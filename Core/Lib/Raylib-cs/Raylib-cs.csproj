@@ -1,0 +1,29 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFrameworks>net47;netstandard2.0;netcoreapp3.1</TargetFrameworks>
+        <Platforms>x64</Platforms>
+    </PropertyGroup>
+
+    <Import Project="../netfx.props" />
+
+    <PropertyGroup>
+        <EnableDefaultItems>false</EnableDefaultItems>
+        <AssemblyName>Raylib-cs</AssemblyName>
+        <RootNamespace>Raylib</RootNamespace>
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+        <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <Compile Include="Easings.cs" />
+        <Compile Include="Physac.cs" />
+        <Compile Include="Raygui.cs" />
+        <Compile Include="Raylib.cs" />
+        <Compile Include="Raymath.cs" />
+        <Compile Include="Rlgl.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="../app.config" />
+    </ItemGroup>
+</Project>

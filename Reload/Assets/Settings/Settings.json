@@ -1,0 +1,18 @@
+{
+  "ApplicationInfo": {
+    "ProgramName": "Reload",
+    "ProgramVersion": "0.1"
+  },
+  "DisplaySettings": {
+    "TargetFps": 60,
+    "Width": 1280,
+    "Height": 720,
+    "Flags": [ 32, 64 ]
+  },
+  "AudioSettings": {
+    "SampleRate": 44000,
+    "SampleSize": 16,
+    "Channels": 2,
+    "MasterVolume": 0.5
+  }
+}

@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
+    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_Reload.-868020023.00" t="ExcludeRecursive" />
+    <e p="$PROJECT_DIR$" t="IncludeFlat">
+      <e p="Core" t="IncludeRecursive">
+        <e p="Audio" t="Include">
+          <e p="AudioEngine.cs" t="Include" />
+          <e p="AudioEngineSdl.cs" t="Include" />
+          <e p="IAudioEngine.cs" t="Include" />
+        </e>
+        <e p="Config" t="Include">
+          <e p="Configuration.cs" t="Include" />
+          <e p="IConfiguration.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="ApplicationSettings.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Core.csproj" t="IncludeRecursive" />
+        <e p="GameBase.cs" t="Include" />
+        <e p="Graphics" t="Include">
+          <e p="IWindow.cs" t="Include" />
+          <e p="Window.cs" t="Include" />
+        </e>
+        <e p="Lib" t="Include">
+          <e p="Raylib-cs" t="Include">
+            <e p="Easings.cs" t="Include" />
+            <e p="Physac.cs" t="Include" />
+            <e p="Raygui.cs" t="Include" />
+            <e p="Raylib.cs" t="Include" />
+            <e p="Raymath.cs" t="Include" />
+            <e p="Rlgl.cs" t="Include" />
+          </e>
+          <e p="SDL2" t="Include">
+            <e p="SDL2.cs" t="Include" />
+            <e p="SDL2_image.cs" t="Include" />
+            <e p="SDL2_mixer.cs" t="Include" />
+            <e p="SDL2_ttf.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Screen" t="Include">
+          <e p="IScreenList.cs" t="Include" />
+          <e p="ScreenBase.cs" t="Include" />
+          <e p="ScreenList.cs" t="Include" />
+        </e>
+        <e p="State" t="Include">
+          <e p="IState.cs" t="Include" />
+          <e p="IStateMachine.cs" t="Include" />
+          <e p="StateMachine.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Core.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Reload" t="IncludeRecursive">
+        <e p="Assets" t="Include">
+          <e p="Music" t="Include">
+            <e p="Intro.mp3" t="Include" />
+            <e p="Intro.ogg" t="Include" />
+            <e p="Intro2.wav" t="Include" />
+          </e>
+          <e p="Settings" t="Include">
+            <e p="Settings.json" t="Include" />
+          </e>
+          <e p="Sounds" t="Include" />
+        </e>
+        <e p="Program.cs" t="Include" />
+        <e p="Reload.cs" t="Include" />
+        <e p="Reload.csproj" t="IncludeRecursive" />
+        <e p="Screens" t="Include">
+          <e p="IntroScreen.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Reload.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Reload.sln" t="IncludeFlat" />
+      <e p="packages" t="ExcludeRecursive" />
+    </e>
+  </component>
+</project>
