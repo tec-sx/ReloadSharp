@@ -1,9 +1,10 @@
+using Core.Resources;
+
 namespace Core
 {
     using System;
     using Config;
     using Screen;
-    using Graphics;
     using Audio;
     using State;
     using Microsoft.Extensions.DependencyInjection;
@@ -15,18 +16,13 @@ namespace Core
         
         private readonly ServiceProvider _serviceProvider;
         
-        protected readonly IWindow Window;
-        protected readonly IAudioEngine AudioEngine;
-        protected readonly IScreenList ScreenList;
-        protected ScreenBase CurrentScreen { get; set; }
+        protected readonly IScreenManager screenManager;
+        private ScreenBase _currentScreen;
 
         protected GameBase()
         {
             _serviceProvider = RegisterServices().BuildServiceProvider();
-            
-            Window = _serviceProvider.GetService<IWindow>();
-            AudioEngine = _serviceProvider.GetService<IAudioEngine>();
-            ScreenList = _serviceProvider.GetService<IScreenList>();
+            screenManager = _serviceProvider.GetService<IScreenManager>();
 
             IsRunning = false;
         }
@@ -39,42 +35,53 @@ namespace Core
         {
             var collection = new ServiceCollection();
 
-            collection.AddTransient(typeof(IStateMachine<>), typeof(StateMachine<>));
             collection.AddSingleton<IConfiguration, Configuration>();
-            collection.AddSingleton<IWindow, Window>();
             collection.AddSingleton<IAudioEngine, AudioEngine>();
-            collection.AddSingleton<IScreenList, ScreenList>();
+            
+            collection.AddSingleton<IScreenManager, ScreenManager>();
+            collection.AddTransient(typeof(IStateMachine<>), typeof(StateMachine<>));
+            collection.AddTransient<IResourceManager, ResourceManager>();
 
             return collection;
         }
 
         private bool Init()
         {
-            Window.Create();
+            var settings = _serviceProvider.GetService<IConfiguration>().Settings;
+            
+            ConfigFlag flags = 0;
+            Array.ForEach(settings.Display.Flags, flag => flags |= flag);
+            Raylib.SetConfigFlags(flags);
+            
+            Raylib.InitWindow(
+                settings.Display.Width, 
+                settings.Display.Height, 
+                settings.Info.WindowTitle);
+            
+            Raylib.SetTargetFPS(settings.Display.TargetFps);
 
             OnInit();
             AddScreens();
-
-            CurrentScreen = ScreenList.CurrentScreen;
-            CurrentScreen?.Run();
-            CurrentScreen?.OnEnter();
+            
+            _currentScreen = screenManager.CurrentScreen;
+            _currentScreen?.Run();
+            _currentScreen?.OnEnter();
 
             return true;
         }
         
         private void Update(double deltaTime)
         {
-            ScreenList.Update();
+            screenManager.Update();
         }
 
         private void Render()
         {
             Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.RAYWHITE);
+            Raylib.ClearBackground(Color.BLACK);
             
-            CurrentScreen?.Render();
+            _currentScreen?.Render();
             
-            Raylib.DrawText("Hello, world!", 12, 12, 20, Color.BLACK);
             Raylib.DrawFPS(700, 15);
             
             Raylib.EndDrawing();
@@ -91,9 +98,9 @@ namespace Core
             {
                 Update(Raylib.GetFrameTime());
 
-                if (CurrentScreen != null && CurrentScreen.State == ScreenState.RUNNING)
+                if (_currentScreen != null && _currentScreen.State == ScreenState.RUNNING)
                 {
-                    CurrentScreen.Render();
+                    _currentScreen.Render();
                 }
                 
                 Render();
@@ -103,9 +110,8 @@ namespace Core
         public void Dispose()
         {
             OnDispose();
-
-            AudioEngine?.Dispose();
-            Window?.Dispose();
+            
+            Raylib.CloseWindow();
             _serviceProvider?.Dispose();
         }
     }

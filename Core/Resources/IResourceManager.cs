@@ -1,7 +1,6 @@
-using System;
-
 namespace Core.Resources
 {
+    using System;
     using Raylib_cs;
     
     public interface IResourceManager : IDisposable

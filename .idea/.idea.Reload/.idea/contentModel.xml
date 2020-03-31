@@ -21,10 +21,6 @@
         </e>
         <e p="Core.csproj" t="IncludeRecursive" />
         <e p="GameBase.cs" t="Include" />
-        <e p="Graphics" t="Include">
-          <e p="IWindow.cs" t="Include" />
-          <e p="Window.cs" t="Include" />
-        </e>
         <e p="Lib" t="Include">
           <e p="Raylib-cs" t="Include">
             <e p="Easings.cs" t="Include" />
@@ -44,9 +40,9 @@
           </e>
         </e>
         <e p="Screen" t="Include">
-          <e p="IScreenList.cs" t="Include" />
+          <e p="IScreenManager.cs" t="Include" />
           <e p="ScreenBase.cs" t="Include" />
-          <e p="ScreenList.cs" t="Include" />
+          <e p="ScreenManager.cs" t="Include" />
         </e>
         <e p="Settings.json" t="Include" />
         <e p="State" t="Include">
@@ -70,7 +66,9 @@
             <e p="Intro2.wav" t="Include" />
           </e>
           <e p="Sounds" t="Include" />
-          <e p="Textures" t="Include" />
+          <e p="Textures" t="Include">
+            <e p="Player.png" t="Include" />
+          </e>
         </e>
         <e p="Program.cs" t="Include" />
         <e p="Reload.cs" t="Include" />

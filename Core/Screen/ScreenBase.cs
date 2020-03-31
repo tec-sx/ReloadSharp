@@ -1,6 +1,7 @@
 namespace Core.Screen
 {
     using System;
+    using Resources;
     using Audio;
     
     public enum ScreenState
@@ -15,11 +16,11 @@ namespace Core.Screen
     
     public abstract class ScreenBase : IDisposable
     {
-        protected IAudioEngine audioEngine;
         public ScreenState State { get; private set; }
         public ScreenBase NextScreen { get; set; }
         public ScreenBase PrevScreen { get; set; }
-
+        public ScreenManager Manager { get; set; }
+        
         protected ScreenBase()
         {
             State = ScreenState.NONE;
@@ -30,20 +31,15 @@ namespace Core.Screen
         public abstract void Update();
         public abstract void Render();
 
-        public void SetDeps(IAudioEngine audioEngineDep)
-        {
-            audioEngine = audioEngineDep; 
-        }
-        
         public void Run()
         {
-            audioEngine.Init();
+            Manager.Audio.Init();
             State = ScreenState.RUNNING;
         }
-        
+
         public void Dispose()
         {
-            audioEngine.Dispose();    
+            Manager.Audio.Dispose();    
         }
     }
 }

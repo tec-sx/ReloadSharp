@@ -1,6 +1,5 @@
 namespace Core.Audio
 {
-    using System;
     using System.IO;
     using Config;
     using Config.Models;

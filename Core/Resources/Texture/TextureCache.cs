@@ -23,18 +23,21 @@ namespace Core.Resources.Texture
             }
         }
         
-        public Texture2D GetTexture(string file)
+        public Texture2D GetTexture(string fullPath)
         {
-            string fullPath = Path.Combine($"{Environment.CurrentDirectory}", $"Assets/Textures/{file}.png");
-
             if (_textureDict.TryGetValue(fullPath, out var texture))
             {
                 return texture;
             }
             
-            texture = Raylib.LoadTexture(fullPath);
-            _textureDict.Add(fullPath, texture);
+            var image = Raylib.LoadImage(fullPath);
+            Raylib.ImageFormat(ref image, (int)PixelFormat.UNCOMPRESSED_R8G8B8A8);
 
+            texture = Raylib.LoadTextureFromImage(image);
+            _textureDict.Add(fullPath, texture);
+            
+            // Unload image
+            
             return texture;
         }
     }

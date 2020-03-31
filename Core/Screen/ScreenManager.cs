@@ -1,17 +1,23 @@
 namespace Core.Screen
 {
     using Audio;
-
-    public class ScreenList : IScreenList
+    using Resources;
+    
+    public class ScreenManager : IScreenManager
     {
-        private readonly IAudioEngine _audioEngine;
+        public IAudioEngine Audio { get; }
+        public IResourceManager Resources { get; }
+
         public ScreenBase CurrentScreen { get; set; }
 
-        public ScreenList(IAudioEngine audioEngine)
+        public ScreenManager(
+            IAudioEngine audio,
+            IResourceManager resources)
         {
-            _audioEngine = audioEngine;
+            Audio = audio;
+            Resources = resources;
         }
-        
+
         public ScreenBase MoveToNextScreen()
         {
             CurrentScreen = CurrentScreen.NextScreen;
@@ -66,25 +72,31 @@ namespace Core.Screen
             }
         }
 
-        public void AddScreen(ScreenBase newScreen)
+        public ScreenBase CreateScreen<T>() where T : ScreenBase, new()
         {
-            newScreen.SetDeps(_audioEngine);
+            var newScreen = new T
+            {
+                Manager = this
+            };
             
             if (CurrentScreen == null)
             {
                 CurrentScreen = newScreen;
-                return;
             }
-
-            var tempScreen = CurrentScreen;
-
-            while (CurrentScreen.NextScreen != null)
+            else
             {
-                tempScreen = tempScreen.NextScreen;
+                var tempScreen = CurrentScreen;
+
+                while (CurrentScreen.NextScreen != null)
+                {
+                    tempScreen = tempScreen.NextScreen;
+                }
+
+                newScreen.PrevScreen = tempScreen;
+                tempScreen.NextScreen = newScreen;
             }
 
-            newScreen.PrevScreen = tempScreen;
-            tempScreen.NextScreen = newScreen;
+            return newScreen;
         }
     }
 }

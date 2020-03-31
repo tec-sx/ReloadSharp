@@ -1,11 +1,11 @@
 namespace Core.Screen
 {
-    public interface IScreenList
+    public interface IScreenManager
     {
         ScreenBase CurrentScreen { get; set; }
         ScreenBase MoveToNextScreen();
         ScreenBase MoveToPrevScreen();
         void Update();
-        void AddScreen(ScreenBase newScreen);
+        ScreenBase CreateScreen<T>() where T : ScreenBase, new();
     }
 }
