@@ -69,12 +69,14 @@ namespace Core
 
         private void Render()
         {
+            Raylib.BeginDrawing();
+            Raylib.ClearBackground(Color.RAYWHITE);
+            
             CurrentScreen?.Render();
             
-            Raylib.DrawFPS(700, 15);
-            Raylib.BeginDrawing();
-            Raylib.ClearBackground(Color.WHITE);
             Raylib.DrawText("Hello, world!", 12, 12, 20, Color.BLACK);
+            Raylib.DrawFPS(700, 15);
+            
             Raylib.EndDrawing();
         }
 

@@ -36,14 +36,16 @@ namespace Core.Audio
     public class AudioEngine : IAudioEngine
     {
         private readonly ApplicationSettings _settings;
+        private readonly ContentPath _contentPath;
 
         private readonly Dictionary<string, Sound> _effectsList;
         private readonly Dictionary<string, Music> _musicList;
 
         public AudioEngine(IConfiguration configuration)
         {
-            _settings = configuration.GetSettings();
-
+            _settings = configuration.Settings;
+            _contentPath = configuration.ContentPath;
+            
             _effectsList = new Dictionary<string, Sound>();
             _musicList = new Dictionary<string, Music>();
         }
@@ -73,7 +75,7 @@ namespace Core.Audio
 
         public SoundEffect LoadSound(string file)
         {
-            string fullPath = Path.Combine($"{Environment.CurrentDirectory}", $"Assets/Sounds/{file}.mp3");
+            string fullPath = Path.Combine(_contentPath.Music, $"{file}.{_settings.Audio.Format}");
             var sound = new SoundEffect();
 
             if (_effectsList.TryGetValue(fullPath, out var chunk))
@@ -90,7 +92,7 @@ namespace Core.Audio
 
         public MusicStream LoadMusic(string file)
         {
-            var fullPath = Path.Combine($"{Environment.CurrentDirectory}", $"Assets/Music/{file}.mp3");
+            var fullPath = Path.Combine(_contentPath.Music, $"{file}.{_settings.Audio.Format}");
             var music = new MusicStream();
 
             if (_musicList.TryGetValue(fullPath, out var stream))

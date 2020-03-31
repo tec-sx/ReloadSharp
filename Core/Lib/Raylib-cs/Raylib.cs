@@ -832,6 +832,7 @@ namespace Raylib_cs
 
     // System config flags
     // NOTE: Used for bit masks
+    [Flags]
     public enum ConfigFlag
     {
         FLAG_RESERVED           = 1,    // Reserved
@@ -1238,7 +1239,7 @@ namespace Raylib_cs
         // Used by DllImport to load the native library.
         public const string nativeLibName = "raylib";
 
-        public const string RAYLIB_VERSION = "2.6";
+        public const string RAYLIB_VERSION = "3.0";
 
         public const float DEG2RAD = (float)Math.PI / 180.0f;
         public const float RAD2DEG = 180.0f / (float)Math.PI;

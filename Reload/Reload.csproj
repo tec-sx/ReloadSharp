@@ -39,6 +39,7 @@
 
     <ItemGroup>
       <Folder Include="Assets\Sounds" />
+      <Folder Include="Assets\Textures" />
     </ItemGroup>
 
 </Project>

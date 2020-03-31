@@ -17,6 +17,12 @@ namespace Core.Config.Models
         [JsonPropertyName("SampleSize")] public int SampleSize { get; set; }
         [JsonPropertyName("Channels")] public int Channels { get; set; }
         [JsonPropertyName("MasterVolume")] public float MasterVolume { get; set; }
+        [JsonPropertyName("Format")] public string Format { get; set; }
+    }
+
+    public class ImageSettings
+    {
+        [JsonPropertyName("Format")] public string Format { get; set; }
     }
 
     public class ApplicationInfo
@@ -31,6 +37,7 @@ namespace Core.Config.Models
         [JsonPropertyName("ApplicationInfo")] public ApplicationInfo Info { get; set; }
         [JsonPropertyName("DisplaySettings")] public DisplaySettings Display { get; set; }
         [JsonPropertyName("AudioSettings")] public AudioSettings Audio { get; set;}
+        [JsonPropertyName(("ImageSettings"))] public ImageSettings Image { get; set; }
     }
     
 }

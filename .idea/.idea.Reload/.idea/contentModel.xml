@@ -9,7 +9,6 @@
       <e p="Core" t="IncludeRecursive">
         <e p="Audio" t="Include">
           <e p="AudioEngine.cs" t="Include" />
-          <e p="AudioEngineSdl.cs" t="Include" />
           <e p="IAudioEngine.cs" t="Include" />
         </e>
         <e p="Config" t="Include">
@@ -17,6 +16,7 @@
           <e p="IConfiguration.cs" t="Include" />
           <e p="Models" t="Include">
             <e p="ApplicationSettings.cs" t="Include" />
+            <e p="ContentPath.cs" t="Include" />
           </e>
         </e>
         <e p="Core.csproj" t="IncludeRecursive" />
@@ -34,11 +34,13 @@
             <e p="Raymath.cs" t="Include" />
             <e p="Rlgl.cs" t="Include" />
           </e>
-          <e p="SDL2" t="Include">
-            <e p="SDL2.cs" t="Include" />
-            <e p="SDL2_image.cs" t="Include" />
-            <e p="SDL2_mixer.cs" t="Include" />
-            <e p="SDL2_ttf.cs" t="Include" />
+        </e>
+        <e p="Resources" t="Include">
+          <e p="IResourceManager.cs" t="Include" />
+          <e p="ResourceManager.cs" t="Include" />
+          <e p="Texture" t="Include">
+            <e p="ImageLoader.cs" t="Include" />
+            <e p="TextureCache.cs" t="Include" />
           </e>
         </e>
         <e p="Screen" t="Include">
@@ -46,6 +48,7 @@
           <e p="ScreenBase.cs" t="Include" />
           <e p="ScreenList.cs" t="Include" />
         </e>
+        <e p="Settings.json" t="Include" />
         <e p="State" t="Include">
           <e p="IState.cs" t="Include" />
           <e p="IStateMachine.cs" t="Include" />
@@ -64,13 +67,10 @@
         <e p="Assets" t="Include">
           <e p="Music" t="Include">
             <e p="Intro.mp3" t="Include" />
-            <e p="Intro.ogg" t="Include" />
             <e p="Intro2.wav" t="Include" />
           </e>
-          <e p="Settings" t="Include">
-            <e p="Settings.json" t="Include" />
-          </e>
           <e p="Sounds" t="Include" />
+          <e p="Textures" t="Include" />
         </e>
         <e p="Program.cs" t="Include" />
         <e p="Reload.cs" t="Include" />

@@ -11,7 +11,7 @@ namespace Core.Graphics
 
         public Window(IConfiguration configuration)
         {
-            _settings = configuration.GetSettings();
+            _settings = configuration.Settings;
         }
         
         public void Create()
