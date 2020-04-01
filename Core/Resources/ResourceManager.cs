@@ -1,8 +1,5 @@
-using Core.Config.Models;
-
 namespace Core.Resources
 {
-    using System;
     using System.IO;
     using Config;
     using Texture;

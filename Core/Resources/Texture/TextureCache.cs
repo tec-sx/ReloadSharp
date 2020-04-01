@@ -36,7 +36,7 @@ namespace Core.Resources.Texture
             texture = Raylib.LoadTextureFromImage(image);
             _textureDict.Add(fullPath, texture);
             
-            // Unload image
+            Raylib.UnloadImage(image);
             
             return texture;
         }

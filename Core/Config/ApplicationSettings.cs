@@ -1,4 +1,4 @@
-namespace Core.Config.Models
+namespace Core.Config
 {
     using System.Text.Json.Serialization;
     using Raylib_cs;

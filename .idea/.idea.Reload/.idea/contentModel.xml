@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$APPLICATION_CONFIG_DIR$/consoles/db" t="IncludeRecursive" />
-    <e p="$APPLICATION_CONFIG_DIR$/extensions" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_Reload.-868020023.00" t="ExcludeRecursive" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
@@ -12,12 +10,11 @@
           <e p="IAudioEngine.cs" t="Include" />
         </e>
         <e p="Config" t="Include">
+          <e p="ApplicationSettings.cs" t="Include" />
           <e p="Configuration.cs" t="Include" />
+          <e p="ContentPath.cs" t="Include" />
           <e p="IConfiguration.cs" t="Include" />
-          <e p="Models" t="Include">
-            <e p="ApplicationSettings.cs" t="Include" />
-            <e p="ContentPath.cs" t="Include" />
-          </e>
+          <e p="Models" t="Include" />
         </e>
         <e p="Core.csproj" t="IncludeRecursive" />
         <e p="GameBase.cs" t="Include" />
@@ -30,12 +27,20 @@
             <e p="Raymath.cs" t="Include" />
             <e p="Rlgl.cs" t="Include" />
           </e>
+          <e p="SDL2" t="Include">
+            <e p="SDL2.cs" t="Include" />
+            <e p="SDL2_image.cs" t="Include" />
+            <e p="SDL2_mixer.cs" t="Include" />
+            <e p="SDL2_ttf.cs" t="Include" />
+          </e>
         </e>
         <e p="Resources" t="Include">
           <e p="IResourceManager.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="ModelFactory.cs" t="Include" />
+          </e>
           <e p="ResourceManager.cs" t="Include" />
           <e p="Texture" t="Include">
-            <e p="ImageLoader.cs" t="Include" />
             <e p="TextureCache.cs" t="Include" />
           </e>
         </e>
@@ -61,6 +66,7 @@
       </e>
       <e p="Reload" t="IncludeRecursive">
         <e p="Assets" t="Include">
+          <e p="Models" t="Include" />
           <e p="Music" t="Include">
             <e p="Intro.mp3" t="Include" />
             <e p="Intro2.wav" t="Include" />

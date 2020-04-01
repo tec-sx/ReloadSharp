@@ -2,7 +2,6 @@ namespace Core.Audio
 {
     using System.IO;
     using Config;
-    using Config.Models;
     using System.Collections.Generic;
     using Raylib_cs;
 
@@ -12,7 +11,7 @@ namespace Core.Audio
 
         public void Play(int numOfLoops = -1)
         {
-            // Raylib.SetMusicLoopCount(Stream, numOfLoops);
+            Raylib.SetMusicLoopCount(Stream, numOfLoops);
             Raylib.PlayMusicStream(Stream);
         }
 

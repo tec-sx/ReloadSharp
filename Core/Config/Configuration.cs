@@ -5,7 +5,6 @@ namespace Core.Config
     using System.IO;
     using System.Text.Json;
     using System;
-    using Models;
 
     public class Configuration : IConfiguration
     {

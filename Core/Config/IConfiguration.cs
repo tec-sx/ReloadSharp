@@ -1,7 +1,5 @@
 namespace Core.Config
 {
-    using Models;
-
     public interface IConfiguration
     {
         ApplicationSettings Settings { get; }

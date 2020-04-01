@@ -1,3 +1,5 @@
+using System;
+
 namespace Core.Screen
 {
     using Audio;
@@ -10,9 +12,7 @@ namespace Core.Screen
 
         public ScreenBase CurrentScreen { get; set; }
 
-        public ScreenManager(
-            IAudioEngine audio,
-            IResourceManager resources)
+        public ScreenManager(IAudioEngine audio, IResourceManager resources)
         {
             Audio = audio;
             Resources = resources;
@@ -64,6 +64,10 @@ namespace Core.Screen
                     case ScreenState.EXIT_APP:
                         GameBase.IsRunning = false;
                         break;
+                    case ScreenState.NONE:
+                        throw new ApplicationException("Screen not yet initialized.");
+                    default:
+                        throw new ArgumentOutOfRangeException();
                 }
             }
             else
