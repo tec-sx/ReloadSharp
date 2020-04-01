@@ -36,10 +36,11 @@
         </e>
         <e p="Resources" t="Include">
           <e p="IResourceManager.cs" t="Include" />
-          <e p="Models" t="Include">
-            <e p="ModelFactory.cs" t="Include" />
-          </e>
           <e p="ResourceManager.cs" t="Include" />
+          <e p="Scene" t="Include">
+            <e p="ModelBase.cs" t="Include" />
+            <e p="SceneGraph.cs" t="Include" />
+          </e>
           <e p="Texture" t="Include">
             <e p="TextureCache.cs" t="Include" />
           </e>
