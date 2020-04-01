@@ -25,6 +25,11 @@ namespace Core.Config
         [JsonPropertyName("Format")] public string Format { get; set; }
     }
 
+    public class ModelSettings
+    {
+        [JsonPropertyName("Format")] public string Format { get; set; }
+    }
+
     public class ApplicationInfo
     {
         [JsonPropertyName("ProgramName")] public string ProgramName { get; set; }
@@ -38,6 +43,6 @@ namespace Core.Config
         [JsonPropertyName("DisplaySettings")] public DisplaySettings Display { get; set; }
         [JsonPropertyName("AudioSettings")] public AudioSettings Audio { get; set;}
         [JsonPropertyName(("ImageSettings"))] public ImageSettings Image { get; set; }
+        [JsonPropertyName("ModelSettings")] public ModelSettings Model { get; set; }
     }
-    
 }

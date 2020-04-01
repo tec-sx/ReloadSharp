@@ -1,19 +1,17 @@
-using System.IO;
-using Core.Audio;
-using Raylib_cs;
-
 namespace Reload.Screens
 {
+    using Core.Resources.Audio;
+    using Core.Resources.Textures;
     using Core.Screen;
 
     public class IntroScreen : ScreenBase
     {
-        private MusicStream _bgMusicStream;
-        private Texture2D _texture;
-        
+        private IMusic _bgMusicStream;
+        private ITexture _texture;
+
         public override void OnEnter()
         {
-            _bgMusicStream = Manager.Audio.LoadMusic("Intro");
+            _bgMusicStream = Manager.Resources.LoadMusic("Intro");
             _bgMusicStream.Play();
 
             _texture = Manager.Resources.GetTexture("Player");
@@ -31,11 +29,7 @@ namespace Reload.Screens
 
         public override void Render()
         {
-            Raylib.DrawTexture(
-                _texture,
-                0,
-                0,
-                Color.WHITE);
+            _texture.Render(0, 0, 0, 0);
         }
     }
 }

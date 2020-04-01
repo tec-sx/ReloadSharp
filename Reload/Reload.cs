@@ -2,7 +2,7 @@ namespace Reload
 {
     using Core;
     using Screens;
-    
+
     public class Reload : GameBase
     {
         protected override void OnInit()

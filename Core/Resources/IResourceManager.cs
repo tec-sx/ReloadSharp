@@ -1,10 +1,15 @@
 namespace Core.Resources
 {
     using System;
-    using Raylib_cs;
-    
+    using Audio;
+    using GameObjects;
+    using Textures;
+
     public interface IResourceManager : IDisposable
     {
-        Texture2D GetTexture(string file);
+        ITexture GetTexture(string file);
+        IGameObject GetGameObject(string file);
+        IMusic LoadMusic(string file);
+        ISound LoadSound(string file);
     }
 }

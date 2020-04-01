@@ -4,17 +4,15 @@ namespace Core.Screen
 {
     using Audio;
     using Resources;
-    
+
     public class ScreenManager : IScreenManager
     {
-        public IAudioEngine Audio { get; }
         public IResourceManager Resources { get; }
 
         public ScreenBase CurrentScreen { get; set; }
 
         public ScreenManager(IAudioEngine audio, IResourceManager resources)
         {
-            Audio = audio;
             Resources = resources;
         }
 
@@ -45,20 +43,20 @@ namespace Core.Screen
                     {
                         CurrentScreen.OnLeave();
                         CurrentScreen = MoveToNextScreen();
-                        
+
                         CurrentScreen?.Run();
                         CurrentScreen?.OnEnter();
-                        
+
                         break;
                     }
                     case ScreenState.CHANGE_PREV:
                     {
                         CurrentScreen.OnLeave();
                         CurrentScreen = MoveToPrevScreen();
-                        
+
                         CurrentScreen?.Run();
                         CurrentScreen?.OnEnter();
-                        
+
                         break;
                     }
                     case ScreenState.EXIT_APP:
@@ -82,7 +80,7 @@ namespace Core.Screen
             {
                 Manager = this
             };
-            
+
             if (CurrentScreen == null)
             {
                 CurrentScreen = newScreen;

@@ -18,5 +18,8 @@
   },
   "ImageSettings": {
     "Format": "png"
+  },
+  "ModelSettings": {
+    "Format":  "obj"
   }
 }

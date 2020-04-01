@@ -10,17 +10,19 @@ namespace Core.Config
     {
         private readonly string _settingsFile;
         private readonly string _assetsPath;
-        
+
         public ApplicationSettings Settings { get; }
         public ContentPath ContentPath { get; }
-        
+
         public Configuration()
         {
             _settingsFile = Path.Combine(Environment.CurrentDirectory, "Settings.json");
             _assetsPath = Path.Combine(Environment.CurrentDirectory, "Assets");
-            
+
             Settings = LoadSettings(_settingsFile);
             ContentPath = new ContentPath(_assetsPath);
+
+            SetLibsDir();
         }
 
         private ApplicationSettings LoadSettings(string path)
@@ -34,6 +36,14 @@ namespace Core.Config
         {
             string settingsJson = JsonSerializer.Serialize(Settings);
             File.WriteAllText(_settingsFile, settingsJson);
+        }
+
+        private void SetLibsDir()
+        {
+            string libsDirectory = $"{Environment.CurrentDirectory}/Libraries/lib";
+            var pathVar = Environment.GetEnvironmentVariable("PATH") ?? string.Empty;
+            var separator = Path.PathSeparator.ToString();
+            Environment.SetEnvironmentVariable("PATH", $"{pathVar}{separator}{libsDirectory}");
         }
 
     }

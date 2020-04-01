@@ -41,7 +41,6 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Folder Include="Assets\Models" />
       <Folder Include="Assets\Sounds" />
       <Folder Include="Assets\Textures" />
     </ItemGroup>
