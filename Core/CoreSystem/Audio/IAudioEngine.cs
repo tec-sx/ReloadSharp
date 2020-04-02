@@ -1,4 +1,4 @@
-namespace Core.Audio
+namespace Core.CoreSystem.Audio
 {
     using System;
 

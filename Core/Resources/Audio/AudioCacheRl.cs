@@ -1,24 +1,16 @@
 ﻿namespace Core.Resources.Audio
 {
     using System.Collections.Generic;
-    using System.IO;
-    using Config;
     using Models;
     using Raylib_cs;
 
-    public class AudioCache_RL : IAudioCache
+    public class AudioCacheRl : IAudioCache
     {
-        private readonly ApplicationSettings _settings;
-        private readonly ContentPath _contentPath;
-
         private readonly Dictionary<string, Sound> _effectsList;
         private readonly Dictionary<string, Music> _musicList;
 
-        public AudioCache_RL(IConfiguration configuration)
+        public AudioCacheRl()
         {
-            _settings = configuration.Settings;
-            _contentPath = configuration.ContentPath;
-
             _effectsList = new Dictionary<string, Sound>();
             _musicList = new Dictionary<string, Music>();
         }

@@ -1,14 +1,14 @@
-﻿namespace Core.Resources.GameObjects
+﻿namespace Core.Resources.GameObjects.Models
 {
     using System;
     using Raylib_cs;
 
 
-    public class GameObject_RL : IGameObject
+    public class GameObjectRl : IGameObject
     {
         private readonly Model _model;
 
-        public GameObject_RL(Model model)
+        public GameObjectRl(Model model)
         {
             _model = model;
         }

@@ -2,7 +2,7 @@ namespace Core.Resources
 {
     using System;
     using Audio;
-    using GameObjects;
+    using GameObjects.Models;
     using Textures;
 
     public interface IResourceManager : IDisposable

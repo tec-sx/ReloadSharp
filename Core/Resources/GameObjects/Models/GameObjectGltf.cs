@@ -1,12 +1,12 @@
-﻿namespace Core.Resources.GameObjects
+﻿namespace Core.Resources.GameObjects.Models
 {
     using SharpGLTF.Schema2;
 
-    public class GameObject_Gltf : IGameObject
+    public class GameObjectGltf : IGameObject
     {
         private ModelRoot _model;
 
-        public GameObject_Gltf(ModelRoot model)
+        public GameObjectGltf(ModelRoot model)
         {
             _model = model;
         }

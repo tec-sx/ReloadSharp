@@ -4,6 +4,7 @@ namespace Core.Resources
     using Config;
     using Textures;
     using GameObjects;
+    using GameObjects.Models;
     using Audio;
 
     public class ResourceManager : IResourceManager
@@ -16,13 +17,12 @@ namespace Core.Resources
         private readonly IAudioCache _audioCache;
 
         public ResourceManager(
-            IConfiguration configuration,
             ITextureCache textureCache,
             IGameObjectCache gameObjectCache,
             IAudioCache audioCache)
         {
-            _settings = configuration.Settings;
-            _contentPath = configuration.ContentPath;
+            _settings = Configuration.Settings;
+            _contentPath = Configuration.ContentPath;
 
             _textureCache = textureCache;
             _gameObjectCache = gameObjectCache;

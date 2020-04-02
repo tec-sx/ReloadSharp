@@ -3,46 +3,103 @@
   <component name="ContentModelStore">
     <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_Reload.-868020023.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.4.0/build/netcoreapp2.1" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.api.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.dll" t="Include" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="Core" t="IncludeRecursive">
-        <e p="Audio" t="Include">
-          <e p="AudioEngine.cs" t="Include" />
-          <e p="IAudioEngine.cs" t="Include" />
-        </e>
         <e p="Config" t="Include">
           <e p="ApplicationSettings.cs" t="Include" />
           <e p="Configuration.cs" t="Include" />
           <e p="ContentPath.cs" t="Include" />
-          <e p="IConfiguration.cs" t="Include" />
-          <e p="Models" t="Include" />
         </e>
         <e p="Core.csproj" t="IncludeRecursive" />
-        <e p="GameBase.cs" t="Include" />
-        <e p="Lib" t="Include">
-          <e p="Raylib-cs" t="Include">
-            <e p="Easings.cs" t="Include" />
-            <e p="Physac.cs" t="Include" />
-            <e p="Raygui.cs" t="Include" />
-            <e p="Raylib.cs" t="Include" />
-            <e p="Raymath.cs" t="Include" />
-            <e p="Rlgl.cs" t="Include" />
+        <e p="CoreSystem" t="Include">
+          <e p="Audio" t="Include">
+            <e p="AudioEngineRl.cs" t="Include" />
+            <e p="IAudioEngine.cs" t="Include" />
           </e>
-          <e p="SDL2" t="Include">
-            <e p="SDL2.cs" t="Include" />
-            <e p="SDL2_image.cs" t="Include" />
-            <e p="SDL2_mixer.cs" t="Include" />
-            <e p="SDL2_ttf.cs" t="Include" />
+        </e>
+        <e p="GameBase.cs" t="Include" />
+        <e p="Libraries" t="Include">
+          <e p="Bindings" t="Include">
+            <e p="Raylib-cs" t="Include">
+              <e p="Easings.cs" t="Include" />
+              <e p="Physac.cs" t="Include" />
+              <e p="Raygui.cs" t="Include" />
+              <e p="Raylib.cs" t="Include" />
+              <e p="Raymath.cs" t="Include" />
+              <e p="Rlgl.cs" t="Include" />
+            </e>
+            <e p="SDL2" t="Include">
+              <e p="SDL2.cs" t="Include" />
+              <e p="SDL2_image.cs" t="Include" />
+              <e p="SDL2_mixer.cs" t="Include" />
+              <e p="SDL2_ttf.cs" t="Include" />
+            </e>
+          </e>
+          <e p="LibraryManager.cs" t="Include" />
+          <e p="Linux" t="Include">
+            <e p="libSDL2-2.0.so.0.10.0" t="Include" />
+            <e p="libSDL2_image-2.0.so.0.2.3" t="Include" />
+            <e p="libSDL2_mixer-2.0.so.0.2.2" t="Include" />
+            <e p="libSDL2_ttf-2.0.so.0.14.1" t="Include" />
+            <e p="libraylib.so.3.0.0" t="Include" />
+          </e>
+          <e p="Windows" t="Include">
+            <e p="SDL2.dll" t="Include" />
+            <e p="SDL2_image.dll" t="Include" />
+            <e p="SDL2_mixer.dll" t="Include" />
+            <e p="SDL2_ttf.dll" t="Include" />
+            <e p="libFLAC-8.dll" t="Include" />
+            <e p="libfreetype-6.dll" t="Include" />
+            <e p="libjpeg-9.dll" t="Include" />
+            <e p="libmodplug-1.dll" t="Include" />
+            <e p="libmpg123-0.dll" t="Include" />
+            <e p="libogg-0.dll" t="Include" />
+            <e p="libopus-0.dll" t="Include" />
+            <e p="libopusfile-0.dll" t="Include" />
+            <e p="libpng16-16.dll" t="Include" />
+            <e p="libvorbis-0.dll" t="Include" />
+            <e p="libvorbisfile-3.dll" t="Include" />
+            <e p="raylib.dll" t="Include" />
+            <e p="zlib1.dll" t="Include" />
           </e>
         </e>
         <e p="Resources" t="Include">
+          <e p="Audio" t="Include">
+            <e p="AudioCacheRl.cs" t="Include" />
+            <e p="IAudioCache.cs" t="Include" />
+            <e p="Models" t="Include">
+              <e p="IMusic.cs" t="Include" />
+              <e p="ISound.cs" t="Include" />
+              <e p="Music_RL.cs" t="Include" />
+              <e p="Sound_RL.cs" t="Include" />
+            </e>
+          </e>
+          <e p="GameObjects" t="Include">
+            <e p="GameObjectCacheGltf.cs" t="Include" />
+            <e p="GameObjectCacheRl.cs" t="Include" />
+            <e p="IGameObjectCache.cs" t="Include" />
+            <e p="Models" t="Include">
+              <e p="GameObjectGltf.cs" t="Include" />
+              <e p="GameObjectRl.cs" t="Include" />
+              <e p="IGameObject.cs" t="Include" />
+            </e>
+          </e>
           <e p="IResourceManager.cs" t="Include" />
           <e p="ResourceManager.cs" t="Include" />
-          <e p="Scene" t="Include">
-            <e p="ModelBase.cs" t="Include" />
-            <e p="SceneGraph.cs" t="Include" />
-          </e>
-          <e p="Texture" t="Include">
-            <e p="TextureCache.cs" t="Include" />
+          <e p="Textures" t="Include">
+            <e p="ITextureCache.cs" t="Include" />
+            <e p="Models" t="Include">
+              <e p="ITexture.cs" t="Include" />
+              <e p="Texture_RL.cs" t="Include" />
+            </e>
+            <e p="TextureCache_RL.cs" t="Include" />
           </e>
         </e>
         <e p="Screen" t="Include">
@@ -65,9 +122,1296 @@
           </e>
         </e>
       </e>
+      <e p="CoreTest" t="IncludeRecursive">
+        <e p="ConfigurationTest.cs" t="Include" />
+        <e p="CoreTest.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="CoreTest.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="Reload" t="IncludeRecursive">
         <e p="Assets" t="Include">
-          <e p="Models" t="Include" />
+          <e p="Models" t="Include">
+            <e p="Tests" t="Include">
+              <e p="2CylinderEngine" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="2CylinderEngine.gltf" t="Include" />
+                  <e p="2CylinderEngine0.bin" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="2CylinderEngine.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="2CylinderEngine.gltf" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="2CylinderEngine.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="AlphaBlendModeTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="AlphaBlendLabels.png" t="Include" />
+                  <e p="AlphaBlendModeTest.bin" t="Include" />
+                  <e p="AlphaBlendModeTest.gltf" t="Include" />
+                  <e p="MatBed_baseColor.jpg" t="Include" />
+                  <e p="MatBed_normal.jpg" t="Include" />
+                  <e p="MatBed_occlusionRoughnessMetallic.jpg" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="AlphaBlendModeTest.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="AlphaBlendModeTest.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="BlendFail.jpg" t="Include" />
+                  <e p="CutoffDefaultFail.jpg" t="Include" />
+                  <e p="CutoffTests.jpg" t="Include" />
+                  <e p="CutoffValueFail.jpg" t="Include" />
+                  <e p="MissingBorder.png" t="Include" />
+                  <e p="OpaqueFail.jpg" t="Include" />
+                  <e p="OpaqueVsBlend.jpg" t="Include" />
+                  <e p="screenshot.png" t="Include" />
+                  <e p="screenshot_large.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="AnimatedCube" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="AnimatedCube.bin" t="Include" />
+                  <e p="AnimatedCube.gltf" t="Include" />
+                  <e p="AnimatedCube_BaseColor.png" t="Include" />
+                  <e p="AnimatedCube_MetallicRoughness.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.gif" t="Include" />
+                </e>
+              </e>
+              <e p="AnimatedMorphCube" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="AnimatedMorphCube.bin" t="Include" />
+                  <e p="AnimatedMorphCube.gltf" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="AnimatedMorphCube.glb" t="Include" />
+                </e>
+                <e p="glTF-Quantized" t="Include">
+                  <e p="AnimatedMorphCube.bin" t="Include" />
+                  <e p="AnimatedMorphCube.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.gif" t="Include" />
+                </e>
+              </e>
+              <e p="AnimatedMorphSphere" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="AnimatedMorphSphere.bin" t="Include" />
+                  <e p="AnimatedMorphSphere.gltf" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="AnimatedMorphSphere.glb" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.gif" t="Include" />
+                </e>
+              </e>
+              <e p="AnimatedTriangle" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="AnimatedTriangle.gltf" t="Include" />
+                  <e p="animation.bin" t="Include" />
+                  <e p="simpleTriangle.bin" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="AnimatedTriangle.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="animation.png" t="Include" />
+                  <e p="screenshot.gif" t="Include" />
+                  <e p="simpleTriangle.png" t="Include" />
+                </e>
+              </e>
+              <e p="AntiqueCamera" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="AntiqueCamera.bin" t="Include" />
+                  <e p="AntiqueCamera.gltf" t="Include" />
+                  <e p="camera_camera_BaseColor.png" t="Include" />
+                  <e p="camera_camera_Normal.png" t="Include" />
+                  <e p="camera_camera_Roughness.png" t="Include" />
+                  <e p="camera_tripod_BaseColor.png" t="Include" />
+                  <e p="camera_tripod_Normal.png" t="Include" />
+                  <e p="camera_tripod_Roughness.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="AntiqueCamera.glb" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="Avocado" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Avocado.bin" t="Include" />
+                  <e p="Avocado.gltf" t="Include" />
+                  <e p="Avocado_baseColor.png" t="Include" />
+                  <e p="Avocado_normal.png" t="Include" />
+                  <e p="Avocado_roughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="Avocado.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="Avocado.gltf" t="Include" />
+                  <e p="Avocado_baseColor.png" t="Include" />
+                  <e p="Avocado_normal.png" t="Include" />
+                  <e p="Avocado_roughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-Quantized" t="Include">
+                  <e p="Avocado.bin" t="Include" />
+                  <e p="Avocado.gltf" t="Include" />
+                  <e p="Avocado_baseColor.png" t="Include" />
+                  <e p="Avocado_normal.png" t="Include" />
+                  <e p="Avocado_roughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-pbrSpecularGlossiness" t="Include">
+                  <e p="Avocado.bin" t="Include" />
+                  <e p="Avocado.gltf" t="Include" />
+                  <e p="Avocado_baseColor.png" t="Include" />
+                  <e p="Avocado_diffuse.png" t="Include" />
+                  <e p="Avocado_normal.png" t="Include" />
+                  <e p="Avocado_roughnessMetallic.png" t="Include" />
+                  <e p="Avocado_specularGlossiness.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="BarramundiFish" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="BarramundiFish.bin" t="Include" />
+                  <e p="BarramundiFish.gltf" t="Include" />
+                  <e p="BarramundiFish_baseColor.png" t="Include" />
+                  <e p="BarramundiFish_normal.png" t="Include" />
+                  <e p="BarramundiFish_occlusionRoughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="BarramundiFish.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="BarramundiFish.gltf" t="Include" />
+                  <e p="BarramundiFish_baseColor.png" t="Include" />
+                  <e p="BarramundiFish_normal.png" t="Include" />
+                  <e p="BarramundiFish_occlusionRoughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-pbrSpecularGlossiness" t="Include">
+                  <e p="BarramundiFish.bin" t="Include" />
+                  <e p="BarramundiFish.gltf" t="Include" />
+                  <e p="BarramundiFish_baseColor.png" t="Include" />
+                  <e p="BarramundiFish_diffuse.png" t="Include" />
+                  <e p="BarramundiFish_normal.png" t="Include" />
+                  <e p="BarramundiFish_occlusion.png" t="Include" />
+                  <e p="BarramundiFish_roughnessMetallic.png" t="Include" />
+                  <e p="BarramundiFish_specularGlossiness.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="BoomBox" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="BoomBox.bin" t="Include" />
+                  <e p="BoomBox.gltf" t="Include" />
+                  <e p="BoomBox_baseColor.png" t="Include" />
+                  <e p="BoomBox_emissive.png" t="Include" />
+                  <e p="BoomBox_normal.png" t="Include" />
+                  <e p="BoomBox_occlusionRoughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="BoomBox.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="BoomBox.gltf" t="Include" />
+                  <e p="BoomBox_baseColor.png" t="Include" />
+                  <e p="BoomBox_emissive.png" t="Include" />
+                  <e p="BoomBox_normal.png" t="Include" />
+                  <e p="BoomBox_occlusionRoughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-pbrSpecularGlossiness" t="Include">
+                  <e p="BoomBox.bin" t="Include" />
+                  <e p="BoomBox.gltf" t="Include" />
+                  <e p="BoomBox_baseColor.png" t="Include" />
+                  <e p="BoomBox_diffuse.png" t="Include" />
+                  <e p="BoomBox_emissive.png" t="Include" />
+                  <e p="BoomBox_normal.png" t="Include" />
+                  <e p="BoomBox_occlusion.png" t="Include" />
+                  <e p="BoomBox_roughnessMetallic.png" t="Include" />
+                  <e p="BoomBox_specularGlossiness.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="BoomBoxWithAxes" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="BoomBoxWithAxes.bin" t="Include" />
+                  <e p="BoomBoxWithAxes.gltf" t="Include" />
+                  <e p="BoomBoxWithAxes_baseColor.png" t="Include" />
+                  <e p="BoomBoxWithAxes_baseColor1.png" t="Include" />
+                  <e p="BoomBoxWithAxes_emissive.png" t="Include" />
+                  <e p="BoomBoxWithAxes_normal.png" t="Include" />
+                  <e p="BoomBoxWithAxes_roughnessMetallic.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="Box" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Box.gltf" t="Include" />
+                  <e p="Box0.bin" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="Box.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="Box.gltf" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="Box.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="BoxAnimated" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="BoxAnimated.gltf" t="Include" />
+                  <e p="BoxAnimated0.bin" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="BoxAnimated.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="BoxAnimated.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.gif" t="Include" />
+                </e>
+              </e>
+              <e p="BoxInterleaved" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="BoxInterleaved.bin" t="Include" />
+                  <e p="BoxInterleaved.gltf" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="BoxInterleaved.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="BoxInterleaved.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="BoxTextured" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="BoxTextured.gltf" t="Include" />
+                  <e p="BoxTextured0.bin" t="Include" />
+                  <e p="CesiumLogoFlat.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="BoxTextured.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="BoxTextured.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="BoxTexturedNonPowerOfTwo" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="BoxTextured0.bin" t="Include" />
+                  <e p="BoxTexturedNonPowerOfTwo.gltf" t="Include" />
+                  <e p="CesiumLogoFlat.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="BoxTexturedNonPowerOfTwo.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="BoxTexturedNonPowerOfTwo.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="BoxVertexColors" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="BoxVertexColors.gltf" t="Include" />
+                  <e p="buffer.bin" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="BoxVertexColors.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="BoxVertexColors.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="BrainStem" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="BrainStem.gltf" t="Include" />
+                  <e p="BrainStem0.bin" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="BrainStem.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="BrainStem.gltf" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="BrainStem.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.gif" t="Include" />
+                </e>
+              </e>
+              <e p="Buggy" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Buggy.gltf" t="Include" />
+                  <e p="Buggy0.bin" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="Buggy.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="Buggy.gltf" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="Buggy.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="Cameras" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Cameras.gltf" t="Include" />
+                  <e p="simpleSquare.bin" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="Cameras.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                  <e p="simpleSquare.png" t="Include" />
+                </e>
+              </e>
+              <e p="CesiumMan" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="CesiumMan.gltf" t="Include" />
+                  <e p="CesiumMan_data.bin" t="Include" />
+                  <e p="CesiumMan_img0.jpg" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="CesiumMan.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="CesiumMan.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.gif" t="Include" />
+                </e>
+              </e>
+              <e p="CesiumMilkTruck" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="CesiumMilkTruck.gltf" t="Include" />
+                  <e p="CesiumMilkTruck.jpg" t="Include" />
+                  <e p="CesiumMilkTruck_data.bin" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="CesiumMilkTruck.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="CesiumMilkTruck.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.gif" t="Include" />
+                </e>
+              </e>
+              <e p="ClearCoatTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="ClearCoatLabels.png" t="Include" />
+                  <e p="ClearCoatTest.bin" t="Include" />
+                  <e p="ClearCoatTest.gltf" t="Include" />
+                  <e p="PartialCoating.png" t="Include" />
+                  <e p="PartialCoating_Alpha.png" t="Include" />
+                  <e p="PlasticWrap_normals.jpg" t="Include" />
+                  <e p="RibsNormal.png" t="Include" />
+                  <e p="RoughnessStripes.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="ClearCoatTest.glb" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="FirstRow.jpg" t="Include" />
+                  <e p="PartialCoat.jpg" t="Include" />
+                  <e p="screenshot.jpg" t="Include" />
+                  <e p="screenshot_large.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="Corset" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Corset.bin" t="Include" />
+                  <e p="Corset.gltf" t="Include" />
+                  <e p="Corset_baseColor.png" t="Include" />
+                  <e p="Corset_normal.png" t="Include" />
+                  <e p="Corset_occlusionRoughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="Corset.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="Corset.gltf" t="Include" />
+                  <e p="Corset_baseColor.png" t="Include" />
+                  <e p="Corset_normal.png" t="Include" />
+                  <e p="Corset_occlusionRoughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-pbrSpecularGlossiness" t="Include">
+                  <e p="Corset.bin" t="Include" />
+                  <e p="Corset.gltf" t="Include" />
+                  <e p="Corset_baseColor.png" t="Include" />
+                  <e p="Corset_diffuse.png" t="Include" />
+                  <e p="Corset_normal.png" t="Include" />
+                  <e p="Corset_occlusion.png" t="Include" />
+                  <e p="Corset_roughnessMetallic.png" t="Include" />
+                  <e p="Corset_specularGlossiness.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="Cube" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Cube.bin" t="Include" />
+                  <e p="Cube.gltf" t="Include" />
+                  <e p="Cube_BaseColor.png" t="Include" />
+                  <e p="Cube_MetallicRoughness.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="DamagedHelmet" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="DamagedHelmet.bin" t="Include" />
+                  <e p="DamagedHelmet.gltf" t="Include" />
+                  <e p="Default_AO.jpg" t="Include" />
+                  <e p="Default_albedo.jpg" t="Include" />
+                  <e p="Default_emissive.jpg" t="Include" />
+                  <e p="Default_metalRoughness.jpg" t="Include" />
+                  <e p="Default_normal.jpg" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="DamagedHelmet.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="DamagedHelmet.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="Duck" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Duck.gltf" t="Include" />
+                  <e p="Duck0.bin" t="Include" />
+                  <e p="DuckCM.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="Duck.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="Duck.gltf" t="Include" />
+                  <e p="DuckCM.png" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="Duck.gltf" t="Include" />
+                </e>
+                <e p="glTF-Quantized" t="Include">
+                  <e p="Duck.bin" t="Include" />
+                  <e p="Duck.gltf" t="Include" />
+                  <e p="DuckCM.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="EnvironmentTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="EnvironmentTest.gltf" t="Include" />
+                  <e p="EnvironmentTest_binary.bin" t="Include" />
+                  <e p="EnvironmentTest_images" t="Include">
+                    <e p="roughness_metallic_0.jpg" t="Include" />
+                    <e p="roughness_metallic_1.jpg" t="Include" />
+                  </e>
+                </e>
+                <e p="glTF-IBL" t="Include">
+                  <e p="EnvironmentTest.gltf" t="Include" />
+                  <e p="EnvironmentTest_binary.bin" t="Include" />
+                  <e p="EnvironmentTest_images" t="Include">
+                    <e p="roughness_metallic_0.jpg" t="Include" />
+                    <e p="roughness_metallic_1.jpg" t="Include" />
+                  </e>
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="FlightHelmet" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="FlightHelmet.bin" t="Include" />
+                  <e p="FlightHelmet.gltf" t="Include" />
+                  <e p="FlightHelmet_Materials_GlassPlasticMat_BaseColor.png" t="Include" />
+                  <e p="FlightHelmet_Materials_GlassPlasticMat_Normal.png" t="Include" />
+                  <e p="FlightHelmet_Materials_GlassPlasticMat_OcclusionRoughMetal.png" t="Include" />
+                  <e p="FlightHelmet_Materials_LeatherPartsMat_BaseColor.png" t="Include" />
+                  <e p="FlightHelmet_Materials_LeatherPartsMat_Normal.png" t="Include" />
+                  <e p="FlightHelmet_Materials_LeatherPartsMat_OcclusionRoughMetal.png" t="Include" />
+                  <e p="FlightHelmet_Materials_LensesMat_BaseColor.png" t="Include" />
+                  <e p="FlightHelmet_Materials_LensesMat_Normal.png" t="Include" />
+                  <e p="FlightHelmet_Materials_LensesMat_OcclusionRoughMetal.png" t="Include" />
+                  <e p="FlightHelmet_Materials_MetalPartsMat_BaseColor.png" t="Include" />
+                  <e p="FlightHelmet_Materials_MetalPartsMat_Normal.png" t="Include" />
+                  <e p="FlightHelmet_Materials_MetalPartsMat_OcclusionRoughMetal.png" t="Include" />
+                  <e p="FlightHelmet_Materials_RubberWoodMat_BaseColor.png" t="Include" />
+                  <e p="FlightHelmet_Materials_RubberWoodMat_Normal.png" t="Include" />
+                  <e p="FlightHelmet_Materials_RubberWoodMat_OcclusionRoughMetal.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="Fox" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Fox.bin" t="Include" />
+                  <e p="Fox.gltf" t="Include" />
+                  <e p="Texture.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="Fox.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="Fox.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="GearboxAssy" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="GearboxAssy.gltf" t="Include" />
+                  <e p="GearboxAssy0.bin" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="GearboxAssy.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="GearboxAssy.gltf" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="GearboxAssy.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="InterpolationTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="InterpolationTest.gltf" t="Include" />
+                  <e p="interpolation.bin" t="Include" />
+                  <e p="l.jpg" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="InterpolationTest.glb" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.gif" t="Include" />
+                </e>
+              </e>
+              <e p="Lantern" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Lantern.bin" t="Include" />
+                  <e p="Lantern.gltf" t="Include" />
+                  <e p="Lantern_baseColor.png" t="Include" />
+                  <e p="Lantern_emissive.png" t="Include" />
+                  <e p="Lantern_normal.png" t="Include" />
+                  <e p="Lantern_roughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="Lantern.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="Lantern.gltf" t="Include" />
+                  <e p="Lantern_baseColor.png" t="Include" />
+                  <e p="Lantern_emissive.png" t="Include" />
+                  <e p="Lantern_normal.png" t="Include" />
+                  <e p="Lantern_roughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-Quantized" t="Include">
+                  <e p="Lantern.bin" t="Include" />
+                  <e p="Lantern.gltf" t="Include" />
+                  <e p="Lantern_baseColor.png" t="Include" />
+                  <e p="Lantern_emissive.png" t="Include" />
+                  <e p="Lantern_normal.png" t="Include" />
+                  <e p="Lantern_roughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-pbrSpecularGlossiness" t="Include">
+                  <e p="Lantern.bin" t="Include" />
+                  <e p="Lantern.gltf" t="Include" />
+                  <e p="Lantern_baseColor.png" t="Include" />
+                  <e p="Lantern_diffuse.png" t="Include" />
+                  <e p="Lantern_emissive.png" t="Include" />
+                  <e p="Lantern_normal.png" t="Include" />
+                  <e p="Lantern_roughnessMetallic.png" t="Include" />
+                  <e p="Lantern_specularGlossiness.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="MetalRoughSpheres" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="MetalRoughSpheres.gltf" t="Include" />
+                  <e p="MetalRoughSpheres0.bin" t="Include" />
+                  <e p="Spheres_BaseColor.png" t="Include" />
+                  <e p="Spheres_MetalRough.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="MetalRoughSpheres.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="MetalRoughSpheres.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="MetalRoughSpheresNoTextures" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="MetalRoughSpheresNoTextures.bin" t="Include" />
+                  <e p="MetalRoughSpheresNoTextures.gltf" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="MetalRoughSpheresNoTextures.glb" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="MorphPrimitivesTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="MorphPrimitivesTest.bin" t="Include" />
+                  <e p="MorphPrimitivesTest.gltf" t="Include" />
+                  <e p="uv_texture.jpg" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="MorphPrimitivesTest.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="MorphPrimitivesTest.glb" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="MultiUVTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="MultiUVTest.bin" t="Include" />
+                  <e p="MultiUVTest.gltf" t="Include" />
+                  <e p="uv0.png" t="Include" />
+                  <e p="uv1.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="MultiUVTest.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="MultiUVTest.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="NormalTangentMirrorTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="NormalTangentMirrorTest.bin" t="Include" />
+                  <e p="NormalTangentMirrorTest.gltf" t="Include" />
+                  <e p="NormalTangentMirrorTest_BaseColor.png" t="Include" />
+                  <e p="NormalTangentMirrorTest_OcclusionRoughnessMetallic.png" t="Include" />
+                  <e p="NormalTangentTest_Normal.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="NormalTangentMirrorTest.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="NormalTangentMirrorTest.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="back-side.png" t="Include" />
+                  <e p="incorrect-flipped-y.png" t="Include" />
+                  <e p="screenshot-larger.png" t="Include" />
+                  <e p="screenshot.png" t="Include" />
+                  <e p="supplied-tangents-ignored.png" t="Include" />
+                  <e p="top-down.png" t="Include" />
+                </e>
+              </e>
+              <e p="NormalTangentTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="NormalTangentTest.gltf" t="Include" />
+                  <e p="NormalTangentTest0.bin" t="Include" />
+                  <e p="NormalTangentTest_BaseColor.png" t="Include" />
+                  <e p="NormalTangentTest_Normal.png" t="Include" />
+                  <e p="NormalTangentTest_OcclusionRoughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="NormalTangentTest.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="NormalTangentTest.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="back-side.png" t="Include" />
+                  <e p="incorrect-flipped-y.png" t="Include" />
+                  <e p="screenshot-larger.png" t="Include" />
+                  <e p="screenshot.png" t="Include" />
+                  <e p="top-down.png" t="Include" />
+                </e>
+              </e>
+              <e p="OrientationTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="OrientationTest.bin" t="Include" />
+                  <e p="OrientationTest.gltf" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="OrientationTest.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="OrientationTest.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="OrientationTestFail.png" t="Include" />
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="README.md" t="Include" />
+              <e p="ReciprocatingSaw" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="ReciprocatingSaw.gltf" t="Include" />
+                  <e p="ReciprocatingSaw0.bin" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="ReciprocatingSaw.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="ReciprocatingSaw.gltf" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="ReciprocatingSaw.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="RiggedFigure" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="RiggedFigure.gltf" t="Include" />
+                  <e p="RiggedFigure0.bin" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="RiggedFigure.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="RiggedFigure.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.gif" t="Include" />
+                </e>
+              </e>
+              <e p="RiggedSimple" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="RiggedSimple.gltf" t="Include" />
+                  <e p="RiggedSimple0.bin" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="RiggedSimple.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="RiggedSimple.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.gif" t="Include" />
+                </e>
+              </e>
+              <e p="SciFiHelmet" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="SciFiHelmet.bin" t="Include" />
+                  <e p="SciFiHelmet.gltf" t="Include" />
+                  <e p="SciFiHelmet_AmbientOcclusion.png" t="Include" />
+                  <e p="SciFiHelmet_BaseColor.png" t="Include" />
+                  <e p="SciFiHelmet_MetallicRoughness.png" t="Include" />
+                  <e p="SciFiHelmet_Normal.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="SimpleMeshes" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="SimpleMeshes.gltf" t="Include" />
+                  <e p="triangle.bin" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="SimpleMeshes.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                  <e p="triangle.png" t="Include" />
+                </e>
+              </e>
+              <e p="SimpleMorph" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="SimpleMorph.gltf" t="Include" />
+                  <e p="simpleMorphAnimation.bin" t="Include" />
+                  <e p="simpleMorphGeometry.bin" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="SimpleMorph.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                  <e p="simpleMorphStructure.png" t="Include" />
+                </e>
+              </e>
+              <e p="SimpleSparseAccessor" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="SimpleSparseAccessor.bin" t="Include" />
+                  <e p="SimpleSparseAccessor.gltf" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="SimpleSparseAccessor.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="SimpleSparseAccessorDescription.png" t="Include" />
+                  <e p="screenshot.png" t="Include" />
+                  <e p="simpleSparseAccessorStructure.png" t="Include" />
+                </e>
+              </e>
+              <e p="SpecGlossVsMetalRough" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="SpecGlossVsMetalRough.gltf" t="Include" />
+                  <e p="SpecGlossVsMetalRough.png" t="Include" />
+                  <e p="SpecGlossVsMetalRoughLabel.bin" t="Include" />
+                  <e p="WaterBottle.bin" t="Include" />
+                  <e p="WaterBottle_baseColor.png" t="Include" />
+                  <e p="WaterBottle_diffuse.png" t="Include" />
+                  <e p="WaterBottle_emissive.png" t="Include" />
+                  <e p="WaterBottle_normal.png" t="Include" />
+                  <e p="WaterBottle_occlusion.png" t="Include" />
+                  <e p="WaterBottle_roughnessMetallic.png" t="Include" />
+                  <e p="WaterBottle_specularGlossiness.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="SpecGlossVsMetalRough.glb" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot-large.jpg" t="Include" />
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="Sponza" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="10381718147657362067.jpg" t="Include" />
+                  <e p="10388182081421875623.jpg" t="Include" />
+                  <e p="11474523244911310074.jpg" t="Include" />
+                  <e p="11490520546946913238.jpg" t="Include" />
+                  <e p="11872827283454512094.jpg" t="Include" />
+                  <e p="11968150294050148237.jpg" t="Include" />
+                  <e p="1219024358953944284.jpg" t="Include" />
+                  <e p="12501374198249454378.jpg" t="Include" />
+                  <e p="13196865903111448057.jpg" t="Include" />
+                  <e p="13824894030729245199.jpg" t="Include" />
+                  <e p="13982482287905699490.jpg" t="Include" />
+                  <e p="14118779221266351425.jpg" t="Include" />
+                  <e p="14170708867020035030.jpg" t="Include" />
+                  <e p="14267839433702832875.jpg" t="Include" />
+                  <e p="14650633544276105767.jpg" t="Include" />
+                  <e p="15295713303328085182.jpg" t="Include" />
+                  <e p="15722799267630235092.jpg" t="Include" />
+                  <e p="16275776544635328252.png" t="Include" />
+                  <e p="16299174074766089871.jpg" t="Include" />
+                  <e p="16885566240357350108.jpg" t="Include" />
+                  <e p="17556969131407844942.jpg" t="Include" />
+                  <e p="17876391417123941155.jpg" t="Include" />
+                  <e p="2051777328469649772.jpg" t="Include" />
+                  <e p="2185409758123873465.jpg" t="Include" />
+                  <e p="2299742237651021498.jpg" t="Include" />
+                  <e p="2374361008830720677.jpg" t="Include" />
+                  <e p="2411100444841994089.jpg" t="Include" />
+                  <e p="2775690330959970771.jpg" t="Include" />
+                  <e p="2969916736137545357.jpg" t="Include" />
+                  <e p="332936164838540657.jpg" t="Include" />
+                  <e p="3371964815757888145.jpg" t="Include" />
+                  <e p="3455394979645218238.jpg" t="Include" />
+                  <e p="3628158980083700836.jpg" t="Include" />
+                  <e p="3827035219084910048.jpg" t="Include" />
+                  <e p="4477655471536070370.jpg" t="Include" />
+                  <e p="4601176305987539675.jpg" t="Include" />
+                  <e p="466164707995436622.jpg" t="Include" />
+                  <e p="4675343432951571524.jpg" t="Include" />
+                  <e p="4871783166746854860.jpg" t="Include" />
+                  <e p="4910669866631290573.jpg" t="Include" />
+                  <e p="4975155472559461469.jpg" t="Include" />
+                  <e p="5061699253647017043.png" t="Include" />
+                  <e p="5792855332885324923.jpg" t="Include" />
+                  <e p="5823059166183034438.jpg" t="Include" />
+                  <e p="6047387724914829168.jpg" t="Include" />
+                  <e p="6151467286084645207.jpg" t="Include" />
+                  <e p="6593109234861095314.jpg" t="Include" />
+                  <e p="6667038893015345571.jpg" t="Include" />
+                  <e p="6772804448157695701.jpg" t="Include" />
+                  <e p="7056944414013900257.jpg" t="Include" />
+                  <e p="715093869573992647.jpg" t="Include" />
+                  <e p="7268504077753552595.jpg" t="Include" />
+                  <e p="7441062115984513793.jpg" t="Include" />
+                  <e p="755318871556304029.jpg" t="Include" />
+                  <e p="759203620573749278.jpg" t="Include" />
+                  <e p="7645212358685992005.jpg" t="Include" />
+                  <e p="7815564343179553343.jpg" t="Include" />
+                  <e p="8006627369776289000.png" t="Include" />
+                  <e p="8051790464816141987.jpg" t="Include" />
+                  <e p="8114461559286000061.jpg" t="Include" />
+                  <e p="8481240838833932244.jpg" t="Include" />
+                  <e p="8503262930880235456.jpg" t="Include" />
+                  <e p="8747919177698443163.jpg" t="Include" />
+                  <e p="8750083169368950601.jpg" t="Include" />
+                  <e p="8773302468495022225.jpg" t="Include" />
+                  <e p="8783994986360286082.jpg" t="Include" />
+                  <e p="9288698199695299068.jpg" t="Include" />
+                  <e p="9916269861720640319.jpg" t="Include" />
+                  <e p="Sponza.bin" t="Include" />
+                  <e p="Sponza.gltf" t="Include" />
+                  <e p="white.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="large.jpg" t="Include" />
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="Suzanne" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Suzanne.bin" t="Include" />
+                  <e p="Suzanne.gltf" t="Include" />
+                  <e p="Suzanne_BaseColor.png" t="Include" />
+                  <e p="Suzanne_MetallicRoughness.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="TextureCoordinateTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="TextureCoordinateTemplate.png" t="Include" />
+                  <e p="TextureCoordinateTest.bin" t="Include" />
+                  <e p="TextureCoordinateTest.gltf" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="TextureCoordinateTest.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="TextureCoordinateTest.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="TextureSettingsTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="CheckAndX.png" t="Include" />
+                  <e p="CheckAndX_V.png" t="Include" />
+                  <e p="TextureSettingsTest.gltf" t="Include" />
+                  <e p="TextureSettingsTest0.bin" t="Include" />
+                  <e p="TextureTestLabels.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="TextureSettingsTest.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="TextureSettingsTest.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="TextureTransformTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Arrow.png" t="Include" />
+                  <e p="Correct.png" t="Include" />
+                  <e p="Error.png" t="Include" />
+                  <e p="NotSupported.png" t="Include" />
+                  <e p="TextureTransformTest.bin" t="Include" />
+                  <e p="TextureTransformTest.gltf" t="Include" />
+                  <e p="UV.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="Triangle" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="Triangle.gltf" t="Include" />
+                  <e p="simpleTriangle.bin" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="Triangle.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                  <e p="simpleTriangle.png" t="Include" />
+                </e>
+              </e>
+              <e p="TriangleWithoutIndices" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="TriangleWithoutIndices.gltf" t="Include" />
+                  <e p="triangleWithoutIndices.bin" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="TriangleWithoutIndices.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                  <e p="triangleWithoutIndices.png" t="Include" />
+                </e>
+              </e>
+              <e p="TwoSidedPlane" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="TwoSidedPlane.bin" t="Include" />
+                  <e p="TwoSidedPlane.gltf" t="Include" />
+                  <e p="TwoSidedPlane_BaseColor.png" t="Include" />
+                  <e p="TwoSidedPlane_MetallicRoughness.png" t="Include" />
+                  <e p="TwoSidedPlane_Normal.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="UnlitTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="UnlitTest.bin" t="Include" />
+                  <e p="UnlitTest.gltf" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="UnlitTest.glb" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                  <e p="screenshot_large.jpg" t="Include" />
+                  <e p="unlit_test_fail.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="VC" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="001.jpg" t="Include" />
+                  <e p="002.jpg" t="Include" />
+                  <e p="11.jpg" t="Include" />
+                  <e p="5.jpg" t="Include" />
+                  <e p="O21.jpg" t="Include" />
+                  <e p="VC.gltf" t="Include" />
+                  <e p="VC0.bin" t="Include" />
+                  <e p="cockpit-map.jpg" t="Include" />
+                  <e p="f22.jpg" t="Include" />
+                  <e p="heli.jpg" t="Include" />
+                  <e p="machine.jpg" t="Include" />
+                  <e p="prop128.png" t="Include" />
+                  <e p="s_01.jpg" t="Include" />
+                  <e p="s_02.jpg" t="Include" />
+                  <e p="s_03.jpg" t="Include" />
+                  <e p="s_04.jpg" t="Include" />
+                  <e p="s_05.jpg" t="Include" />
+                  <e p="s_06.jpg" t="Include" />
+                  <e p="s_07.jpg" t="Include" />
+                  <e p="s_08.jpg" t="Include" />
+                  <e p="scrapsurf03-red.jpg" t="Include" />
+                  <e p="surface01.jpg" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="VC.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="001.jpg" t="Include" />
+                  <e p="002.jpg" t="Include" />
+                  <e p="11.jpg" t="Include" />
+                  <e p="5.jpg" t="Include" />
+                  <e p="O21.jpg" t="Include" />
+                  <e p="VC.gltf" t="Include" />
+                  <e p="cockpit-map.jpg" t="Include" />
+                  <e p="f22.jpg" t="Include" />
+                  <e p="heli.jpg" t="Include" />
+                  <e p="machine.jpg" t="Include" />
+                  <e p="prop128.png" t="Include" />
+                  <e p="s_01.jpg" t="Include" />
+                  <e p="s_02.jpg" t="Include" />
+                  <e p="s_03.jpg" t="Include" />
+                  <e p="s_04.jpg" t="Include" />
+                  <e p="s_05.jpg" t="Include" />
+                  <e p="s_06.jpg" t="Include" />
+                  <e p="s_07.jpg" t="Include" />
+                  <e p="s_08.jpg" t="Include" />
+                  <e p="scrapsurf03-red.jpg" t="Include" />
+                  <e p="surface01.jpg" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="VC.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.gif" t="Include" />
+                </e>
+              </e>
+              <e p="VertexColorTest" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="VertexColorChecks.png" t="Include" />
+                  <e p="VertexColorTest.bin" t="Include" />
+                  <e p="VertexColorTest.gltf" t="Include" />
+                  <e p="VertexColorTestLabels.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="VertexColorTest.glb" t="Include" />
+                </e>
+                <e p="glTF-Embedded" t="Include">
+                  <e p="VertexColorTest.gltf" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.png" t="Include" />
+                </e>
+              </e>
+              <e p="WaterBottle" t="Include">
+                <e p="README.md" t="Include" />
+                <e p="glTF" t="Include">
+                  <e p="WaterBottle.bin" t="Include" />
+                  <e p="WaterBottle.gltf" t="Include" />
+                  <e p="WaterBottle_baseColor.png" t="Include" />
+                  <e p="WaterBottle_emissive.png" t="Include" />
+                  <e p="WaterBottle_normal.png" t="Include" />
+                  <e p="WaterBottle_occlusionRoughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-Binary" t="Include">
+                  <e p="WaterBottle.glb" t="Include" />
+                </e>
+                <e p="glTF-Draco" t="Include">
+                  <e p="0.bin" t="Include" />
+                  <e p="WaterBottle.gltf" t="Include" />
+                  <e p="WaterBottle_baseColor.png" t="Include" />
+                  <e p="WaterBottle_emissive.png" t="Include" />
+                  <e p="WaterBottle_normal.png" t="Include" />
+                  <e p="WaterBottle_occlusionRoughnessMetallic.png" t="Include" />
+                </e>
+                <e p="glTF-pbrSpecularGlossiness" t="Include">
+                  <e p="WaterBottle.bin" t="Include" />
+                  <e p="WaterBottle.gltf" t="Include" />
+                  <e p="WaterBottle_baseColor.png" t="Include" />
+                  <e p="WaterBottle_diffuse.png" t="Include" />
+                  <e p="WaterBottle_emissive.png" t="Include" />
+                  <e p="WaterBottle_normal.png" t="Include" />
+                  <e p="WaterBottle_occlusion.png" t="Include" />
+                  <e p="WaterBottle_roughnessMetallic.png" t="Include" />
+                  <e p="WaterBottle_specularGlossiness.png" t="Include" />
+                </e>
+                <e p="screenshot" t="Include">
+                  <e p="screenshot.jpg" t="Include" />
+                </e>
+              </e>
+              <e p="model-index.json" t="Include" />
+            </e>
+          </e>
           <e p="Music" t="Include">
             <e p="Intro.mp3" t="Include" />
             <e p="Intro2.wav" t="Include" />

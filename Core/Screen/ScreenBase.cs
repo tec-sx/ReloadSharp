@@ -1,8 +1,6 @@
 namespace Core.Screen
 {
     using System;
-    using Resources;
-    using Audio;
 
     public enum ScreenState
     {

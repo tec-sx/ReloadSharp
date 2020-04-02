@@ -3,12 +3,13 @@
     using System.Collections.Generic;
     using Raylib_cs;
     using RaylibModel = Raylib_cs.Model;
+    using Models;
 
-    public class GameObjectCache_RL : IGameObjectCache
+    public class GameObjectCacheRl : IGameObjectCache
     {
         private readonly Dictionary<string, RaylibModel> _modelsDictionary;
 
-        public GameObjectCache_RL()
+        public GameObjectCacheRl()
         {
             _modelsDictionary = new Dictionary<string, RaylibModel>();
         }
@@ -32,7 +33,7 @@
                 _modelsDictionary.Add(fullPath, raylibModel);
             }
 
-            return new GameObject_RL(raylibModel);
+            return new GameObjectRl(raylibModel);
         }
     }
 }

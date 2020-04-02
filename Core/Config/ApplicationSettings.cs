@@ -34,7 +34,6 @@ namespace Core.Config
     {
         [JsonPropertyName("ProgramName")] public string ProgramName { get; set; }
         [JsonPropertyName("ProgramVersion")] public string ProgramVersion { get; set; }
-        public string WindowTitle { get; set; }
     }
 
     public class ApplicationSettings

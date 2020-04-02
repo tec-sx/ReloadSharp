@@ -1,4 +1,4 @@
-﻿namespace Core.Resources.GameObjects
+﻿namespace Core.Resources.GameObjects.Models
 {
     public interface IGameObject
     {

@@ -1,11 +1,10 @@
-
-
 namespace Core
 {
+    using Libraries;
     using System;
     using Config;
+    using CoreSystem.Audio;
     using Screen;
-    using Audio;
     using State;
     using Resources;
     using Resources.Textures;
@@ -28,6 +27,9 @@ namespace Core
 
         protected GameBase()
         {
+            Configuration.Init();
+            LibraryManager.LoadNativeLibraries();
+
             _serviceProvider = RegisterServices().BuildServiceProvider();
 
             _audioEngine = _serviceProvider.GetService<IAudioEngine>();
@@ -52,22 +54,21 @@ namespace Core
         protected abstract void AddScreens();
         protected abstract void OnDispose();
 
-        private ServiceCollection RegisterServices()
+        private static ServiceCollection RegisterServices()
         {
             var collection = new ServiceCollection();
 
             #region System
-
-            collection.AddSingleton<IConfiguration, Configuration>();
-            collection.AddSingleton<IAudioEngine, AudioEngine_RL>();
+            
+            collection.AddSingleton<IAudioEngine, AudioEngineRl>();
 
             #endregion
 
             #region Resources
 
             collection.AddScoped<ITextureCache, TextureCache_RL>();
-            collection.AddScoped<IGameObjectCache, GameObjectCache_RL>();
-            collection.AddScoped<IAudioCache, AudioCache_RL>();
+            collection.AddScoped<IGameObjectCache, GameObjectCacheRl>();
+            collection.AddScoped<IAudioCache, AudioCacheRl>();
             collection.AddScoped<IResourceManager, ResourceManager>();
 
             #endregion
@@ -84,18 +85,17 @@ namespace Core
 
         private bool Init()
         {
-            var settings = _serviceProvider.GetService<IConfiguration>().Settings;
 
             ConfigFlag flags = 0;
-            Array.ForEach(settings.Display.Flags, flag => flags |= flag);
+            Array.ForEach(Configuration.Settings.Display.Flags, flag => flags |= flag);
             Raylib.SetConfigFlags(flags);
 
             Raylib.InitWindow(
-                settings.Display.Width,
-                settings.Display.Height,
-                settings.Info.WindowTitle);
+                Configuration.Settings.Display.Width,
+                Configuration.Settings.Display.Height,
+                Configuration.Settings.Info.ProgramName);
 
-            Raylib.SetTargetFPS(settings.Display.TargetFps);
+            Raylib.SetTargetFPS(Configuration.Settings.Display.TargetFps);
 
             _audioEngine.Init();
 

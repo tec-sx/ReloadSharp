@@ -2,7 +2,6 @@ using System;
 
 namespace Core.Screen
 {
-    using Audio;
     using Resources;
 
     public class ScreenManager : IScreenManager
@@ -11,7 +10,7 @@ namespace Core.Screen
 
         public ScreenBase CurrentScreen { get; set; }
 
-        public ScreenManager(IAudioEngine audio, IResourceManager resources)
+        public ScreenManager(IResourceManager resources)
         {
             Resources = resources;
         }

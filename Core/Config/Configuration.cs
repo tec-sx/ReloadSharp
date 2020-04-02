@@ -1,50 +1,32 @@
-using System.Reflection;
-
 namespace Core.Config
 {
     using System.IO;
     using System.Text.Json;
     using System;
 
-    public class Configuration : IConfiguration
+    public static class Configuration
     {
-        private readonly string _settingsFile;
-        private readonly string _assetsPath;
+        public static ContentPath ContentPath { get; private set; }
+        public static ApplicationSettings Settings { get; private set; }
 
-        public ApplicationSettings Settings { get; }
-        public ContentPath ContentPath { get; }
-
-        public Configuration()
+        public static void Init()
         {
-            _settingsFile = Path.Combine(Environment.CurrentDirectory, "Settings.json");
-            _assetsPath = Path.Combine(Environment.CurrentDirectory, "Assets");
-
-            Settings = LoadSettings(_settingsFile);
-            ContentPath = new ContentPath(_assetsPath);
-
-            SetLibsDir();
+            var settingsFile = Path.Combine(Environment.CurrentDirectory, "Settings.json");
+            
+            ContentPath = new ContentPath(Path.Combine(Environment.CurrentDirectory, "Assets"));
+            Settings = LoadSettings<ApplicationSettings>(settingsFile);
         }
 
-        private ApplicationSettings LoadSettings(string path)
+        public static T LoadSettings<T>(string file)
         {
-            var settings = JsonSerializer.Deserialize<ApplicationSettings>(File.ReadAllText(path));
-            settings.Info.WindowTitle = $"{settings.Info.ProgramName} v.{settings.Info.ProgramVersion}";
+            var settings = JsonSerializer.Deserialize<T>(File.ReadAllText(file));
             return settings;
         }
 
-        public void SaveSettings()
+        public static void SaveSettings(string file)
         {
-            string settingsJson = JsonSerializer.Serialize(Settings);
-            File.WriteAllText(_settingsFile, settingsJson);
+            var settingsJson = JsonSerializer.Serialize(Settings);
+            File.WriteAllText(file, settingsJson);
         }
-
-        private void SetLibsDir()
-        {
-            string libsDirectory = $"{Environment.CurrentDirectory}/Libraries/lib";
-            var pathVar = Environment.GetEnvironmentVariable("PATH") ?? string.Empty;
-            var separator = Path.PathSeparator.ToString();
-            Environment.SetEnvironmentVariable("PATH", $"{pathVar}{separator}{libsDirectory}");
-        }
-
     }
 }

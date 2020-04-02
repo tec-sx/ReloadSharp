@@ -2,12 +2,13 @@
 {
     using System.Collections.Generic;
     using SharpGLTF.Schema2;
+    using Models;
 
-    public class GameObjectCache_Gltf : IGameObjectCache
+    public class GameObjectCacheGltf : IGameObjectCache
     {
         private readonly Dictionary<string, ModelRoot> _modelsDictionary;
 
-        public GameObjectCache_Gltf()
+        public GameObjectCacheGltf()
         {
             _modelsDictionary = new Dictionary<string, ModelRoot>();
         }
@@ -30,7 +31,7 @@
                 _modelsDictionary.Add(fullPath, model);
             }
 
-            return new GameObject_Gltf(model);
+            return new GameObjectGltf(model);
         }
     }
 }

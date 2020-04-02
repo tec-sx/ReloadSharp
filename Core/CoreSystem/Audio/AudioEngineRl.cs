@@ -1,16 +1,15 @@
-namespace Core.Audio
+namespace Core.CoreSystem.Audio
 {
     using Config;
     using Raylib_cs;
 
-
-    public class AudioEngine_RL : IAudioEngine
+    public class AudioEngineRl : IAudioEngine
     {
         private readonly ApplicationSettings _settings;
 
-        public AudioEngine_RL(IConfiguration configuration)
+        public AudioEngineRl()
         {
-            _settings = configuration.Settings;
+            _settings = Configuration.Settings;
         }
 
         public void Init()
