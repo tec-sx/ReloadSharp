@@ -44,7 +44,7 @@ namespace Core.Config
     {
         [JsonPropertyName("Debug")] public bool Debug { get; set; }
     }
-    
+
     public class ApplicationSettings
     {
         [JsonPropertyName("ApplicationInfo")] public ApplicationInfo Info { get; set; }

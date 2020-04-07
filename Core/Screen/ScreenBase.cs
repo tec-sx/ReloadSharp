@@ -30,11 +30,11 @@ namespace Core.Screen
         public abstract void OnLeave();
         public abstract void OnUpdate();
         public abstract void OnRender();
-        
+
         public void Dispose()
         {
         }
-        
+
         public void Run()
         {
             State = ScreenState.RUNNING;
@@ -42,7 +42,7 @@ namespace Core.Screen
 
         public void Update(float deltaTime)
         {
-            
+
         }
 
         public void Render(float deltaTime)

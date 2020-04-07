@@ -1,0 +1,31 @@
+{
+  "ApplicationInfo": {
+    "ProgramName": "Reload",
+    "ProgramVersion": "0.1"
+  },
+  "DisplaySettings": {
+    "TargetFps": 60,
+    "Width": 1280,
+    "Height": 720,
+    "UseVulkan": true,
+    "IsFullScreen": false,
+    "VSync": true,
+    "RefreshRate": 60
+  },
+  "AudioSettings": {
+    "SampleRate": 44000,
+    "SampleSize": 16,
+    "Channels": 2,
+    "MasterVolume": 0.5,
+    "Format": "mp3"
+  },
+  "ImageSettings": {
+    "Format": "png"
+  },
+  "ModelSettings": {
+    "Format":  "obj"
+  },
+  "Flags": {
+    "Debug": true
+  }
+}

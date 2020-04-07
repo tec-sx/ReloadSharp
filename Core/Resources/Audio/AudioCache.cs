@@ -5,18 +5,18 @@ namespace Core.Resources.Audio
     using Logging.Exceptions;
     using Models;
     using static SDL2.SDL_mixer;
-    
+
     public class AudioCache : IAudioCache
     {
         private readonly Dictionary<string, IntPtr> _effectsDictionary;
         private readonly Dictionary<string, IntPtr> _musicDictionary;
-        
+
         public AudioCache()
         {
             _effectsDictionary = new Dictionary<string, IntPtr>();
             _musicDictionary = new Dictionary<string, IntPtr>();
         }
-        
+
         public void Dispose()
         {
             foreach (var (key, value) in _musicDictionary)
@@ -43,12 +43,12 @@ namespace Core.Resources.Audio
             else
             {
                 music.Stream = Mix_LoadMUS(fullPath);
-                
+
                 if (music.Stream == null)
                 {
                     throw new MusicException($"{fullPath} can't be loaded.");
                 }
-                
+
                 _musicDictionary.Add(fullPath, music.Stream);
             }
 
@@ -71,7 +71,7 @@ namespace Core.Resources.Audio
                 {
                     throw new SoundException($"{fullPath} can't be loaded.");
                 }
-                
+
                 _effectsDictionary.Add(fullPath, sound.Chunk);
             }
 

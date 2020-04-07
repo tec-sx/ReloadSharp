@@ -1,6 +1,3 @@
-using System.Drawing;
-using Silk.NET.Windowing.Common;
-
 namespace Core.Config
 {
     using System.IO;
@@ -10,12 +7,11 @@ namespace Core.Config
     public static class Configuration
     {
         private static readonly string SettingsFile = Path.Combine(Environment.CurrentDirectory, "Settings.json");
-        public static ContentPath ContentPath { get; private set; }
+        public static ContentPath ContentPath { get; } = new ContentPath(Path.Combine(Environment.CurrentDirectory, "Assets"));
         public static ApplicationSettings Settings { get; private set; }
 
         public static void LoadDefaultConfiguration()
         {
-            ContentPath = new ContentPath(Path.Combine(Environment.CurrentDirectory, "Assets"));
             Settings = LoadSettings<ApplicationSettings>();
         }
 

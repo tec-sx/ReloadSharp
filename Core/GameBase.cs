@@ -14,11 +14,11 @@ namespace Core
         private readonly IWindow _window;
         private readonly AudioDevice _audioDevice;
         protected readonly IScreenManager screenManager;
-        
+
         protected internal static bool isRunning;
         protected static float deltaTime;
         protected static float fps;
-        
+
         private ScreenBase _currentScreen;
 
         protected GameBase()
@@ -26,8 +26,6 @@ namespace Core
             Configuration.LoadDefaultConfiguration();
             LibraryManager.LoadNativeLibraries();
             ServiceManager.RegisterServices();
-            
-            _window = Window.Create(ConfigurationFactory.CreateWindowOptions());
 
             _audioDevice    = ServiceManager.GetService<AudioDevice>();
             screenManager   = ServiceManager.GetService<IScreenManager>();
@@ -36,27 +34,27 @@ namespace Core
         protected abstract void OnInitialize();
         protected abstract void AddScreens();
         protected abstract void OnDispose();
-        
+
         private void Initialize()
         {
-            
+
             AddScreens();
 
             _currentScreen = screenManager.CurrentScreen;
             _currentScreen?.Run();
             _currentScreen?.OnEnter();
         }
-        
+
         public void Dispose()
         {
             OnDispose();
-            
+
             ServiceManager.DisposeServices();
         }
 
         private void LoadContent()
         {
-            
+
         }
 
         private void Update(float deltaTime)
