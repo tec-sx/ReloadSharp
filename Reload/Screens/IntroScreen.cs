@@ -7,14 +7,11 @@ namespace Reload.Screens
     public class IntroScreen : ScreenBase
     {
         private IMusic _bgMusicStream;
-        private ITexture _texture;
 
         public override void OnEnter()
         {
             _bgMusicStream = Manager.Resources.LoadMusic("Intro");
             _bgMusicStream.Play();
-
-            _texture = Manager.Resources.GetTexture("Player");
         }
 
         public override void OnLeave()
@@ -22,14 +19,13 @@ namespace Reload.Screens
             _bgMusicStream.Stop();
         }
 
-        public override void Update()
+        public override void OnUpdate()
         {
             _bgMusicStream.Update();
         }
 
-        public override void Render()
+        public override void OnRender()
         {
-            _texture.Render(0, 0, 0, 0);
         }
     }
 }

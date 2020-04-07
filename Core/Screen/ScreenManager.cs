@@ -34,7 +34,7 @@ namespace Core.Screen
                 switch (CurrentScreen.State)
                 {
                     case ScreenState.RUNNING:
-                        CurrentScreen.Update();
+                        CurrentScreen.OnUpdate();
                         break;
                     case ScreenState.PAUSED:
                         break;
@@ -59,7 +59,7 @@ namespace Core.Screen
                         break;
                     }
                     case ScreenState.EXIT_APP:
-                        GameBase.IsRunning = false;
+                        GameBase.isRunning = false;
                         break;
                     case ScreenState.NONE:
                         throw new ApplicationException("Screen not yet initialized.");
@@ -69,7 +69,7 @@ namespace Core.Screen
             }
             else
             {
-                GameBase.IsRunning = false;
+                GameBase.isRunning = false;
             }
         }
 

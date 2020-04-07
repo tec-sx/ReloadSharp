@@ -4,11 +4,11 @@ namespace Core.Resources.Textures
     using System.Collections.Generic;
     using Raylib_cs;
 
-    public class TextureCache_RL : ITextureCache
+    public class TextureCacheRl : ITextureCache
     {
         private readonly Dictionary<string, Texture2D> _textureDict;
 
-        public TextureCache_RL()
+        public TextureCacheRl()
         {
             _textureDict = new Dictionary<string, Texture2D>();
         }

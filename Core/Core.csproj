@@ -90,7 +90,12 @@
       <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0-preview.1.20120.4" />
       <PackageReference Include="SharpGLTF.Core" Version="1.0.0-alpha0016" />
       <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.0-alpha0016" />
+      <PackageReference Include="Silk.NET" Version="1.0.1" />
       <PackageReference Include="StructureMap.Microsoft.DependencyInjection" Version="2.0.0" />
+      <PackageReference Include="Veldrid" Version="4.7.0" />
+      <PackageReference Include="Veldrid.SPIRV" Version="1.0.13" />
+      <PackageReference Include="Veldrid.StartupUtilities" Version="4.7.0" />
+      <PackageReference Include="Veldrid.Utilities" Version="4.7.0" />
     </ItemGroup>
     
     <ItemGroup>
@@ -106,7 +111,6 @@
     </ItemGroup>
     
     <ItemGroup>
-      <Folder Include="CoreSystem" />
       <Folder Include="Libraries\Bindings" />
     </ItemGroup>
 </Project>

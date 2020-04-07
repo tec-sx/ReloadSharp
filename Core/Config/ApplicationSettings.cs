@@ -1,14 +1,18 @@
 namespace Core.Config
 {
+    using CoreSystem;
     using System.Text.Json.Serialization;
-    using Raylib_cs;
+
 
     public class DisplaySettings
     {
         [JsonPropertyName("Width")] public int Width { get; set; }
         [JsonPropertyName("Height")] public int Height { get; set; }
         [JsonPropertyName("TargetFps")] public int TargetFps { get; set; }
-        [JsonPropertyName("Flags")] public ConfigFlag[] Flags { get; set; }
+        [JsonPropertyName("UseVulkan")] public bool UseVulkan { get; set; }
+        [JsonPropertyName("IsFullScreen")] public bool IsFullScreen { get; set; }
+        [JsonPropertyName("VSync")] public bool VSync { get; set; }
+        [JsonPropertyName("RefreshRate")] public int RefreshRate { get; set; }
     }
 
     public class AudioSettings
@@ -36,6 +40,11 @@ namespace Core.Config
         [JsonPropertyName("ProgramVersion")] public string ProgramVersion { get; set; }
     }
 
+    public class Flags
+    {
+        [JsonPropertyName("Debug")] public bool Debug { get; set; }
+    }
+    
     public class ApplicationSettings
     {
         [JsonPropertyName("ApplicationInfo")] public ApplicationInfo Info { get; set; }
@@ -43,5 +52,6 @@ namespace Core.Config
         [JsonPropertyName("AudioSettings")] public AudioSettings Audio { get; set;}
         [JsonPropertyName(("ImageSettings"))] public ImageSettings Image { get; set; }
         [JsonPropertyName("ModelSettings")] public ModelSettings Model { get; set; }
+        [JsonPropertyName("Flags")] public Flags Flags { get; set; }
     }
 }

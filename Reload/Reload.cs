@@ -5,7 +5,7 @@ namespace Reload
 
     public class Reload : GameBase
     {
-        protected override void OnInit()
+        protected override void OnInitialize()
         {
         }
 

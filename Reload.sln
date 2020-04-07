@@ -4,8 +4,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload", "Reload\Reload.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{DB913D05-3EBB-4FBA-AF23-4422D75D607E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTest", "CoreTest\CoreTest.csproj", "{8CB22FE7-98FA-4A61-B73D-D0F13065EDBC}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -20,9 +18,5 @@ Global
 		{DB913D05-3EBB-4FBA-AF23-4422D75D607E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DB913D05-3EBB-4FBA-AF23-4422D75D607E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DB913D05-3EBB-4FBA-AF23-4422D75D607E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8CB22FE7-98FA-4A61-B73D-D0F13065EDBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8CB22FE7-98FA-4A61-B73D-D0F13065EDBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8CB22FE7-98FA-4A61-B73D-D0F13065EDBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8CB22FE7-98FA-4A61-B73D-D0F13065EDBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

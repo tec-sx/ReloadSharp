@@ -1,6 +1,8 @@
 namespace Core.Screen
 {
     using System;
+    using CoreSystem;
+
 
     public enum ScreenState
     {
@@ -26,16 +28,29 @@ namespace Core.Screen
 
         public abstract void OnEnter();
         public abstract void OnLeave();
-        public abstract void Update();
-        public abstract void Render();
-
+        public abstract void OnUpdate();
+        public abstract void OnRender();
+        
+        public void Dispose()
+        {
+        }
+        
         public void Run()
         {
             State = ScreenState.RUNNING;
         }
 
-        public void Dispose()
+        public void Update(float deltaTime)
         {
+            
+        }
+
+        public void Render(float deltaTime)
+        {
+            if (State == ScreenState.RUNNING)
+            {
+                OnRender();
+            }
         }
     }
 }

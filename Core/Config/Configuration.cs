@@ -1,3 +1,6 @@
+using System.Drawing;
+using Silk.NET.Windowing.Common;
+
 namespace Core.Config
 {
     using System.IO;
@@ -6,27 +9,26 @@ namespace Core.Config
 
     public static class Configuration
     {
+        private static readonly string SettingsFile = Path.Combine(Environment.CurrentDirectory, "Settings.json");
         public static ContentPath ContentPath { get; private set; }
         public static ApplicationSettings Settings { get; private set; }
 
-        public static void Init()
+        public static void LoadDefaultConfiguration()
         {
-            var settingsFile = Path.Combine(Environment.CurrentDirectory, "Settings.json");
-            
             ContentPath = new ContentPath(Path.Combine(Environment.CurrentDirectory, "Assets"));
-            Settings = LoadSettings<ApplicationSettings>(settingsFile);
+            Settings = LoadSettings<ApplicationSettings>();
         }
 
-        public static T LoadSettings<T>(string file)
+        public static T LoadSettings<T>()
         {
-            var settings = JsonSerializer.Deserialize<T>(File.ReadAllText(file));
+            var settings = JsonSerializer.Deserialize<T>(File.ReadAllText(SettingsFile));
             return settings;
         }
 
-        public static void SaveSettings(string file)
+        public static void SaveSettings()
         {
             var settingsJson = JsonSerializer.Serialize(Settings);
-            File.WriteAllText(file, settingsJson);
+            File.WriteAllText(SettingsFile, settingsJson);
         }
     }
 }

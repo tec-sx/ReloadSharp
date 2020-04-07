@@ -7,7 +7,10 @@
     "TargetFps": 60,
     "Width": 1280,
     "Height": 720,
-    "Flags": [ 32, 64 ]
+    "UseVulkan": true,
+    "IsFullScreen": false,
+    "VSync": true,
+    "RefreshRate": 60
   },
   "AudioSettings": {
     "SampleRate": 44000,
@@ -21,5 +24,8 @@
   },
   "ModelSettings": {
     "Format":  "obj"
+  },
+  "Flags": {
+    "Debug": true
   }
 }

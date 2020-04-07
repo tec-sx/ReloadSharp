@@ -3,28 +3,25 @@
   <component name="ContentModelStore">
     <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
     <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_Reload.-868020023.00" t="ExcludeRecursive" />
-    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.4.0/build/netcoreapp2.1" t="Include">
-      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
-    </e>
-    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.dll" t="Include" />
-    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.pdb" t="Include" />
-    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.api.dll" t="Include" />
-    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.dll" t="Include" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p="Core" t="IncludeRecursive">
         <e p="Config" t="Include">
           <e p="ApplicationSettings.cs" t="Include" />
           <e p="Configuration.cs" t="Include" />
+          <e p="ConfigurationFactory.cs" t="Include" />
           <e p="ContentPath.cs" t="Include" />
         </e>
         <e p="Core.csproj" t="IncludeRecursive" />
         <e p="CoreSystem" t="Include">
-          <e p="Audio" t="Include">
-            <e p="AudioEngineRl.cs" t="Include" />
-            <e p="IAudioEngine.cs" t="Include" />
+          <e p="AudioDevice.cs" t="Include" />
+          <e p="Graphics" t="Include">
+            <e p="VulkanUtils.cs" t="Include" />
+            <e p="WindowFactory.cs" t="Include" />
           </e>
+          <e p="GraphicsBackendType.cs" t="Include" />
         </e>
         <e p="GameBase.cs" t="Include" />
+        <e p="GameThread.cs" t="Include" />
         <e p="Libraries" t="Include">
           <e p="Bindings" t="Include">
             <e p="Raylib-cs" t="Include">
@@ -48,6 +45,7 @@
             <e p="libSDL2_image-2.0.so.0.2.3" t="Include" />
             <e p="libSDL2_mixer-2.0.so.0.2.2" t="Include" />
             <e p="libSDL2_ttf-2.0.so.0.14.1" t="Include" />
+            <e p="libglfw.so.3.3" t="Include" />
             <e p="libraylib.so.3.0.0" t="Include" />
           </e>
           <e p="Windows" t="Include">
@@ -55,6 +53,7 @@
             <e p="SDL2_image.dll" t="Include" />
             <e p="SDL2_mixer.dll" t="Include" />
             <e p="SDL2_ttf.dll" t="Include" />
+            <e p="glfw3.dll" t="Include" />
             <e p="libFLAC-8.dll" t="Include" />
             <e p="libfreetype-6.dll" t="Include" />
             <e p="libjpeg-9.dll" t="Include" />
@@ -70,15 +69,22 @@
             <e p="zlib1.dll" t="Include" />
           </e>
         </e>
+        <e p="Logging" t="Include">
+          <e p="ConsoleLog.cs" t="Include" />
+          <e p="Exceptions" t="Include">
+            <e p="CoreSystemExceptions.cs" t="Include" />
+            <e p="ResourcesExceptions.cs" t="Include" />
+          </e>
+        </e>
         <e p="Resources" t="Include">
           <e p="Audio" t="Include">
-            <e p="AudioCacheRl.cs" t="Include" />
+            <e p="AudioCache.cs" t="Include" />
             <e p="IAudioCache.cs" t="Include" />
             <e p="Models" t="Include">
               <e p="IMusic.cs" t="Include" />
               <e p="ISound.cs" t="Include" />
-              <e p="Music_RL.cs" t="Include" />
-              <e p="Sound_RL.cs" t="Include" />
+              <e p="Music.cs" t="Include" />
+              <e p="Sound.cs" t="Include" />
             </e>
           </e>
           <e p="GameObjects" t="Include">
@@ -99,7 +105,7 @@
               <e p="ITexture.cs" t="Include" />
               <e p="Texture_RL.cs" t="Include" />
             </e>
-            <e p="TextureCache_RL.cs" t="Include" />
+            <e p="TextureCacheRl.cs" t="Include" />
           </e>
         </e>
         <e p="Screen" t="Include">
@@ -112,24 +118,17 @@
           <e p="IState.cs" t="Include" />
           <e p="IStateMachine.cs" t="Include" />
           <e p="StateMachine.cs" t="Include" />
+          <e p="States.cs" t="Include" />
+        </e>
+        <e p="Utilities" t="Include">
+          <e p="ServiceManager.cs" t="Include" />
+          <e p="Timing.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
               <e p="Core.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="CoreTest" t="IncludeRecursive">
-        <e p="ConfigurationTest.cs" t="Include" />
-        <e p="CoreTest.csproj" t="IncludeRecursive" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="CoreTest.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
