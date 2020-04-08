@@ -1,6 +1,7 @@
-namespace Core.Logging.Exceptions
+namespace Core.CoreSystem.ErrorHandling.Exceptions
 {
     using System;
+    using Utilities;
     
     public class MusicException : Exception
     {

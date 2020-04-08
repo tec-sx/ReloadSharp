@@ -1,8 +1,9 @@
+using Core.CoreSystem.ErrorHandling.Exceptions;
+
 namespace Core.Resources.Audio
 {
     using System;
     using System.Collections.Generic;
-    using Logging.Exceptions;
     using Models;
     using static SDL2.SDL_mixer;
 

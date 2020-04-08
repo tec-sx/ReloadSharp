@@ -1,3 +1,5 @@
+using Core.CoreSystem.Graphics;
+
 namespace Core
 {
     using System;
@@ -11,7 +13,9 @@ namespace Core
 
     public abstract class GameBase : IDisposable
     {
-        private readonly IWindow _window;
+        private IWindow _window;
+        private VulkanBackend _backend;
+        
         private readonly AudioDevice _audioDevice;
         protected readonly IScreenManager screenManager;
 
@@ -24,9 +28,10 @@ namespace Core
         protected GameBase()
         {
             Configuration.LoadDefaultConfiguration();
-            LibraryManager.LoadNativeLibraries();
+            EmbeddedResourceManager.LoadNativeLibraries();
             ServiceManager.RegisterServices();
-
+            
+            _backend = new VulkanBackend();
             _audioDevice    = ServiceManager.GetService<AudioDevice>();
             screenManager   = ServiceManager.GetService<IScreenManager>();
         }
@@ -38,6 +43,9 @@ namespace Core
         private void Initialize()
         {
 
+            _window = WindowFactory.CreateWindow();
+            _backend.Initialize(_window);
+            
             AddScreens();
 
             _currentScreen = screenManager.CurrentScreen;
@@ -71,16 +79,18 @@ namespace Core
         {
             Initialize();
 
-            var fpsLimiter = new FpsLimiter();
-
-            while (isRunning)
-            {
-                fpsLimiter.Begin();
-
-                deltaTime = fpsLimiter.DeltaTime;
-                fps = fpsLimiter.End();
-            }
-
+            _window.Run();
+            _backend.WaitForIdle();
+            
+            // var fpsLimiter = new FpsLimiter();
+            //
+            // while (isRunning)
+            // {
+            //     fpsLimiter.Begin();
+            //
+            //     deltaTime = fpsLimiter.DeltaTime;
+            //     fps = fpsLimiter.End();
+            // }
         }
     }
 }

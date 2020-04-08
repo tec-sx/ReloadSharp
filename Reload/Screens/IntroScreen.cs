@@ -10,7 +10,7 @@ namespace Reload.Screens
 
         public override void OnEnter()
         {
-            _bgMusicStream = Manager.Resources.LoadMusic("Intro");
+            _bgMusicStream = Manager.Assetses.LoadMusic("Intro");
             _bgMusicStream.Play();
         }
 

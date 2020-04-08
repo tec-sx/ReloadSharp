@@ -4,7 +4,7 @@ using Silk.NET.Windowing.Common;
 using System.Collections.Generic;
 using Xunit;
 
-namespace CoreSystem
+namespace CoreTests.CoreSystem
 {
     public class WindowFactoryTests
     {

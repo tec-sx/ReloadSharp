@@ -1,4 +1,8 @@
-namespace Core.CoreSystem.Graphics.Device
+using System.Text;
+using Core.CoreSystem.ErrorHandling;
+using Core.Utilities;
+
+namespace Core.CoreSystem.Graphics
 {
     using System;
     using System.Runtime.InteropServices;
@@ -6,7 +10,6 @@ namespace Core.CoreSystem.Graphics.Device
     using Config;
     using Silk.NET.Vulkan;
     using Silk.NET.Core.Native;
-    using Silk.NET.GLFW;
     using Silk.NET.Vulkan.Extensions.EXT;
     using Silk.NET.Vulkan.Extensions.KHR;
     using Silk.NET.Windowing.Common;
@@ -14,31 +17,8 @@ namespace Core.CoreSystem.Graphics.Device
     using Image = Silk.NET.Vulkan.Image;
     using System.Linq;
 
-    public struct SwapChainSupportDetails
+    internal sealed class VulkanBackend : IGraphicsBackend<Vk>
     {
-        public SurfaceCapabilitiesKHR Capabilities { get; set; }
-        public SurfaceFormatKHR[] Formats { get; set; }
-        public PresentModeKHR[] PresentModes { get; set; }
-    }
-
-    public struct QueueFamilyIndices
-    {
-        public uint? GraphicsFamily { get; set; }
-        public uint? PresentFamily { get; set; }
-
-        public bool IsComplete()
-        {
-            return GraphicsFamily.HasValue && PresentFamily.HasValue;
-        }
-    }
-
-    internal sealed class VulkanBackend : GraphicsBackendBase<Vk>
-    {
-#if DEBUG
-        public const bool EnableValidationLayers = true;
-# else
-        public const bool EnableValidationLayers = false;
-#endif
         public const int MaxFramesInFlight = 8;
 
         public Vk Api { get; } = Vk.GetApi();
@@ -49,10 +29,9 @@ namespace Core.CoreSystem.Graphics.Device
         private KhrSurface _vkSurface;
         private KhrSwapchain _vkSwapchain;
         private ExtDebugUtils _debugUtils;
-        private string[] _validationLayers = { "VK_LAYER_KHRONOS_validation" };
-        private string[] _deviceExtensions = { "VK_KHR_swapchain" };
 
-        private DebugUtilsMessengerEXT _debugMessenger;
+        private readonly string[] _deviceExtensions = { "VK_KHR_swapchain" };
+
         private SurfaceKHR _surface;
 
         private PhysicalDevice _physicalDevice;
@@ -81,12 +60,24 @@ namespace Core.CoreSystem.Graphics.Device
         private Fence[] _imagesInFlight;
         private uint _currentFrame;
 
-        public override void Initialize(IWindow window)
+        //--------------------------------------------------------------------------------------------------------------
+        // Debug Fields
+        //--------------------------------------------------------------------------------------------------------------
+        private bool _enableValidationLayers;
+        private readonly string[] _validationLayers = { "VK_LAYER_KHRONOS_validation" };
+        private DebugUtilsMessengerEXT _debugMessenger;
+        
+        //--------------------------------------------------------------------------------------------------------------
+        // Public Methods
+        //--------------------------------------------------------------------------------------------------------------
+        public void Initialize(IWindow window)
         {
             _window = window as IVulkanWindow;
 
             CreateInstance();
+#if DEBUG
             SetupDebugMessenger();
+#endif
             CreateSurface();
             PickPhysicalDevice();
             CreateLogicalDevice();
@@ -108,52 +99,58 @@ namespace Core.CoreSystem.Graphics.Device
         }
 
 
-        public override unsafe void Dispose()
+        public unsafe void Dispose()
         {
             for (var i = 0; i < MaxFramesInFlight; i++)
             {
-                Api.DestroySemaphore(_device, _renderFinishedSemaphores[i], (AllocationCallbacks*)null);
-                Api.DestroySemaphore(_device, _imageAvailableSemaphores[i], (AllocationCallbacks*)null);
-                Api.DestroyFence(_device, _inFlightFences[i], (AllocationCallbacks*)null);
+                Api.DestroySemaphore(_device, _renderFinishedSemaphores[i], null);
+                Api.DestroySemaphore(_device, _imageAvailableSemaphores[i], null);
+                Api.DestroyFence(_device, _inFlightFences[i], null);
             }
 
-            Api.DestroyCommandPool(_device, _commandPool, (AllocationCallbacks*)null);
+            Api.DestroyCommandPool(_device, _commandPool, null);
 
             foreach (var framebuffer in _swapchainFramebuffers)
             {
-                Api.DestroyFramebuffer(_device, framebuffer, (AllocationCallbacks*)null);
+                Api.DestroyFramebuffer(_device, framebuffer, null);
             }
 
-            Api.DestroyPipeline(_device, _graphicsPipeline, (AllocationCallbacks*)null);
-            Api.DestroyPipelineLayout(_device, _pipelineLayout, (AllocationCallbacks*)null);
-            Api.DestroyRenderPass(_device, _renderPass, (AllocationCallbacks*)null);
+            Api.DestroyPipeline(_device, _graphicsPipeline, null);
+            Api.DestroyPipelineLayout(_device, _pipelineLayout, null);
+            Api.DestroyRenderPass(_device, _renderPass, null);
 
             foreach (var imageView in _swapchainImageViews)
             {
-                Api.DestroyImageView(_device, imageView, (AllocationCallbacks*)null);
+                Api.DestroyImageView(_device, imageView, null);
             }
 
-            _vkSwapchain.DestroySwapchain(_device, _swapchain, (AllocationCallbacks*)null);
-            Api.DestroyDevice(_device, (AllocationCallbacks*)null);
+            _vkSwapchain.DestroySwapchain(_device, _swapchain, null);
+            Api.DestroyDevice(_device, null);
 
-            if (EnableValidationLayers)
+            if (_enableValidationLayers)
             {
-                _debugUtils.DestroyDebugUtilsMessenger(_instance, _debugMessenger, (AllocationCallbacks*)null);
+                _debugUtils.DestroyDebugUtilsMessenger(_instance, _debugMessenger, null);
             }
 
-            _vkSurface.DestroySurface(_instance, _surface, (AllocationCallbacks*)null);
-            Api.DestroyInstance(_instance, (AllocationCallbacks*)null);
+            _vkSurface.DestroySurface(_instance, _surface, null);
+            Api.DestroyInstance(_instance, null);
         }
 
-        #region Instance
-
-        public unsafe void CreateInstance()
+        //--------------------------------------------------------------------------------------------------------------
+        // Instance Methods
+        //--------------------------------------------------------------------------------------------------------------
+        private unsafe void CreateInstance()
         {
-            if (EnableValidationLayers && !CheckValidationLayerSupport())
+#if DEBUG
+            if (!CheckValidationLayerSupport())
             {
-                throw new NotSupportedException("Validation layers requested, but not available!");
+                GraphicsDebugNotSupported.Warning("Validation layers not available. continuing without validation");
             }
-
+            else
+            {
+                _enableValidationLayers = true;
+            }
+#endif
             var appInfo = new Silk.NET.Vulkan.ApplicationInfo
             {
                 SType = StructureType.ApplicationInfo,
@@ -176,7 +173,7 @@ namespace Core.CoreSystem.Graphics.Device
             createInfo.PpEnabledExtensionNames = (byte**)extensions;
 
 
-            if (EnableValidationLayers)
+            if (_enableValidationLayers)
             {
                 createInfo.EnabledLayerCount = (uint)_validationLayers.Length;
                 createInfo.PpEnabledLayerNames = (byte**)SilkMarshal.MarshalStringArrayToPtr(_validationLayers);
@@ -210,7 +207,7 @@ namespace Core.CoreSystem.Graphics.Device
             Marshal.FreeHGlobal((IntPtr)appInfo.PApplicationName);
             Marshal.FreeHGlobal((IntPtr)appInfo.PEngineName);
 
-            if (EnableValidationLayers)
+            if (_enableValidationLayers)
             {
                 SilkMarshal.FreeStringArrayPtr((IntPtr)createInfo.PpEnabledLayerNames, _validationLayers.Length);
             }
@@ -247,25 +244,28 @@ namespace Core.CoreSystem.Graphics.Device
             return true;
         }
 
-        #endregion
-
-        #region Debug
-
+        //--------------------------------------------------------------------------------------------------------------
+        // Debugger Methods
+        //--------------------------------------------------------------------------------------------------------------
         private unsafe void SetupDebugMessenger()
         {
-            if (!EnableValidationLayers) return;
-            if (!Api.TryGetExtension(out _debugUtils)) return;
+            if (!_enableValidationLayers || !Api.TryGetExtension(out _debugUtils))
+            {
+                return;
+            }
 
-            var createInfo = new DebugUtilsMessengerCreateInfoEXT();
+            var createInfo = new DebugUtilsMessengerCreateInfoEXT
+            {
+                SType = StructureType.DebugUtilsMessengerCreateInfoExt,
+                MessageSeverity = DebugUtilsMessageSeverityFlagsEXT.DebugUtilsMessageSeverityVerboseBitExt |
+                                  DebugUtilsMessageSeverityFlagsEXT.DebugUtilsMessageSeverityWarningBitExt |
+                                  DebugUtilsMessageSeverityFlagsEXT.DebugUtilsMessageSeverityErrorBitExt,
+                MessageType = DebugUtilsMessageTypeFlagsEXT.DebugUtilsMessageTypeGeneralBitExt |
+                              DebugUtilsMessageTypeFlagsEXT.DebugUtilsMessageTypePerformanceBitExt |
+                              DebugUtilsMessageTypeFlagsEXT.DebugUtilsMessageTypeValidationBitExt,
+                PfnUserCallback = FuncPtr.Of<DebugUtilsMessengerCallbackFunctionEXT>(DebugCallback)
+            };
 
-            createInfo.SType = StructureType.DebugUtilsMessengerCreateInfoExt;
-            createInfo.MessageSeverity = DebugUtilsMessageSeverityFlagsEXT.DebugUtilsMessageSeverityVerboseBitExt |
-                                         DebugUtilsMessageSeverityFlagsEXT.DebugUtilsMessageSeverityWarningBitExt |
-                                         DebugUtilsMessageSeverityFlagsEXT.DebugUtilsMessageSeverityErrorBitExt;
-            createInfo.MessageType = DebugUtilsMessageTypeFlagsEXT.DebugUtilsMessageTypeGeneralBitExt |
-                                     DebugUtilsMessageTypeFlagsEXT.DebugUtilsMessageTypePerformanceBitExt |
-                                     DebugUtilsMessageTypeFlagsEXT.DebugUtilsMessageTypeValidationBitExt;
-            createInfo.PfnUserCallback = FuncPtr.Of<DebugUtilsMessengerCallbackFunctionEXT>(DebugCallback);
 
             fixed (DebugUtilsMessengerEXT* debugMessenger = &_debugMessenger)
             {
@@ -277,38 +277,45 @@ namespace Core.CoreSystem.Graphics.Device
             }
         }
 
-        private unsafe uint DebugCallback
+        private static unsafe uint DebugCallback
         (
             DebugReportFlagsEXT flags,
-            DebugReportObjectTypeEXT objecttype,
+            DebugReportObjectTypeEXT objectType,
             ulong o,
             UIntPtr location,
-            int messagecode,
-            char* playerprefix,
-            char* pmessage,
-            void* puserdata
+            int messageCode,
+            char* playerPrefix,
+            char* pMessage,
+            void* pUserData
         )
         {
-            Console.Write("[" + flags.ToString().Replace("DebugReport", string.Empty) + "] ");
-            Console.Write(Marshal.PtrToStringAnsi((IntPtr)playerprefix) + "/");
-            Console.Write(objecttype.ToString().Replace("DebugReportObjectType", string.Empty)[..^3]);
-            Console.WriteLine(": " + Marshal.PtrToStringAnsi((IntPtr)pmessage));
+            var tag = flags.ToString().Replace("DebugReport", string.Empty);
+            var sb = new StringBuilder();
+
+            sb.Append($"{Marshal.PtrToStringAnsi((IntPtr) playerPrefix)}/");
+            sb.Append(objectType.ToString().Replace("DebugReportObjectType", string.Empty)[..^3]);
+            sb.AppendLine($": {Marshal.PtrToStringAnsi((IntPtr) pMessage)}");
+            
+            ConsoleLog.Info(tag, sb.ToString());
             return Vk.False;
         }
-
-        #endregion
-
+        
+        //--------------------------------------------------------------------------------------------------------------
+        // Surface Methods
+        //--------------------------------------------------------------------------------------------------------------
         private unsafe void CreateSurface()
         {
             _surface = _window.CreateSurface<AllocationCallbacks>(_instance.ToHandle(), null).ToSurface();
         }
 
 
-        #region Physical Device
+        //--------------------------------------------------------------------------------------------------------------
+        // Physical Device Methods
+        //--------------------------------------------------------------------------------------------------------------
         private unsafe void PickPhysicalDevice()
         {
             var deviceCount = 0u;
-            Api.EnumeratePhysicalDevices(_instance, &deviceCount, (PhysicalDevice*)null);
+            Api.EnumeratePhysicalDevices(_instance, &deviceCount, null);
 
             if (deviceCount == 0)
             {
@@ -321,11 +328,14 @@ namespace Core.CoreSystem.Graphics.Device
             for (var i = 0; i < deviceCount; i++)
             {
                 var device = devices[i];
-                if (IsDeviceSuitable(device))
+                
+                if (!IsDeviceSuitable(device))
                 {
-                    _physicalDevice = device;
-                    return;
+                    continue;
                 }
+                
+                _physicalDevice = device;
+                return;
             }
 
             throw new Exception("No suitable device.");
@@ -354,7 +364,7 @@ namespace Core.CoreSystem.Graphics.Device
             details.Capabilities = surfaceCapabilities;
 
             var formatCount = 0u;
-            _vkSurface.GetPhysicalDeviceSurfaceFormats(device, _surface, &formatCount, (SurfaceFormatKHR*)null);
+            _vkSurface.GetPhysicalDeviceSurfaceFormats(device, _surface, &formatCount, null);
 
             if (formatCount != 0)
             {
@@ -369,7 +379,7 @@ namespace Core.CoreSystem.Graphics.Device
             }
 
             var presentModeCount = 0u;
-            _vkSurface.GetPhysicalDeviceSurfacePresentModes(device, _surface, &presentModeCount, (PresentModeKHR*)null);
+            _vkSurface.GetPhysicalDeviceSurfacePresentModes(device, _surface, &presentModeCount, null);
 
             if (presentModeCount != 0)
             {
@@ -391,7 +401,7 @@ namespace Core.CoreSystem.Graphics.Device
             var indices = new QueueFamilyIndices();
 
             uint queryFamilyCount = 0;
-            Api.GetPhysicalDeviceQueueFamilyProperties(device, &queryFamilyCount, (QueueFamilyProperties*)null);
+            Api.GetPhysicalDeviceQueueFamilyProperties(device, &queryFamilyCount, null);
 
             var queueFamilies = stackalloc QueueFamilyProperties[(int)queryFamilyCount];
 
@@ -425,7 +435,7 @@ namespace Core.CoreSystem.Graphics.Device
         private unsafe bool CheckDeviceExtensionSupport(PhysicalDevice device)
         {
             uint extensionCount;
-            Api.EnumerateDeviceExtensionProperties(device, (byte*)null, &extensionCount, (ExtensionProperties*)null);
+            Api.EnumerateDeviceExtensionProperties(device, (byte*)null, &extensionCount, null);
 
             var availableExtensions = stackalloc ExtensionProperties[(int)extensionCount];
             Api.EnumerateDeviceExtensionProperties(device, (byte*)null, &extensionCount, availableExtensions);
@@ -441,13 +451,23 @@ namespace Core.CoreSystem.Graphics.Device
             return requiredExtensions.Count == 0;
         }
 
-        #endregion
-
-        #region Logical Device
-
+        //--------------------------------------------------------------------------------------------------------------
+        // Logical Device Methods
+        //--------------------------------------------------------------------------------------------------------------
         private unsafe void CreateLogicalDevice()
         {
             var indices = FindQueueFamilies(_physicalDevice);
+
+            if (indices.GraphicsFamily == null)
+            {
+                throw VulkanInvalidOperation.Exception("Graphics family is null");
+            }
+
+            if (indices.PresentFamily == null)
+            {
+                throw VulkanInvalidOperation.Exception("Present family is null.");
+            }
+            
             var uniqueQueueFamilies = new[] { indices.GraphicsFamily.Value, indices.PresentFamily.Value };
             var queueCreateInfos = stackalloc DeviceQueueCreateInfo[uniqueQueueFamilies.Length];
 
@@ -466,17 +486,19 @@ namespace Core.CoreSystem.Graphics.Device
 
             var deviceFeatures = new PhysicalDeviceFeatures();
 
-            var createInfo = new DeviceCreateInfo();
-            createInfo.SType = StructureType.DeviceCreateInfo;
-            createInfo.QueueCreateInfoCount = (uint)uniqueQueueFamilies.Length;
-            createInfo.PQueueCreateInfos = queueCreateInfos;
-            createInfo.PEnabledFeatures = &deviceFeatures;
-            createInfo.EnabledExtensionCount = (uint)_deviceExtensions.Length;
+            var createInfo = new DeviceCreateInfo
+            {
+                SType = StructureType.DeviceCreateInfo,
+                QueueCreateInfoCount = (uint) uniqueQueueFamilies.Length,
+                PQueueCreateInfos = queueCreateInfos,
+                PEnabledFeatures = &deviceFeatures,
+                EnabledExtensionCount = (uint) _deviceExtensions.Length
+            };
 
             var enabledExtensionNames = SilkMarshal.MarshalStringArrayToPtr(_deviceExtensions);
             createInfo.PpEnabledExtensionNames = (byte**)enabledExtensionNames;
 
-            if (EnableValidationLayers)
+            if (_enableValidationLayers)
             {
                 createInfo.EnabledLayerCount = (uint)_validationLayers.Length;
                 createInfo.PpEnabledLayerNames = (byte**)SilkMarshal.MarshalStringArrayToPtr(_validationLayers);
@@ -507,10 +529,9 @@ namespace Core.CoreSystem.Graphics.Device
             Api.CurrentDevice = _device;
         }
 
-        #endregion
-
-        #region SwapChain
-
+        //--------------------------------------------------------------------------------------------------------------
+        // Swapchain Methods
+        //--------------------------------------------------------------------------------------------------------------
         private unsafe void CreateSwapChain()
         {
             var swapChainSupport = QuerySwapChainSupport(_physicalDevice);
@@ -539,6 +560,17 @@ namespace Core.CoreSystem.Graphics.Device
             };
 
             var indices = FindQueueFamilies(_physicalDevice);
+
+            if (indices.GraphicsFamily == null)
+            {
+                throw VulkanInvalidOperation.Exception("Graphics family is null.");
+            }
+
+            if (indices.PresentFamily == null)
+            {
+                throw VulkanInvalidOperation.Exception("Present family is null.");
+            }
+            
             uint[] queueFamilyIndices = { indices.GraphicsFamily.Value, indices.PresentFamily.Value };
 
             fixed (uint* qfiPtr = queueFamilyIndices)
@@ -570,7 +602,7 @@ namespace Core.CoreSystem.Graphics.Device
                 }
             }
 
-            _vkSwapchain.GetSwapchainImages(_device, _swapchain, &imageCount, (Image*)null);
+            _vkSwapchain.GetSwapchainImages(_device, _swapchain, &imageCount, null);
             _swapchainImages = new Image[imageCount];
             fixed (Image* swapchainImage = _swapchainImages)
             {
@@ -604,7 +636,7 @@ namespace Core.CoreSystem.Graphics.Device
             return actualExtent;
         }
 
-        private PresentModeKHR ChooseSwapPresentMode(PresentModeKHR[] presentModes)
+        private static PresentModeKHR ChooseSwapPresentMode(IEnumerable<PresentModeKHR> presentModes)
         {
             foreach (var availablePresentMode in presentModes)
             {
@@ -617,7 +649,7 @@ namespace Core.CoreSystem.Graphics.Device
             return PresentModeKHR.PresentModeFifoKhr;
         }
 
-        private SurfaceFormatKHR ChooseSwapSurfaceFormat(SurfaceFormatKHR[] formats)
+        private static  SurfaceFormatKHR ChooseSwapSurfaceFormat(IReadOnlyList<SurfaceFormatKHR> formats)
         {
             foreach (var format in formats)
             {
@@ -726,14 +758,13 @@ namespace Core.CoreSystem.Graphics.Device
             }
         }
 
-        #endregion
-
-        #region Shaders
-
+        //--------------------------------------------------------------------------------------------------------------
+        // Shaders Methods
+        //--------------------------------------------------------------------------------------------------------------
         private unsafe void CreateGraphicsPipeline()
         {
-            var vertShaderCode = Program.LoadEmbeddedResourceBytes("VulkanTriangle.shader.vert.spv");
-            var fragShaderCode = Program.LoadEmbeddedResourceBytes("VulkanTriangle.shader.frag.spv");
+            var vertShaderCode = EmbeddedResourceManager.LoadShader("shader.vert.spv");
+            var fragShaderCode = EmbeddedResourceManager.LoadShader("shader.frag.spv");
 
             var vertShaderModule = CreateShaderModule(vertShaderCode);
             var fragShaderModule = CreateShaderModule(fragShaderCode);
@@ -805,7 +836,7 @@ namespace Core.CoreSystem.Graphics.Device
                 DepthBiasEnable = Vk.False
             };
 
-            var multisampling = new PipelineMultisampleStateCreateInfo
+            var multiSampling = new PipelineMultisampleStateCreateInfo
             {
                 SType = StructureType.PipelineMultisampleStateCreateInfo,
                 SampleShadingEnable = Vk.False,
@@ -820,7 +851,7 @@ namespace Core.CoreSystem.Graphics.Device
                                  ColorComponentFlags.ColorComponentABit,
                 BlendEnable = Vk.False
             };
-
+            
             var colorBlending = new PipelineColorBlendStateCreateInfo
             {
                 SType = StructureType.PipelineColorBlendStateCreateInfo,
@@ -859,7 +890,7 @@ namespace Core.CoreSystem.Graphics.Device
                 PInputAssemblyState = &inputAssembly,
                 PViewportState = &viewportState,
                 PRasterizationState = &rasterizer,
-                PMultisampleState = &multisampling,
+                PMultisampleState = &multiSampling,
                 PColorBlendState = &colorBlending,
                 Layout = _pipelineLayout,
                 RenderPass = _renderPass,
@@ -876,8 +907,8 @@ namespace Core.CoreSystem.Graphics.Device
                 }
             }
 
-            Api.DestroyShaderModule(_device, fragShaderModule, (AllocationCallbacks*)null);
-            Api.DestroyShaderModule(_device, vertShaderModule, (AllocationCallbacks*)null);
+            Api.DestroyShaderModule(_device, fragShaderModule, null);
+            Api.DestroyShaderModule(_device, vertShaderModule, null);
         }
 
         private unsafe ShaderModule CreateShaderModule(byte[] code)
@@ -901,7 +932,7 @@ namespace Core.CoreSystem.Graphics.Device
             return shaderModule;
         }
 
-        #endregion
+
 
         private unsafe void CreateFramebuffers()
         {
@@ -935,6 +966,11 @@ namespace Core.CoreSystem.Graphics.Device
         {
             var queueFamilyIndices = FindQueueFamilies(_physicalDevice);
 
+            if (queueFamilyIndices.GraphicsFamily == null)
+            {
+                throw VulkanInvalidOperation.Exception("Graphics family is null");
+            }
+            
             var poolInfo = new CommandPoolCreateInfo
             {
                 SType = StructureType.CommandPoolCreateInfo,
@@ -1011,12 +1047,16 @@ namespace Core.CoreSystem.Graphics.Device
             _inFlightFences = new Fence[MaxFramesInFlight];
             _imagesInFlight = new Fence[MaxFramesInFlight];
 
-            SemaphoreCreateInfo semaphoreInfo = new SemaphoreCreateInfo();
-            semaphoreInfo.SType = StructureType.SemaphoreCreateInfo;
+            var semaphoreInfo = new SemaphoreCreateInfo
+            {
+                SType = StructureType.SemaphoreCreateInfo
+            };
 
-            FenceCreateInfo fenceInfo = new FenceCreateInfo();
-            fenceInfo.SType = StructureType.FenceCreateInfo;
-            fenceInfo.Flags = FenceCreateFlags.FenceCreateSignaledBit;
+            var fenceInfo = new FenceCreateInfo
+            {
+                SType = StructureType.FenceCreateInfo, 
+                Flags = FenceCreateFlags.FenceCreateSignaledBit
+            };
 
             for (var i = 0; i < MaxFramesInFlight; i++)
             {
@@ -1083,7 +1123,7 @@ namespace Core.CoreSystem.Graphics.Device
 
             fixed (SwapchainKHR* swapchain = &_swapchain)
             {
-                PresentInfoKHR presentInfo = new PresentInfoKHR
+                var presentInfo = new PresentInfoKHR
                 {
                     SType = StructureType.PresentInfoKhr,
                     WaitSemaphoreCount = 1,

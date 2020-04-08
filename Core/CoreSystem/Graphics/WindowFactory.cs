@@ -1,12 +1,13 @@
+using Core.CoreSystem.ErrorHandling;
+
 namespace Core.CoreSystem.Graphics
 {
     using Config;
-    using Logging.Exceptions;
     using Silk.NET.Windowing;
     using Silk.NET.Windowing.Common;
     using System.Drawing;
 
-    internal static class WindowFactory
+    public static class WindowFactory
     {
         public static IWindow CreateWindow()
         {

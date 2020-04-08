@@ -1,5 +1,6 @@
 namespace Core.Utilities
 {
+    using CoreSystem.Graphics;
     using CoreSystem;
     using Resources;
     using Resources.Audio;
@@ -24,7 +25,7 @@ namespace Core.Utilities
             collection.AddScoped<ITextureCache, TextureCacheRl>();
             collection.AddScoped<IGameObjectCache, GameObjectCacheRl>();
             collection.AddScoped<IAudioCache, AudioCache>();
-            collection.AddScoped<IResourceManager, ResourceManager>();
+            collection.AddScoped<IAssetsManager, AssetsManager>();
 
             collection.AddSingleton<IScreenManager, ScreenManager>();
             collection.AddScoped(typeof(IStateMachine<>), typeof(StateMachine<>));

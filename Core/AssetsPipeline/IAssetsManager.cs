@@ -5,7 +5,7 @@ namespace Core.Resources
     using GameObjects.Models;
     using Textures;
 
-    public interface IResourceManager : IDisposable
+    public interface IAssetsManager : IDisposable
     {
         ITexture GetTexture(string file);
         IGameObject GetGameObject(string file);

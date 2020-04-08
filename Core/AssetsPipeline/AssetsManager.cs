@@ -7,7 +7,7 @@ namespace Core.Resources
     using GameObjects.Models;
     using Audio;
 
-    public class ResourceManager : IResourceManager
+    public class AssetsManager : IAssetsManager
     {
         private readonly ApplicationSettings _settings;
         private readonly ContentPath _contentPath;
@@ -16,7 +16,7 @@ namespace Core.Resources
         private readonly IGameObjectCache _gameObjectCache;
         private readonly IAudioCache _audioCache;
 
-        public ResourceManager(
+        public AssetsManager(
             ITextureCache textureCache,
             IGameObjectCache gameObjectCache,
             IAudioCache audioCache)

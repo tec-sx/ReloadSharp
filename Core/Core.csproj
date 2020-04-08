@@ -18,70 +18,25 @@
       <Compile Remove="Config\Models\**" />
       <EmbeddedResource Remove="Config\Models\**" />
       <None Remove="Config\Models\**" />
-      <None Update="Libraries\Linux\libraylib.so.3.0.0">
+      <None Remove="Resources\Shaders\shader.frag.spv" />
+      <None Remove="Resources\Shaders\shader.vert.spv" />
+      <None Remove="EmbeddedResources\Libraries\Linux\libglfw.so.3.3" />
+      <None Include="Resources\Libraries\Linux\libglfw.so.3.3">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Libraries\Linux\libSDL2-2.0.so.0.10.0">
+      <None Update="Resources\Libraries\Linux\libraylib.so.3.0.0">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Libraries\Linux\libSDL2_image-2.0.so.0.2.3">
+      <None Update="Resources\Libraries\Linux\libSDL2-2.0.so.0.10.0">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Libraries\Linux\libSDL2_mixer-2.0.so.0.2.2">
+      <None Update="Resources\Libraries\Linux\libSDL2_image-2.0.so.0.2.3">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Libraries\Linux\libSDL2_ttf-2.0.so.0.14.1">
+      <None Update="Resources\Libraries\Linux\libSDL2_mixer-2.0.so.0.2.2">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Libraries\Windows\libFLAC-8.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\libfreetype-6.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\libjpeg-9.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\libmodplug-1.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\libmpg123-0.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\libogg-0.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\libopus-0.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\libopusfile-0.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\libpng16-16.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\libvorbis-0.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\libvorbisfile-3.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\raylib.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\SDL2.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\SDL2_image.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\SDL2_mixer.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\SDL2_ttf.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Libraries\Windows\zlib1.dll">
+      <None Update="Resources\Libraries\Linux\libSDL2_ttf-2.0.so.0.14.1">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
     </ItemGroup>
@@ -100,6 +55,12 @@
     </ItemGroup>
     
     <ItemGroup>
+        <EmbeddedResource Include="Resources\Shaders\shader.frag.spv">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
+        <EmbeddedResource Include="Resources\Shaders\shader.vert.spv">
+          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </EmbeddedResource>
         <EmbeddedResource Include="Settings.json">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </EmbeddedResource>
@@ -109,9 +70,5 @@
       <None Update="Libraries\lib\raylib.dll">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-    </ItemGroup>
-    
-    <ItemGroup>
-      <Folder Include="Libraries\Bindings" />
     </ItemGroup>
 </Project>

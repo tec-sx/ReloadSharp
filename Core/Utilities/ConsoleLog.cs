@@ -1,4 +1,4 @@
-namespace Core.Logging
+namespace Core.Utilities
 {
     using System;
     
@@ -10,7 +10,7 @@ namespace Core.Logging
             Console.BackgroundColor = color;
             Console.Write(tag);
             Console.ResetColor();
-            Console.Write($"]::{from}::{message}");
+            Console.WriteLine($"]::{from}::{message}");
         }
 
         public static void Info(string from, string message) => 

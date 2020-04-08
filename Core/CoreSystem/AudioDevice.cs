@@ -1,6 +1,6 @@
 namespace Core.CoreSystem
 {
-    using Logging.Exceptions;
+    using ErrorHandling.Exceptions;
     using static SDL2.SDL_mixer;
     
     public class AudioDevice

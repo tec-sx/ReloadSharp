@@ -6,13 +6,13 @@ namespace Core.Screen
 
     public class ScreenManager : IScreenManager
     {
-        public IResourceManager Resources { get; }
+        public IAssetsManager Assetses { get; }
 
         public ScreenBase CurrentScreen { get; set; }
 
-        public ScreenManager(IResourceManager resources)
+        public ScreenManager(IAssetsManager assetses)
         {
-            Resources = resources;
+            Assetses = assetses;
         }
 
         public ScreenBase MoveToNextScreen()
