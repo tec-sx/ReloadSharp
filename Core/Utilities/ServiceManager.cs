@@ -1,3 +1,6 @@
+using Core.CoreSystem.Audio;
+using Core.CoreSystem.Audio.Device;
+
 namespace Core.Utilities
 {
     using CoreSystem.Graphics;
@@ -19,7 +22,8 @@ namespace Core.Utilities
         public static void RegisterServices()
         {
             var collection = new ServiceCollection();
-            
+
+            collection.AddSingleton<IGraphicsManager, GraphicsManager>();
             collection.AddSingleton<AudioDevice>();
 
             collection.AddScoped<ITextureCache, TextureCacheRl>();

@@ -1,15 +1,28 @@
-using Core.CoreSystem.ErrorHandling;
-
 namespace Core.CoreSystem.Graphics
 {
-    using Config;
-    using Silk.NET.Windowing;
-    using Silk.NET.Windowing.Common;
     using System.Drawing;
+    using Config;
+    using Device;
+    using ErrorHandling;
+    using Device.OpenGl;
+    using Core.CoreSystem.Graphics.Device.Vulkan;
+    using Silk.NET.Windowing.Common;
 
-    public static class WindowFactory
+    using SilkWindow = Silk.NET.Windowing.Window;
+    
+    internal sealed class GraphicsManager : IGraphicsManager
     {
-        public static IWindow CreateWindow()
+        public IWindow Window { get; private set; }
+        public IGraphicsDevice Device { get; private set; }
+
+
+        public void DisposeResources()
+        {
+            Window.Dispose();
+            Device.Dispose();
+        }
+
+        public void CreateWindow()
         {
             var windowOptions = CreateWindowOptionsFromSettings();
 
@@ -17,7 +30,8 @@ namespace Core.CoreSystem.Graphics
             {
                 if (TryCreateVulkanWindow(windowOptions, out var vulkanWindow))
                 {
-                    return vulkanWindow;
+                    Window = vulkanWindow;
+                    return;
                 }
 
                 GraphicsBackendNotSupported.Warning("Vulkan is not supported, fallback to OpenGl.");
@@ -28,12 +42,27 @@ namespace Core.CoreSystem.Graphics
 
             if(TryCreateOpenGlWindow(windowOptions, out var openGlWindow))
             {
-                return openGlWindow;
+                Window = openGlWindow;
+                return;
             }
 
             throw GraphicsBackendNotSupported.Exception("Open GL is not supported.");
         }
 
+        public void CreateDevice()
+        {
+            if (Configuration.Settings.Display.UseVulkan)
+            {
+                Device = new VulkanDevice();
+            }
+            else
+            {
+                Device = new OpenGlDevice();
+            }
+            
+            Device.Initialize(Window);
+        }
+        
         private static WindowOptions CreateWindowOptionsFromSettings()
         {
             var info = Configuration.Settings.Info;
@@ -52,9 +81,9 @@ namespace Core.CoreSystem.Graphics
             return options;
         }
 
-        private static unsafe bool TryCreateVulkanWindow(WindowOptions options, out IWindow window)
+        private static bool TryCreateVulkanWindow(WindowOptions options, out IWindow window)
         {
-            window = Window.Create(options) as IVulkanWindow;
+            window = SilkWindow.Create(options) as IVulkanWindow;
 
             if (window is null || !window.IsVulkanSupported)
             {
@@ -68,7 +97,7 @@ namespace Core.CoreSystem.Graphics
 
         private static bool TryCreateOpenGlWindow(WindowOptions options, out IWindow window)
         {
-            window = Window.Create(options);
+            window = SilkWindow.Create(options);
 
             if (window is null)
             {

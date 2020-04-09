@@ -50,7 +50,14 @@
         </e>
         <e p="Core.csproj" t="IncludeRecursive" />
         <e p="CoreSystem" t="Include">
-          <e p="AudioDevice.cs" t="Include" />
+          <e p="Audio" t="Include">
+            <e p="AudioManager.cs" t="Include" />
+            <e p="Device" t="Include">
+              <e p="AudioDevice.cs" t="Include" />
+              <e p="IAudioDevice.cs" t="Include" />
+            </e>
+            <e p="IAudioManager.cs" t="Include" />
+          </e>
           <e p="ErrorHandling" t="Include">
             <e p="CoreSystemErrorHandler.cs" t="Include" />
             <e p="Exceptions" t="Include">
@@ -59,10 +66,26 @@
             </e>
           </e>
           <e p="Graphics" t="Include">
-            <e p="IGraphicsBackend.cs" t="Include" />
-            <e p="VulkanBackend.cs" t="Include" />
-            <e p="VulkanStructs.cs" t="Include" />
-            <e p="WindowFactory.cs" t="Include" />
+            <e p="Device" t="Include">
+              <e p="IGraphicsDevice.cs" t="Include" />
+              <e p="OpenGl" t="Include">
+                <e p="OpenGlDevice.cs" t="Include" />
+              </e>
+              <e p="Vulkan" t="Include">
+                <e p="VulkanDevice.cs" t="Include" />
+                <e p="VulkanStructs.cs" t="Include" />
+              </e>
+            </e>
+            <e p="GraphicsManager.cs" t="Include" />
+            <e p="IGraphicsManager.cs" t="Include" />
+          </e>
+          <e p="Input" t="Include">
+            <e p="Controllers" t="Include">
+              <e p="Keyboard.cs" t="Include" />
+              <e p="Mouse.cs" t="Include" />
+            </e>
+            <e p="IInputManager.cs" t="Include" />
+            <e p="InputManager.cs" t="Include" />
           </e>
         </e>
         <e p="GameBase.cs" t="Include" />
@@ -147,17 +170,17 @@
           </e>
         </e>
       </e>
-      <e p="CoreTests" t="IncludeRecursive">
+      <e p="Core.Tests" t="IncludeRecursive">
+        <e p="Core.Tests.csproj" t="IncludeRecursive" />
         <e p="CoreSystem" t="Include">
-          <e p="WindowFactoryTests.cs" t="Include" />
+          <e p="GraphicsManagerTests.cs" t="Include" />
         </e>
-        <e p="CoreTests.csproj" t="IncludeRecursive" />
         <e p="Settings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
-              <e p="CoreTests.AssemblyInfo.cs" t="Include" />
+              <e p="Core.Tests.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>

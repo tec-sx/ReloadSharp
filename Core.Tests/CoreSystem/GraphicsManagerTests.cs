@@ -1,12 +1,11 @@
-using Core.Config;
-using Core.CoreSystem.Graphics;
-using Silk.NET.Windowing.Common;
-using System.Collections.Generic;
-using Xunit;
-
-namespace CoreTests.CoreSystem
+namespace Core.Tests.CoreSystem
 {
-    public class WindowFactoryTests
+    using Core.Config;
+    using Core.CoreSystem.Graphics;
+    using Silk.NET.Windowing.Common;
+    using Xunit;
+    
+    public class GraphicsManagerTests
     {
         [Fact]
         public void CreateWindowVulkanSuccess()
@@ -15,18 +14,18 @@ namespace CoreTests.CoreSystem
 
             Configuration.LoadDefaultConfiguration();
             Configuration.Settings.Display.UseVulkan = true;
-
+            
             #endregion
 
             #region Act
-
-            var window = WindowFactory.CreateWindow();
+            var graphicsManager = new GraphicsManager();
+            graphicsManager.CreateWindow();
 
             #endregion
 
             #region Assert
 
-                Assert.Equal(ContextAPI.Vulkan, window.API.API);
+                Assert.Equal(ContextAPI.Vulkan, graphicsManager.Window.API.API);
 
             #endregion
 
@@ -44,13 +43,14 @@ namespace CoreTests.CoreSystem
 
             #region Act
 
-            var window = WindowFactory.CreateWindow();
+            var graphicsManager = new GraphicsManager();
+            graphicsManager.CreateWindow();
 
             #endregion
 
             #region Assert
 
-            Assert.InRange(window.API.API, ContextAPI.OpenGL, ContextAPI.OpenGLES);
+            Assert.InRange(graphicsManager.Window.API.API, ContextAPI.OpenGL, ContextAPI.OpenGLES);
 
             #endregion
 

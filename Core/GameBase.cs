@@ -1,20 +1,22 @@
-using Core.CoreSystem.Graphics;
+using System.Runtime.CompilerServices;
+using Core.CoreSystem.Audio;
+using Core.CoreSystem.Audio.Device;
+
+[assembly:InternalsVisibleTo("Core.Tests")]
 
 namespace Core
 {
     using System;
-    using Libraries;
+    using CoreSystem.Graphics;
     using Config;
     using CoreSystem;
     using Screen;
     using Utilities;
-    using Silk.NET.Windowing;
     using Silk.NET.Windowing.Common;
 
     public abstract class GameBase : IDisposable
     {
-        private IWindow _window;
-        private VulkanBackend _backend;
+        private readonly IGraphicsManager _graphicsManager;
         
         private readonly AudioDevice _audioDevice;
         protected readonly IScreenManager screenManager;
@@ -30,8 +32,8 @@ namespace Core
             Configuration.LoadDefaultConfiguration();
             EmbeddedResourceManager.LoadNativeLibraries();
             ServiceManager.RegisterServices();
-            
-            _backend = new VulkanBackend();
+
+            _graphicsManager = ServiceManager.GetService<IGraphicsManager>();
             _audioDevice    = ServiceManager.GetService<AudioDevice>();
             screenManager   = ServiceManager.GetService<IScreenManager>();
         }
@@ -43,8 +45,8 @@ namespace Core
         private void Initialize()
         {
 
-            _window = WindowFactory.CreateWindow();
-            _backend.Initialize(_window);
+            _graphicsManager.CreateWindow();
+            _graphicsManager.CreateDevice();
             
             AddScreens();
 
@@ -56,7 +58,9 @@ namespace Core
         public void Dispose()
         {
             OnDispose();
-
+            
+            _graphicsManager.DisposeResources();
+            
             ServiceManager.DisposeServices();
         }
 
@@ -65,12 +69,12 @@ namespace Core
 
         }
 
-        private void Update(float deltaTime)
+        private void Update(double deltaTime)
         {
             screenManager.Update();
         }
 
-        private void Render(float deltaTime)
+        private void Render(double deltaTime)
         {
             _currentScreen?.OnRender();
         }
@@ -79,18 +83,14 @@ namespace Core
         {
             Initialize();
 
-            _window.Run();
-            _backend.WaitForIdle();
-            
-            // var fpsLimiter = new FpsLimiter();
-            //
-            // while (isRunning)
-            // {
-            //     fpsLimiter.Begin();
-            //
-            //     deltaTime = fpsLimiter.DeltaTime;
-            //     fps = fpsLimiter.End();
-            // }
+            _graphicsManager.Window.Load += LoadContent;
+            _graphicsManager.Window.Update += Update;
+            _graphicsManager.Window.Render += Render;
+            _graphicsManager.Window.Closing += Dispose;
+
+            _graphicsManager.Window.Run();
+            _graphicsManager.Device.WaitForIdle();
+           
         }
     }
 }

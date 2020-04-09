@@ -7,7 +7,7 @@
     "TargetFps": 60,
     "Width": 1280,
     "Height": 720,
-    "UseVulkan": true,
+    "UseVulkan": false,
     "IsFullScreen": false,
     "VSync": true,
     "RefreshRate": 60

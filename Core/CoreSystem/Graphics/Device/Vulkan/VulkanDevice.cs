@@ -1,23 +1,21 @@
-using System.Text;
-using Core.CoreSystem.ErrorHandling;
-using Core.Utilities;
-
-namespace Core.CoreSystem.Graphics
+namespace Core.CoreSystem.Graphics.Device.Vulkan
 {
     using System;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
+    using System.Linq;
+    using System.Runtime.InteropServices;
+    using System.Text;
     using Config;
-    using Silk.NET.Vulkan;
+    using ErrorHandling;
+    using Utilities;
     using Silk.NET.Core.Native;
+    using Silk.NET.Vulkan;
     using Silk.NET.Vulkan.Extensions.EXT;
     using Silk.NET.Vulkan.Extensions.KHR;
     using Silk.NET.Windowing.Common;
-
     using Image = Silk.NET.Vulkan.Image;
-    using System.Linq;
 
-    internal sealed class VulkanBackend : IGraphicsBackend<Vk>
+    internal sealed class VulkanDevice : IGraphicsDevice
     {
         public const int MaxFramesInFlight = 8;
 
@@ -30,7 +28,7 @@ namespace Core.CoreSystem.Graphics
         private KhrSwapchain _vkSwapchain;
         private ExtDebugUtils _debugUtils;
 
-        private readonly string[] _deviceExtensions = { "VK_KHR_swapchain" };
+        private readonly string[] _deviceExtensions = {"VK_KHR_swapchain"};
 
         private SurfaceKHR _surface;
 
@@ -64,9 +62,9 @@ namespace Core.CoreSystem.Graphics
         // Debug Fields
         //--------------------------------------------------------------------------------------------------------------
         private bool _enableValidationLayers;
-        private readonly string[] _validationLayers = { "VK_LAYER_KHRONOS_validation" };
+        private readonly string[] _validationLayers = {"VK_LAYER_KHRONOS_validation"};
         private DebugUtilsMessengerEXT _debugMessenger;
-        
+
         //--------------------------------------------------------------------------------------------------------------
         // Public Methods
         //--------------------------------------------------------------------------------------------------------------
@@ -97,7 +95,6 @@ namespace Core.CoreSystem.Graphics
         {
             Api.DeviceWaitIdle(_device);
         }
-
 
         public unsafe void Dispose()
         {
@@ -154,9 +151,9 @@ namespace Core.CoreSystem.Graphics
             var appInfo = new Silk.NET.Vulkan.ApplicationInfo
             {
                 SType = StructureType.ApplicationInfo,
-                PApplicationName = (byte*)Marshal.StringToHGlobalAnsi(_window.Title),
+                PApplicationName = (byte*) Marshal.StringToHGlobalAnsi(_window.Title),
                 ApplicationVersion = new Version32(1, 0, 0),
-                PEngineName = (byte*)Marshal.StringToHGlobalAnsi(Configuration.Settings.Info.ProgramName),
+                PEngineName = (byte*) Marshal.StringToHGlobalAnsi(Configuration.Settings.Info.ProgramName),
                 EngineVersion = new Version32(1, 0, 0),
                 ApiVersion = Vk.Version11
             };
@@ -170,13 +167,13 @@ namespace Core.CoreSystem.Graphics
             var extensions = (_window).GetRequiredExtensions(out var extCount);
 
             createInfo.EnabledExtensionCount = extCount;
-            createInfo.PpEnabledExtensionNames = (byte**)extensions;
+            createInfo.PpEnabledExtensionNames = (byte**) extensions;
 
 
             if (_enableValidationLayers)
             {
-                createInfo.EnabledLayerCount = (uint)_validationLayers.Length;
-                createInfo.PpEnabledLayerNames = (byte**)SilkMarshal.MarshalStringArrayToPtr(_validationLayers);
+                createInfo.EnabledLayerCount = (uint) _validationLayers.Length;
+                createInfo.PpEnabledLayerNames = (byte**) SilkMarshal.MarshalStringArrayToPtr(_validationLayers);
             }
             else
             {
@@ -204,23 +201,25 @@ namespace Core.CoreSystem.Graphics
                 throw new NotSupportedException("KHR_swapchain extension not found.");
             }
 
-            Marshal.FreeHGlobal((IntPtr)appInfo.PApplicationName);
-            Marshal.FreeHGlobal((IntPtr)appInfo.PEngineName);
+            Marshal.FreeHGlobal((IntPtr) appInfo.PApplicationName);
+            Marshal.FreeHGlobal((IntPtr) appInfo.PEngineName);
 
             if (_enableValidationLayers)
             {
-                SilkMarshal.FreeStringArrayPtr((IntPtr)createInfo.PpEnabledLayerNames, _validationLayers.Length);
+                SilkMarshal.FreeStringArrayPtr((IntPtr) createInfo.PpEnabledLayerNames, _validationLayers.Length);
             }
         }
 
         private unsafe bool CheckValidationLayerSupport()
         {
             uint layerCount = 0;
-            Api.EnumerateInstanceLayerProperties(&layerCount, (LayerProperties*)0);
+            Api.EnumerateInstanceLayerProperties(&layerCount, (LayerProperties*) 0);
 
             var availableLayers = new LayerProperties[layerCount];
             fixed (LayerProperties* availableLayersPtr = availableLayers)
+            {
                 Api.EnumerateInstanceLayerProperties(&layerCount, availableLayersPtr);
+            }
 
             foreach (var layerName in _validationLayers)
             {
@@ -228,7 +227,7 @@ namespace Core.CoreSystem.Graphics
 
                 foreach (var layerProperties in availableLayers)
                 {
-                    if (layerName == Marshal.PtrToStringAnsi((IntPtr)layerProperties.LayerName))
+                    if (layerName == Marshal.PtrToStringAnsi((IntPtr) layerProperties.LayerName))
                     {
                         layerFound = true;
                         break;
@@ -270,7 +269,7 @@ namespace Core.CoreSystem.Graphics
             fixed (DebugUtilsMessengerEXT* debugMessenger = &_debugMessenger)
             {
                 if (_debugUtils.CreateDebugUtilsMessenger
-                        (_instance, &createInfo, null, debugMessenger) != Result.Success)
+                    (_instance, &createInfo, null, debugMessenger) != Result.Success)
                 {
                     throw new Exception("Failed to create debug messenger.");
                 }
@@ -295,11 +294,11 @@ namespace Core.CoreSystem.Graphics
             sb.Append($"{Marshal.PtrToStringAnsi((IntPtr) playerPrefix)}/");
             sb.Append(objectType.ToString().Replace("DebugReportObjectType", string.Empty)[..^3]);
             sb.AppendLine($": {Marshal.PtrToStringAnsi((IntPtr) pMessage)}");
-            
+
             ConsoleLog.Info(tag, sb.ToString());
             return Vk.False;
         }
-        
+
         //--------------------------------------------------------------------------------------------------------------
         // Surface Methods
         //--------------------------------------------------------------------------------------------------------------
@@ -322,18 +321,18 @@ namespace Core.CoreSystem.Graphics
                 throw new NotSupportedException("Failed to find GPUs with Vulkan support.");
             }
 
-            var devices = stackalloc PhysicalDevice[(int)deviceCount];
+            var devices = stackalloc PhysicalDevice[(int) deviceCount];
             Api.EnumeratePhysicalDevices(_instance, &deviceCount, devices);
 
             for (var i = 0; i < deviceCount; i++)
             {
                 var device = devices[i];
-                
+
                 if (!IsDeviceSuitable(device))
                 {
                     continue;
                 }
-                
+
                 _physicalDevice = device;
                 return;
             }
@@ -369,7 +368,7 @@ namespace Core.CoreSystem.Graphics
             if (formatCount != 0)
             {
                 details.Formats = new SurfaceFormatKHR[formatCount];
-                var formats = stackalloc SurfaceFormatKHR[(int)formatCount];
+                var formats = stackalloc SurfaceFormatKHR[(int) formatCount];
                 _vkSurface.GetPhysicalDeviceSurfaceFormats(device, _surface, &formatCount, formats);
 
                 for (var i = 0; i < formatCount; i++)
@@ -384,7 +383,7 @@ namespace Core.CoreSystem.Graphics
             if (presentModeCount != 0)
             {
                 details.PresentModes = new PresentModeKHR[presentModeCount];
-                var modes = stackalloc PresentModeKHR[(int)presentModeCount];
+                var modes = stackalloc PresentModeKHR[(int) presentModeCount];
                 _vkSurface.GetPhysicalDeviceSurfacePresentModes(device, _surface, &presentModeCount, modes);
 
                 for (var i = 0; i < formatCount; i++)
@@ -403,14 +402,13 @@ namespace Core.CoreSystem.Graphics
             uint queryFamilyCount = 0;
             Api.GetPhysicalDeviceQueueFamilyProperties(device, &queryFamilyCount, null);
 
-            var queueFamilies = stackalloc QueueFamilyProperties[(int)queryFamilyCount];
+            var queueFamilies = stackalloc QueueFamilyProperties[(int) queryFamilyCount];
 
             Api.GetPhysicalDeviceQueueFamilyProperties(device, &queryFamilyCount, queueFamilies);
             for (var i = 0u; i < queryFamilyCount; i++)
             {
                 var queueFamily = queueFamilies[i];
-                // note: HasFlag is slow on .NET Core 2.1 and below.
-                // if you're targeting these versions, use ((queueFamily.QueueFlags & QueueFlags.QueueGraphicsBit) != 0)
+
                 if (queueFamily.QueueFlags.HasFlag(QueueFlags.QueueGraphicsBit))
                 {
                     indices.GraphicsFamily = i;
@@ -435,17 +433,17 @@ namespace Core.CoreSystem.Graphics
         private unsafe bool CheckDeviceExtensionSupport(PhysicalDevice device)
         {
             uint extensionCount;
-            Api.EnumerateDeviceExtensionProperties(device, (byte*)null, &extensionCount, null);
+            Api.EnumerateDeviceExtensionProperties(device, (byte*) null, &extensionCount, null);
 
-            var availableExtensions = stackalloc ExtensionProperties[(int)extensionCount];
-            Api.EnumerateDeviceExtensionProperties(device, (byte*)null, &extensionCount, availableExtensions);
+            var availableExtensions = stackalloc ExtensionProperties[(int) extensionCount];
+            Api.EnumerateDeviceExtensionProperties(device, (byte*) null, &extensionCount, availableExtensions);
 
             var requiredExtensions = new List<string>();
             requiredExtensions.AddRange(_deviceExtensions);
 
             for (var i = 0u; i < extensionCount; i++)
             {
-                requiredExtensions.Remove(Marshal.PtrToStringAnsi((IntPtr)availableExtensions[i].ExtensionName));
+                requiredExtensions.Remove(Marshal.PtrToStringAnsi((IntPtr) availableExtensions[i].ExtensionName));
             }
 
             return requiredExtensions.Count == 0;
@@ -467,8 +465,8 @@ namespace Core.CoreSystem.Graphics
             {
                 throw VulkanInvalidOperation.Exception("Present family is null.");
             }
-            
-            var uniqueQueueFamilies = new[] { indices.GraphicsFamily.Value, indices.PresentFamily.Value };
+
+            var uniqueQueueFamilies = new[] {indices.GraphicsFamily.Value, indices.PresentFamily.Value};
             var queueCreateInfos = stackalloc DeviceQueueCreateInfo[uniqueQueueFamilies.Length];
 
             var queuePriority = 1f;
@@ -496,12 +494,12 @@ namespace Core.CoreSystem.Graphics
             };
 
             var enabledExtensionNames = SilkMarshal.MarshalStringArrayToPtr(_deviceExtensions);
-            createInfo.PpEnabledExtensionNames = (byte**)enabledExtensionNames;
+            createInfo.PpEnabledExtensionNames = (byte**) enabledExtensionNames;
 
             if (_enableValidationLayers)
             {
-                createInfo.EnabledLayerCount = (uint)_validationLayers.Length;
-                createInfo.PpEnabledLayerNames = (byte**)SilkMarshal.MarshalStringArrayToPtr(_validationLayers);
+                createInfo.EnabledLayerCount = (uint) _validationLayers.Length;
+                createInfo.PpEnabledLayerNames = (byte**) SilkMarshal.MarshalStringArrayToPtr(_validationLayers);
             }
             else
             {
@@ -570,8 +568,8 @@ namespace Core.CoreSystem.Graphics
             {
                 throw VulkanInvalidOperation.Exception("Present family is null.");
             }
-            
-            uint[] queueFamilyIndices = { indices.GraphicsFamily.Value, indices.PresentFamily.Value };
+
+            uint[] queueFamilyIndices = {indices.GraphicsFamily.Value, indices.PresentFamily.Value};
 
             fixed (uint* qfiPtr = queueFamilyIndices)
             {
@@ -621,7 +619,7 @@ namespace Core.CoreSystem.Graphics
             }
 
             var actualExtent = new Extent2D
-            { Height = (uint)_window.Size.Height, Width = (uint)_window.Size.Width };
+                {Height = (uint) _window.Size.Height, Width = (uint) _window.Size.Width};
             actualExtent.Width = new[]
             {
                 capabilities.MinImageExtent.Width,
@@ -649,7 +647,7 @@ namespace Core.CoreSystem.Graphics
             return PresentModeKHR.PresentModeFifoKhr;
         }
 
-        private static  SurfaceFormatKHR ChooseSwapSurfaceFormat(IReadOnlyList<SurfaceFormatKHR> formats)
+        private static SurfaceFormatKHR ChooseSwapSurfaceFormat(IReadOnlyList<SurfaceFormatKHR> formats)
         {
             foreach (var format in formats)
             {
@@ -774,7 +772,7 @@ namespace Core.CoreSystem.Graphics
                 SType = StructureType.PipelineShaderStageCreateInfo,
                 Stage = ShaderStageFlags.ShaderStageVertexBit,
                 Module = vertShaderModule,
-                PName = (byte*)SilkMarshal.MarshalStringToPtr("main")
+                PName = (byte*) SilkMarshal.MarshalStringToPtr("main")
             };
 
             var fragShaderStageInfo = new PipelineShaderStageCreateInfo
@@ -782,7 +780,7 @@ namespace Core.CoreSystem.Graphics
                 SType = StructureType.PipelineShaderStageCreateInfo,
                 Stage = ShaderStageFlags.ShaderStageFragmentBit,
                 Module = fragShaderModule,
-                PName = (byte*)SilkMarshal.MarshalStringToPtr("main")
+                PName = (byte*) SilkMarshal.MarshalStringToPtr("main")
             };
 
             var shaderStages = stackalloc PipelineShaderStageCreateInfo[2];
@@ -813,7 +811,7 @@ namespace Core.CoreSystem.Graphics
                 MaxDepth = 1.0f
             };
 
-            var scissor = new Rect2D { Offset = default, Extent = _swapchainExtent };
+            var scissor = new Rect2D {Offset = default, Extent = _swapchainExtent};
 
             var viewportState = new PipelineViewportStateCreateInfo
             {
@@ -851,7 +849,7 @@ namespace Core.CoreSystem.Graphics
                                  ColorComponentFlags.ColorComponentABit,
                 BlendEnable = Vk.False
             };
-            
+
             var colorBlending = new PipelineColorBlendStateCreateInfo
             {
                 SType = StructureType.PipelineColorBlendStateCreateInfo,
@@ -901,7 +899,7 @@ namespace Core.CoreSystem.Graphics
             fixed (Pipeline* graphicsPipeline = &_graphicsPipeline)
             {
                 if (Api.CreateGraphicsPipelines
-                        (_device, default, 1, &pipelineInfo, null, graphicsPipeline) != Result.Success)
+                    (_device, default, 1, &pipelineInfo, null, graphicsPipeline) != Result.Success)
                 {
                     throw new Exception("failed to create graphics pipeline!");
                 }
@@ -916,22 +914,21 @@ namespace Core.CoreSystem.Graphics
             var createInfo = new ShaderModuleCreateInfo
             {
                 SType = StructureType.ShaderModuleCreateInfo,
-                CodeSize = new UIntPtr((uint)code.Length)
+                CodeSize = new UIntPtr((uint) code.Length)
             };
             fixed (byte* codePtr = code)
             {
-                createInfo.PCode = (uint*)codePtr;
+                createInfo.PCode = (uint*) codePtr;
             }
-
+        
             var shaderModule = new ShaderModule();
             if (Api.CreateShaderModule(_device, &createInfo, null, &shaderModule) != Result.Success)
             {
                 throw new Exception("failed to create shader module!");
             }
-
+        
             return shaderModule;
         }
-
 
 
         private unsafe void CreateFramebuffers()
@@ -970,7 +967,7 @@ namespace Core.CoreSystem.Graphics
             {
                 throw VulkanInvalidOperation.Exception("Graphics family is null");
             }
-            
+
             var poolInfo = new CommandPoolCreateInfo
             {
                 SType = StructureType.CommandPoolCreateInfo,
@@ -995,7 +992,7 @@ namespace Core.CoreSystem.Graphics
                 SType = StructureType.CommandBufferAllocateInfo,
                 CommandPool = _commandPool,
                 Level = CommandBufferLevel.Primary,
-                CommandBufferCount = (uint)_commandBuffers.Length
+                CommandBufferCount = (uint) _commandBuffers.Length
             };
 
             fixed (CommandBuffer* commandBuffers = _commandBuffers)
@@ -1008,7 +1005,7 @@ namespace Core.CoreSystem.Graphics
 
             for (var i = 0; i < _commandBuffers.Length; i++)
             {
-                var beginInfo = new CommandBufferBeginInfo { SType = StructureType.CommandBufferBeginInfo };
+                var beginInfo = new CommandBufferBeginInfo {SType = StructureType.CommandBufferBeginInfo};
 
                 if (Api.BeginCommandBuffer(_commandBuffers[i], &beginInfo) != Result.Success)
                 {
@@ -1020,11 +1017,11 @@ namespace Core.CoreSystem.Graphics
                     SType = StructureType.RenderPassBeginInfo,
                     RenderPass = _renderPass,
                     Framebuffer = _swapchainFramebuffers[i],
-                    RenderArea = { Offset = new Offset2D { X = 0, Y = 0 }, Extent = _swapchainExtent }
+                    RenderArea = {Offset = new Offset2D {X = 0, Y = 0}, Extent = _swapchainExtent}
                 };
 
                 var clearColor = new ClearValue
-                { Color = new ClearColorValue { Float32_0 = 0, Float32_1 = 0, Float32_2 = 0, Float32_3 = 1 } };
+                    {Color = new ClearColorValue {Float32_0 = 0, Float32_1 = 0, Float32_2 = 0, Float32_3 = 1}};
                 renderPassInfo.ClearValueCount = 1;
                 renderPassInfo.PClearValues = &clearColor;
 
@@ -1054,7 +1051,7 @@ namespace Core.CoreSystem.Graphics
 
             var fenceInfo = new FenceCreateInfo
             {
-                SType = StructureType.FenceCreateInfo, 
+                SType = StructureType.FenceCreateInfo,
                 Flags = FenceCreateFlags.FenceCreateSignaledBit
             };
 
@@ -1091,10 +1088,10 @@ namespace Core.CoreSystem.Graphics
 
             _imagesInFlight[imageIndex] = _inFlightFences[_currentFrame];
 
-            SubmitInfo submitInfo = new SubmitInfo { SType = StructureType.SubmitInfo };
+            SubmitInfo submitInfo = new SubmitInfo {SType = StructureType.SubmitInfo};
 
-            Semaphore[] waitSemaphores = { _imageAvailableSemaphores[_currentFrame] };
-            PipelineStageFlags[] waitStages = { PipelineStageFlags.PipelineStageColorAttachmentOutputBit };
+            Semaphore[] waitSemaphores = {_imageAvailableSemaphores[_currentFrame]};
+            PipelineStageFlags[] waitStages = {PipelineStageFlags.PipelineStageColorAttachmentOutputBit};
             submitInfo.WaitSemaphoreCount = 1;
             var signalSemaphore = _renderFinishedSemaphores[_currentFrame];
             fixed (Semaphore* waitSemaphoresPtr = waitSemaphores)
@@ -1114,7 +1111,7 @@ namespace Core.CoreSystem.Graphics
                     Api.ResetFences(_device, 1, &fence);
 
                     if (Api.QueueSubmit
-                            (_graphicsQueue, 1, &submitInfo, _inFlightFences[_currentFrame]) != Result.Success)
+                        (_graphicsQueue, 1, &submitInfo, _inFlightFences[_currentFrame]) != Result.Success)
                     {
                         throw new Exception("failed to submit draw command buffer!");
                     }

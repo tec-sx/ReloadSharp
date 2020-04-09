@@ -1,9 +1,9 @@
-namespace Core.CoreSystem
+namespace Core.CoreSystem.Audio.Device
 {
     using ErrorHandling.Exceptions;
     using static SDL2.SDL_mixer;
     
-    public class AudioDevice
+    internal sealed class AudioDevice : IAudioDevice
     {
         private static bool _engineIsInitialized;
 
