@@ -1,13 +1,17 @@
+using Core.AssetsPipeline;
+using Core.AssetsPipeline.Audio;
+using Core.AssetsPipeline.GameObjects;
+using Core.AssetsPipeline.Textures;
 using Core.CoreSystem.Audio;
 using Core.CoreSystem.Audio.Device;
+using Core.ResourcesPipeline;
+using Core.ResourcesPipeline.Shaders;
 
 namespace Core.Utilities
 {
     using CoreSystem.Graphics;
     using CoreSystem;
     using Resources;
-    using Resources.Audio;
-    using Resources.GameObjects;
     using Resources.Textures;
     using Screen;
     using State;
@@ -23,14 +27,26 @@ namespace Core.Utilities
         {
             var collection = new ServiceCollection();
 
-            collection.AddSingleton<IGraphicsManager, GraphicsManager>();
-            collection.AddSingleton<AudioDevice>();
+            #region Core System
+            
+            collection.AddSingleton<GraphicsManager>();
+            collection.AddSingleton<AudioManager>();
+            #endregion
+            
+            #region Resources Pipeline
 
-            collection.AddScoped<ITextureCache, TextureCacheRl>();
+            collection.AddScoped<IShaderCache, ShaderCache>();
+            collection.AddScoped<IResourcesManager, ResourcesManager>();
+            #endregion
+            
+            #region Assets Pipeline
+            
+            collection.AddScoped<ITextureCache, TextureCache>();
             collection.AddScoped<IGameObjectCache, GameObjectCacheRl>();
             collection.AddScoped<IAudioCache, AudioCache>();
             collection.AddScoped<IAssetsManager, AssetsManager>();
-
+            #endregion
+            
             collection.AddSingleton<IScreenManager, ScreenManager>();
             collection.AddScoped(typeof(IStateMachine<>), typeof(StateMachine<>));
 

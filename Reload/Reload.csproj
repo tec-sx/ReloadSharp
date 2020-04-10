@@ -35,14 +35,15 @@
       <None Update="Assets\Music\Intro2.wav">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
-      <None Update="Assets\Textures\Player.png">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Assets\Scenes\Common\Models" />
+      <Folder Include="Assets\Scenes\Common\Textures" />
+      <Folder Include="Assets\Scenes\Sandbox\Models" />
+      <Folder Include="Assets\Scenes\Sandbox\Textures" />
+      <Folder Include="Assets\Scenes\Test\Models" />
       <Folder Include="Assets\Sounds" />
-      <Folder Include="Assets\Textures" />
     </ItemGroup>
 
 </Project>

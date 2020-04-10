@@ -1,6 +1,5 @@
 namespace Core.Config
 {
-    using System;
     using System.IO;
 
     public class ContentPath

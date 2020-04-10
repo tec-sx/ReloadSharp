@@ -1,8 +1,8 @@
-using Core.CoreSystem.Audio.Device;
-
 namespace Core.CoreSystem.Audio
 {
-    internal sealed class AudioManager : IAudioManager
+    using Core.CoreSystem.Audio.Device;
+    
+    internal sealed class AudioManager
     {
         public IAudioDevice Device { get; private set; }
         

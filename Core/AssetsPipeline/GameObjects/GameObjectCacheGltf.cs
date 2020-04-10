@@ -1,9 +1,9 @@
-﻿namespace Core.Resources.GameObjects
+﻿namespace Core.AssetsPipeline.GameObjects
 {
     using System.Collections.Generic;
-    using SharpGLTF.Schema2;
     using Models;
-
+    using SharpGLTF.Schema2;
+    
     public class GameObjectCacheGltf : IGameObjectCache
     {
         private readonly Dictionary<string, ModelRoot> _modelsDictionary;

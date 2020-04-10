@@ -1,4 +1,4 @@
-﻿namespace Core.Resources.Audio
+﻿namespace Core.AssetsPipeline.Audio.Models
 {
     public interface ISound
     {

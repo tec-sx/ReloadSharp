@@ -28,8 +28,8 @@ namespace Core.Screen
 
         public abstract void OnEnter();
         public abstract void OnLeave();
-        public abstract void OnUpdate();
-        public abstract void OnRender();
+        public abstract void OnUpdate(double deltaTime);
+        public abstract void OnRender(double deltaTime);
 
         public void Dispose()
         {
@@ -40,16 +40,19 @@ namespace Core.Screen
             State = ScreenState.RUNNING;
         }
 
-        public void Update(float deltaTime)
-        {
-
-        }
-
-        public void Render(float deltaTime)
+        public void Update(double deltaTime)
         {
             if (State == ScreenState.RUNNING)
             {
-                OnRender();
+                OnUpdate(deltaTime);
+            }
+        }
+
+        public void Render(double deltaTime)
+        {
+            if (State == ScreenState.RUNNING)
+            {
+                OnRender(deltaTime);
             }
         }
     }

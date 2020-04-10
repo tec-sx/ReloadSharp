@@ -1,4 +1,4 @@
-﻿namespace Core.Resources.Textures
+﻿namespace Core.AssetsPipeline.Textures.Models
 {
     public interface ITexture
     {

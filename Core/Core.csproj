@@ -39,6 +39,12 @@
       <None Update="Resources\Libraries\Linux\libSDL2_ttf-2.0.so.0.14.1">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
+      <None Remove="Resources\Shaders\main.frag.glsl" />
+      <EmbeddedResource Include="Resources\Shaders\main.frag.glsl" />
+      <None Remove="Resources\Shaders\main.geom.glsl" />
+      <EmbeddedResource Include="Resources\Shaders\main.geom.glsl" />
+      <None Remove="Resources\Shaders\main.vert.glsl" />
+      <EmbeddedResource Include="Resources\Shaders\main.vert.glsl" />
     </ItemGroup>
 
     <ItemGroup>
@@ -55,12 +61,6 @@
     </ItemGroup>
     
     <ItemGroup>
-        <EmbeddedResource Include="Resources\Shaders\shader.frag.spv">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
-        <EmbeddedResource Include="Resources\Shaders\shader.vert.spv">
-          <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-        </EmbeddedResource>
         <EmbeddedResource Include="Settings.json">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </EmbeddedResource>

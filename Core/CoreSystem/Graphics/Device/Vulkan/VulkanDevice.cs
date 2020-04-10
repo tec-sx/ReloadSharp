@@ -19,7 +19,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
     {
         public const int MaxFramesInFlight = 8;
 
-        public Vk Api { get; } = Vk.GetApi();
+        private Vk _api = Vk.GetApi();
 
         private IVulkanWindow _window;
 
@@ -93,36 +93,36 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
 
         public void WaitForIdle()
         {
-            Api.DeviceWaitIdle(_device);
+            _api.DeviceWaitIdle(_device);
         }
 
         public unsafe void Dispose()
         {
             for (var i = 0; i < MaxFramesInFlight; i++)
             {
-                Api.DestroySemaphore(_device, _renderFinishedSemaphores[i], null);
-                Api.DestroySemaphore(_device, _imageAvailableSemaphores[i], null);
-                Api.DestroyFence(_device, _inFlightFences[i], null);
+                _api.DestroySemaphore(_device, _renderFinishedSemaphores[i], null);
+                _api.DestroySemaphore(_device, _imageAvailableSemaphores[i], null);
+                _api.DestroyFence(_device, _inFlightFences[i], null);
             }
 
-            Api.DestroyCommandPool(_device, _commandPool, null);
+            _api.DestroyCommandPool(_device, _commandPool, null);
 
             foreach (var framebuffer in _swapchainFramebuffers)
             {
-                Api.DestroyFramebuffer(_device, framebuffer, null);
+                _api.DestroyFramebuffer(_device, framebuffer, null);
             }
 
-            Api.DestroyPipeline(_device, _graphicsPipeline, null);
-            Api.DestroyPipelineLayout(_device, _pipelineLayout, null);
-            Api.DestroyRenderPass(_device, _renderPass, null);
+            _api.DestroyPipeline(_device, _graphicsPipeline, null);
+            _api.DestroyPipelineLayout(_device, _pipelineLayout, null);
+            _api.DestroyRenderPass(_device, _renderPass, null);
 
             foreach (var imageView in _swapchainImageViews)
             {
-                Api.DestroyImageView(_device, imageView, null);
+                _api.DestroyImageView(_device, imageView, null);
             }
 
             _vkSwapchain.DestroySwapchain(_device, _swapchain, null);
-            Api.DestroyDevice(_device, null);
+            _api.DestroyDevice(_device, null);
 
             if (_enableValidationLayers)
             {
@@ -130,7 +130,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
             }
 
             _vkSurface.DestroySurface(_instance, _surface, null);
-            Api.DestroyInstance(_instance, null);
+            _api.DestroyInstance(_instance, null);
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -183,20 +183,20 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
 
             fixed (Instance* instance = &_instance)
             {
-                if (Api.CreateInstance(&createInfo, null, instance) != Result.Success)
+                if (_api.CreateInstance(&createInfo, null, instance) != Result.Success)
                 {
                     throw new Exception("Failed to create instance!");
                 }
             }
 
-            Api.CurrentInstance = _instance;
+            _api.CurrentInstance = _instance;
 
-            if (!Api.TryGetExtension(out _vkSurface))
+            if (!_api.TryGetExtension(out _vkSurface))
             {
                 throw new NotSupportedException("KHR_surface extension not found.");
             }
 
-            if (!Api.TryGetExtension(out _vkSwapchain))
+            if (!_api.TryGetExtension(out _vkSwapchain))
             {
                 throw new NotSupportedException("KHR_swapchain extension not found.");
             }
@@ -213,12 +213,12 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
         private unsafe bool CheckValidationLayerSupport()
         {
             uint layerCount = 0;
-            Api.EnumerateInstanceLayerProperties(&layerCount, (LayerProperties*) 0);
+            _api.EnumerateInstanceLayerProperties(&layerCount, (LayerProperties*) 0);
 
             var availableLayers = new LayerProperties[layerCount];
             fixed (LayerProperties* availableLayersPtr = availableLayers)
             {
-                Api.EnumerateInstanceLayerProperties(&layerCount, availableLayersPtr);
+                _api.EnumerateInstanceLayerProperties(&layerCount, availableLayersPtr);
             }
 
             foreach (var layerName in _validationLayers)
@@ -248,7 +248,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
         //--------------------------------------------------------------------------------------------------------------
         private unsafe void SetupDebugMessenger()
         {
-            if (!_enableValidationLayers || !Api.TryGetExtension(out _debugUtils))
+            if (!_enableValidationLayers || !_api.TryGetExtension(out _debugUtils))
             {
                 return;
             }
@@ -314,7 +314,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
         private unsafe void PickPhysicalDevice()
         {
             var deviceCount = 0u;
-            Api.EnumeratePhysicalDevices(_instance, &deviceCount, null);
+            _api.EnumeratePhysicalDevices(_instance, &deviceCount, null);
 
             if (deviceCount == 0)
             {
@@ -322,7 +322,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
             }
 
             var devices = stackalloc PhysicalDevice[(int) deviceCount];
-            Api.EnumeratePhysicalDevices(_instance, &deviceCount, devices);
+            _api.EnumeratePhysicalDevices(_instance, &deviceCount, devices);
 
             for (var i = 0; i < deviceCount; i++)
             {
@@ -400,11 +400,11 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
             var indices = new QueueFamilyIndices();
 
             uint queryFamilyCount = 0;
-            Api.GetPhysicalDeviceQueueFamilyProperties(device, &queryFamilyCount, null);
+            _api.GetPhysicalDeviceQueueFamilyProperties(device, &queryFamilyCount, null);
 
             var queueFamilies = stackalloc QueueFamilyProperties[(int) queryFamilyCount];
 
-            Api.GetPhysicalDeviceQueueFamilyProperties(device, &queryFamilyCount, queueFamilies);
+            _api.GetPhysicalDeviceQueueFamilyProperties(device, &queryFamilyCount, queueFamilies);
             for (var i = 0u; i < queryFamilyCount; i++)
             {
                 var queueFamily = queueFamilies[i];
@@ -433,10 +433,10 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
         private unsafe bool CheckDeviceExtensionSupport(PhysicalDevice device)
         {
             uint extensionCount;
-            Api.EnumerateDeviceExtensionProperties(device, (byte*) null, &extensionCount, null);
+            _api.EnumerateDeviceExtensionProperties(device, (byte*) null, &extensionCount, null);
 
             var availableExtensions = stackalloc ExtensionProperties[(int) extensionCount];
-            Api.EnumerateDeviceExtensionProperties(device, (byte*) null, &extensionCount, availableExtensions);
+            _api.EnumerateDeviceExtensionProperties(device, (byte*) null, &extensionCount, availableExtensions);
 
             var requiredExtensions = new List<string>();
             requiredExtensions.AddRange(_deviceExtensions);
@@ -508,7 +508,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
 
             fixed (Device* device = &_device)
             {
-                if (Api.CreateDevice(_physicalDevice, &createInfo, null, device) != Result.Success)
+                if (_api.CreateDevice(_physicalDevice, &createInfo, null, device) != Result.Success)
                 {
                     throw new Exception("Failed to create logical device.");
                 }
@@ -516,15 +516,15 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
 
             fixed (Queue* graphicsQueue = &_graphicsQueue)
             {
-                Api.GetDeviceQueue(_device, indices.GraphicsFamily.Value, 0, graphicsQueue);
+                _api.GetDeviceQueue(_device, indices.GraphicsFamily.Value, 0, graphicsQueue);
             }
 
             fixed (Queue* presentQueue = &_presentQueue)
             {
-                Api.GetDeviceQueue(_device, indices.PresentFamily.Value, 0, presentQueue);
+                _api.GetDeviceQueue(_device, indices.PresentFamily.Value, 0, presentQueue);
             }
 
-            Api.CurrentDevice = _device;
+            _api.CurrentDevice = _device;
         }
 
         //--------------------------------------------------------------------------------------------------------------
@@ -690,7 +690,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
                 };
 
                 ImageView imageView = default;
-                if (Api.CreateImageView(_device, &createInfo, null, &imageView) != Result.Success)
+                if (_api.CreateImageView(_device, &createInfo, null, &imageView) != Result.Success)
                 {
                     throw new Exception("failed to create image views!");
                 }
@@ -749,7 +749,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
 
             fixed (RenderPass* renderPass = &_renderPass)
             {
-                if (Api.CreateRenderPass(_device, &renderPassInfo, null, renderPass) != Result.Success)
+                if (_api.CreateRenderPass(_device, &renderPassInfo, null, renderPass) != Result.Success)
                 {
                     throw new Exception("failed to create render pass!");
                 }
@@ -761,8 +761,8 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
         //--------------------------------------------------------------------------------------------------------------
         private unsafe void CreateGraphicsPipeline()
         {
-            var vertShaderCode = EmbeddedResourceManager.LoadShader("shader.vert.spv");
-            var fragShaderCode = EmbeddedResourceManager.LoadShader("shader.frag.spv");
+            var vertShaderCode = EmbeddedResourceManager.LoadEmbeddedResourceBytes("shader.vert.spv");
+            var fragShaderCode = EmbeddedResourceManager.LoadEmbeddedResourceBytes("shader.frag.spv");
 
             var vertShaderModule = CreateShaderModule(vertShaderCode);
             var fragShaderModule = CreateShaderModule(fragShaderCode);
@@ -873,7 +873,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
 
             fixed (PipelineLayout* pipelineLayout = &_pipelineLayout)
             {
-                if (Api.CreatePipelineLayout(_device, &pipelineLayoutInfo, null, pipelineLayout) != Result.Success)
+                if (_api.CreatePipelineLayout(_device, &pipelineLayoutInfo, null, pipelineLayout) != Result.Success)
                 {
                     throw new Exception("failed to create pipeline layout!");
                 }
@@ -898,15 +898,15 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
 
             fixed (Pipeline* graphicsPipeline = &_graphicsPipeline)
             {
-                if (Api.CreateGraphicsPipelines
+                if (_api.CreateGraphicsPipelines
                     (_device, default, 1, &pipelineInfo, null, graphicsPipeline) != Result.Success)
                 {
                     throw new Exception("failed to create graphics pipeline!");
                 }
             }
 
-            Api.DestroyShaderModule(_device, fragShaderModule, null);
-            Api.DestroyShaderModule(_device, vertShaderModule, null);
+            _api.DestroyShaderModule(_device, fragShaderModule, null);
+            _api.DestroyShaderModule(_device, vertShaderModule, null);
         }
 
         private unsafe ShaderModule CreateShaderModule(byte[] code)
@@ -922,7 +922,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
             }
         
             var shaderModule = new ShaderModule();
-            if (Api.CreateShaderModule(_device, &createInfo, null, &shaderModule) != Result.Success)
+            if (_api.CreateShaderModule(_device, &createInfo, null, &shaderModule) != Result.Success)
             {
                 throw new Exception("failed to create shader module!");
             }
@@ -950,7 +950,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
                 };
 
                 var framebuffer = new Framebuffer();
-                if (Api.CreateFramebuffer(_device, &framebufferInfo, null, &framebuffer) != Result.Success)
+                if (_api.CreateFramebuffer(_device, &framebufferInfo, null, &framebuffer) != Result.Success)
                 {
                     throw new Exception("failed to create framebuffer!");
                 }
@@ -976,7 +976,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
 
             fixed (CommandPool* commandPool = &_commandPool)
             {
-                if (Api.CreateCommandPool(_device, &poolInfo, null, commandPool) != Result.Success)
+                if (_api.CreateCommandPool(_device, &poolInfo, null, commandPool) != Result.Success)
                 {
                     throw new Exception("failed to create command pool!");
                 }
@@ -997,7 +997,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
 
             fixed (CommandBuffer* commandBuffers = _commandBuffers)
             {
-                if (Api.AllocateCommandBuffers(_device, &allocInfo, commandBuffers) != Result.Success)
+                if (_api.AllocateCommandBuffers(_device, &allocInfo, commandBuffers) != Result.Success)
                 {
                     throw new Exception("failed to allocate command buffers!");
                 }
@@ -1007,7 +1007,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
             {
                 var beginInfo = new CommandBufferBeginInfo {SType = StructureType.CommandBufferBeginInfo};
 
-                if (Api.BeginCommandBuffer(_commandBuffers[i], &beginInfo) != Result.Success)
+                if (_api.BeginCommandBuffer(_commandBuffers[i], &beginInfo) != Result.Success)
                 {
                     throw new Exception("failed to begin recording command buffer!");
                 }
@@ -1025,12 +1025,12 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
                 renderPassInfo.ClearValueCount = 1;
                 renderPassInfo.PClearValues = &clearColor;
 
-                Api.CmdBeginRenderPass(_commandBuffers[i], &renderPassInfo, SubpassContents.Inline);
-                Api.CmdBindPipeline(_commandBuffers[i], PipelineBindPoint.Graphics, _graphicsPipeline);
-                Api.CmdDraw(_commandBuffers[i], 3, 1, 0, 0);
-                Api.CmdEndRenderPass(_commandBuffers[i]);
+                _api.CmdBeginRenderPass(_commandBuffers[i], &renderPassInfo, SubpassContents.Inline);
+                _api.CmdBindPipeline(_commandBuffers[i], PipelineBindPoint.Graphics, _graphicsPipeline);
+                _api.CmdDraw(_commandBuffers[i], 3, 1, 0, 0);
+                _api.CmdEndRenderPass(_commandBuffers[i]);
 
-                if (Api.EndCommandBuffer(_commandBuffers[i]) != Result.Success)
+                if (_api.EndCommandBuffer(_commandBuffers[i]) != Result.Success)
                 {
                     throw new Exception("failed to record command buffer!");
                 }
@@ -1059,9 +1059,9 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
             {
                 Semaphore imgAvSema, renderFinSema;
                 Fence inFlightFence;
-                if (Api.CreateSemaphore(_device, &semaphoreInfo, null, &imgAvSema) != Result.Success ||
-                    Api.CreateSemaphore(_device, &semaphoreInfo, null, &renderFinSema) != Result.Success ||
-                    Api.CreateFence(_device, &fenceInfo, null, &inFlightFence) != Result.Success)
+                if (_api.CreateSemaphore(_device, &semaphoreInfo, null, &imgAvSema) != Result.Success ||
+                    _api.CreateSemaphore(_device, &semaphoreInfo, null, &renderFinSema) != Result.Success ||
+                    _api.CreateFence(_device, &fenceInfo, null, &inFlightFence) != Result.Success)
                 {
                     throw new Exception("failed to create synchronization objects for a frame!");
                 }
@@ -1075,7 +1075,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
         private unsafe void DrawFrame(double obj)
         {
             var fence = _inFlightFences[_currentFrame];
-            Api.WaitForFences(_device, 1, ref fence, Vk.True, ulong.MaxValue);
+            _api.WaitForFences(_device, 1, ref fence, Vk.True, ulong.MaxValue);
 
             uint imageIndex;
             _vkSwapchain.AcquireNextImage
@@ -1083,7 +1083,7 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
 
             if (_imagesInFlight[imageIndex].Handle != 0)
             {
-                Api.WaitForFences(_device, 1, ref _imagesInFlight[imageIndex], Vk.True, ulong.MaxValue);
+                _api.WaitForFences(_device, 1, ref _imagesInFlight[imageIndex], Vk.True, ulong.MaxValue);
             }
 
             _imagesInFlight[imageIndex] = _inFlightFences[_currentFrame];
@@ -1108,9 +1108,9 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
                     submitInfo.SignalSemaphoreCount = 1;
                     submitInfo.PSignalSemaphores = &signalSemaphore;
 
-                    Api.ResetFences(_device, 1, &fence);
+                    _api.ResetFences(_device, 1, &fence);
 
-                    if (Api.QueueSubmit
+                    if (_api.QueueSubmit
                         (_graphicsQueue, 1, &submitInfo, _inFlightFences[_currentFrame]) != Result.Success)
                     {
                         throw new Exception("failed to submit draw command buffer!");

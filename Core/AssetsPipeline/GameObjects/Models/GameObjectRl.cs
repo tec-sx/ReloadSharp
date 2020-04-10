@@ -1,8 +1,6 @@
-﻿namespace Core.Resources.GameObjects.Models
+﻿namespace Core.AssetsPipeline.GameObjects.Models
 {
-    using System;
     using Raylib_cs;
-
 
     public class GameObjectRl : IGameObject
     {

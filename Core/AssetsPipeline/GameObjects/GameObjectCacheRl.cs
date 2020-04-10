@@ -1,9 +1,10 @@
-﻿namespace Core.Resources.GameObjects
+﻿namespace Core.AssetsPipeline.GameObjects
 {
     using System.Collections.Generic;
-    using Raylib_cs;
-    using RaylibModel = Raylib_cs.Model;
     using Models;
+    using Raylib_cs;
+    
+    using RaylibModel = Raylib_cs.Model;
 
     public class GameObjectCacheRl : IGameObjectCache
     {

@@ -1,4 +1,5 @@
 using System;
+using Core.AssetsPipeline;
 
 namespace Core.Screen
 {
@@ -6,55 +7,55 @@ namespace Core.Screen
 
     public class ScreenManager : IScreenManager
     {
-        public IAssetsManager Assetses { get; }
+        public IAssetsManager Assets { get; }
 
-        public ScreenBase CurrentScreen { get; set; }
+        public ScreenBase ActiveScreen { get; set; }
 
-        public ScreenManager(IAssetsManager assetses)
+        public ScreenManager(IAssetsManager assets)
         {
-            Assetses = assetses;
+            Assets = assets;
         }
 
         public ScreenBase MoveToNextScreen()
         {
-            CurrentScreen = CurrentScreen.NextScreen;
-            return CurrentScreen;
+            ActiveScreen = ActiveScreen.NextScreen;
+            return ActiveScreen;
         }
 
         public ScreenBase MoveToPrevScreen()
         {
-            CurrentScreen = CurrentScreen.PrevScreen;
-            return CurrentScreen;
+            ActiveScreen = ActiveScreen.PrevScreen;
+            return ActiveScreen;
         }
 
-        public void Update()
+        public void Update(double deltaTime)
         {
-            if (CurrentScreen != null)
+            if (ActiveScreen != null)
             {
-                switch (CurrentScreen.State)
+                switch (ActiveScreen.State)
                 {
                     case ScreenState.RUNNING:
-                        CurrentScreen.OnUpdate();
+                        ActiveScreen.Update(deltaTime);
                         break;
                     case ScreenState.PAUSED:
                         break;
                     case ScreenState.CHANGE_NEXT:
                     {
-                        CurrentScreen.OnLeave();
-                        CurrentScreen = MoveToNextScreen();
+                        ActiveScreen.OnLeave();
+                        ActiveScreen = MoveToNextScreen();
 
-                        CurrentScreen?.Run();
-                        CurrentScreen?.OnEnter();
+                        ActiveScreen?.Run();
+                        ActiveScreen?.OnEnter();
 
                         break;
                     }
                     case ScreenState.CHANGE_PREV:
                     {
-                        CurrentScreen.OnLeave();
-                        CurrentScreen = MoveToPrevScreen();
+                        ActiveScreen.OnLeave();
+                        ActiveScreen = MoveToPrevScreen();
 
-                        CurrentScreen?.Run();
-                        CurrentScreen?.OnEnter();
+                        ActiveScreen?.Run();
+                        ActiveScreen?.OnEnter();
 
                         break;
                     }
@@ -73,6 +74,11 @@ namespace Core.Screen
             }
         }
 
+        public void Render(double deltaTime)
+        {
+            ActiveScreen.Render(deltaTime);
+        }
+
         public ScreenBase CreateScreen<T>() where T : ScreenBase, new()
         {
             var newScreen = new T
@@ -80,15 +86,15 @@ namespace Core.Screen
                 Manager = this
             };
 
-            if (CurrentScreen == null)
+            if (ActiveScreen == null)
             {
-                CurrentScreen = newScreen;
+                ActiveScreen = newScreen;
             }
             else
             {
-                var tempScreen = CurrentScreen;
+                var tempScreen = ActiveScreen;
 
-                while (CurrentScreen.NextScreen != null)
+                while (ActiveScreen.NextScreen != null)
                 {
                     tempScreen = tempScreen.NextScreen;
                 }

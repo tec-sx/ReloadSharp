@@ -6,25 +6,6 @@ namespace Core.Utilities
     
     public static class EmbeddedResourceManager
     {
-        internal static byte[] LoadShader(string file)
-        {
-            return LoadEmbeddedResourceBytes($"Core.Resources.Shaders.{file}");
-        }
-        
-        private static byte[] LoadEmbeddedResourceBytes(string path)
-        {
-            using var stream = typeof(GameBase).Assembly.GetManifestResourceStream(path);
-            using var ms = new MemoryStream();
-
-            if (stream == null)
-            {
-                throw new ApplicationException($"Embedded resource {path} not found.");    
-            }
-            
-            stream.CopyTo(ms);
-            return ms.ToArray();
-        }
-        
         internal static void LoadNativeLibraries()
         {
             string platform;
@@ -54,6 +35,20 @@ namespace Core.Utilities
                 NativeLibrary.Load(library);
                 Console.WriteLine($"[LOADING LIB]::{library}::SUCCESS");
             }
+        }
+        
+        internal static byte[] LoadEmbeddedResourceBytes(string path)
+        {
+            using var stream = typeof(GameBase).Assembly.GetManifestResourceStream(path);
+            using var ms = new MemoryStream();
+
+            if (stream == null)
+            {
+                throw new ApplicationException($"Embedded resource {path} not found.");    
+            }
+            
+            stream.CopyTo(ms);
+            return ms.ToArray();
         }
     }
 }

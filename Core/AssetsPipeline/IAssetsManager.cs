@@ -1,9 +1,10 @@
-namespace Core.Resources
+
+namespace Core.AssetsPipeline
 {
     using System;
-    using Audio;
+    using Textures.Models;
+    using Audio.Models;
     using GameObjects.Models;
-    using Textures;
 
     public interface IAssetsManager : IDisposable
     {

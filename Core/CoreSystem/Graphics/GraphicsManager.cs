@@ -10,11 +10,10 @@ namespace Core.CoreSystem.Graphics
 
     using SilkWindow = Silk.NET.Windowing.Window;
     
-    internal sealed class GraphicsManager : IGraphicsManager
+    internal sealed class GraphicsManager
     {
         public IWindow Window { get; private set; }
         public IGraphicsDevice Device { get; private set; }
-
 
         public void DisposeResources()
         {
@@ -62,7 +61,7 @@ namespace Core.CoreSystem.Graphics
             
             Device.Initialize(Window);
         }
-        
+
         private static WindowOptions CreateWindowOptionsFromSettings()
         {
             var info = Configuration.Settings.Info;
@@ -77,6 +76,7 @@ namespace Core.CoreSystem.Graphics
             options.FramesPerSecond = display.TargetFps;
             options.VSync = display.VSync ? VSyncMode.On : VSyncMode.Adaptive;
             options.RunningSlowTolerance = 5;
+            options.UseSingleThreadedWindow = false;
 
             return options;
         }
@@ -91,7 +91,6 @@ namespace Core.CoreSystem.Graphics
             }
 
             window.Initialize();
-
             return true;
         }
 

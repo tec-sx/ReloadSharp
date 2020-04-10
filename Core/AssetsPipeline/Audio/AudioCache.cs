@@ -1,10 +1,9 @@
-using Core.CoreSystem.ErrorHandling.Exceptions;
-
-namespace Core.Resources.Audio
+namespace Core.AssetsPipeline.Audio
 {
     using System;
     using System.Collections.Generic;
     using Models;
+    using CoreSystem.ErrorHandling.Exceptions;
     using static SDL2.SDL_mixer;
 
     public class AudioCache : IAudioCache

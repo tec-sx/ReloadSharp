@@ -1,7 +1,8 @@
+using Core.AssetsPipeline.Audio.Models;
+
 namespace Reload.Screens
 {
-    using Core.Resources.Audio;
-    using Core.Resources.Textures;
+    using Core.AssetsPipeline.Textures;
     using Core.Screen;
 
     public class IntroScreen : ScreenBase
@@ -10,7 +11,7 @@ namespace Reload.Screens
 
         public override void OnEnter()
         {
-            _bgMusicStream = Manager.Assetses.LoadMusic("Intro");
+            _bgMusicStream = Manager.Assets.LoadMusic("Intro");
             _bgMusicStream.Play();
         }
 
@@ -19,12 +20,12 @@ namespace Reload.Screens
             _bgMusicStream.Stop();
         }
 
-        public override void OnUpdate()
+        public override void OnUpdate(double deltaTime)
         {
             _bgMusicStream.Update();
         }
 
-        public override void OnRender()
+        public override void OnRender(double deltaTime)
         {
         }
     }

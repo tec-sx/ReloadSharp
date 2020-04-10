@@ -12,7 +12,7 @@ namespace Reload
         protected override void AddScreens()
         {
             var introScreen = screenManager.CreateScreen<IntroScreen>();
-            screenManager.CurrentScreen = introScreen;
+            screenManager.ActiveScreen = introScreen;
         }
 
         protected override void OnDispose()

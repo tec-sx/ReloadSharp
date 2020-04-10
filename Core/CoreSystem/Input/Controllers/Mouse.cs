@@ -10,6 +10,11 @@ namespace Core.CoreSystem.Input.Controllers
         {
             foreach (var mouse in mice)
             {
+                if (!mouse.IsConnected)
+                {
+                    continue;
+                }
+                
                 mouse.MouseDown += ButtonDown;
                 mouse.MouseUp += ButtonUp;
                 mouse.MouseMove += MouseMove;

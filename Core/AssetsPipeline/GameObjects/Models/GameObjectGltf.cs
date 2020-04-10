@@ -1,4 +1,4 @@
-﻿namespace Core.Resources.GameObjects.Models
+﻿namespace Core.AssetsPipeline.GameObjects.Models
 {
     using SharpGLTF.Schema2;
 

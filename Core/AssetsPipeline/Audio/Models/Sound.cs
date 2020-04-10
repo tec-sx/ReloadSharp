@@ -1,8 +1,7 @@
-using Core.CoreSystem.ErrorHandling.Exceptions;
-
-namespace Core.Resources.Audio.Models
+namespace Core.AssetsPipeline.Audio.Models
 {
     using System;
+    using CoreSystem.ErrorHandling.Exceptions;
     using static SDL2.SDL_mixer;
     
     public class SoundSdl : ISound

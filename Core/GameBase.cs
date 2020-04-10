@@ -9,23 +9,18 @@ namespace Core
     using System;
     using CoreSystem.Graphics;
     using Config;
-    using CoreSystem;
     using Screen;
     using Utilities;
     using Silk.NET.Windowing.Common;
 
     public abstract class GameBase : IDisposable
     {
-        private readonly IGraphicsManager _graphicsManager;
+        private readonly GraphicsManager _graphicsManager;
+        private readonly AudioManager _audioManager;
         
-        private readonly AudioDevice _audioDevice;
         protected readonly IScreenManager screenManager;
 
-        protected internal static bool isRunning;
-        protected static float deltaTime;
-        protected static float fps;
-
-        private ScreenBase _currentScreen;
+        internal static bool isRunning;
 
         protected GameBase()
         {
@@ -33,8 +28,8 @@ namespace Core
             EmbeddedResourceManager.LoadNativeLibraries();
             ServiceManager.RegisterServices();
 
-            _graphicsManager = ServiceManager.GetService<IGraphicsManager>();
-            _audioDevice    = ServiceManager.GetService<AudioDevice>();
+            _graphicsManager = ServiceManager.GetService<GraphicsManager>();
+            _audioManager    = ServiceManager.GetService<AudioManager>();
             screenManager   = ServiceManager.GetService<IScreenManager>();
         }
 
@@ -47,12 +42,9 @@ namespace Core
 
             _graphicsManager.CreateWindow();
             _graphicsManager.CreateDevice();
-            
-            AddScreens();
+            _audioManager.CreateDevice();
 
-            _currentScreen = screenManager.CurrentScreen;
-            _currentScreen?.Run();
-            _currentScreen?.OnEnter();
+            AddScreens();
         }
 
         public void Dispose()
@@ -60,6 +52,7 @@ namespace Core
             OnDispose();
             
             _graphicsManager.DisposeResources();
+            _audioManager.DisposeResources();
             
             ServiceManager.DisposeServices();
         }
@@ -71,12 +64,12 @@ namespace Core
 
         private void Update(double deltaTime)
         {
-            screenManager.Update();
+            screenManager.Update(deltaTime);
         }
 
         private void Render(double deltaTime)
         {
-            _currentScreen?.OnRender();
+            screenManager.Render(deltaTime);
         }
 
         public void Run()
@@ -90,7 +83,7 @@ namespace Core
 
             _graphicsManager.Window.Run();
             _graphicsManager.Device.WaitForIdle();
-           
+
         }
     }
 }

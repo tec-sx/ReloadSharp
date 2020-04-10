@@ -1,6 +1,7 @@
-﻿namespace Core.Resources.Textures
+﻿namespace Core.AssetsPipeline.Textures
 {
     using System;
+    using Models;
 
     public interface ITextureCache : IDisposable
     {

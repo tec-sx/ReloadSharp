@@ -1,11 +1,13 @@
-namespace Core.Resources
+namespace Core.AssetsPipeline
 {
     using System.IO;
-    using Config;
-    using Textures;
+    using Audio;
+    using Audio.Models;
     using GameObjects;
     using GameObjects.Models;
-    using Audio;
+    using Textures;
+    using Textures.Models;
+    using Config;
 
     public class AssetsManager : IAssetsManager
     {
