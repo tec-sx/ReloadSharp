@@ -1,6 +1,7 @@
 using System.Runtime.CompilerServices;
 using Core.CoreSystem.Audio;
 using Core.CoreSystem.Audio.Device;
+using Core.CoreSystem.Input;
 
 [assembly:InternalsVisibleTo("Core.Tests")]
 
@@ -16,21 +17,23 @@ namespace Core
     public abstract class GameBase : IDisposable
     {
         private readonly GraphicsManager _graphicsManager;
+        private readonly InputManager _inputManager;
         private readonly AudioManager _audioManager;
         
-        protected readonly IScreenManager screenManager;
+        protected readonly ScreenManager screenManager;
 
         internal static bool isRunning;
 
         protected GameBase()
         {
             Configuration.LoadDefaultConfiguration();
-            EmbeddedResourceManager.LoadNativeLibraries();
+            LibraryLoader.LoadNativeLibraries();
             ServiceManager.RegisterServices();
 
             _graphicsManager = ServiceManager.GetService<GraphicsManager>();
+            _inputManager = ServiceManager.GetService<InputManager>();
             _audioManager    = ServiceManager.GetService<AudioManager>();
-            screenManager   = ServiceManager.GetService<IScreenManager>();
+            screenManager   = ServiceManager.GetService<ScreenManager>();
         }
 
         protected abstract void OnInitialize();
@@ -42,6 +45,7 @@ namespace Core
 
             _graphicsManager.CreateWindow();
             _graphicsManager.CreateDevice();
+            _inputManager.Initialize(_graphicsManager.Window);
             _audioManager.CreateDevice();
 
             AddScreens();

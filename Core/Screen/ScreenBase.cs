@@ -1,3 +1,5 @@
+using Core.Screen.Layers;
+
 namespace Core.Screen
 {
     using System;
@@ -16,6 +18,7 @@ namespace Core.Screen
 
     public abstract class ScreenBase : IDisposable
     {
+        protected LayerStack Layers { get; }
         public ScreenState State { get; private set; }
         public ScreenBase NextScreen { get; set; }
         public ScreenBase PrevScreen { get; set; }
@@ -24,6 +27,7 @@ namespace Core.Screen
         protected ScreenBase()
         {
             State = ScreenState.NONE;
+            Layers = new LayerStack();
         }
 
         public abstract void OnEnter();
@@ -33,6 +37,7 @@ namespace Core.Screen
 
         public void Dispose()
         {
+            Layers.DisposeStack();
         }
 
         public void Run()
@@ -42,18 +47,23 @@ namespace Core.Screen
 
         public void Update(double deltaTime)
         {
-            if (State == ScreenState.RUNNING)
+            if (State != ScreenState.RUNNING)
             {
-                OnUpdate(deltaTime);
+                return;
             }
+            
+            OnUpdate(deltaTime);
+            Layers.Update();
         }
 
         public void Render(double deltaTime)
         {
-            if (State == ScreenState.RUNNING)
+            if (State != ScreenState.RUNNING)
             {
-                OnRender(deltaTime);
+                return;
             }
+            
+            OnRender(deltaTime);
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Core.Utilities
     using System.IO;
     using System.Runtime.InteropServices;
     
-    public static class EmbeddedResourceManager
+    public static class LibraryLoader
     {
         internal static void LoadNativeLibraries()
         {
@@ -35,20 +35,6 @@ namespace Core.Utilities
                 NativeLibrary.Load(library);
                 Console.WriteLine($"[LOADING LIB]::{library}::SUCCESS");
             }
-        }
-        
-        internal static byte[] LoadEmbeddedResourceBytes(string path)
-        {
-            using var stream = typeof(GameBase).Assembly.GetManifestResourceStream(path);
-            using var ms = new MemoryStream();
-
-            if (stream == null)
-            {
-                throw new ApplicationException($"Embedded resource {path} not found.");    
-            }
-            
-            stream.CopyTo(ms);
-            return ms.ToArray();
         }
     }
 }

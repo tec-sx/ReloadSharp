@@ -1,6 +1,7 @@
+
 namespace Core.Config
 {
-    using CoreSystem;
+    using Silk.NET.Input.Common;
     using System.Text.Json.Serialization;
 
 
@@ -44,6 +45,26 @@ namespace Core.Config
     {
         [JsonPropertyName("Debug")] public bool Debug { get; set; }
     }
+    
+        public class MouseInputSettings
+        {
+            [JsonPropertyName("Interact")] public MouseButton Interact { get; set; }
+        }
+
+        public class KeyInputSettings
+        {
+            [JsonPropertyName("Up")] public Key Up { get; set; }
+            [JsonPropertyName("Down")] public Key Down { get; set; }
+            [JsonPropertyName("Left")] public Key Left { get; set; }
+            [JsonPropertyName("Right")] public Key Right { get; set; }
+            [JsonPropertyName("Run")] public Key Run { get; set; }
+            [JsonPropertyName("Duck")] public Key Duck { get; set; }
+            [JsonPropertyName("Jump")] public Key Jump { get; set; }
+            [JsonPropertyName("OpenInventory")] public Key OpenInventory { get; set; }
+            [JsonPropertyName("ToggleFightMode")] public Key ToggleFightMode { get; set; }
+            [JsonPropertyName("Select")] public Key Select { get; set; }
+            [JsonPropertyName("Pause")] public Key Pause { get; set; }
+        }
 
     public class ApplicationSettings
     {
@@ -52,6 +73,8 @@ namespace Core.Config
         [JsonPropertyName("AudioSettings")] public AudioSettings Audio { get; set;}
         [JsonPropertyName(("ImageSettings"))] public ImageSettings Image { get; set; }
         [JsonPropertyName("ModelSettings")] public ModelSettings Model { get; set; }
-        [JsonPropertyName("Flags")] public Flags Flags { get; set; }
+        [JsonPropertyName("KeyInputSettings")] public KeyInputSettings KeyInput { get; set; }
+        [JsonPropertyName("MouseInputSettings")] public MouseInputSettings MouseInput { get; set; }
+        
     }
 }

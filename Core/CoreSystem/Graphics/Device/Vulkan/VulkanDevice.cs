@@ -761,8 +761,8 @@ namespace Core.CoreSystem.Graphics.Device.Vulkan
         //--------------------------------------------------------------------------------------------------------------
         private unsafe void CreateGraphicsPipeline()
         {
-            var vertShaderCode = EmbeddedResourceManager.LoadEmbeddedResourceBytes("shader.vert.spv");
-            var fragShaderCode = EmbeddedResourceManager.LoadEmbeddedResourceBytes("shader.frag.spv");
+            var vertShaderCode = ResourceLoader.LoadEmbeddedResourceBytes("shader.vert.spv");
+            var fragShaderCode = ResourceLoader.LoadEmbeddedResourceBytes("shader.frag.spv");
 
             var vertShaderModule = CreateShaderModule(vertShaderCode);
             var fragShaderModule = CreateShaderModule(fragShaderCode);

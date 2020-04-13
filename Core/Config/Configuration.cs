@@ -6,7 +6,8 @@ namespace Core.Config
 
     public static class Configuration
     {
-        private static readonly string SettingsFile = Path.Combine(Environment.CurrentDirectory, "Settings.json");
+        private static readonly string SettingsFile = Path.Combine(Environment.CurrentDirectory, "settings.json");
+
         public static ContentPath ContentPath { get; } = new ContentPath(Path.Combine(Environment.CurrentDirectory, "Assets"));
         public static ApplicationSettings Settings { get; private set; }
 

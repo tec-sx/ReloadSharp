@@ -1,19 +1,23 @@
-using System;
-using Core.AssetsPipeline;
+using Core.GamePlay;
 
 namespace Core.Screen
 {
-    using Resources;
-
-    public class ScreenManager : IScreenManager
+    using System;
+    using AssetsPipeline;
+    
+    public class ScreenManager
     {
         public IAssetsManager Assets { get; }
-
+        public PlayerAction PlayerAction { get; }
+        
         public ScreenBase ActiveScreen { get; set; }
 
-        public ScreenManager(IAssetsManager assets)
+        public ScreenManager(
+            IAssetsManager assets,
+            PlayerAction playerAction)
         {
             Assets = assets;
+            PlayerAction = playerAction;
         }
 
         public ScreenBase MoveToNextScreen()

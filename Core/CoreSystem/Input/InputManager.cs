@@ -1,20 +1,20 @@
 namespace Core.CoreSystem.Input
 {
     using Silk.NET.Input;
-    using Controllers;
     using Silk.NET.Windowing.Common;
-    
-    public class InputManager : IInputManager
+    using Silk.NET.Input.Common;
+
+    public class InputManager
     {
-        public Mouse Mouse { get; }
-        public Keyboard Keyboard { get; }
+        public IMouse Mouse { get; private set; }
+        public IKeyboard Keyboard { get; private set; }
         
-        public InputManager(IView view)
+        public void Initialize(IView view)
         {
             var input = view.CreateInput();
             
-            Mouse = new Mouse(input.Mice);
-            Keyboard = new Keyboard(input.Keyboards);
+            Mouse = input.Mice[0];
+            Keyboard = input.Keyboards[0];
         }
     }
 }

@@ -10,7 +10,7 @@ namespace Core.CoreSystem.Graphics
 
     using SilkWindow = Silk.NET.Windowing.Window;
     
-    internal sealed class GraphicsManager
+    public sealed class GraphicsManager
     {
         public IWindow Window { get; private set; }
         public IGraphicsDevice Device { get; private set; }

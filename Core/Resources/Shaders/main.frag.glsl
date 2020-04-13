@@ -1,3 +1,5 @@
+// Fragment
+
 #version 330
 
 in vec4 color;

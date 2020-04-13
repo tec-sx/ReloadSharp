@@ -1,56 +1,32 @@
 namespace Core.ResourcesPipeline
 {
-    using System;
-    using System.IO;
     using Config;
     using Shaders;
     using Shaders.Models;
+    using CoreSystem.Graphics.Device;
+    using CoreSystem.Graphics.Device.OpenGl;
+    using System.Collections.Generic;
     using Silk.NET.OpenGL;
     
     public class ResourcesManager : IResourcesManager
     {
         private readonly IShaderCache _shaderCache;
         
-        public ResourcesManager(IShaderCache shaderCache)
+        public ResourcesManager(IGraphicsDevice device)
         {
-            _shaderCache = shaderCache;
+            _shaderCache = Configuration.Settings.Display.UseVulkan 
+                ? new VkShaderCache()
+                : new GlShaderCache(device as OpenGlDevice)
+                    as IShaderCache;
         }
-        
-        public IShader LoadShader(ShaderType type, string name)
-        {
-            var resourceName = Configuration.Settings.Display.UseVulkan
-                ? $"Core.Resources.Shaders.{name}.spv"
-                : $"Core.Resources.Shaders.{name}.glsl";
 
-            return _shaderCache.LoadShader(type, LoadEmbeddedResourceString(resourceName));
-        }
-        
-        private static byte[] LoadEmbeddedResourceBytes(string path)
+        public IShaderProgram LoadShader(string name)
         {
-            using var stream = typeof(GameBase).Assembly.GetManifestResourceStream(path);
-            using var ms = new MemoryStream();
-
-            if (stream == null)
+            var shaders = new Dictionary<ShaderType, string>
             {
-                throw new ApplicationException($"Embedded resource {path} not found.");    
-            }
-            
-            stream.CopyTo(ms);
-            return ms.ToArray();
-        }
-        
-        private static string LoadEmbeddedResourceString(string path)
-        {
-            using var stream = typeof(GameBase).Assembly.GetManifestResourceStream(path);
-
-            if (stream == null)
-            {
-                throw new ApplicationException($"Embedded resource {path} not found.");    
-            }
-            
-            using var reader = new StreamReader(stream);
-            
-            return reader.ReadToEnd();
+                { ShaderType.VertexShader, $"{name}.vert"}
+            };
+            return _shaderCache.LoadShader(name, shaders);
         }
     }
 }

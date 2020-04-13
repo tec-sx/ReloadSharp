@@ -1,4 +1,6 @@
+using System;
 using Core.AssetsPipeline.Audio.Models;
+using Core.GamePlay;
 
 namespace Reload.Screens
 {
@@ -8,9 +10,28 @@ namespace Reload.Screens
     public class IntroScreen : ScreenBase
     {
         private IMusic _bgMusicStream;
-
+        
         public override void OnEnter()
         {
+            Manager.PlayerAction.Jump += () => Console.WriteLine("Jump");
+            Manager.PlayerAction.Move += direction =>
+            {
+                switch(direction)
+                {
+                    case MoveDirection.UP:
+                        Console.WriteLine("Up");
+                        break;
+                    case MoveDirection.DOWN:
+                        Console.WriteLine("Down");
+                        break;
+                    case MoveDirection.LEFT:
+                        Console.WriteLine("Left");
+                        break;
+                    case MoveDirection.RIGHT:
+                        Console.WriteLine("Right");
+                        break;
+                };
+            };
             _bgMusicStream = Manager.Assets.LoadMusic("Intro");
             _bgMusicStream.Play();
         }

@@ -63,6 +63,7 @@
               <e p="CustomExceptions.cs" t="Include" />
               <e p="ResourcesExceptions.cs" t="Include" />
             </e>
+            <e p="ResourcePipelineErrorHandler.cs" t="Include" />
           </e>
           <e p="Graphics" t="Include">
             <e p="Device" t="Include">
@@ -78,15 +79,16 @@
             <e p="GraphicsManager.cs" t="Include" />
           </e>
           <e p="Input" t="Include">
-            <e p="Controllers" t="Include">
-              <e p="Keyboard.cs" t="Include" />
-              <e p="Mouse.cs" t="Include" />
-            </e>
-            <e p="IInputManager.cs" t="Include" />
             <e p="InputManager.cs" t="Include" />
           </e>
         </e>
         <e p="GameBase.cs" t="Include" />
+        <e p="GamePlay" t="Include">
+          <e p="Enumerations" t="Include">
+            <e p="UserActionType.cs" t="Include" />
+          </e>
+          <e p="PlayerAction.cs" t="Include" />
+        </e>
         <e p="GameThread.cs" t="Include" />
         <e p="Resources" t="Include">
           <e p="Libraries" t="Include">
@@ -146,21 +148,24 @@
           <e p="IResourcesManager.cs" t="Include" />
           <e p="ResourcesManager.cs" t="Include" />
           <e p="Shaders" t="Include">
+            <e p="GlShaderCache.cs" t="Include" />
             <e p="IShaderCache.cs" t="Include" />
             <e p="Models" t="Include">
-              <e p="GlShader.cs" t="Include" />
-              <e p="IShader.cs" t="Include" />
-              <e p="VkShader.cs" t="Include" />
+              <e p="GlShaderProgram.cs" t="Include" />
+              <e p="IShaderProgram.cs" t="Include" />
+              <e p="VkShaderProgram.cs" t="Include" />
             </e>
-            <e p="ShaderCache.cs" t="Include" />
+            <e p="VkShaderCache.cs" t="Include" />
           </e>
         </e>
         <e p="Screen" t="Include">
-          <e p="IScreenManager.cs" t="Include" />
+          <e p="Layers" t="Include">
+            <e p="LayerBase.cs" t="Include" />
+            <e p="LayerStack.cs" t="Include" />
+          </e>
           <e p="ScreenBase.cs" t="Include" />
           <e p="ScreenManager.cs" t="Include" />
         </e>
-        <e p="Settings.json" t="Include" />
         <e p="State" t="Include">
           <e p="IState.cs" t="Include" />
           <e p="IStateMachine.cs" t="Include" />
@@ -169,7 +174,8 @@
         </e>
         <e p="Utilities" t="Include">
           <e p="ConsoleLog.cs" t="Include" />
-          <e p="EmbeddedResourceManager.cs" t="Include" />
+          <e p="LibraryLoader.cs" t="Include" />
+          <e p="ResourceLoader.cs" t="Include" />
           <e p="ServiceManager.cs" t="Include" />
           <e p="Timing.cs" t="Include" />
         </e>
@@ -181,11 +187,15 @@
             </e>
           </e>
         </e>
+        <e p="settings.json" t="Include" />
       </e>
       <e p="Core.Tests" t="IncludeRecursive">
         <e p="Core.Tests.csproj" t="IncludeRecursive" />
         <e p="CoreSystem" t="Include">
           <e p="GraphicsManagerTests.cs" t="Include" />
+        </e>
+        <e p="ResourcesPipeline" t="Include">
+          <e p="ResourcesManagerTests.cs" t="Include" />
         </e>
         <e p="Settings.json" t="Include" />
         <e p="bin" t="ExcludeRecursive" />

@@ -4,19 +4,16 @@ using Core.AssetsPipeline.GameObjects;
 using Core.AssetsPipeline.Textures;
 using Core.CoreSystem.Audio;
 using Core.CoreSystem.Audio.Device;
+using Core.CoreSystem.Input;
+using Core.GamePlay;
 using Core.ResourcesPipeline;
 using Core.ResourcesPipeline.Shaders;
 
 namespace Core.Utilities
 {
     using CoreSystem.Graphics;
-    using CoreSystem;
-    using Resources;
-    using Resources.Textures;
     using Screen;
     using State;
-    using Silk.NET.Windowing.Common;
-    using Silk.NET.Windowing;
     using Microsoft.Extensions.DependencyInjection;
     
     public static class ServiceManager
@@ -31,11 +28,11 @@ namespace Core.Utilities
             
             collection.AddSingleton<GraphicsManager>();
             collection.AddSingleton<AudioManager>();
+            collection.AddSingleton<InputManager>();
             #endregion
             
             #region Resources Pipeline
-
-            collection.AddScoped<IShaderCache, ShaderCache>();
+            
             collection.AddScoped<IResourcesManager, ResourcesManager>();
             #endregion
             
@@ -47,9 +44,13 @@ namespace Core.Utilities
             collection.AddScoped<IAssetsManager, AssetsManager>();
             #endregion
             
-            collection.AddSingleton<IScreenManager, ScreenManager>();
-            collection.AddScoped(typeof(IStateMachine<>), typeof(StateMachine<>));
+            #region Gameplay
 
+            collection.AddSingleton<PlayerAction>();
+            collection.AddSingleton<ScreenManager>();
+            collection.AddScoped(typeof(IStateMachine<>), typeof(StateMachine<>));
+            #endregion
+            
             _serviceProvider = collection.BuildServiceProvider();
         }
 

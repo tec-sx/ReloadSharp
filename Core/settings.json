@@ -23,9 +23,25 @@
     "Format": "png"
   },
   "ModelSettings": {
-    "Format":  "obj"
+    "Format": "obj"
   },
   "Flags": {
     "Debug": true
+  },
+  "KeyInputSettings": {
+    "Up": 87,
+    "Down": 83,
+    "Left": 65,
+    "Right": 68,
+    "Run": 340,
+    "Duck": 342,
+    "Jump": 32,
+    "OpenInventory": 81,
+    "ToggleFightMode": 69,
+    "Select": 257,
+    "Pause": 256
+  },
+  "MouseInputSettings": {
+    "Interact": 0
   }
 }

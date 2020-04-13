@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace Core.ResourcesPipeline
 {
     using Shaders.Models;
@@ -5,6 +7,6 @@ namespace Core.ResourcesPipeline
 
     public interface IResourcesManager
     {
-        IShader LoadShader(ShaderType type, string name);
+        IShaderProgram LoadShader(string name);
     }
 }
