@@ -15,7 +15,7 @@ namespace Core.Utilities
     using Screen;
     using State;
     using Microsoft.Extensions.DependencyInjection;
-    
+
     public static class ServiceManager
     {
         private static ServiceProvider _serviceProvider;
@@ -25,32 +25,32 @@ namespace Core.Utilities
             var collection = new ServiceCollection();
 
             #region Core System
-            
+
             collection.AddSingleton<GraphicsManager>();
             collection.AddSingleton<AudioManager>();
             collection.AddSingleton<InputManager>();
             #endregion
-            
+
             #region Resources Pipeline
-            
+
             collection.AddScoped<IResourcesManager, ResourcesManager>();
             #endregion
-            
+
             #region Assets Pipeline
-            
+
             collection.AddScoped<ITextureCache, TextureCache>();
             collection.AddScoped<IGameObjectCache, GameObjectCacheRl>();
             collection.AddScoped<IAudioCache, AudioCache>();
             collection.AddScoped<IAssetsManager, AssetsManager>();
             #endregion
-            
+
             #region Gameplay
 
             collection.AddSingleton<PlayerAction>();
             collection.AddSingleton<ScreenManager>();
             collection.AddScoped(typeof(IStateMachine<>), typeof(StateMachine<>));
             #endregion
-            
+
             _serviceProvider = collection.BuildServiceProvider();
         }
 
