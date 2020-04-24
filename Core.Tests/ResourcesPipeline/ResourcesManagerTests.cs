@@ -6,7 +6,7 @@ namespace CoreTests.ResourcesPipeline
     using Core.Config;
     using Core.ResourcesPipeline;
     using Xunit;
-    
+
     public class ResourcesManagerTests
     {
         [Fact]
@@ -16,11 +16,11 @@ namespace CoreTests.ResourcesPipeline
 
             Configuration.LoadDefaultConfiguration();
             Configuration.Settings.Display.UseVulkan = false;
-            
+
             #endregion
 
             #region Act
-            
+
             var resourcesManager = new ResourcesManager();
             var shaderList = new List<string>
             {
@@ -28,7 +28,7 @@ namespace CoreTests.ResourcesPipeline
                 "main.frag",
                 "main.geom"
             };
-            
+
             resourcesManager.LoadShader(shaderList);
 
             #endregion

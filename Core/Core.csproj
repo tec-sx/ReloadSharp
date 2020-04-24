@@ -21,24 +21,6 @@
       <None Remove="Resources\Shaders\shader.frag.spv" />
       <None Remove="Resources\Shaders\shader.vert.spv" />
       <None Remove="EmbeddedResources\Libraries\Linux\libglfw.so.3.3" />
-      <None Include="Resources\Libraries\Linux\libglfw.so.3.3">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Resources\Libraries\Linux\libraylib.so.3.0.0">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Resources\Libraries\Linux\libSDL2-2.0.so.0.10.0">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Resources\Libraries\Linux\libSDL2_image-2.0.so.0.2.3">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Resources\Libraries\Linux\libSDL2_mixer-2.0.so.0.2.2">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
-      <None Update="Resources\Libraries\Linux\libSDL2_ttf-2.0.so.0.14.1">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
       <None Remove="Resources\Shaders\main.frag.glsl" />
       <None Remove="Resources\Shaders\main.geom.glsl" />
       <None Remove="Resources\Shaders\main.vert.glsl" />
@@ -66,11 +48,5 @@
         <EmbeddedResource Include="settings.json">
           <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
         </EmbeddedResource>
-    </ItemGroup>
-    
-    <ItemGroup>
-      <None Update="Libraries\lib\raylib.dll">
-        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-      </None>
     </ItemGroup>
 </Project>

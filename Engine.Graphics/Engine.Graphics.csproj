@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Shaders\Resources\main.frag.glsl" />
+    <EmbeddedResource Include="Shaders\Resources\main.geom.glsl" />
+    <EmbeddedResource Include="Shaders\Resources\main.vert.glsl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="ShaderGen" Version="1.2.0-beta3" />
+    <PackageReference Include="ShaderGen.Build" Version="1.2.0-beta3" />
+    <PackageReference Include="SharpGLTF.Core" Version="1.0.0-alpha0016" />
+    <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.0-alpha0016" />
+    <PackageReference Include="Silk.NET.Core" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.GLFW" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.OpenGL" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.Vulkan" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.Vulkan.Extensions.EXT" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.Vulkan.Extensions.KHR" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.Windowing" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.Windowing.Desktop" Version="1.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Engine.Utilities\Engine.Utilities.csproj" />
+  </ItemGroup>
+
+</Project>

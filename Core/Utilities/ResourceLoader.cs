@@ -2,7 +2,7 @@ namespace Core.Utilities
 {
     using System;
     using System.IO;
-    
+
     public class ResourceLoader
     {
         internal static byte[] LoadEmbeddedResourceBytes(string path)
@@ -12,13 +12,13 @@ namespace Core.Utilities
 
             if (stream == null)
             {
-                throw new ApplicationException($"Embedded resource {path} not found.");    
+                throw new ApplicationException($"Embedded resource {path} not found.");
             }
-            
+
             stream.CopyTo(ms);
             return ms.ToArray();
         }
-        
+
         public static string LoadEmbeddedResourceString(string path)
         {
             using var stream = typeof(GameBase).Assembly.GetManifestResourceStream(path);

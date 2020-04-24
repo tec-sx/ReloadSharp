@@ -3,16 +3,16 @@ namespace Core.Utilities
     using System;
     using System.IO;
     using System.Runtime.InteropServices;
-    
+
     public static class LibraryLoader
     {
-        internal static void LoadNativeLibraries()
+        public static void LoadNativeLibraries()
         {
             string platform;
 
             if (!Environment.Is64BitProcess)
             {
-                throw new ApplicationException("Only 64 bit platform supported.");    
+                throw new ApplicationException("Only 64 bit platform supported.");
             }
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -29,7 +29,7 @@ namespace Core.Utilities
 
             var librariesPath = Path.Combine(Environment.CurrentDirectory, "Libraries", platform);
             var libraries = Directory.EnumerateFiles(librariesPath);
-            
+
             foreach (var library in libraries)
             {
                 NativeLibrary.Load(library);

@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NLayer.Core" Version="1.15.0" />
+    <PackageReference Include="NVorbis" Version="0.10.1" />
+    <PackageReference Include="SharpDX.XAudio2" Version="4.2.0" />
+    <PackageReference Include="Silk.NET.OpenAL" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.OpenAL.Extensions.Creative" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.OpenAL.Extensions.Enumeration" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.OpenAL.Extensions.EXT" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.OpenAL.Extensions.Soft" Version="1.1.1" />
+    <PackageReference Include="System.Memory" Version="4.5.4" />
+  </ItemGroup>
+
+</Project>

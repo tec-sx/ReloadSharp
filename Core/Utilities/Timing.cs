@@ -1,16 +1,16 @@
 namespace Core.Utilities
 {
     using static SDL2.SDL;
-    
+
     public class FpsLimiter
     {
         private const float ONE_SECOND = 1000.0f;
         private const int NUM_OF_SAMPLES = 10;
-        
+
         private static readonly float[] FrameTimes = new float[NUM_OF_SAMPLES];
         private static int _currentFrame = 0;
         private static uint _previousTicks = SDL_GetTicks();
-        
+
         private float _fps;
         private float _maxFps;
         private float _frameTime;
@@ -18,7 +18,7 @@ namespace Core.Utilities
         private float _lastDeltaTime;
 
         public float DeltaTime { get; set; }
-        
+
         public void SetMaxFps(float maxFps)
         {
             _maxFps = maxFps;
@@ -32,7 +32,7 @@ namespace Core.Utilities
         public float End()
         {
             CalculateFps();
-            
+
             var nowDeltaTime = SDL_GetTicks();
             var frameTicks = SDL_GetTicks() - _startTicks;
 
@@ -58,7 +58,7 @@ namespace Core.Utilities
             FrameTimes[_currentFrame % NUM_OF_SAMPLES] = _frameTime;
             _previousTicks = currentTicks;
             _currentFrame++;
-            
+
             var frameCount = _currentFrame < NUM_OF_SAMPLES ? _currentFrame : NUM_OF_SAMPLES;
             var frameTimeAverage = 0.0f;
 
