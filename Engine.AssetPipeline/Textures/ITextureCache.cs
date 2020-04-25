@@ -1,4 +1,4 @@
-﻿namespace Core.AssetsPipeline.Textures
+﻿namespace Engine.AssetPipeline.Textures
 {
     using System;
     using Models;

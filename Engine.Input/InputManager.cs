@@ -1,4 +1,4 @@
-namespace Core.CoreSystem.Input
+namespace Engine.Input
 {
     using Silk.NET.Input;
     using Silk.NET.Windowing.Common;

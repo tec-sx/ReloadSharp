@@ -1,4 +1,4 @@
-namespace Core.ResourcesPipeline.Shaders
+namespace Engine.ResourcesPipeline.Shaders
 {
     using Engine.Graphics.Device.OpenGl;
     using System.Collections.Generic;
@@ -7,8 +7,6 @@ namespace Core.ResourcesPipeline.Shaders
 
     public class GlShaderCache : IShaderCache
     {
-        private const string SHADER_EXT = "glsl";
-
         private readonly Dictionary<string,  uint> _shaderProgramsDictionary;
         private readonly GL _api;
 

@@ -3,31 +3,25 @@
     using NUnit.Framework;
     using FluentAssertions;
     using Engine.Audio;
+    using System.IO;
 
     public class AudioEngine_Tests
     {
-        private SoundManager _soundManager;
 
         [OneTimeSetUp]
         public void SetUp()
         {
-            new AudioDevice();
-            _soundManager = new SoundManager();
-        }
-
-        [OneTimeTearDown]
-        public void TearDown()
-        {
-            _soundManager.DisposeResources();
+            new AudioManager();
         }
 
         [Test]
         public void Play_Music_Stream_Stereo_Success()
         {
-            var music = _soundManager.LoadMusic("Assets/Background.Original.ogg");
+            var music = new AudioSource(File.OpenRead("Assets/Background.Original.ogg"));
+
             music.Should().NotBeNull();
 
-            music.Play();
+            music.Play(loop: false);
             while (music.Elapsed.Seconds < music.Duration.Seconds) ;
             music.Stop();
         }
@@ -35,10 +29,12 @@
         [Test]
         public void Play_Sound_SingleShot_Success()
         {
-            var snare = _soundManager.LoadSound("Assets/Snare.ogg");
+            var data = File.ReadAllBytes("Assets/Snare.ogg");
+            var snare = new AudioSource(new MemoryStream(data));
+
             snare.Should().NotBeNull();
 
-            snare.Play();
+            snare.Play(loop: false);
             while (snare.Elapsed.Seconds < snare.Duration.Seconds) ;
             snare.Stop();
         }
@@ -46,7 +42,9 @@
         [Test]
         public void Play_Sound_Loop_Success()
         {
-            var snare = _soundManager.LoadSound("Assets/Snare.ogg");
+            var data = File.ReadAllBytes("Assets/Snare.ogg");
+            var snare = new AudioSource(new MemoryStream(data));
+
             snare.Should().NotBeNull();
 
             snare.Play(loop: true);
@@ -59,7 +57,9 @@
         [Test]
         public void Sound_Gain_Change_Success()
         {
-            var snare = _soundManager.LoadSound("Assets/Snare.ogg");
+            var data = File.ReadAllBytes("Assets/Snare.ogg");
+            var snare = new AudioSource(new MemoryStream(data));
+
             snare.Should().NotBeNull();
 
             var downBeat = 1;

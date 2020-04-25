@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 
-namespace Core.Screen.Layers
+namespace Engine.Scene.Layers
 {
     public class LayerStack
     {
@@ -13,7 +13,7 @@ namespace Core.Screen.Layers
             _layers = new List<LayerBase>();
             _layerInsertIndex = 0;
         }
-        
+
         /// <summary>
         /// Push new layer to the first half of the layers list;
         /// </summary>
@@ -41,7 +41,7 @@ namespace Core.Screen.Layers
         /// Update all layers
         /// </summary>
         public void Update() => _layers.ForEach(layer => layer.OnUpdate());
-        
+
         /// <summary>
         /// Handle events for all layers
         /// </summary>

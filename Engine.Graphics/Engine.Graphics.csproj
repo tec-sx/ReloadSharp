@@ -17,7 +17,6 @@
 
   <ItemGroup>
     <PackageReference Include="ShaderGen" Version="1.2.0-beta3" />
-    <PackageReference Include="ShaderGen.Build" Version="1.2.0-beta3" />
     <PackageReference Include="SharpGLTF.Core" Version="1.0.0-alpha0016" />
     <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.0-alpha0016" />
     <PackageReference Include="Silk.NET.Core" Version="1.1.1" />

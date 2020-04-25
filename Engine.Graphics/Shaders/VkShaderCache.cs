@@ -1,4 +1,4 @@
-namespace Core.ResourcesPipeline.Shaders
+namespace Engine.ResourcesPipeline.Shaders
 {
     using System.Collections.Generic;
     using Models;

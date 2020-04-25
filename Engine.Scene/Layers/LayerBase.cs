@@ -1,7 +1,7 @@
-namespace Core.Screen.Layers
+namespace Engine.Scene.Layers
 {
     using System;
-    
+
     public abstract class LayerBase : IDisposable
     {
         public abstract void OnAttach();

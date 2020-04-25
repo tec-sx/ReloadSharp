@@ -1,7 +1,7 @@
-namespace Core.State
+namespace Engine.State
 {
     using System.Collections.Generic;
-    
+
     public class StateMachine<T> : IStateMachine<T>
         where T : IState
     {

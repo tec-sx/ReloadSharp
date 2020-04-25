@@ -1,20 +1,17 @@
-using Core.AssetsPipeline;
-using Core.AssetsPipeline.Audio;
-using Core.AssetsPipeline.GameObjects;
-using Core.AssetsPipeline.Textures;
-using Core.CoreSystem.Audio;
-using Core.CoreSystem.Audio.Device;
-using Core.CoreSystem.Input;
-using Core.GamePlay;
-using Core.ResourcesPipeline;
-using Core.ResourcesPipeline.Shaders;
-
-namespace Core.Utilities
+namespace Engine.Core
 {
-    using CoreSystem.Graphics;
-    using Screen;
+    using Engine.Graphics;
+    using Engine.AssetPipeline;
+    using Engine.AssetPipeline.Audio;
+    using Engine.AssetPipeline.GameObjects;
+    using Engine.AssetPipeline.Textures;
+    using Engine.Audio;
+    using Engine.Input;
+    using Engine.GamePlay;
+    using Engine.Scene;
     using State;
     using Microsoft.Extensions.DependencyInjection;
+    using Engine.Configuration;
 
     public static class ServiceManager
     {
@@ -25,29 +22,24 @@ namespace Core.Utilities
             var collection = new ServiceCollection();
 
             #region Core System
-
+            collection.AddSingleton<ConfigurationManager>();
             collection.AddSingleton<GraphicsManager>();
             collection.AddSingleton<AudioManager>();
             collection.AddSingleton<InputManager>();
-            #endregion
-
-            #region Resources Pipeline
-
-            collection.AddScoped<IResourcesManager, ResourcesManager>();
+            collection.AddSingleton<IAssetsManager, AssetsManager>();
+            collection.AddSingleton<SceneManager>();
             #endregion
 
             #region Assets Pipeline
 
             collection.AddScoped<ITextureCache, TextureCache>();
-            collection.AddScoped<IGameObjectCache, GameObjectCacheRl>();
+            collection.AddScoped<IGameObjectCache, GameObjectCache>();
             collection.AddScoped<IAudioCache, AudioCache>();
-            collection.AddScoped<IAssetsManager, AssetsManager>();
             #endregion
 
             #region Gameplay
 
             collection.AddSingleton<PlayerAction>();
-            collection.AddSingleton<ScreenManager>();
             collection.AddScoped(typeof(IStateMachine<>), typeof(StateMachine<>));
             #endregion
 

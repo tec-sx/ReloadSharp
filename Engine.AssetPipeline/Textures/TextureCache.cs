@@ -1,7 +1,7 @@
-namespace Core.AssetsPipeline.Textures
+namespace Engine.AssetPipeline.Textures
 {
     using Models;
-    
+
     public class TextureCache : ITextureCache
     {
         public void Dispose()

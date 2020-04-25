@@ -19,7 +19,7 @@ namespace Engine.Graphics.Device.Vulkan
     {
         public const int MaxFramesInFlight = 8;
 
-        private Vk _api = Vk.GetApi();
+        private readonly Vk _api = Vk.GetApi();
 
         private IVulkanWindow _window;
 

@@ -1,22 +1,49 @@
-namespace Core.AssetsPipeline.Audio.Models
+namespace Engine.AssetPipeline.Audio.Models
 {
-    using System;
-    using CoreSystem.ErrorHandling.Exceptions;
-    using static SDL2.SDL_mixer;
+    using System.Numerics;
+    using Engine.Audio;
 
-    public class SoundSdl : ISound
+    public class Sound : ISound
     {
-        public IntPtr Chunk { get; set; }
+        private readonly AudioSource _source;
 
-        public void Play()
+        public float Gain
         {
-            if (Mix_PlayChannel(-1, Chunk, 0) == -1)
-            {
-                if (Mix_PlayChannel(0, Chunk, 0) == -1)
-                {
-                    throw new SoundException("Error playing sound file.");
-                }
-            }
+            get => _source.Gain;
+            set => _source.Gain = value;
         }
+
+        public float Pitch
+        {
+            get => _source.Pitch;
+            set => _source.Pitch = value;
+        }
+
+        public bool Looping => _source.Looping;
+
+        public Vector3 Position
+        {
+            get => _source.Position;
+            set => _source.Position = value;
+        }
+        public Vector3 Direction
+        {
+            get => _source.Direction;
+            set => _source.Direction = value;
+        }
+
+        public Vector3 Velocity
+        {
+            get => _source.Velocity;
+            set => _source.Velocity = value;
+        }
+
+        public Sound(AudioSource source)
+        {
+            _source = source;
+        }
+
+        public void Play(bool loop = false) => _source.Play(loop);
+        public void Stop() => _source.Stop();
     }
 }

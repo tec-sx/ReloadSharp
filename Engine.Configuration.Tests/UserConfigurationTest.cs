@@ -2,10 +2,9 @@ using Xunit;
 using Engine.Configuration.Extensions;
 using Xunit.Extensions.Ordering;
 using System.IO;
-using System.Numerics;
+using System.Drawing;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
-
 namespace Engine.Configuration.Tests
 {
     public class UserConfigurationTest
@@ -32,7 +31,7 @@ namespace Engine.Configuration.Tests
             #endregion
 
             #region Act
-            userConfiguration.DisplayResolution = new Vector2(640, 480);
+            userConfiguration.DisplayResolution = new Point(640, 480);
             userConfiguration.Save();
             #endregion
 

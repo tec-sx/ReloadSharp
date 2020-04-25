@@ -1,11 +1,9 @@
 using Silk.NET.OpenGL;
 
-namespace Core.ResourcesPipeline.Shaders.Models
+namespace Engine.ResourcesPipeline.Shaders.Models
 {
     public class VkShaderProgram : IShaderProgram
     {
-        private const string SHADER_EXT = "spv";
-
         public void Dispose()
         {
             throw new System.NotImplementedException();

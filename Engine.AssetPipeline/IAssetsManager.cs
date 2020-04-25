@@ -1,5 +1,5 @@
 
-namespace Core.AssetsPipeline
+namespace Engine.AssetPipeline
 {
     using System;
     using Textures.Models;
@@ -8,6 +8,7 @@ namespace Core.AssetsPipeline
 
     public interface IAssetsManager : IDisposable
     {
+        void Initialize(AssetsConfiguration assetsConfiguration);
         ITexture GetTexture(string file);
         IGameObject GetGameObject(string file);
         IMusic LoadMusic(string file);

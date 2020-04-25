@@ -1,5 +1,5 @@
 ﻿
-namespace Core.AssetsPipeline.Audio
+namespace Engine.AssetPipeline.Audio
 {
     using System;
     using Models;

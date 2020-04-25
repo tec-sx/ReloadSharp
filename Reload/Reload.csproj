@@ -18,6 +18,14 @@
       <PlatformTarget>x64</PlatformTarget>
     </PropertyGroup>
 
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+      <CodeAnalysisRuleSet />
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+      <CodeAnalysisRuleSet />
+    </PropertyGroup>
+
     <ItemGroup>
       <None Update="assets\settings\settingss.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -40,6 +48,11 @@
       <Folder Include="Assets\Scenes\Sandbox\Textures" />
       <Folder Include="Assets\Scenes\Test\Models" />
       <Folder Include="Assets\Sounds" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Engine.AssetPipeline\Engine.AssetPipeline.csproj" />
+      <ProjectReference Include="..\Engine.Core\Engine.Core.csproj" />
     </ItemGroup>
 
 </Project>

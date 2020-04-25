@@ -1,4 +1,4 @@
-namespace Core.AssetsPipeline.Textures.Models
+namespace Engine.AssetPipeline.Textures.Models
 {
     public class Texture : ITexture
     {

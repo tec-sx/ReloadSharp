@@ -6,7 +6,7 @@
 
     internal class Mp3Decoder : Decoder
     {
-        private MpegFile _mp3Stream;
+        private readonly MpegFile _mp3Stream;
 
         public override bool IsFinished => _mp3Stream.Position == _mp3Stream.Length;
         public override TimeSpan Duration => _mp3Stream.Duration;

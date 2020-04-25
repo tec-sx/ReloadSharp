@@ -1,9 +1,14 @@
-﻿namespace Core.AssetsPipeline.Audio.Models
+﻿namespace Engine.AssetPipeline.Audio.Models
 {
+    using System;
+
     public interface IMusic
     {
-        void Play(int numOfLoops = -1);
-        void Update();
+        public float Gain { get; set; }
+        public TimeSpan Duration { get; }
+        public TimeSpan Elapsed { get; }
+
+        void Play();
         void Pause();
         void Stop();
         void Resume();

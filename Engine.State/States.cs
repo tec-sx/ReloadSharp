@@ -1,7 +1,7 @@
-namespace Core.State
+namespace Engine.State
 {
     public enum PlayerState
     {
-        NONE
+        None
     }
 }

@@ -8,6 +8,7 @@ namespace Engine.Graphics.Tests
     public class GraphicsManager_Tests
     {
         private DisplayConfiguration _displayConfiguration;
+
         [SetUp]
         public void Setup()
         {
@@ -31,7 +32,9 @@ namespace Engine.Graphics.Tests
             #endregion
 
             #region Act
-            var graphicsManager = new GraphicsManager(_displayConfiguration);
+            var graphicsManager = new GraphicsManager();
+
+            graphicsManager.Initialize(_displayConfiguration);
             graphicsManager.CreateWindow();
             #endregion
 
@@ -49,7 +52,9 @@ namespace Engine.Graphics.Tests
             #endregion
 
             #region Act
-            var graphicsManager = new GraphicsManager(_displayConfiguration);
+            var graphicsManager = new GraphicsManager();
+
+            graphicsManager.Initialize(_displayConfiguration);
             graphicsManager.CreateWindow();
             #endregion
 

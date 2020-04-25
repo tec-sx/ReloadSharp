@@ -19,7 +19,7 @@
 
     internal static class StreamExtensions
     {
-        public static byte[] ReadFourCc(this Stream reader, bool bigEndian = false)
+        public static byte[] ReadFourCc(this Stream reader)
         {
             byte a = (byte)reader.ReadByte();
             byte b = (byte)reader.ReadByte();

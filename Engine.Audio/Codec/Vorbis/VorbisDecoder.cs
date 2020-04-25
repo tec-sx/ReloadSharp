@@ -6,7 +6,7 @@
 
     internal class VorbisDecoder : Decoder
     {
-        private VorbisReader _reader;
+        private readonly VorbisReader _reader;
 
         public override bool IsFinished =>  _reader.IsEndOfStream;
         public override TimeSpan Duration => _reader.TotalTime;

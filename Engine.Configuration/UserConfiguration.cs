@@ -1,6 +1,7 @@
 ﻿namespace Engine.Configuration
 {
     using System;
+    using System.Drawing;
     using System.Numerics;
     using Silk.NET.Input.Common;
 
@@ -8,7 +9,7 @@
     public class UserConfiguration
     {
         #region Display
-        public Vector2 DisplayResolution { get; set; } = new Vector2(1280, 720);
+        public Point DisplayResolution { get; set; } = new Point(1280, 720);
         public int DisplayRefreshRate { get; set; } = 60;
         public bool DisplayInFullScreen { get; set; } = false;
         public bool DisplayEnableVsync { get; set; } = false;

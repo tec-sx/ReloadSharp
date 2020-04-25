@@ -1,4 +1,4 @@
-﻿namespace Core.AssetsPipeline.GameObjects.Models
+﻿namespace Engine.AssetPipeline.GameObjects.Models
 {
     public interface IGameObject
     {

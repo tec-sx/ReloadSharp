@@ -16,7 +16,7 @@
         private readonly Decoder _decoder;
         private readonly BufferChain _bufferChain;
         private readonly Stopwatch _timer;
-        private byte[] _data;
+        public byte[] Data;
 
         public float Gain
         {
@@ -76,8 +76,8 @@
             _bufferChain = new BufferChain(_source);
             _decoder = DecoderFactory.CreateDecoder(stream);
 
-            _data = _decoder.ReadSamples(TimeSpan.FromSeconds(1));
-            _bufferChain.QueueData(_data, _decoder.Format);
+            Data = _decoder.ReadSamples(TimeSpan.FromSeconds(1));
+            _bufferChain.QueueData(Data, _decoder.Format);
 
             _timer = new Stopwatch();
         }
@@ -87,7 +87,7 @@
             ALNative.DeleteSource(_source);
         }
 
-        public void Play(bool loop = false)
+        public void Play(bool loop)
         {
             Looping = loop;
             ALNative.SourcePlay(_source);
@@ -99,8 +99,8 @@
                 {
                     if (_bufferChain.BuffersQueued < 3 && !_decoder.IsFinished)
                     {
-                        _data = _decoder.ReadSamples(TimeSpan.FromSeconds(1));
-                        _bufferChain.QueueData(_data, _decoder.Format);
+                        Data = _decoder.ReadSamples(TimeSpan.FromSeconds(1));
+                        _bufferChain.QueueData(Data, _decoder.Format);
                     }
 
                     Thread.Sleep(100);

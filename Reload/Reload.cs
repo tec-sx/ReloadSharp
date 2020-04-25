@@ -1,7 +1,8 @@
 namespace Reload
 {
-    using Core;
-    using Screens;
+    using Engine.Core;
+    using Engine.Scene;
+    using Scenes;
 
     public class Reload : GameBase
     {
@@ -9,10 +10,10 @@ namespace Reload
         {
         }
 
-        protected override void AddScreens()
+        protected override void AddScenes()
         {
-            var introScreen = screenManager.CreateScreen<IntroScreen>();
-            screenManager.ActiveScreen = introScreen;
+            var introScreen = sceneManager.CreateScene<IntroScene>();
+            sceneManager.ActiveScene = introScreen;
         }
 
         protected override void OnDispose()

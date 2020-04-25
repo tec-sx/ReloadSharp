@@ -2,7 +2,7 @@
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main()
         {
             var game = new Reload();
             game.Run();

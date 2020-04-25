@@ -1,32 +1,29 @@
-using Core.Screen.Layers;
-
-namespace Core.Screen
+namespace Engine.Scene
 {
+    using Engine.Scene.Layers;
     using System;
-    using CoreSystem;
 
-
-    public enum ScreenState
+    public enum SceneState
     {
-        NONE,
-        RUNNING,
-        PAUSED,
-        EXIT_APP,
-        CHANGE_NEXT,
-        CHANGE_PREV
+        None,
+        Running,
+        Paused,
+        ExitApp,
+        ChangeNext,
+        ChangePrev
     }
 
-    public abstract class ScreenBase : IDisposable
+    public abstract class Scene : IDisposable
     {
         protected LayerStack Layers { get; }
-        public ScreenState State { get; private set; }
-        public ScreenBase NextScreen { get; set; }
-        public ScreenBase PrevScreen { get; set; }
-        public ScreenManager Manager { get; set; }
+        public SceneState State { get; private set; }
+        public Scene NextScene { get; set; }
+        public Scene PrevScene { get; set; }
+        public SceneManager Manager { get; set; }
 
-        protected ScreenBase()
+        protected Scene()
         {
-            State = ScreenState.NONE;
+            State = SceneState.None;
             Layers = new LayerStack();
         }
 
@@ -42,27 +39,27 @@ namespace Core.Screen
 
         public void Run()
         {
-            State = ScreenState.RUNNING;
+            State = SceneState.Running;
         }
 
         public void Update(double deltaTime)
         {
-            if (State != ScreenState.RUNNING)
+            if (State != SceneState.Running)
             {
                 return;
             }
-            
+
             OnUpdate(deltaTime);
             Layers.Update();
         }
 
         public void Render(double deltaTime)
         {
-            if (State != ScreenState.RUNNING)
+            if (State != SceneState.Running)
             {
                 return;
             }
-            
+
             OnRender(deltaTime);
         }
     }

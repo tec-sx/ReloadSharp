@@ -32,7 +32,7 @@ namespace Engine.Libraries
 
             foreach (var library in libraries)
             {
-                NativeLibrary.Load(library);
+                //NativeLibrary.Load(library);
                 Console.WriteLine($"[LOADING LIB]::{library}::SUCCESS");
             }
         }

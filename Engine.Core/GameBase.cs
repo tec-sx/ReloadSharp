@@ -1,63 +1,67 @@
-using System.Runtime.CompilerServices;
-using Core.CoreSystem.Audio;
-using Core.CoreSystem.Audio.Device;
-using Core.CoreSystem.Input;
-
-[assembly:InternalsVisibleTo("Core.Tests")]
-
-namespace Core
+namespace Engine.Core
 {
     using System;
-    using CoreSystem.Graphics;
-    using Config;
-    using Screen;
+    using Engine.Graphics;
+    using Engine.Audio;
+    using Engine.Input;
+    using Engine.Configuration;
+    using Scene;
     using Utilities;
     using Silk.NET.Windowing.Common;
+    using Engine.Configuration.Extensions;
+    using Engine.AssetPipeline;
 
     public abstract class GameBase : IDisposable
     {
-        private readonly GraphicsManager _graphicsManager;
-        private readonly InputManager _inputManager;
-        private readonly AudioManager _audioManager;
-        
-        protected readonly ScreenManager screenManager;
+        private readonly ConfigurationManager configurationManager;
+        private readonly GraphicsManager graphicsManager;
+        private readonly InputManager inputManager;
+        private readonly AudioManager audioManager;
+
+        protected readonly SceneManager sceneManager;
+        protected readonly IAssetsManager assetsManager;
 
         internal static bool isRunning;
 
         protected GameBase()
         {
-            Configuration.LoadDefaultConfiguration();
-            LibraryLoader.LoadNativeLibraries();
             ServiceManager.RegisterServices();
 
-            _graphicsManager = ServiceManager.GetService<GraphicsManager>();
-            _inputManager = ServiceManager.GetService<InputManager>();
-            _audioManager    = ServiceManager.GetService<AudioManager>();
-            screenManager   = ServiceManager.GetService<ScreenManager>();
+            configurationManager = ServiceManager.GetService<ConfigurationManager>();
+            graphicsManager = ServiceManager.GetService<GraphicsManager>();
+            inputManager = ServiceManager.GetService<InputManager>();
+            audioManager    = ServiceManager.GetService<AudioManager>();
+
+            assetsManager = ServiceManager.GetService<IAssetsManager>();
+            sceneManager   = ServiceManager.GetService<SceneManager>();
         }
 
         protected abstract void OnInitialize();
-        protected abstract void AddScreens();
+        protected abstract void AddScenes();
         protected abstract void OnDispose();
 
         private void Initialize()
         {
+            graphicsManager.Initialize(configurationManager.CreateDisplayConfiguration());
+            assetsManager.Initialize(configurationManager.CreateAssetsConfiguration());
 
-            _graphicsManager.CreateWindow();
-            _graphicsManager.CreateDevice();
-            _inputManager.Initialize(_graphicsManager.Window);
-            _audioManager.CreateDevice();
+            graphicsManager.CreateWindow();
+            graphicsManager.CreateDevice();
+            inputManager.Initialize(graphicsManager.Window);
+            audioManager.CreateContext();
 
-            AddScreens();
+            AddScenes();
+            sceneManager.ActiveScene.OnEnter();
+            sceneManager.ActiveScene.Run();
         }
 
         public void Dispose()
         {
             OnDispose();
-            
-            _graphicsManager.DisposeResources();
-            _audioManager.DisposeResources();
-            
+
+            graphicsManager.DisposeResources();
+            audioManager.DisposeResources();
+
             ServiceManager.DisposeServices();
         }
 
@@ -68,25 +72,27 @@ namespace Core
 
         private void Update(double deltaTime)
         {
-            screenManager.Update(deltaTime);
+            sceneManager.Update(deltaTime);
         }
 
         private void Render(double deltaTime)
         {
-            screenManager.Render(deltaTime);
+            sceneManager.Render(deltaTime);
         }
 
         public void Run()
         {
             Initialize();
 
-            _graphicsManager.Window.Load += LoadContent;
-            _graphicsManager.Window.Update += Update;
-            _graphicsManager.Window.Render += Render;
-            _graphicsManager.Window.Closing += Dispose;
+            graphicsManager.Window.Load += LoadContent;
+            graphicsManager.Window.Update += Update;
+            graphicsManager.Window.Render += Render;
+            graphicsManager.Window.Closing += Dispose;
 
-            _graphicsManager.Window.Run();
-            _graphicsManager.Device.WaitForIdle();
+            sceneManager.ExitGame += () => isRunning = false;
+
+            graphicsManager.Window.Run();
+            graphicsManager.Device.WaitForIdle();
 
         }
     }

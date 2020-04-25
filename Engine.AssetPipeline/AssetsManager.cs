@@ -1,19 +1,16 @@
-namespace Core.AssetsPipeline
+namespace Engine.AssetPipeline
 {
     using System.IO;
-    using Audio;
-    using Audio.Models;
-    using GameObjects;
-    using GameObjects.Models;
-    using Textures;
-    using Textures.Models;
-    using Config;
+    using Engine.AssetPipeline.Audio;
+    using Engine.AssetPipeline.Audio.Models;
+    using Engine.AssetPipeline.GameObjects;
+    using Engine.AssetPipeline.GameObjects.Models;
+    using Engine.AssetPipeline.Textures;
+    using Engine.AssetPipeline.Textures.Models;
 
     public class AssetsManager : IAssetsManager
     {
-        private readonly ApplicationSettings _settings;
-        private readonly ContentPath _contentPath;
-
+        private AssetsConfiguration _assetsConfiguration;
         private readonly ITextureCache _textureCache;
         private readonly IGameObjectCache _gameObjectCache;
         private readonly IAudioCache _audioCache;
@@ -23,13 +20,15 @@ namespace Core.AssetsPipeline
             IGameObjectCache gameObjectCache,
             IAudioCache audioCache)
         {
-            _settings = Configuration.Settings;
-            _contentPath = Configuration.ContentPath;
-
             _textureCache = textureCache;
             _gameObjectCache = gameObjectCache;
             _audioCache = audioCache;
 
+        }
+
+        public void Initialize(AssetsConfiguration assetsConfiguration)
+        {
+            _assetsConfiguration = assetsConfiguration;
         }
 
         public void Dispose()
@@ -40,25 +39,25 @@ namespace Core.AssetsPipeline
 
         public ITexture GetTexture(string file)
         {
-            var fullPath = Path.Combine(_contentPath.Textures, $"{file}.{_settings.Image.Format}");
+            var fullPath = Path.Combine(_assetsConfiguration.TexturesPath, $"{file}.{_assetsConfiguration.TextureFormat}");
             return _textureCache.GetTexture(fullPath);
         }
 
         public IGameObject GetGameObject(string file)
         {
-            var fullPath = Path.Combine(_contentPath.Models, $"{file}.{_settings.Model.Format}");
+            var fullPath = Path.Combine(_assetsConfiguration.ModelsPath, $"{file}.{_assetsConfiguration.ModelFormat}");
             return _gameObjectCache.GetGameObject(fullPath);
         }
 
         public IMusic LoadMusic(string file)
         {
-            string fullPath = Path.Combine(_contentPath.Music, $"{file}.{_settings.Audio.Format}");
+            string fullPath = Path.Combine(_assetsConfiguration.MusicPath, $"{file}.{_assetsConfiguration.SoundFormat}");
             return _audioCache.LoadMusic(fullPath);
         }
 
         public ISound LoadSound(string file)
         {
-            var fullPath = Path.Combine(_contentPath.Sounds, $"{file}.{_settings.Audio.Format}");
+            var fullPath = Path.Combine(_assetsConfiguration.SoundsPath, $"{file}.{_assetsConfiguration.SoundFormat}");
             return _audioCache.LoadSound(fullPath);
         }
     }

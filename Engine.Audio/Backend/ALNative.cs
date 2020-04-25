@@ -6,7 +6,7 @@
 
     internal static class ALNative
     {
-        private static AL _api = AL.GetApi();
+        private static readonly AL _api = AL.GetApi();
 
         private static void CheckForErrors()
         {

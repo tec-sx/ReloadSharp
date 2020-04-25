@@ -12,18 +12,19 @@ namespace Engine.Graphics
     public sealed class GraphicsManager
     {
         private DisplayConfiguration _displayConfiguration;
+
         public IWindow Window { get; private set; }
         public IGraphicsDevice Device { get; private set; }
-
-        public GraphicsManager(DisplayConfiguration displayConfiguration)
-        {
-            _displayConfiguration = displayConfiguration;
-        }
 
         public void DisposeResources()
         {
             Window.Dispose();
             Device.Dispose();
+        }
+
+        public void Initialize(DisplayConfiguration displayConfiguration)
+        {
+            _displayConfiguration = displayConfiguration;
         }
 
         public void CreateWindow()

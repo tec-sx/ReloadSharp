@@ -1,35 +1,44 @@
-namespace Core.AssetsPipeline.Audio.Models
+namespace Engine.AssetPipeline.Audio.Models
 {
+    using Engine.Audio;
     using System;
-    using CoreSystem.ErrorHandling.Exceptions;
-    using static SDL2.SDL_mixer;
 
-    public class MusicSdl: IMusic
+    public class Music: IMusic
     {
-        public IntPtr Stream { get; set; }
+        private readonly AudioSource _source;
 
-        public void Play(int numOfLoops = -1)
+        public float Gain
         {
-            if (Mix_PlayMusic(Stream, numOfLoops) == -1)
-            {
-                throw new MusicException("Can't play music file.");
-            }
+            get => _source.Gain;
+            set => _source.Gain = value;
         }
 
-        public void Update()
+        public TimeSpan Duration => _source.Duration;
+        public TimeSpan Elapsed => _source.Elapsed;
+
+        public Music(AudioSource source)
         {
+            _source = source;
+        }
+
+        public void Play()
+        {
+            _source.Play(loop: false);
         }
 
         public void Pause()
         {
+            throw new NotImplementedException();
         }
 
         public void Stop()
         {
+            _source.Stop();
         }
 
         public void Resume()
         {
+            throw new NotImplementedException();
         }
     }
 }

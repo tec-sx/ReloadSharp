@@ -6,18 +6,28 @@
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Text;
 
-    public static class UserConfiguration_Extension
+    public static class UserConfigurationExtension
     {
-        private static readonly string ConfigurationFilePath = Path.Combine(ContentPaths.Configuration, "settings.recfg");
+        private static readonly string ConfigurationFilePath = Path.Combine(new ContentPaths().Configuration, "settings.recfg");
         private static readonly byte[] Header = Encoding.UTF8.GetBytes("YOUDIDNTSAYTHEMAGICWORD");
 
         public static string GetConfigurationFilePath(this UserConfiguration configuration)
         {
+            if (configuration is null)
+            {
+                throw new ArgumentNullException(nameof(configuration));
+            }
+
             return ConfigurationFilePath;
         }
 
         public static void Load(this UserConfiguration destination)
         {
+            if (destination is null)
+            {
+                throw new ArgumentNullException(nameof(destination));
+            }
+
             if (!File.Exists(ConfigurationFilePath))
             {
                 destination.Save();

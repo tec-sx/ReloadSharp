@@ -1,10 +1,10 @@
-﻿namespace Core.AssetsPipeline.GameObjects.Models
+﻿namespace Engine.AssetPipeline.GameObjects.Models
 {
     using SharpGLTF.Schema2;
 
     public class GameObjectGltf : IGameObject
     {
-        private ModelRoot _model;
+        private readonly ModelRoot _model;
 
         public GameObjectGltf(ModelRoot model)
         {
