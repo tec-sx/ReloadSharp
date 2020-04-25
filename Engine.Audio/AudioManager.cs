@@ -3,7 +3,7 @@
     using Engine.Audio.Backend;
     using Silk.NET.OpenAL;
 
-    public sealed class AudioManager
+    public sealed class AudioManager : IAudioManager
     {
         public AudioContext Context { get; private set; }
 
@@ -14,7 +14,7 @@
             ALNative.SetDistanceModel(DistanceModel.InverseDistanceClamped);
         }
 
-        public void DisposeResources()
+        public void Dispose()
         {
             Context?.Dispose();
         }

@@ -4,7 +4,7 @@
     using Engine.Configuration.Extensions;
     using Engine.Graphics;
 
-    public class ConfigurationManager
+    public class ConfigurationManager : IConfigurationManager
     {
         private readonly ContentPaths contentPaths;
         private readonly SystemConfiguration systemConfiguration;

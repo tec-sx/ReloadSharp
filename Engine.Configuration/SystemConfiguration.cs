@@ -18,7 +18,7 @@ namespace Engine.Configuration
         #endregion
 
         #region Formats
-        public readonly string AudioExtension = "mp3";
+        public readonly string AudioExtension = "ogg";
         public readonly string ImageExtension = "jpg";
         public readonly string TextureExtension = "png";
         public readonly string ModelExtension = "gltf";

@@ -4,7 +4,7 @@ namespace Engine.Input
     using Silk.NET.Windowing.Common;
     using Silk.NET.Input.Common;
 
-    public class InputManager
+    public class InputManager : IInputManager
     {
         public IMouse Mouse { get; private set; }
         public IKeyboard Keyboard { get; private set; }

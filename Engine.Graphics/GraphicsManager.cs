@@ -9,22 +9,22 @@ namespace Engine.Graphics
     using SilkWindow = Silk.NET.Windowing.Window;
     using System;
 
-    public sealed class GraphicsManager
+    public sealed class GraphicsManager : IGraphicsManager
     {
         private DisplayConfiguration _displayConfiguration;
 
         public IWindow Window { get; private set; }
         public IGraphicsDevice Device { get; private set; }
 
-        public void DisposeResources()
-        {
-            Window.Dispose();
-            Device.Dispose();
-        }
-
         public void Initialize(DisplayConfiguration displayConfiguration)
         {
             _displayConfiguration = displayConfiguration;
+        }
+
+        public void Dispose()
+        {
+            Window.Dispose();
+            Device.Dispose();
         }
 
         public void CreateWindow()

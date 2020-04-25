@@ -2,26 +2,28 @@ namespace Engine.Scene
 {
     using System;
     using Engine.AssetPipeline;
+    using Engine.Scene.Enumerations;
 
-    public class SceneManager
+    public class SceneManager : ISceneManager
     {
         public event Action ExitGame;
+
         public IAssetsManager Assets { get; }
 
-        public Scene ActiveScene { get; set; }
+        public IScene ActiveScene { get; set; }
 
         public SceneManager(IAssetsManager assets)
         {
             Assets = assets;
         }
 
-        public Scene MoveToNextScreen()
+        public IScene MoveToNextScreen()
         {
             ActiveScene = ActiveScene.NextScene;
             return ActiveScene;
         }
 
-        public Scene MoveToPrevScreen()
+        public IScene MoveToPrevScreen()
         {
             ActiveScene = ActiveScene.PrevScene;
             return ActiveScene;
@@ -78,11 +80,11 @@ namespace Engine.Scene
             ActiveScene.Render(deltaTime);
         }
 
-        public Scene CreateScene<T>() where T : Scene, new()
+        public IScene CreateScene<T>() where T : IScene, new()
         {
             var newScene = new T
             {
-                Manager = this
+                Manager = this as ISceneManager
             };
 
             if (ActiveScene == null)

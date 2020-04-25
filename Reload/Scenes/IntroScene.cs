@@ -6,7 +6,7 @@ namespace Reload.Scenes
     using Engine.AssetPipeline.Textures;
     using Engine.Scene;
 
-    public class IntroScene : Scene
+    public class IntroScene : SceneBase
     {
         private IMusic _bgMusicStream;
 

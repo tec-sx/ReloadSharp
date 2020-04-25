@@ -22,12 +22,12 @@ namespace Engine.Core
             var collection = new ServiceCollection();
 
             #region Core System
-            collection.AddSingleton<ConfigurationManager>();
-            collection.AddSingleton<GraphicsManager>();
-            collection.AddSingleton<AudioManager>();
-            collection.AddSingleton<InputManager>();
+            collection.AddSingleton<IConfigurationManager, ConfigurationManager>();
+            collection.AddSingleton<IGraphicsManager, GraphicsManager>();
+            collection.AddSingleton<IAudioManager, AudioManager>();
+            collection.AddSingleton<IInputManager, InputManager>();
             collection.AddSingleton<IAssetsManager, AssetsManager>();
-            collection.AddSingleton<SceneManager>();
+            collection.AddSingleton<ISceneManager, SceneManager>();
             #endregion
 
             #region Assets Pipeline

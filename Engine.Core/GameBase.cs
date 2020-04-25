@@ -13,12 +13,12 @@ namespace Engine.Core
 
     public abstract class GameBase : IDisposable
     {
-        private readonly ConfigurationManager configurationManager;
-        private readonly GraphicsManager graphicsManager;
-        private readonly InputManager inputManager;
-        private readonly AudioManager audioManager;
+        private readonly IConfigurationManager configurationManager;
+        private readonly IGraphicsManager graphicsManager;
+        private readonly IInputManager inputManager;
+        private readonly IAudioManager audioManager;
 
-        protected readonly SceneManager sceneManager;
+        protected readonly ISceneManager sceneManager;
         protected readonly IAssetsManager assetsManager;
 
         internal static bool isRunning;
@@ -27,13 +27,13 @@ namespace Engine.Core
         {
             ServiceManager.RegisterServices();
 
-            configurationManager = ServiceManager.GetService<ConfigurationManager>();
-            graphicsManager = ServiceManager.GetService<GraphicsManager>();
-            inputManager = ServiceManager.GetService<InputManager>();
-            audioManager    = ServiceManager.GetService<AudioManager>();
+            configurationManager = ServiceManager.GetService<IConfigurationManager>();
+            graphicsManager = ServiceManager.GetService<IGraphicsManager>();
+            inputManager = ServiceManager.GetService<IInputManager>();
+            audioManager    = ServiceManager.GetService<IAudioManager>();
 
             assetsManager = ServiceManager.GetService<IAssetsManager>();
-            sceneManager   = ServiceManager.GetService<SceneManager>();
+            sceneManager   = ServiceManager.GetService<ISceneManager>();
         }
 
         protected abstract void OnInitialize();
@@ -59,8 +59,8 @@ namespace Engine.Core
         {
             OnDispose();
 
-            graphicsManager.DisposeResources();
-            audioManager.DisposeResources();
+            graphicsManager.Dispose();
+            audioManager.Dispose();
 
             ServiceManager.DisposeServices();
         }
