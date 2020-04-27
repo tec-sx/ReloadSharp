@@ -1,23 +1,21 @@
 namespace Engine.Core
 {
-    using System;
     using Engine.Graphics;
     using Engine.Audio;
     using Engine.Input;
     using Engine.Configuration;
     using Scene;
-    using Utilities;
-    using Silk.NET.Windowing.Common;
-    using Engine.Configuration.Extensions;
     using Engine.AssetPipeline;
+    using Silk.NET.Windowing.Common;
 
-    public abstract class GameBase : IDisposable
+    public abstract class GameBase
     {
         private readonly IConfigurationManager configurationManager;
         private readonly IGraphicsManager graphicsManager;
         private readonly IInputManager inputManager;
         private readonly IAudioManager audioManager;
 
+        protected readonly IWindow window;
         protected readonly ISceneManager sceneManager;
         protected readonly IAssetsManager assetsManager;
 
@@ -38,7 +36,7 @@ namespace Engine.Core
 
         protected abstract void OnInitialize();
         protected abstract void AddScenes();
-        protected abstract void OnDispose();
+        protected abstract void OnCleanUp();
 
         private void Initialize()
         {
@@ -55,13 +53,12 @@ namespace Engine.Core
             sceneManager.ActiveScene.Run();
         }
 
-        public void Dispose()
+        private void CleanUp()
         {
-            OnDispose();
+            OnCleanUp();
 
             graphicsManager.Dispose();
             audioManager.Dispose();
-
             ServiceManager.DisposeServices();
         }
 
@@ -84,16 +81,15 @@ namespace Engine.Core
         {
             Initialize();
 
-            graphicsManager.Window.Load += LoadContent;
-            graphicsManager.Window.Update += Update;
-            graphicsManager.Window.Render += Render;
-            graphicsManager.Window.Closing += Dispose;
-
-            sceneManager.ExitGame += () => isRunning = false;
-
             graphicsManager.Window.Run();
             graphicsManager.Device.WaitForIdle();
 
+            graphicsManager.Window.Load += LoadContent;
+            graphicsManager.Window.Update += Update;
+            graphicsManager.Window.Render += Render;
+            graphicsManager.Window.Closing += CleanUp;
+
+            sceneManager.ExitProgram += graphicsManager.Window.Close;
         }
     }
 }

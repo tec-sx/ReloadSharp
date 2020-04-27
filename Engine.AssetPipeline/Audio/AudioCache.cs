@@ -14,7 +14,7 @@ namespace Engine.AssetPipeline.Audio
             _soundCache = new Dictionary<string, byte[]>();
         }
 
-        public void Dispose()
+        public void CleanUp()
         {
             foreach (var sound in _soundCache)
             {

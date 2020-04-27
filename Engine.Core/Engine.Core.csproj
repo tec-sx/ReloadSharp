@@ -24,4 +24,8 @@
     <ProjectReference Include="..\Engine.Utilities\Engine.Utilities.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Characters\" />
+  </ItemGroup>
+
 </Project>

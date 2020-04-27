@@ -1,9 +1,8 @@
 ﻿namespace Engine.Scene
 {
     using Engine.Scene.Enumerations;
-    using System;
 
-    public interface IScene : IDisposable
+    public interface IScene
     {
         SceneState State { get; }
         IScene NextScene { get; set; }
@@ -18,5 +17,6 @@
         void Run();
         void Update(double deltaTime);
         void Render(double deltaTime);
+        void CleanResources();
     }
 }

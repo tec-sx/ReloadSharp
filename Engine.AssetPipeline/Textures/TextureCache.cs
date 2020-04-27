@@ -4,14 +4,12 @@ namespace Engine.AssetPipeline.Textures
 
     public class TextureCache : ITextureCache
     {
-        public void Dispose()
-        {
-            throw new System.NotImplementedException();
-        }
-
         public ITexture GetTexture(string fullPath)
         {
             throw new System.NotImplementedException();
         }
+
+        public void CleanUp()
+        { }
     }
 }

@@ -3,49 +3,70 @@ using System.Collections.Generic;
 
 namespace Engine.Scene.Layers
 {
+    /// <summary>
+    /// The scene's layer stack.
+    /// </summary>
     public class LayerStack
     {
-        private int _layerInsertIndex;
-        private readonly List<LayerBase> _layers;
+        private int layerInsertIndex;
+        private readonly List<LayerBase> layers;
 
+        /// <summary>
+        /// Constructor.
+        /// </summary>
         public LayerStack()
         {
-            _layers = new List<LayerBase>();
-            _layerInsertIndex = 0;
+            layers = new List<LayerBase>();
+            layerInsertIndex = 0;
         }
 
         /// <summary>
         /// Push new layer to the first half of the layers list;
         /// </summary>
-        /// <param name="layerBase"></param>
-        public void PushLayer(LayerBase layerBase) => _layers.Insert(_layerInsertIndex++, layerBase);
+        /// <param name="layer"></param>
+        public void PushLayer(LayerBase layer)
+        {
+            if (layer == null)
+            {
+                throw new NullReferenceException(
+                    Properties.Resources.LayerNullParameterExceptionMessage);
+            }
+
+            layers.Insert(layerInsertIndex++, layer);
+        }
 
         /// <summary>
         /// Push overlay to the second half of the stack
         /// </summary>
         /// <param name="overlay"></param>
-        public void PushOverlay(LayerBase overlay) => _layers.Add(overlay);
+        public void PushOverlay(LayerBase overlay)
+        {
+            if (overlay == null)
+            {
+                throw new NullReferenceException(
+                    Properties.Resources.OverlayNullParameterExceptionMessage);
+            }
+
+            layers.Add(overlay);
+        }
 
         /// <summary>
         /// Pop layer and shift layer insert index
         /// </summary>
-        /// <param name="layerBase"></param>
-        public void PopLayer(LayerBase layerBase)
+        /// <param name="layer"></param>
+        public void PopLayer(LayerBase layer)
         {
-            layerBase.OnDetach();
-            _layers.Remove(layerBase);
-            _layerInsertIndex--;
+            if (layer == null)
+            {
+                throw new NullReferenceException(
+                    Properties.Resources.LayerNullParameterExceptionMessage);
+            }
+
+            layer.OnDetach();
+
+            layers.Remove(layer);
+            layerInsertIndex--;
         }
-
-        /// <summary>
-        /// Update all layers
-        /// </summary>
-        public void Update() => _layers.ForEach(layer => layer.OnUpdate());
-
-        /// <summary>
-        /// Handle events for all layers
-        /// </summary>
-        public void HandleEvent() => _layers.ForEach(layer => layer.OnEvent());
 
         /// <summary>
         /// Pop overlay
@@ -53,14 +74,33 @@ namespace Engine.Scene.Layers
         /// <param name="overlay"></param>
         public void PopOverlay(LayerBase overlay)
         {
+            if (overlay == null)
+            {
+                throw new NullReferenceException(
+                    Properties.Resources.OverlayNullParameterExceptionMessage);
+            }
+
             overlay.OnDetach();
-            _layers.Remove(overlay);
+            layers.Remove(overlay);
         }
 
-        public void DisposeStack()
+        /// <summary>
+        /// Update all layers
+        /// </summary>
+        public void Update() => layers.ForEach(layer => layer.OnUpdate());
+
+        /// <summary>
+        /// Handle events for all layers
+        /// </summary>
+        public void HandleEvent() => layers.ForEach(layer => layer.OnEvent());
+
+        /// <summary>
+        /// Detach all layers and clears layer stack.
+        /// </summary>
+        public void ClearStack()
         {
-            _layers.ForEach(layer => layer.OnDetach());
-            _layers.Clear();
+            layers.ForEach(layer => layer.OnDetach());
+            layers.Clear();
         }
     }
 }

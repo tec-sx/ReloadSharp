@@ -13,7 +13,7 @@
             _modelsDictionary = new Dictionary<string, ModelRoot>();
         }
 
-        public void Dispose()
+        public void CleanUp()
         {
             foreach ((string key, ModelRoot _) in _modelsDictionary)
             {

@@ -23,11 +23,11 @@ namespace Engine.Graphics
 
         public void Dispose()
         {
-            Window.Dispose();
-            Device.Dispose();
+            Window?.Dispose();
+            Device?.Dispose();
         }
 
-        public void CreateWindow()
+        public IWindow CreateWindow()
         {
             var windowOptions = CreateWindowOptionsFromSettings();
 
@@ -36,7 +36,7 @@ namespace Engine.Graphics
                 if (TryCreateVulkanWindow(windowOptions, out var vulkanWindow))
                 {
                     Window = vulkanWindow;
-                    return;
+                    return ;
                 }
 
                 throw new NotSupportedException("Vulkan is not supported.");

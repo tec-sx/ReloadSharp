@@ -31,10 +31,10 @@ namespace Engine.AssetPipeline
             _assetsConfiguration = assetsConfiguration;
         }
 
-        public void Dispose()
+        public void CleanUp()
         {
-            _textureCache.Dispose();
-            _gameObjectCache.Dispose();
+            _textureCache.CleanUp();
+            _gameObjectCache.CleanUp();
         }
 
         public ITexture GetTexture(string file)

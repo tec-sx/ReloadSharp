@@ -3,8 +3,9 @@
     using System;
     using Models;
 
-    public interface IGameObjectCache : IDisposable
+    public interface IGameObjectCache
     {
         IGameObject GetGameObject(string fullPath);
+        void CleanUp();
     }
 }

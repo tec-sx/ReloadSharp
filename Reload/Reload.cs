@@ -1,7 +1,6 @@
 namespace Reload
 {
     using Engine.Core;
-    using Engine.Scene;
     using Scenes;
 
     public class Reload : GameBase
@@ -12,12 +11,13 @@ namespace Reload
 
         protected override void AddScenes()
         {
-            var introScreen = sceneManager.CreateScene<IntroScene>();
+            var introScreen = sceneManager.AddScene<IntroScene>();
             sceneManager.ActiveScene = introScreen;
         }
 
-        protected override void OnDispose()
+        protected override void OnCleanUp()
         {
+
         }
     }
 }

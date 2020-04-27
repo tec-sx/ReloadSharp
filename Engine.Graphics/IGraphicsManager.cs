@@ -10,7 +10,7 @@
         public IGraphicsDevice Device { get; }
 
         void Initialize(DisplayConfiguration displayConfiguration);
-        void CreateWindow();
-        void CreateDevice();
+        IWindow CreateWindow();
+        IGraphicsDevice CreateDevice();
     }
 }

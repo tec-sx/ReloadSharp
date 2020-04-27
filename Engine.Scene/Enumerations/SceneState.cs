@@ -5,7 +5,7 @@
         None,
         Running,
         Paused,
-        ExitApp,
+        ExitProgram,
         ChangeNext,
         ChangePrev
     }

@@ -3,8 +3,9 @@
     using System;
     using Models;
 
-    public interface ITextureCache : IDisposable
+    public interface ITextureCache
     {
         ITexture GetTexture(string fullPath);
+        void CleanUp();
     }
 }
