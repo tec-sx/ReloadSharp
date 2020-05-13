@@ -1,9 +1,20 @@
 namespace Reload.Game
 {
     using Silk.NET.Windowing.Common;
+    using System;
 
     public abstract class GameBase : IGame
     {
+        /// <summary>
+        /// Occurs when [activated].
+        /// </summary>
+        public event EventHandler<EventArgs> Activated;
+
+        /// <summary>
+        /// Occurs when [deactivated].
+        /// </summary>
+        public event EventHandler<EventArgs> Deactivated;
+
         /// <inheritdoc />
         public IWindow Window { get; set; }
 

@@ -21,9 +21,8 @@
         public event EventHandler<DeviceChangedEventArgs> DeviceAdded;
 
         //private IInputSource source;
-        private IGame game;
+        private IInputContext inputContext;
 
-        private readonly List<IInputDevice> devices;
         private readonly List<InputEvent> events;
 
         private readonly Dictionary<Type, IInputEventRouter> eventRouters;
@@ -47,8 +46,6 @@
 
         public InputManager(IGame game) : base(game)
         {
-            this.game = game;
-            devices = new List<IInputDevice>();
             events = new List<InputEvent>();
 
             eventRouters = new Dictionary<Type, IInputEventRouter>();
@@ -61,9 +58,12 @@
             KeyboardConfiguration keyboardConfiguration,
             MouseConfiguration mouseConfiguration)
         {
-            game.Window.Load += () =>
+            Game.Activated += OnApplicationResumed;
+            Game.Deactivated += OnApplicationPaused;
+
+            Game.Window.Load += () =>
             {
-                IInputContext inputContext = game.Window.CreateInput();
+                inputContext = Game.Window.CreateInput();
 
                 Keyboard = new Keyboard(inputContext.Keyboards[0]);
                 Mouse = new Mouse(inputContext.Mice[0], game);
@@ -170,6 +170,24 @@
                 }
 
                 router.RouteEvent(evt);
+            }
+        }
+
+        private void OnApplicationPaused(object sender, EventArgs e)
+        {
+            // Pause sources
+            foreach (var source in Sources)
+            {
+                source.Pause();
+            }
+        }
+
+        private void OnApplicationResumed(object sender, EventArgs e)
+        {
+            // Resume sources
+            foreach (var source in Sources)
+            {
+                source.Resume();
             }
         }
 
