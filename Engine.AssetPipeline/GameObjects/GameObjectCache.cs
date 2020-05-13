@@ -1,8 +1,8 @@
 ﻿namespace Engine.AssetPipeline.GameObjects
 {
-    using System.Collections.Generic;
     using Models;
     using SharpGLTF.Schema2;
+    using System.Collections.Generic;
 
     public class GameObjectCache : IGameObjectCache
     {

@@ -1,24 +1,24 @@
 namespace Engine.AssetPipeline.Audio
 {
-    using System.Collections.Generic;
-    using System.IO;
     using Engine.AssetPipeline.Audio.Models;
     using Engine.Audio;
+    using System.Collections.Generic;
+    using System.IO;
 
     public class AudioCache : IAudioCache
     {
-        private readonly Dictionary<string, byte[]> _soundCache;
+        private readonly Dictionary<string, byte[]> soundCache;
 
         public AudioCache()
         {
-            _soundCache = new Dictionary<string, byte[]>();
+            soundCache = new Dictionary<string, byte[]>();
         }
 
         public void CleanUp()
         {
-            foreach (var sound in _soundCache)
+            foreach (var sound in soundCache)
             {
-                _soundCache.Remove(sound.Key);
+                soundCache.Remove(sound.Key);
             }
         }
 
@@ -33,7 +33,7 @@ namespace Engine.AssetPipeline.Audio
         {
             AudioSource audioSource;
 
-            if (_soundCache.TryGetValue(fullPath, out var data))
+            if (soundCache.TryGetValue(fullPath, out var data))
             {
                 audioSource = new AudioSource(new MemoryStream(data));
             }
@@ -42,7 +42,7 @@ namespace Engine.AssetPipeline.Audio
                 data = File.ReadAllBytes(fullPath);
                 audioSource = new AudioSource(new MemoryStream(data));
 
-                _soundCache.Add(fullPath, data);
+                soundCache.Add(fullPath, data);
             }
 
             return new Sound(audioSource);

@@ -11,14 +11,15 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Silk.NET.Input.Common" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.Input.Common" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Engine.AssetPipeline\Engine.AssetPipeline.csproj" />
     <ProjectReference Include="..\Engine.Audio\Engine.Audio.csproj" />
+    <ProjectReference Include="..\Engine.Events\Engine.Events.csproj" />
     <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
-    <ProjectReference Include="..\Engine.Input\Engine.Input.csproj" />
+    <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
   </ItemGroup>
 
 </Project>

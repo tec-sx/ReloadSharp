@@ -7,12 +7,12 @@ namespace Engine.Graphics.Tests
 {
     public class GraphicsManager_Tests
     {
-        private DisplayConfiguration _displayConfiguration;
+        private DisplayConfiguration displayConfiguration;
 
         [SetUp]
         public void Setup()
         {
-            _displayConfiguration = new DisplayConfiguration
+            displayConfiguration = new DisplayConfiguration
             {
                 Resolution = new Point(1280, 760),
                 RefreshRate = 60,
@@ -25,43 +25,24 @@ namespace Engine.Graphics.Tests
         }
 
         [Test]
-        public void Create_Vulkan_Window_Success()
+        public void Create_OpenGl_Window_Success()
         {
-            #region Arrange
-            _displayConfiguration.EnableVulkan = true;
-            #endregion
+            // Arrange
+            displayConfiguration.EnableVulkan = false;
 
-            #region Act
+            // Act
             var graphicsManager = new GraphicsManager();
+            graphicsManager.CreateWindow(displayConfiguration);
 
-            graphicsManager.Initialize(_displayConfiguration);
-            graphicsManager.CreateWindow();
-            #endregion
-
-            #region Assert
-            graphicsManager.Window.API.API.Should().Be(ContextAPI.Vulkan);
-            #endregion
+            // Assert
+            graphicsManager.Window.API.API
+                .Should().Match<ContextAPI>(api => api == ContextAPI.OpenGL || api == ContextAPI.OpenGLES);
 
         }
 
         [Test]
-        public void Create_OpenGl_Window_Success()
+        public void Compile_Shader_Program_Success()
         {
-            #region Arrange
-            _displayConfiguration.EnableVulkan = false;
-            #endregion
-
-            #region Act
-            var graphicsManager = new GraphicsManager();
-
-            graphicsManager.Initialize(_displayConfiguration);
-            graphicsManager.CreateWindow();
-            #endregion
-
-            #region Assert
-            graphicsManager.Window.API.API
-                .Should().Match<ContextAPI>(api => api == ContextAPI.OpenGL || api == ContextAPI.OpenGLES);
-            #endregion
 
         }
     }

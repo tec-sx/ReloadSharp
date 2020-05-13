@@ -7,14 +7,13 @@
     {
         public AudioContext Context { get; private set; }
 
-        public void CreateContext()
+        public void Initialize()
         {
             Context = new AudioContext();
-
             ALNative.SetDistanceModel(DistanceModel.InverseDistanceClamped);
         }
 
-        public void Dispose()
+        public void ShutDown()
         {
             Context?.Dispose();
         }

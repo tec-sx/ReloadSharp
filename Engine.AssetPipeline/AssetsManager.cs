@@ -1,16 +1,17 @@
 namespace Engine.AssetPipeline
 {
-    using System.IO;
     using Engine.AssetPipeline.Audio;
     using Engine.AssetPipeline.Audio.Models;
     using Engine.AssetPipeline.GameObjects;
     using Engine.AssetPipeline.GameObjects.Models;
     using Engine.AssetPipeline.Textures;
     using Engine.AssetPipeline.Textures.Models;
+    using System.IO;
 
     public class AssetsManager : IAssetsManager
     {
         private AssetsConfiguration _assetsConfiguration;
+
         private readonly ITextureCache _textureCache;
         private readonly IGameObjectCache _gameObjectCache;
         private readonly IAudioCache _audioCache;
@@ -18,12 +19,12 @@ namespace Engine.AssetPipeline
         public AssetsManager(
             ITextureCache textureCache,
             IGameObjectCache gameObjectCache,
-            IAudioCache audioCache)
+            IAudioCache audioCache
+            )
         {
             _textureCache = textureCache;
             _gameObjectCache = gameObjectCache;
             _audioCache = audioCache;
-
         }
 
         public void Initialize(AssetsConfiguration assetsConfiguration)
@@ -31,7 +32,7 @@ namespace Engine.AssetPipeline
             _assetsConfiguration = assetsConfiguration;
         }
 
-        public void CleanUp()
+        public void ShutDown()
         {
             _textureCache.CleanUp();
             _gameObjectCache.CleanUp();

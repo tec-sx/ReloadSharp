@@ -3,7 +3,7 @@ namespace Engine.AssetPipeline.Audio.Models
     using Engine.Audio;
     using System;
 
-    public class Music: IMusic
+    public class Music : IMusic
     {
         private readonly AudioSource _source;
 

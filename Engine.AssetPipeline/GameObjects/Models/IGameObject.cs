@@ -3,6 +3,6 @@
     public interface IGameObject
     {
         void Update();
-        void Render();
+        void Draw();
     }
 }

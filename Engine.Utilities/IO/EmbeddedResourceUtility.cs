@@ -7,7 +7,7 @@
 
     public static class EmbeddedResourceUtility
     {
-        public static byte[] LoadEmbeddedResourceBytes(Assembly assembly,  string name)
+        public static byte[] LoadEmbeddedResourceBytes(Assembly assembly, string name)
         {
 
             using var stream = GetResourceStream(assembly, name);

@@ -1,7 +1,7 @@
 namespace Engine.Scene
 {
-    using Engine.Scene.Layers;
     using Engine.Scene.Enumerations;
+    using Engine.Scene.Layers;
 
     /// <summary>
     /// Scene base abstract class. every scene, be it gameplay,

@@ -19,6 +19,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Engine.AssetPipeline\Engine.AssetPipeline.csproj" />
+    <ProjectReference Include="..\Engine.Events\Engine.Events.csproj" />
+    <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
   </ItemGroup>
 
   <ItemGroup>

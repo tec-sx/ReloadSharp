@@ -2,9 +2,9 @@
 {
     class Program
     {
-        static void Main()
+        static void Main(string[] args)
         {
-            var game = new Reload();
+            var game = new Reload(args);
             game.Run();
         }
     }

@@ -1,111 +1,107 @@
 namespace Engine.Graphics
 {
-    using System.Drawing;
-    using Device;
-    using Device.OpenGl;
-    using Engine.Graphics.Device.Vulkan;
+    using Engine.ResourcesPipeline.Shaders.ShaderProgram;
+    using Silk.NET.GLFW;
+    using Silk.NET.OpenGL;
     using Silk.NET.Windowing.Common;
-
-    using SilkWindow = Silk.NET.Windowing.Window;
     using System;
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Runtime.CompilerServices;
 
+    /// <summary>
+    /// The main graphics manager class. Add as singleton in the
+    /// service manager.
+    /// </summary>
     public sealed class GraphicsManager : IGraphicsManager
     {
-        private DisplayConfiguration _displayConfiguration;
-
+        /// <summary>
+        /// Main prorogram window.
+        /// </summary>
         public IWindow Window { get; private set; }
-        public IGraphicsDevice Device { get; private set; }
 
-        public void Initialize(DisplayConfiguration displayConfiguration)
+        /// <summary>
+        /// Creates a new Silk.NET window with the provided configuration.
+        /// </summary>
+        /// <param name="displayConfiguration"></param>
+        /// <returns cref="IWindow"></returns>
+        /// <exception cref="NotSupportedException"></exception>
+        public void CreateWindow(DisplayConfiguration displayConfiguration)
         {
-            _displayConfiguration = displayConfiguration;
+            var options = CreateWindowOptionsFromConfiguration(displayConfiguration);
+            Window = Silk.NET.Windowing.Window.Create(options);
+
+            if (Window == null)
+            {
+                throw new NotSupportedException($"{options.API.API.ToString()} is not supported.");
+            }
         }
 
-        public void Dispose()
+        /// <summary>
+        /// Creates (Compiles and links) a new shader program from
+        /// the shader files dictionary.
+        /// </summary>
+        /// <param name="shaderFiles"></param>
+        /// <returns cref="IShaderProgram"></returns>
+        /// <exception cref="ApplicationException"></exception>
+        public IShaderProgram CreateShader(Dictionary<ShaderType, string> shaderFiles)
         {
-            Window?.Dispose();
-            Device?.Dispose();
+            return CreateShader(shaderFiles, null);
         }
 
-        public IWindow CreateWindow()
+        /// <summary>
+        /// Creates (Compiles adds attributes and then links) a new shader program from
+        /// the shader files dictionary and attribute list.
+        /// </summary>
+        /// <param name="shaderFiles"></param>
+        /// <param name="attributes"></param>
+        /// <returns cref="IShaderProgram"></returns>
+        /// <exception cref="ApplicationException"></exception>
+        public IShaderProgram CreateShader(Dictionary<ShaderType, string> shaderFiles, List<string> attributes)
         {
-            var windowOptions = CreateWindowOptionsFromSettings();
-
-            if (_displayConfiguration.EnableVulkan)
+            if (shaderFiles == null || shaderFiles.Count == 0)
             {
-                if (TryCreateVulkanWindow(windowOptions, out var vulkanWindow))
-                {
-                    Window = vulkanWindow;
-                    return ;
-                }
-
-                throw new NotSupportedException("Vulkan is not supported.");
+                throw new ApplicationException(Properties.Resources.ShaderDictionaryNullOrEmpty);
             }
 
-            if (TryCreateOpenGlWindow(windowOptions, out var openGlWindow))
+            var shaderProgram = new GlShaderProgram();
+
+            foreach (var (shaderType, shaderFile) in shaderFiles)
             {
-                Window = openGlWindow;
-                return;
+                shaderProgram.CompileShader(shaderType, shaderFile);
             }
 
-            throw new NotSupportedException("Open GL is not supported.");
+            if (attributes != null && attributes.Count > 0)
+            {
+                attributes.ForEach(attribute => shaderProgram.AddAttribute(attribute));
+            }
+
+            shaderProgram.LinkShaders();
+
+            return shaderProgram;
         }
 
-        public void CreateDevice()
+        /// <summary>
+        /// Creates WindowOptions used by Silk.NET Window.Create static method
+        ///  from a user defined display configuration.
+        /// </summary>
+        /// <param name="displayConfiguration"></param>
+        /// <returns cref="WindowOptions"></returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        private static WindowOptions CreateWindowOptionsFromConfiguration(DisplayConfiguration displayConfiguration)
         {
-            if (_displayConfiguration.EnableVulkan)
-            {
-                Device = new VulkanDevice();
-            }
-            else
-            {
-                Device = new OpenGlDevice();
-            }
+            var options = displayConfiguration.EnableVulkan ? WindowOptions.DefaultVulkan : WindowOptions.Default;
 
-            Device.Initialize(Window);
-        }
-
-        private WindowOptions CreateWindowOptionsFromSettings()
-        {
-            var options = _displayConfiguration.EnableVulkan ? WindowOptions.DefaultVulkan : WindowOptions.Default;
-
-            options.Title = _displayConfiguration.WindowTitle;
-            options.Size = new Size(_displayConfiguration.Resolution.X, _displayConfiguration.Resolution.Y);
-            options.WindowState = _displayConfiguration.InFullScreen ? WindowState.Fullscreen : WindowState.Normal;
-            options.UpdatesPerSecond = _displayConfiguration.TargetFps;
-            options.FramesPerSecond = _displayConfiguration.TargetFps;
-            options.VSync = _displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Adaptive;
+            options.Title = displayConfiguration.WindowTitle;
+            options.Size = new Size(displayConfiguration.Resolution.X, displayConfiguration.Resolution.Y);
+            options.WindowState = displayConfiguration.InFullScreen ? WindowState.Fullscreen : WindowState.Normal;
+            options.UpdatesPerSecond = displayConfiguration.TargetFps;
+            options.FramesPerSecond = displayConfiguration.TargetFps;
+            options.VSync = displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Adaptive;
             options.RunningSlowTolerance = 5;
             options.UseSingleThreadedWindow = false;
 
             return options;
-        }
-
-        private static bool TryCreateVulkanWindow(WindowOptions options, out IWindow window)
-        {
-            window = SilkWindow.Create(options) as IVulkanWindow;
-
-            if (window is null || !window.IsVulkanSupported)
-            {
-                return false;
-            }
-
-            window.Initialize();
-            return true;
-        }
-
-        private static bool TryCreateOpenGlWindow(WindowOptions options, out IWindow window)
-        {
-            window = SilkWindow.Create(options);
-
-            if (window is null)
-            {
-                return false;
-            }
-
-            window.Initialize();
-
-            return true;
         }
     }
 }

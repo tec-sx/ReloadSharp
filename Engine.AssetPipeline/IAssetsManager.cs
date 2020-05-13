@@ -1,10 +1,9 @@
 
 namespace Engine.AssetPipeline
 {
-    using System;
-    using Textures.Models;
     using Audio.Models;
     using GameObjects.Models;
+    using Textures.Models;
 
     public interface IAssetsManager
     {
@@ -13,6 +12,6 @@ namespace Engine.AssetPipeline
         IGameObject GetGameObject(string file);
         IMusic LoadMusic(string file);
         ISound LoadSound(string file);
-        void CleanUp();
+        void ShutDown();
     }
 }

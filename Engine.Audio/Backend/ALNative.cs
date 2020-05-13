@@ -1,16 +1,16 @@
 ﻿namespace Engine.Audio.Backend
 {
-    using Silk.NET.OpenAL;
     using Engine.Audio.Exceptions;
+    using Silk.NET.OpenAL;
     using System.Numerics;
 
     internal static class ALNative
     {
-        private static readonly AL _api = AL.GetApi();
+        private static readonly AL api = AL.GetApi();
 
         private static void CheckForErrors()
         {
-            switch(_api.GetError())
+            switch (api.GetError())
             {
                 case AudioError.NoError: break;
                 case AudioError.InvalidValue: throw new OpenAlInvalidValueException();
@@ -24,14 +24,14 @@
 
         public static bool IsExtensionPresent(string ext)
         {
-            return _api.IsExtensionPresent(ext);
+            return api.IsExtensionPresent(ext);
         }
 
         #region Generators
 
         public static uint GenerateBuffer()
         {
-            var buffer = _api.GenBuffer();
+            var buffer = api.GenBuffer();
             CheckForErrors();
 
             return buffer;
@@ -39,20 +39,20 @@
 
         public static void DeleteBuffer(uint buffer)
         {
-            _api.DeleteBuffer(buffer);
+            api.DeleteBuffer(buffer);
             CheckForErrors();
         }
 
         public static void BufferData<T>(uint buffer, BufferFormat bufferFormat, T[] data, int sampleRate)
             where T : unmanaged
         {
-            _api.BufferData(buffer, bufferFormat, data, sampleRate);
+            api.BufferData(buffer, bufferFormat, data, sampleRate);
             CheckForErrors();
         }
 
         public static uint GenerateSource()
         {
-            var source = _api.GenSource();
+            var source = api.GenSource();
             CheckForErrors();
 
             return source;
@@ -60,7 +60,7 @@
 
         public static void DeleteSource(uint source)
         {
-            _api.DeleteSource(source);
+            api.DeleteSource(source);
             CheckForErrors();
         }
 
@@ -70,7 +70,7 @@
 
         public static void SetDistanceModel(DistanceModel model)
         {
-            _api.DistanceModel(model);
+            api.DistanceModel(model);
             CheckForErrors();
         }
 
@@ -80,7 +80,7 @@
 
         public static int GetSourceProperty(uint source, GetSourceInteger param)
         {
-            _api.GetSourceProperty(source, param, out int value);
+            api.GetSourceProperty(source, param, out int value);
             CheckForErrors();
 
             return value;
@@ -88,7 +88,7 @@
 
         public static float GetSourceProperty(uint source, SourceFloat param)
         {
-            _api.GetSourceProperty(source, param, out float value);
+            api.GetSourceProperty(source, param, out float value);
             CheckForErrors();
 
             return value;
@@ -96,7 +96,7 @@
 
         public static bool GetSourceProperty(uint source, SourceBoolean param)
         {
-            _api.GetSourceProperty(source, param, out bool value);
+            api.GetSourceProperty(source, param, out bool value);
             CheckForErrors();
 
             return value;
@@ -104,7 +104,7 @@
 
         public static Vector3 GetSourceProperty(uint source, SourceVector3 param)
         {
-            _api.GetSourceProperty(source, param, out Vector3 value);
+            api.GetSourceProperty(source, param, out Vector3 value);
             CheckForErrors();
 
             return value;
@@ -116,25 +116,25 @@
 
         public static void SetSourceProperty(uint source, SourceInteger param, int value)
         {
-            _api.SetSourceProperty(source, param, value);
+            api.SetSourceProperty(source, param, value);
             CheckForErrors();
         }
 
         public static void SetSourceProperty(uint source, SourceFloat param, float value)
         {
-            _api.SetSourceProperty(source, param, value);
+            api.SetSourceProperty(source, param, value);
             CheckForErrors();
         }
 
         public static void SetSourceProperty(uint source, SourceBoolean param, bool value)
         {
-            _api.SetSourceProperty(source, param, value);
+            api.SetSourceProperty(source, param, value);
             CheckForErrors();
         }
 
         public static void SetSourceProperty(uint source, SourceVector3 param, Vector3 value)
         {
-            _api.SetSourceProperty(source, param, value);
+            api.SetSourceProperty(source, param, value);
             CheckForErrors();
         }
 
@@ -144,7 +144,7 @@
 
         public static int GetListenerProperty(ListenerInteger param)
         {
-            _api.GetListenerProperty(param, out int value);
+            api.GetListenerProperty(param, out int value);
             CheckForErrors();
 
             return value;
@@ -152,7 +152,7 @@
 
         public static float GetListenerProperty(ListenerFloat param)
         {
-            _api.GetListenerProperty(param, out float value);
+            api.GetListenerProperty(param, out float value);
             CheckForErrors();
 
             return value;
@@ -160,7 +160,7 @@
 
         public static Vector3 GetListenerProperty(ListenerVector3 param)
         {
-            _api.GetListenerProperty(param, out Vector3 value);
+            api.GetListenerProperty(param, out Vector3 value);
             CheckForErrors();
 
             return value;
@@ -172,19 +172,19 @@
 
         public static void SetListenerProperty(ListenerInteger param, int value)
         {
-            _api.SetListenerProperty(param, value);
+            api.SetListenerProperty(param, value);
             CheckForErrors();
         }
 
         public static void ListenerProperty(ListenerFloat param, float value)
         {
-            _api.SetListenerProperty(param, value);
+            api.SetListenerProperty(param, value);
             CheckForErrors();
         }
 
         public static void SetListenerProperty(ListenerVector3 param, Vector3 value)
         {
-            _api.SetListenerProperty(param, value);
+            api.SetListenerProperty(param, value);
             CheckForErrors();
         }
 
@@ -192,25 +192,25 @@
 
         public static void SourceQueueBuffers(uint source, uint[] buffers)
         {
-            _api.SourceQueueBuffers(source, buffers);
+            api.SourceQueueBuffers(source, buffers);
             CheckForErrors();
         }
 
         public static void SourceUnqueueBuffers(uint source, uint[] buffers)
         {
-            _api.SourceUnqueueBuffers(source, buffers);
+            api.SourceUnqueueBuffers(source, buffers);
             CheckForErrors();
         }
 
         public static void SourcePlay(uint source)
         {
-            _api.SourcePlay(source);
+            api.SourcePlay(source);
             CheckForErrors();
         }
 
         public static void SourceStop(uint source)
         {
-            _api.SourceStop(source);
+            api.SourceStop(source);
             CheckForErrors();
         }
     }

@@ -1,8 +1,9 @@
 namespace Engine.Scene
 {
-    using System;
     using Engine.AssetPipeline;
+    using Engine.Events;
     using Engine.Scene.Enumerations;
+    using System;
 
     /// <summary>
     /// The scene manager. Instantiated as singleton in the
@@ -17,24 +18,29 @@ namespace Engine.Scene
         public event Action ExitProgram;
 
         /// <summary>
+        /// Reference to the input manager.
+        /// </summary>
+        public IEventManager Event { get; }
+
+        /// <summary>
         /// Reference to the asset manager.
         /// </summary>
         public IAssetsManager Assets { get; }
-
 
         /// <summary>
         /// Reference to the current active scene.
         /// </summary>
         public IScene ActiveScene { get; set; }
 
-
         /// <summary>
-        /// Scene manager constructor.
+        /// Initialize scene manager.
         /// </summary>
         /// <param name="assets"></param>
-        public SceneManager(IAssetsManager assets)
+        /// /// <param name="event"></param>
+        public SceneManager(IAssetsManager assets, IEventManager @event)
         {
             Assets = assets;
+            Event = @event;
         }
 
         /// <summary>

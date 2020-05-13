@@ -1,7 +1,7 @@
 namespace Engine.AssetPipeline.Audio.Models
 {
-    using System.Numerics;
     using Engine.Audio;
+    using System.Numerics;
 
     public class Sound : ISound
     {

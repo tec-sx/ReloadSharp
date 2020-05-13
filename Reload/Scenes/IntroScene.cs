@@ -1,38 +1,30 @@
 namespace Reload.Scenes
 {
-    using System;
     using Engine.AssetPipeline.Audio.Models;
-    using Engine.GamePlay;
-    using Engine.AssetPipeline.Textures;
+    using Engine.Events.Keyboard;
     using Engine.Scene;
+    using System;
+    using System.Drawing;
 
     public class IntroScene : SceneBase
     {
         private IMusic _bgMusicStream;
 
+        public MoveDirection moveDirection;
+        public MoveStatus moveStatus;
+
         public override void OnEnter()
         {
-            //Manager.PlayerAction.Jump += () => Console.WriteLine("Jump");
-            //Manager.PlayerAction.Move += direction =>
-            //{
-            //    switch(direction)
-            //    {
-            //        case MoveDirection.UP:
-            //            Console.WriteLine("Up");
-            //            break;
-            //        case MoveDirection.DOWN:
-            //            Console.WriteLine("Down");
-            //            break;
-            //        case MoveDirection.LEFT:
-            //            Console.WriteLine("Left");
-            //            break;
-            //        case MoveDirection.RIGHT:
-            //            Console.WriteLine("Right");
-            //            break;
-            //    };
-            //};
+            Manager.Event.KeyEvent.Jump += () => Console.WriteLine("Jump");
+            Manager.Event.KeyEvent.Move += (direction, status) =>
+            {
+                moveDirection = direction;
+                moveStatus = status;
+            };
+
+            Console.WriteLine("Entering Intro.");
             _bgMusicStream = Manager.Assets.LoadMusic("Intro");
-            _bgMusicStream.Play();
+            //_bgMusicStream.Play();
         }
 
         public override void OnLeave()
@@ -42,7 +34,10 @@ namespace Reload.Scenes
 
         public override void OnUpdate(double deltaTime)
         {
-
+            //if (moveStatus != MoveStatus.Stop)
+            //{
+            //    Console.WriteLine($"Direction: {moveDirection}, Status: {moveStatus}");
+            //}
         }
 
         public override void OnRender(double deltaTime)

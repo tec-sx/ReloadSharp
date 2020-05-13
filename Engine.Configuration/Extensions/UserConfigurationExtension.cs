@@ -8,7 +8,7 @@
 
     public static class UserConfigurationExtension
     {
-        private static readonly string ConfigurationFilePath = Path.Combine(new ContentPaths().Configuration, "settings.recfg");
+        private static readonly string ConfigurationFilePath = Path.Combine(ContentPaths.Configuration, "settings.recfg");
         private static readonly byte[] Header = Encoding.UTF8.GetBytes("YOUDIDNTSAYTHEMAGICWORD");
 
         public static string GetConfigurationFilePath(this UserConfiguration configuration)

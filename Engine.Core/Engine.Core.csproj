@@ -5,27 +5,46 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
+    <PackageReference Include="SimpleInjector" Version="4.10.2" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Engine.AssetPipeline\Engine.AssetPipeline.csproj" />
     <ProjectReference Include="..\Engine.Audio\Engine.Audio.csproj" />
     <ProjectReference Include="..\Engine.Configuration\Engine.Configuration.csproj" />
+    <ProjectReference Include="..\Engine.Events\Engine.Events.csproj" />
     <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
     <ProjectReference Include="..\Engine.GUI\Engine.GUI.csproj" />
-    <ProjectReference Include="..\Engine.Input\Engine.Input.csproj" />
     <ProjectReference Include="..\Engine.Scene\Engine.Scene.csproj" />
     <ProjectReference Include="..\Engine.State\Engine.State.csproj" />
     <ProjectReference Include="..\Engine.Utilities\Engine.Utilities.csproj" />
+    <ProjectReference Include="..\Reload.Core\Reload.Core.csproj" />
+    <ProjectReference Include="..\Reload.Game\Reload.Game.csproj" />
+    <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Characters\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

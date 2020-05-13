@@ -6,7 +6,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Optimize>true</Optimize>
+    <Optimize>false</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
@@ -16,21 +16,39 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="3.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="ShaderGen" Version="1.2.0-beta3" />
     <PackageReference Include="SharpGLTF.Core" Version="1.0.0-alpha0016" />
     <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.0-alpha0016" />
-    <PackageReference Include="Silk.NET.Core" Version="1.1.1" />
-    <PackageReference Include="Silk.NET.GLFW" Version="1.1.1" />
-    <PackageReference Include="Silk.NET.OpenGL" Version="1.1.1" />
-    <PackageReference Include="Silk.NET.Vulkan" Version="1.1.1" />
-    <PackageReference Include="Silk.NET.Vulkan.Extensions.EXT" Version="1.1.1" />
-    <PackageReference Include="Silk.NET.Vulkan.Extensions.KHR" Version="1.1.1" />
-    <PackageReference Include="Silk.NET.Windowing" Version="1.1.1" />
-    <PackageReference Include="Silk.NET.Windowing.Desktop" Version="1.1.1" />
+    <PackageReference Include="Silk.NET.Core" Version="1.2.0" />
+    <PackageReference Include="Silk.NET.GLFW" Version="1.2.0" />
+    <PackageReference Include="Silk.NET.Input" Version="1.2.0" />
+    <PackageReference Include="Silk.NET.OpenGL" Version="1.2.0" />
+    <PackageReference Include="Silk.NET.OpenGLES" Version="1.2.0" />
+    <PackageReference Include="Silk.NET.Vulkan.Extensions.EXT" Version="1.2.0" />
+    <PackageReference Include="Silk.NET.Windowing" Version="1.2.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Engine.Utilities\Engine.Utilities.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Properties\Resources.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
 
 </Project>

@@ -9,4 +9,8 @@
     <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Backend\" />
+  </ItemGroup>
+
 </Project>

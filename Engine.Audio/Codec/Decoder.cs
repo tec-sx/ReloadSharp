@@ -1,7 +1,7 @@
 ﻿namespace Engine.Audio.Codec
 {
-    using System;
     using Engine.Audio.Backend;
+    using System;
 
     internal abstract class Decoder
     {

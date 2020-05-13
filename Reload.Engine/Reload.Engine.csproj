@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SimpleInjector" Version="4.10.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Engine.AssetPipeline\Engine.AssetPipeline.csproj" />
+    <ProjectReference Include="..\Engine.Audio\Engine.Audio.csproj" />
+    <ProjectReference Include="..\Engine.Configuration\Engine.Configuration.csproj" />
+    <ProjectReference Include="..\Engine.Core\Engine.Core.csproj" />
+    <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
+    <ProjectReference Include="..\Engine.Scene\Engine.Scene.csproj" />
+    <ProjectReference Include="..\Engine.State\Engine.State.csproj" />
+    <ProjectReference Include="..\Reload.Core\Reload.Core.csproj" />
+    <ProjectReference Include="..\Reload.Game\Reload.Game.csproj" />
+    <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
+  </ItemGroup>
+
+</Project>

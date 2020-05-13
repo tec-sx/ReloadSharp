@@ -1,8 +1,8 @@
-using Xunit;
 using Engine.Configuration.Extensions;
-using Xunit.Extensions.Ordering;
-using System.IO;
 using System.Drawing;
+using System.IO;
+using Xunit;
+using Xunit.Extensions.Ordering;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
 namespace Engine.Configuration.Tests

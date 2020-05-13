@@ -1,7 +1,6 @@
 namespace Engine.GamePlay
 {
     using System;
-    using Engine;
 
     public enum MoveDirection
     {

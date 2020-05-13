@@ -1,5 +1,4 @@
 using NUnit.Framework;
-using System.Runtime.InteropServices;
 
 namespace Engine.Input.Tests
 {

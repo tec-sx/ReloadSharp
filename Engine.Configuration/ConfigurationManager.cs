@@ -3,19 +3,15 @@
     using Engine.AssetPipeline;
     using Engine.Configuration.Extensions;
     using Engine.Graphics;
+    using Reload.Input.Configuration;
 
     public class ConfigurationManager : IConfigurationManager
     {
-        private readonly ContentPaths contentPaths;
-        private readonly SystemConfiguration systemConfiguration;
         private readonly UserConfiguration userConfiguration;
 
         public ConfigurationManager()
         {
-            contentPaths = new ContentPaths();
-            systemConfiguration = new SystemConfiguration();
             userConfiguration = new UserConfiguration();
-
             userConfiguration.Load();
         }
 
@@ -25,11 +21,11 @@
             {
                 Resolution = userConfiguration.DisplayResolution,
                 RefreshRate = userConfiguration.DisplayRefreshRate,
-                TargetFps = systemConfiguration.TargetFps,
+                TargetFps = SystemConfiguration.TargetFps,
                 InFullScreen = userConfiguration.DisplayInFullScreen,
                 EnableVSync = userConfiguration.DisplayEnableVsync,
                 EnableVulkan = userConfiguration.DisplayEnableVulkan,
-                WindowTitle = $"{systemConfiguration.ProgramName} - v.{systemConfiguration.ProgramVersion}",
+                WindowTitle = $"{SystemConfiguration.ProgramName} - v.{SystemConfiguration.ProgramVersion}",
             };
         }
 
@@ -38,15 +34,42 @@
         {
             return new AssetsConfiguration
             {
-                SoundsPath = contentPaths.Sounds,
-                MusicPath = contentPaths.Music,
-                ModelsPath = contentPaths.Models,
-                TexturesPath = contentPaths.Textures,
-                ImageFormat = systemConfiguration.ImageExtension,
-                TextureFormat = systemConfiguration.TextureExtension,
-                SoundFormat = systemConfiguration.AudioExtension,
-                ModelFormat = systemConfiguration.ModelExtension
+                SoundsPath = ContentPaths.Sounds,
+                MusicPath = ContentPaths.Music,
+                ModelsPath = ContentPaths.Models,
+                TexturesPath = ContentPaths.Textures,
+                ImageFormat = SystemConfiguration.ImageExtension,
+                TextureFormat = SystemConfiguration.TextureExtension,
+                SoundFormat = SystemConfiguration.AudioExtension,
+                ModelFormat = SystemConfiguration.ModelExtension
             };
         }
+
+        public KeyboardConfiguration CreateKeyboardConfiguration()
+        {
+            return new KeyboardConfiguration
+            {
+                Up = userConfiguration.KeyUp,
+                Down = userConfiguration.KeyDown,
+                Left = userConfiguration.KeyLeft,
+                Right = userConfiguration.KeyRight,
+                Run = userConfiguration.KeyRun,
+                Duck = userConfiguration.KeyDuck,
+                Jump = userConfiguration.KeyJump,
+                OpenInventory = userConfiguration.KeyOpenInventory,
+                ToggleFightMode = userConfiguration.KeyToggleFightMode,
+                Select = userConfiguration.KeySelect,
+                Pause = userConfiguration.KeyPause
+            };
+        }
+
+        public MouseConfiguration CreateMouseConfiguration()
+        {
+            return new MouseConfiguration
+            {
+                Interact = userConfiguration.MouseInteract
+            };
+        }
+
     }
 }

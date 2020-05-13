@@ -1,27 +1,27 @@
 namespace Engine.Configuration
 {
-    internal class SystemConfiguration
+    internal static class SystemConfiguration
     {
         #region Info
-        public readonly string ProgramName = "Reload";
-        public readonly string ProgramVersion = "0.2";
+        public const string ProgramName = "Reload";
+        public const string ProgramVersion = "0.2";
         #endregion
 
         #region Graphics
-        public readonly int TargetFps = 60;
+        public const int TargetFps = 60;
         #endregion
 
         #region Audio
-        public readonly int AudioFrequency = 44100;
-        public readonly int AudioChannels = 2;
-        public readonly int AudioChunkSize = 512;
+        public const int AudioFrequency = 44100;
+        public const int AudioChannels = 2;
+        public const int AudioChunkSize = 512;
         #endregion
 
         #region Formats
-        public readonly string AudioExtension = "ogg";
-        public readonly string ImageExtension = "jpg";
-        public readonly string TextureExtension = "png";
-        public readonly string ModelExtension = "gltf";
+        public const string AudioExtension = "ogg";
+        public const string ImageExtension = "jpg";
+        public const string TextureExtension = "png";
+        public const string ModelExtension = "gltf";
         #endregion
     }
 }

@@ -1,14 +1,14 @@
 ﻿namespace Engine.Audio.Codec.Vorbis
 {
-    using System;
     using NVorbis;
+    using System;
     using System.IO;
 
     internal class VorbisDecoder : Decoder
     {
         private readonly VorbisReader _reader;
 
-        public override bool IsFinished =>  _reader.IsEndOfStream;
+        public override bool IsFinished => _reader.IsEndOfStream;
         public override TimeSpan Duration => _reader.TotalTime;
 
         public VorbisDecoder(Stream stream)

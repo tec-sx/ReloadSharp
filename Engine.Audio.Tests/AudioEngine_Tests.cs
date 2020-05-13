@@ -1,8 +1,8 @@
 ﻿namespace Engine.Audio.Tests
 {
-    using NUnit.Framework;
-    using FluentAssertions;
     using Engine.Audio;
+    using FluentAssertions;
+    using NUnit.Framework;
     using System.IO;
 
     public class AudioEngine_Tests
@@ -50,7 +50,7 @@
             snare.Play(loop: true);
             snare.Looping.Should().BeTrue();
 
-            while (snare.Elapsed.Seconds < 2);
+            while (snare.Elapsed.Seconds < 2) ;
             snare.Stop();
         }
 

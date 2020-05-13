@@ -1,8 +1,12 @@
-﻿using Silk.NET.Windowing.Common;
-namespace Engine.Input
+﻿namespace Engine.Input
 {
-    public interface IInputManager
+    using Silk.NET.Input.Common;
+    using Silk.NET.Windowing.Common;
+
+    public interface IEventManager
     {
-        void Initialize(IView view);
+        public IMouse Mouse { get; }
+        public IKeyboard Keyboard { get; }
+        void Initialize(IWindow window);
     }
 }

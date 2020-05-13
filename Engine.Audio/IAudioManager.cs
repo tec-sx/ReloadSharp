@@ -1,9 +1,8 @@
 ﻿namespace Engine.Audio
 {
-    using System;
+    using Engine.Common.Models;
 
-    public interface IAudioManager : IDisposable
+    public interface IAudioManager : ISubSystem
     {
-        void CreateContext();
     }
 }

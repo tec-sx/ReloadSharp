@@ -11,7 +11,7 @@
             _model = model;
         }
 
-        public void Render()
+        public void Draw()
         {
         }
 
