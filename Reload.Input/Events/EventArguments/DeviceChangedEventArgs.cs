@@ -7,11 +7,6 @@
     public class DeviceChangedEventArgs : EventArgs
     {
         /// <summary>
-        /// The input source this device belongs to
-        /// </summary>
-        public IInputSource Source;
-
-        /// <summary>
         /// The device that changed
         /// </summary>
         public IInputDevice Device;

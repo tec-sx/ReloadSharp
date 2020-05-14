@@ -1,8 +1,8 @@
 namespace Engine.Scene
 {
     using Engine.AssetPipeline;
-    using Engine.Events;
     using Engine.Scene.Enumerations;
+    using Reload.Input;
     using System;
 
     /// <summary>
@@ -20,7 +20,7 @@ namespace Engine.Scene
         /// <summary>
         /// Reference to the input manager.
         /// </summary>
-        public IEventManager Event { get; }
+        public InputManager Input { get; }
 
         /// <summary>
         /// Reference to the asset manager.
@@ -37,10 +37,10 @@ namespace Engine.Scene
         /// </summary>
         /// <param name="assets"></param>
         /// /// <param name="event"></param>
-        public SceneManager(IAssetsManager assets, IEventManager @event)
+        public SceneManager(IAssetsManager assets, InputManager input)
         {
             Assets = assets;
-            Event = @event;
+            Input = input;
         }
 
         /// <summary>

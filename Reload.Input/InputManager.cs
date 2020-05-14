@@ -20,13 +20,11 @@
         public event EventHandler<DeviceChangedEventArgs> DeviceRemoved;
         public event EventHandler<DeviceChangedEventArgs> DeviceAdded;
 
-        //private IInputSource source;
         private IInputContext inputContext;
 
         private readonly List<InputEvent> events;
 
         private readonly Dictionary<Type, IInputEventRouter> eventRouters;
-        private Dictionary<IInputSource, EventHandler<NotifyCollectionChangedEventArgs>> devicesCollectionChangedActions;
 
         public IReadOnlyList<InputEvent> Events => events;
 
@@ -49,9 +47,6 @@
             events = new List<InputEvent>();
 
             eventRouters = new Dictionary<Type, IInputEventRouter>();
-            devicesCollectionChangedActions =
-                new Dictionary<IInputSource, EventHandler<NotifyCollectionChangedEventArgs>>();
-
         }
 
         public void Initialize(
@@ -66,7 +61,7 @@
                 inputContext = Game.Window.CreateInput();
 
                 Keyboard = new Keyboard(inputContext.Keyboards[0]);
-                Mouse = new Mouse(inputContext.Mice[0], game);
+                Mouse = new Mouse(inputContext.Mice[0], Game);
 
                 TextInput = Keyboard as ITextInputDevice;
 
@@ -78,20 +73,11 @@
             };
         }
 
-        protected override void Destroy()
+        public override void Destroy()
         {
-            base.Destroy();
-
-            // Destroy all input sources
-            foreach (var source in Sources)
-            {
-                source.Dispose();
-            }
-
             Game.Activated -= OnApplicationResumed;
             Game.Deactivated -= OnApplicationPaused;
 
-            // ensure that OnApplicationPaused is called before destruction, when Game.Deactivated event is not triggered.
             OnApplicationPaused(this, EventArgs.Empty);
         }
 
@@ -137,58 +123,36 @@
             // Recycle input event to reduce garbage generation
             for (int i = 0; i < events.Count; i++)
             {
-                var evt = events[i];
                 // The router takes care of putting the event back in its respective InputEventPool since it already has the type information
-                eventRouters[evt.GetType()].PoolEvent(evt);
+                eventRouters[events[i].GetType()].PoolEvent(events[i]);
             }
 
             events.Clear();
-
-            // Update all input sources so they can route events to input devices and possible register new devices
-            foreach (var source in Sources)
-            {
-                source.Update();
-            }
-
-            // Update all input sources so they can send events and update their state
-            foreach (var inputDevice in devices)
-            {
-                inputDevice.Update(events);
-            }
 
             // Notify PreUpdateInput
             PreUpdateInput?.Invoke(this, new InputPreUpdateEventArgs { GameTime = gameTime });
 
             // Send events to input listeners
-            foreach (var evt in events)
+            for (int i = 0; i < events.Count; i++)
             {
                 IInputEventRouter router;
-                if (!eventRouters.TryGetValue(evt.GetType(), out router))
+                if (!eventRouters.TryGetValue(events[i].GetType(), out router))
                 {
-                    throw new InvalidOperationException($"The event type {evt.GetType()} was not registered with the input manager and cannot be processed");
-
+                    throw new InvalidOperationException($"The event type {events[i].GetType()} was not registered with the input manager and cannot be processed");
                 }
 
-                router.RouteEvent(evt);
+                router.RouteEvent(events[i]);
             }
         }
 
         private void OnApplicationPaused(object sender, EventArgs e)
         {
             // Pause sources
-            foreach (var source in Sources)
-            {
-                source.Pause();
-            }
         }
 
         private void OnApplicationResumed(object sender, EventArgs e)
         {
             // Resume sources
-            foreach (var source in Sources)
-            {
-                source.Resume();
-            }
         }
 
         /// <summary>
@@ -279,11 +243,11 @@
             /// <param name="destinationRectangle">The destination viewport rectangle</param>
             /// <param name="screenCoordinates">The normalized screen coordinates</param>
             /// <returns></returns>
-            public static Vector2 TransformPosition(Size2F fromSize, RectangleF destinationRectangle, Vector2 screenCoordinates)
-            {
-                return new Vector2((screenCoordinates.X * fromSize.Width - destinationRectangle.X) / destinationRectangle.Width,
-                    (screenCoordinates.Y * fromSize.Height - destinationRectangle.Y) / destinationRectangle.Height);
-            }
+            //public static Vector2 TransformPosition(Size2F fromSize, RectangleF destinationRectangle, Vector2 screenCoordinates)
+            //{
+            //    return new Vector2((screenCoordinates.X * fromSize.Width - destinationRectangle.X) / destinationRectangle.Width,
+            //        (screenCoordinates.Y * fromSize.Height - destinationRectangle.Y) / destinationRectangle.Height);
+            //}
         }
     }
 }

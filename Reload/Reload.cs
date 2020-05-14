@@ -1,12 +1,11 @@
-namespace Reload
+namespace ReloadGame
 {
-    using Game;
+    using global::Reload.Engine;
     using Scenes;
 
-    public class Reload : GameBase
+    public class Reload : Game
     {
-        public Reload(string[] args)
-            : base(args)
+        public Reload()
         {}
 
         protected override void OnInitialize()

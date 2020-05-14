@@ -8,16 +8,11 @@
     public interface IGraphicsManager
     {
         /// <summary>
-        /// Main prorogram window.
-        /// </summary>
-        public IWindow Window { get; }
-
-        /// <summary>
         /// Creates a new Silk.NET window with the provided configuration.
         /// </summary>
         /// <param name="displayConfiguration"></param>
         /// <returns cref="IWindow"></returns>
-        void CreateWindow(DisplayConfiguration displayConfiguration);
+        IWindow CreateWindow(DisplayConfiguration displayConfiguration);
 
         /// <summary>
         /// Creates (Compiles and links) a new shader program from

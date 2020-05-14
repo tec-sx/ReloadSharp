@@ -110,5 +110,8 @@
 
         public virtual void Update(double gameTime)
         { }
+
+        public virtual void Destroy()
+        { }
     }
 }

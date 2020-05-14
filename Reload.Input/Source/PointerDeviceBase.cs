@@ -24,6 +24,7 @@
         public IReadOnlySet<PointerPoint> PressedPointers => PointerState.PressedPointers;
         public IReadOnlySet<PointerPoint> ReleasedPointers => PointerState.ReleasedPointers;
         public IReadOnlySet<PointerPoint> DownPointers => PointerState.DownPointers;
+
         public event EventHandler<SurfaceSizeChangedEventArgs> SurfaceSizeChanged;
 
         public int Priority { get; set; }

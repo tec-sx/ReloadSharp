@@ -148,7 +148,7 @@
             get
             {
                 if (!HasMouse) return NoButtons;
-                return Mouse.PressedButtons;
+                return new ReadOnlySet<MouseButton>(Mouse.PressedButtons);
             }
         }
 
@@ -160,7 +160,7 @@
             get
             {
                 if (!HasMouse) return NoButtons;
-                return Mouse.ReleasedButtons;
+                return new ReadOnlySet<MouseButton>(Mouse.ReleasedButtons);
             }
         }
 
@@ -172,7 +172,7 @@
             get
             {
                 if (!HasMouse) return NoButtons;
-                return Mouse.DownButtons;
+                return new ReadOnlySet<MouseButton>(Mouse.DownButtons);
             }
         }
 
@@ -283,7 +283,8 @@
         /// <returns><c>true</c> if the specified mouse button is pressed since the previous update; otherwise, <c>false</c>.</returns>
         public bool IsMouseButtonPressed(MouseButton mouseButton)
         {
-            return Mouse?.IsButtonPressed(mouseButton) ?? false;
+            //return Mouse?.IsButtonPressed(mouseButton) ?? false;
+            return false;
         }
 
         /// <summary>
@@ -293,7 +294,8 @@
         /// <returns><c>true</c> if the specified mouse button is released; otherwise, <c>false</c>.</returns>
         public bool IsMouseButtonReleased(MouseButton mouseButton)
         {
-            return Mouse?.IsButtonReleased(mouseButton) ?? false;
+            //return Mouse?.IsButtonReleased(mouseButton) ?? false;
+            return false;
         }
 
         /// <summary>
@@ -303,7 +305,8 @@
         /// <returns><c>true</c> if the specified mouse button is being pressed down; otherwise, <c>false</c>.</returns>
         public bool IsMouseButtonDown(MouseButton mouseButton)
         {
-            return Mouse?.IsButtonDown(mouseButton) ?? false;
+            //return Mouse?.IsButtonDown(mouseButton) ?? false;
+            return false;
         }
 
         /// <summary>

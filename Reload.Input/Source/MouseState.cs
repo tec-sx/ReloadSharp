@@ -107,7 +107,9 @@
         {
             // Prevent duplicate events
             if (downButtons.Contains(button))
+            {
                 return;
+            }
 
             downButtons.Add(button);
 
@@ -136,7 +138,9 @@
 
             // Simulate tap on primary mouse button
             if (button == MouseButton.Left)
+            {
                 HandlePointerUp();
+            }
         }
 
         public void HandleMouseWheel(float wheelDelta)

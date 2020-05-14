@@ -3,5 +3,6 @@
     interface IGameSystemBase
     {
         void Initialize();
+        void Destroy();
     }
 }

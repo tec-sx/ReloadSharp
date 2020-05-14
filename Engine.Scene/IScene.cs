@@ -1,6 +1,7 @@
 ﻿namespace Engine.Scene
 {
     using Engine.Scene.Enumerations;
+    using Reload.Input;
 
     public interface IScene
     {

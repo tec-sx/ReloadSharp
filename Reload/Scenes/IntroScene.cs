@@ -1,7 +1,6 @@
-namespace Reload.Scenes
+namespace ReloadGame.Scenes
 {
     using Engine.AssetPipeline.Audio.Models;
-    using Engine.Events.Keyboard;
     using Engine.Scene;
     using System;
     using System.Drawing;
@@ -10,17 +9,17 @@ namespace Reload.Scenes
     {
         private IMusic _bgMusicStream;
 
-        public MoveDirection moveDirection;
-        public MoveStatus moveStatus;
+        //public MoveDirection moveDirection;
+        //public MoveStatus moveStatus;
 
         public override void OnEnter()
         {
-            Manager.Event.KeyEvent.Jump += () => Console.WriteLine("Jump");
-            Manager.Event.KeyEvent.Move += (direction, status) =>
-            {
-                moveDirection = direction;
-                moveStatus = status;
-            };
+            //Manager.Event.KeyEvent.Jump += () => Console.WriteLine("Jump");
+            //Manager.Event.KeyEvent.Move += (direction, status) =>
+            //{
+            //    moveDirection = direction;
+            //    moveStatus = status;
+            //};
 
             Console.WriteLine("Entering Intro.");
             _bgMusicStream = Manager.Assets.LoadMusic("Intro");

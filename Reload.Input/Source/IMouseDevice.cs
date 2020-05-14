@@ -2,12 +2,13 @@
 {
     using Reload.Core.Collections;
     using Silk.NET.Input.Common;
+    using System.Collections.Generic;
     using System.Numerics;
 
     /// <summary>
     /// Represents functionality specific to mouse input such as buttons, wheels, mouse locking and setting cursor position
     /// </summary>
-    public interface IMouseDevice : IPointerDevice
+    public interface IMouseDevice : IInputDevice
     {
         /// <summary>
         /// Normalized position of the mouse inside the window
@@ -22,17 +23,17 @@
         /// <summary>
         /// The mouse buttons that have been pressed since the last frame
         /// </summary>
-        IReadOnlySet<MouseButton> PressedButtons { get; }
+        HashSet<MouseButton> PressedButtons { get; }
 
         /// <summary>
         /// The mouse buttons that have been released since the last frame
         /// </summary>
-        IReadOnlySet<MouseButton> ReleasedButtons { get; }
+        HashSet<MouseButton> ReleasedButtons { get; }
 
         /// <summary>
         /// The mouse buttons that are down
         /// </summary>
-        IReadOnlySet<MouseButton> DownButtons { get; }
+        HashSet<MouseButton> DownButtons { get; }
 
         /// <summary>
         /// Gets or sets if the mouse is locked to the screen

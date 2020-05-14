@@ -12,9 +12,20 @@
     using Reload.Input;
     using SimpleInjector;
     using System;
+    using Silk.NET.Windowing.Common;
 
-    public class Game : GameBase
+    public abstract class Game : GameBase
     {
+        /// <summary>
+        /// Static event that will be fired when a game is initialized
+        /// </summary>
+        public static event Action GameStarted;
+
+        /// <summary>
+        /// Static event that will be fired when a game is destroyed
+        /// </summary>
+        public static event Action GameDestroyed;
+
         public Container SubSystems;
 
         /// <summary>
@@ -47,25 +58,24 @@
         /// </summary>
         public ISceneManager SceneManager { get; }
 
+        protected abstract void OnInitialize();
+        protected abstract void OnLoadContent();
+        protected abstract void OnUpdate(double deltaTime);
+        protected abstract void OnRender(double deltaTime);
+        protected abstract void OnShutDown();
+
         public Game()
         {
             SubSystems = new Container();
 
-            SubSystems.RegisterInstance(this);
+            SubSystems.RegisterInstance(this as IGame);
 
             #region Core sub-systems
 
             SubSystems.RegisterSingleton<IConfigurationManager, ConfigurationManager>();
-            ConfigurationManager = SubSystems.GetInstance<IConfigurationManager>();
-
             SubSystems.RegisterSingleton<IGraphicsManager, GraphicsManager>();
-            GraphicsManager = SubSystems.GetInstance<IGraphicsManager>();
-
             SubSystems.RegisterSingleton<InputManager>();
-            InputManager = SubSystems.GetInstance<InputManager>();
-
             SubSystems.RegisterSingleton<IAudioManager, AudioManager>();
-            AudioManager = SubSystems.GetInstance<IAudioManager>();
             #endregion
 
             #region Simultaion sub-systems
@@ -75,18 +85,25 @@
             SubSystems.RegisterSingleton<IAudioCache, AudioCache>();
 
             SubSystems.RegisterSingleton<IAssetsManager, AssetsManager>();
-            AssetsManager = SubSystems.GetInstance<IAssetsManager>();
-
             SubSystems.RegisterSingleton<ISceneManager, SceneManager>();
-            SceneManager = SubSystems.GetInstance<ISceneManager>();
             #endregion
 
             SubSystems.Verify();
+
+            ConfigurationManager = SubSystems.GetInstance<ConfigurationManager>();
+            GraphicsManager = SubSystems.GetInstance<GraphicsManager>();
+            InputManager = SubSystems.GetInstance<InputManager>();
+            AudioManager = SubSystems.GetInstance<AudioManager>();
+
+            AssetsManager = SubSystems.GetInstance<IAssetsManager>();
+            SceneManager = SubSystems.GetInstance<ISceneManager>();
         }
 
-        protected override void OnInitialize()
+        private void Initialize()
         {
-            GraphicsManager.CreateWindow(ConfigurationManager.CreateDisplayConfiguration());
+            OnInitialize();
+
+            Window = GraphicsManager.CreateWindow(ConfigurationManager.CreateDisplayConfiguration());
 
             InputManager.Initialize(
                 ConfigurationManager.CreateKeyboardConfiguration(),
@@ -94,27 +111,51 @@
 
             AudioManager.Initialize();
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
+
+            Window.Load += LoadContent;
+            Window.Update += Update;
+            Window.Render += Render;
+            Window.Closing += ShutDownSubSystems;
+            SceneManager.ExitProgram += Window.Close;
         }
 
-        protected override void OnLoadContent()
+        private void LoadContent()
         {
-            throw new NotImplementedException();
+            OnLoadContent();
+
+            SceneManager.ActiveScene.OnEnter();
+            SceneManager.ActiveScene.Run();
         }
 
-        protected override void OnRender(double deltaTime)
+        private void Update(double deltaTime)
         {
-            throw new NotImplementedException();
+            OnUpdate(deltaTime);
+
+            SceneManager.Update(deltaTime);
         }
 
-        protected override void OnShutDown()
+        private void Render(double deltaTime)
         {
+            OnRender(deltaTime);
+
+            SceneManager.Render(deltaTime);
+        }
+
+        public override void Run()
+        {
+            Initialize();
+
+            Window.Run();
+
+            ShutDownSubSystems();
+        }
+
+        private void ShutDownSubSystems()
+        {
+            OnShutDown();
+
             AssetsManager.ShutDown();
             AudioManager.ShutDown();
-        }
-
-        protected override void OnUpdate(double deltaTime)
-        {
-            throw new NotImplementedException();
         }
     }
 }

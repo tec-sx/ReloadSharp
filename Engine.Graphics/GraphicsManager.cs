@@ -16,25 +16,22 @@ namespace Engine.Graphics
     public sealed class GraphicsManager : IGraphicsManager
     {
         /// <summary>
-        /// Main prorogram window.
-        /// </summary>
-        public IWindow Window { get; private set; }
-
-        /// <summary>
         /// Creates a new Silk.NET window with the provided configuration.
         /// </summary>
         /// <param name="displayConfiguration"></param>
         /// <returns cref="IWindow"></returns>
         /// <exception cref="NotSupportedException"></exception>
-        public void CreateWindow(DisplayConfiguration displayConfiguration)
+        public IWindow CreateWindow(DisplayConfiguration displayConfiguration)
         {
             var options = CreateWindowOptionsFromConfiguration(displayConfiguration);
-            Window = Silk.NET.Windowing.Window.Create(options);
+            var window = Silk.NET.Windowing.Window.Create(options);
 
-            if (Window == null)
+            if (window == null)
             {
                 throw new NotSupportedException($"{options.API.API.ToString()} is not supported.");
             }
+
+            return window;
         }
 
         /// <summary>

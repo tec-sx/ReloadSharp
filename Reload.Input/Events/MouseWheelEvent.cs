@@ -22,3 +22,4 @@
             return $"{nameof(WheelDelta)}: {WheelDelta} {nameof(Mouse)}: {Mouse.Name}";
         }
     }
+}

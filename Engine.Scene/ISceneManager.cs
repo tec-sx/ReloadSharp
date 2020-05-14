@@ -1,14 +1,14 @@
 ﻿namespace Engine.Scene
 {
     using Engine.AssetPipeline;
-    using Engine.Events;
+    using Reload.Input;
     using System;
 
     public interface ISceneManager
     {
         event Action ExitProgram;
 
-        public IEventManager Event { get; }
+        InputManager Input { get; }
         public IAssetsManager Assets { get; }
         public IScene ActiveScene { get; set; }
 
