@@ -9,7 +9,9 @@
 
     public class ReloadKeyboard
     {
-        public Dictionary<Key, Command> Commands { get; } = new Dictionary<Key, Command>();
+        private Dictionary<Key, Command> commands;
+        private Dictionary<Key, StateType> states;
+        private Dictionary<Key, ActionType> actions;
 
         private ReloadInputManager inputManager;
         private const int initialBufferSize = 8;
@@ -22,6 +24,7 @@
 
         public ReloadKeyboard(IKeyboard keyboard, ReloadInputManager manager)
         {
+            commands = new Dictionary<Key, Command>();
             inputManager = manager;
             keyboardBase = keyboard;
             keyboardBase.KeyDown += HandleKeyDown;
@@ -41,7 +44,7 @@
         private void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
         {
             PressedKeys.Add(key);
-            if (Commands.TryGetValue(key, out var command))
+            if (commands.TryGetValue(key, out var command))
             {
                 inputManager.FireCommand(command);
             }
@@ -70,5 +73,9 @@
             keyboardBase.KeyDown += HandleKeyDown;
             keyboardBase.KeyUp += HandleKeyUp;
         }
+
+        public void IsKeyPressed(Key key) => keyboardBase.IsKeyPressed(key);
+
+        public void RegisterCommand(Key control, Command command) => commands.Add(control, command);
     }
 }

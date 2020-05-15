@@ -25,7 +25,12 @@ namespace ReloadGame.Scenes
 
             Console.WriteLine("Entering Intro.");
             _bgMusicStream = Manager.Assets.LoadMusic("Intro");
-            Manager.Input.Keyboard.Commands.Add(Key.Space, new JumpCommand());
+
+            var moveCommand = new MoveCommand();
+            Manager.Input.Keyboard.RegisterCommand(Key.Space, new JumpCommand());
+            Manager.Input.Keyboard.RegisterCommand(Key.W, moveCommand);
+            Manager.Input.Keyboard.RegisterCommand(Key.A, moveCommand);
+            Manager.Input.Keyboard.RegisterCommand(Key.D, moveCommand);
 
             Manager.Input.CommandFired += player.HandleCommand;
             //_bgMusicStream.Play();
