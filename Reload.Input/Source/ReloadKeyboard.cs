@@ -1,14 +1,17 @@
 ﻿namespace Reload.Input.Source
 {
+    using Reload.Core;
     using Reload.Core.Collections;
+    using Reload.Input.Configuration;
     using Silk.NET.Input.Common;
     using System;
     using System.Collections.Generic;
 
     public class ReloadKeyboard
     {
-        public Dictionary<Key, Action> keyActionPairs = new Dictionary<Key, Action>();
+        public Dictionary<Key, Command> Commands { get; } = new Dictionary<Key, Command>();
 
+        private ReloadInputManager inputManager;
         private const int initialBufferSize = 8;
         private IKeyboard keyboardBase;
 
@@ -17,8 +20,9 @@
         public FastList<Key> DownKeys;
         public Dictionary<Key, int> RepeadKeys;
 
-        public ReloadKeyboard(IKeyboard keyboard)
+        public ReloadKeyboard(IKeyboard keyboard, ReloadInputManager manager)
         {
+            inputManager = manager;
             keyboardBase = keyboard;
             keyboardBase.KeyDown += HandleKeyDown;
             keyboardBase.KeyUp += HandleKeyUp;
@@ -29,19 +33,22 @@
             RepeadKeys = new Dictionary<Key, int>();
         }
 
+        public void Update(double deltaTime)
+        {
+
+        }
+
         private void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
         {
             PressedKeys.Add(key);
+            if (Commands.TryGetValue(key, out var command))
+            {
+                inputManager.FireCommand(command);
+            }
         }
 
         private void HandleKeyUp(IKeyboard keyboard, Key key, int arg)
         {
-            if (PressedKeys.Count == 1)
-            {
-                keyActionPairs.TryGetValue(key, out Action action);
-                action?.Invoke();
-            }
-
             PressedKeys.Remove(key);
         }
 

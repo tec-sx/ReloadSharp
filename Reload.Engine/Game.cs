@@ -41,7 +41,7 @@
         /// <summary>
         /// Input manager.
         /// </summary>
-        public InputManager InputManager { get; }
+        public ReloadInputManager InputManager { get; }
 
         /// <summary>
         /// Audio manager.
@@ -74,7 +74,7 @@
 
             SubSystems.RegisterSingleton<IConfigurationManager, ConfigurationManager>();
             SubSystems.RegisterSingleton<IGraphicsManager, GraphicsManager>();
-            SubSystems.RegisterSingleton<InputManager>();
+            SubSystems.RegisterSingleton<ReloadInputManager>();
             SubSystems.RegisterSingleton<IAudioManager, AudioManager>();
             #endregion
 
@@ -92,7 +92,7 @@
 
             ConfigurationManager = SubSystems.GetInstance<ConfigurationManager>();
             GraphicsManager = SubSystems.GetInstance<GraphicsManager>();
-            InputManager = SubSystems.GetInstance<InputManager>();
+            InputManager = SubSystems.GetInstance<ReloadInputManager>();
             AudioManager = SubSystems.GetInstance<AudioManager>();
 
             AssetsManager = SubSystems.GetInstance<IAssetsManager>();

@@ -1,47 +1,59 @@
 ﻿namespace Reload.Input
 {
+    using Reload.Core;
     using Reload.Game;
     using Reload.Input.Configuration;
+    using Reload.Input.Contexts;
     using Reload.Input.Source;
     using Silk.NET.Input;
-    using Silk.NET.Input.Common;
     using System;
 
     public class ReloadInputManager
     {
-        public event Action InputDevicesInitialized;
+        public event Action<Command> CommandFired;
 
-        private IInputContext inputContext;
+        private InputContextBase currentContext;
 
         public GameBase Game { get; }
-        public Keyboard Keyboard { get; private set; }
+        public ReloadKeyboard Keyboard { get; private set; }
         public Mouse Mouse { get; private set; }
         public ITextInputDevice TextInput { get; private set; }
 
         public ReloadInputManager(IGame game)
         {
             Game = game as GameBase;
-            Game.Window.Load += InitializeDevices();
         }
 
-        public Action InitializeDevices()
+        private void Update(double deltaTime)
         {
-            inputContext = Game.Window.CreateInput();
+            Keyboard.Update(deltaTime);
+            Mouse.Update(deltaTime);
+        }
 
-            Keyboard = new Keyboard(inputContext.Keyboards[0]);
-            Mouse = new Mouse(inputContext.Mice[0], Game);
+        public void InitializeDevices()
+        {
+            var input = Game.Window.CreateInput();
+
+            Keyboard = new ReloadKeyboard(input.Keyboards[0], this);
+            Mouse = new Mouse(input.Mice[0], Game);
 
             TextInput = Keyboard as ITextInputDevice;
-
-            return InputDevicesInitialized;
         }
 
         public void Initialize(
             KeyboardConfiguration keyboardConfiguration,
             MouseConfiguration mouseConfiguration)
         {
+            Game.Window.Load += InitializeDevices;
+            Game.Window.Update += Update;
+
             Game.Activated += OnApplicationResumed;
             Game.Deactivated += OnApplicationPaused;
+        }
+
+        public void FireCommand(Command command)
+        {
+            CommandFired?.Invoke(command);
         }
 
         private void OnApplicationPaused(object sender, EventArgs e)

@@ -8,7 +8,7 @@
     {
         event Action ExitProgram;
 
-        InputManager Input { get; }
+        ReloadInputManager Input { get; }
         public IAssetsManager Assets { get; }
         public IScene ActiveScene { get; set; }
 

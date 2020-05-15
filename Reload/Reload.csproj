@@ -56,6 +56,7 @@
     <ItemGroup>
       <ProjectReference Include="..\Engine.AssetPipeline\Engine.AssetPipeline.csproj" />
       <ProjectReference Include="..\Engine.Core\Engine.Core.csproj" />
+      <ProjectReference Include="..\Reload.Core\Reload.Core.csproj" />
       <ProjectReference Include="..\Reload.Engine\Reload.Engine.csproj" />
     </ItemGroup>
 

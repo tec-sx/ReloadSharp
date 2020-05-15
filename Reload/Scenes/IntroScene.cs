@@ -2,13 +2,15 @@ namespace ReloadGame.Scenes
 {
     using Engine.AssetPipeline.Audio.Models;
     using Engine.Scene;
+    using ReloadGame.Characters;
+    using Scenes.Commands;
+    using Silk.NET.Input.Common;
     using System;
-    using System.Drawing;
 
     public class IntroScene : SceneBase
     {
         private IMusic _bgMusicStream;
-
+        private Player player = new Player();
         //public MoveDirection moveDirection;
         //public MoveStatus moveStatus;
 
@@ -23,6 +25,9 @@ namespace ReloadGame.Scenes
 
             Console.WriteLine("Entering Intro.");
             _bgMusicStream = Manager.Assets.LoadMusic("Intro");
+            Manager.Input.Keyboard.Commands.Add(Key.Space, new JumpCommand());
+
+            Manager.Input.CommandFired += player.HandleCommand;
             //_bgMusicStream.Play();
         }
 
@@ -33,10 +38,6 @@ namespace ReloadGame.Scenes
 
         public override void OnUpdate(double deltaTime)
         {
-            //if (moveStatus != MoveStatus.Stop)
-            //{
-            //    Console.WriteLine($"Direction: {moveDirection}, Status: {moveStatus}");
-            //}
         }
 
         public override void OnRender(double deltaTime)

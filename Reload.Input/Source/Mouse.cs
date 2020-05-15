@@ -46,6 +46,11 @@
             source.Scroll += OnScroll;
         }
 
+        public void Update(double deltaTime)
+        {
+
+        }
+
         private void OnScroll(IMouse arg1, ScrollWheel arg2)
         {
 
