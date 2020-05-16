@@ -18,6 +18,9 @@ namespace Reload.Game
         /// <inheritdoc />
         public IWindow Window { get; set; }
 
+        public bool IsLoaded { get; protected set; }
+
+
         /// <inheritdoc />
         public bool IsMouseVisible { get; set; }
 

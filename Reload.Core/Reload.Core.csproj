@@ -5,7 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Command\" />
+    <Compile Remove="Command\**" />
+    <EmbeddedResource Remove="Command\**" />
+    <None Remove="Command\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Silk.NET.Input.Common" Version="1.2.0" />
   </ItemGroup>
 
 </Project>

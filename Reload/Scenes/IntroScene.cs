@@ -16,23 +16,15 @@ namespace ReloadGame.Scenes
 
         public override void OnEnter()
         {
-            //Manager.Event.KeyEvent.Jump += () => Console.WriteLine("Jump");
-            //Manager.Event.KeyEvent.Move += (direction, status) =>
-            //{
-            //    moveDirection = direction;
-            //    moveStatus = status;
-            //};
-
-            Console.WriteLine("Entering Intro.");
             _bgMusicStream = Manager.Assets.LoadMusic("Intro");
 
             var moveCommand = new MoveCommand();
-            Manager.Input.Keyboard.RegisterCommand(Key.Space, new JumpCommand());
-            Manager.Input.Keyboard.RegisterCommand(Key.W, moveCommand);
-            Manager.Input.Keyboard.RegisterCommand(Key.A, moveCommand);
-            Manager.Input.Keyboard.RegisterCommand(Key.D, moveCommand);
+            Manager.Input.RegisterCommand(Key.Space, new JumpCommand());
+            Manager.Input.RegisterCommand(Key.W, moveCommand);
+            Manager.Input.RegisterCommand(Key.A, moveCommand);
+            Manager.Input.RegisterCommand(Key.D, moveCommand);
 
-            Manager.Input.CommandFired += player.HandleCommand;
+            Manager.Input.FireCommand += player.HandleCommand;
             //_bgMusicStream.Play();
         }
 
@@ -43,6 +35,7 @@ namespace ReloadGame.Scenes
 
         public override void OnUpdate(double deltaTime)
         {
+            Manager.Input.Update();
         }
 
         public override void OnRender(double deltaTime)

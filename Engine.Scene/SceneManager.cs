@@ -20,7 +20,7 @@ namespace Engine.Scene
         /// <summary>
         /// Reference to the input manager.
         /// </summary>
-        public ReloadInputManager Input { get; }
+        public ReloadInput Input { get; }
 
         /// <summary>
         /// Reference to the asset manager.
@@ -37,7 +37,7 @@ namespace Engine.Scene
         /// </summary>
         /// <param name="assets"></param>
         /// /// <param name="event"></param>
-        public SceneManager(IAssetsManager assets, ReloadInputManager input)
+        public SceneManager(IAssetsManager assets, ReloadInput input)
         {
             Assets = assets;
             Input = input;

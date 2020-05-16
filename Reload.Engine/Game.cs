@@ -13,9 +13,13 @@
     using SimpleInjector;
     using System;
     using Silk.NET.Windowing.Common;
+    using System.Collections.Generic;
+    using Reload.Core;
 
     public abstract class Game : GameBase
     {
+        private Queue<Command> commandQueue = new Queue<Command>();
+
         /// <summary>
         /// Static event that will be fired when a game is initialized
         /// </summary>
@@ -41,7 +45,7 @@
         /// <summary>
         /// Input manager.
         /// </summary>
-        public ReloadInputManager InputManager { get; }
+        public ReloadInput InputManager { get; }
 
         /// <summary>
         /// Audio manager.
@@ -74,7 +78,7 @@
 
             SubSystems.RegisterSingleton<IConfigurationManager, ConfigurationManager>();
             SubSystems.RegisterSingleton<IGraphicsManager, GraphicsManager>();
-            SubSystems.RegisterSingleton<ReloadInputManager>();
+            SubSystems.RegisterSingleton<ReloadInput>();
             SubSystems.RegisterSingleton<IAudioManager, AudioManager>();
             #endregion
 
@@ -92,7 +96,7 @@
 
             ConfigurationManager = SubSystems.GetInstance<ConfigurationManager>();
             GraphicsManager = SubSystems.GetInstance<GraphicsManager>();
-            InputManager = SubSystems.GetInstance<ReloadInputManager>();
+            InputManager = SubSystems.GetInstance<ReloadInput>();
             AudioManager = SubSystems.GetInstance<AudioManager>();
 
             AssetsManager = SubSystems.GetInstance<IAssetsManager>();
@@ -125,6 +129,8 @@
 
             SceneManager.ActiveScene.OnEnter();
             SceneManager.ActiveScene.Run();
+
+            IsLoaded = true;
         }
 
         private void Update(double deltaTime)
