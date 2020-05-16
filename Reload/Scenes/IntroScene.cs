@@ -18,13 +18,11 @@ namespace ReloadGame.Scenes
         {
             _bgMusicStream = Manager.Assets.LoadMusic("Intro");
 
-            var moveCommand = new MoveCommand();
-            Manager.Input.RegisterCommand(Key.Space, new JumpCommand());
-            Manager.Input.RegisterCommand(Key.W, moveCommand);
-            Manager.Input.RegisterCommand(Key.A, moveCommand);
-            Manager.Input.RegisterCommand(Key.D, moveCommand);
+            Manager.Input.Handler.RegisterKeyCommand(Manager.Input.Keyboards[0], Key.Space, new JumpCommand());
 
-            Manager.Input.FireCommand += player.HandleCommand;
+            Manager.Input.Handler.FireActionCommand += player.HandleActionCommand;
+            Manager.Input.Handler.FireStateCommand += player.HandleStateCommand;
+            Manager.Input.Handler.FireRangeCommand += player.HandleRangeCommand;
             //_bgMusicStream.Play();
         }
 

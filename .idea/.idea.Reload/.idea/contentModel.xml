@@ -6,212 +6,412 @@
     <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.2.0/build/netcoreapp1.0" t="Include">
       <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
     </e>
+    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.4.0/build/netcoreapp2.1" t="Include">
+      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
+    </e>
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.pdb" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.api.dll" t="Include" />
+    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.dll" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.reporters.netcoreapp10.dll" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
-      <e p="Core" t="IncludeRecursive">
-        <e p="AssetsPipeline" t="Include">
-          <e p="AssetsManager.cs" t="Include" />
-          <e p="Audio" t="Include">
-            <e p="AudioCache.cs" t="Include" />
-            <e p="IAudioCache.cs" t="Include" />
-            <e p="Models" t="Include">
-              <e p="IMusic.cs" t="Include" />
-              <e p="ISound.cs" t="Include" />
-              <e p="Music.cs" t="Include" />
-              <e p="Sound.cs" t="Include" />
-            </e>
-          </e>
-          <e p="GameObjects" t="Include">
-            <e p="GameObjectCacheGltf.cs" t="Include" />
-            <e p="GameObjectCacheRl.cs" t="Include" />
-            <e p="IGameObjectCache.cs" t="Include" />
-            <e p="Models" t="Include">
-              <e p="GameObjectGltf.cs" t="Include" />
-              <e p="GameObjectRl.cs" t="Include" />
-              <e p="IGameObject.cs" t="Include" />
-            </e>
-          </e>
-          <e p="IAssetsManager.cs" t="Include" />
-          <e p="Textures" t="Include">
-            <e p="ITextureCache.cs" t="Include" />
-            <e p="Models" t="Include">
-              <e p="ITexture.cs" t="Include" />
-              <e p="Texture.cs" t="Include" />
-            </e>
-            <e p="TextureCache.cs" t="Include" />
+      <e p=".nuke" t="Include" />
+      <e p="Engine" t="Include">
+        <e p="Core" t="Include" />
+        <e p="Runtime" t="Include" />
+        <e p="System" t="Include" />
+      </e>
+      <e p="Engine.AssetPipeline" t="IncludeRecursive">
+        <e p="AssetsConfiguration.cs" t="Include" />
+        <e p="AssetsManager.cs" t="Include" />
+        <e p="Audio" t="Include">
+          <e p="AudioCache.cs" t="Include" />
+          <e p="IAudioCache.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="IMusic.cs" t="Include" />
+            <e p="ISound.cs" t="Include" />
+            <e p="Music.cs" t="Include" />
+            <e p="Sound.cs" t="Include" />
           </e>
         </e>
-        <e p="Config" t="Include">
-          <e p="ApplicationSettings.cs" t="Include" />
-          <e p="Configuration.cs" t="Include" />
-          <e p="ContentPath.cs" t="Include" />
-        </e>
-        <e p="Core.csproj" t="IncludeRecursive" />
-        <e p="CoreSystem" t="Include">
-          <e p="Audio" t="Include">
-            <e p="AudioManager.cs" t="Include" />
-            <e p="Device" t="Include">
-              <e p="AudioDevice.cs" t="Include" />
-              <e p="IAudioDevice.cs" t="Include" />
-            </e>
-          </e>
-          <e p="ErrorHandling" t="Include">
-            <e p="CoreSystemErrorHandler.cs" t="Include" />
-            <e p="Exceptions" t="Include">
-              <e p="CustomExceptions.cs" t="Include" />
-              <e p="ResourcesExceptions.cs" t="Include" />
-            </e>
-            <e p="ResourcePipelineErrorHandler.cs" t="Include" />
-          </e>
-          <e p="Graphics" t="Include">
-            <e p="Device" t="Include">
-              <e p="IGraphicsDevice.cs" t="Include" />
-              <e p="OpenGl" t="Include">
-                <e p="OpenGlDevice.cs" t="Include" />
-              </e>
-              <e p="Vulkan" t="Include">
-                <e p="VulkanDevice.cs" t="Include" />
-                <e p="VulkanStructs.cs" t="Include" />
-              </e>
-            </e>
-            <e p="GraphicsManager.cs" t="Include" />
-          </e>
-          <e p="Input" t="Include">
-            <e p="InputManager.cs" t="Include" />
+        <e p="Backend" t="Include" />
+        <e p="Engine.AssetPipeline.csproj" t="IncludeRecursive" />
+        <e p="GameObjects" t="Include">
+          <e p="GameObjectCache.cs" t="Include" />
+          <e p="IGameObjectCache.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="GameObjectGltf.cs" t="Include" />
+            <e p="IGameObject.cs" t="Include" />
           </e>
         </e>
-        <e p="GameBase.cs" t="Include" />
-        <e p="GamePlay" t="Include">
-          <e p="Enumerations" t="Include">
-            <e p="UserActionType.cs" t="Include" />
+        <e p="IAssetsManager.cs" t="Include" />
+        <e p="Textures" t="Include">
+          <e p="ITextureCache.cs" t="Include" />
+          <e p="Models" t="Include">
+            <e p="ITexture.cs" t="Include" />
+            <e p="Texture.cs" t="Include" />
           </e>
-          <e p="PlayerAction.cs" t="Include" />
+          <e p="TextureCache.cs" t="Include" />
         </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Engine.AssetPipeline.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.AssetPipeline.Tests" t="IncludeRecursive">
+        <e p="Engine.AssetPipeline.Tests.csproj" t="IncludeRecursive" />
+        <e p="UnitTest1.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Engine.AssetPipeline.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.Audio" t="IncludeRecursive">
+        <e p="AudioManager.cs" t="Include" />
+        <e p="AudioSource.cs" t="Include" />
+        <e p="AudioThread.cs" t="Include" />
+        <e p="Backend" t="Include">
+          <e p="ALNative.cs" t="Include" />
+          <e p="AudioBuffer.cs" t="Include" />
+          <e p="AudioFormat.cs" t="Include" />
+        </e>
+        <e p="BufferChain.cs" t="Include" />
+        <e p="Codec" t="Include">
+          <e p="BinaryReaderExtensions.cs" t="Include" />
+          <e p="Decoder.cs" t="Include" />
+          <e p="DecoderFactory.cs" t="Include" />
+          <e p="Mp3" t="Include">
+            <e p="Mp3Decoder.cs" t="Include" />
+          </e>
+          <e p="Vorbis" t="Include">
+            <e p="VorbisDecoder.cs" t="Include" />
+          </e>
+        </e>
+        <e p="Engine.Audio.csproj" t="IncludeRecursive" />
+        <e p="Exceptions" t="Include">
+          <e p="ALExceptions.cs" t="Include" />
+          <e p="AudioException.cs" t="Include" />
+        </e>
+        <e p="IAudioManager.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Engine.Audio.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.Audio.Tests" t="IncludeRecursive">
+        <e p="Assets" t="Include">
+          <e p="Background.Original.ogg" t="Include" />
+          <e p="FormatTestSounds" t="Include">
+            <e p="Example.ogg" t="Include" />
+            <e p="Test.mp3" t="Include" />
+          </e>
+          <e p="Snare.ogg" t="Include" />
+        </e>
+        <e p="AudioEngine_Tests.cs" t="Include" />
+        <e p="Engine.Audio.Tests.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Engine.Audio.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.Common" t="IncludeRecursive">
+        <e p="Engine.Common.csproj" t="IncludeRecursive" />
+        <e p="Models" t="Include">
+          <e p="ISubSystem.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Engine.Common.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.Configuration" t="IncludeRecursive">
+        <e p="ConfigurationManager.cs" t="Include" />
+        <e p="ContentPaths.cs" t="Include" />
+        <e p="Engine.Configuration.csproj" t="IncludeRecursive" />
+        <e p="Extensions" t="Include">
+          <e p="UserConfigurationExtension.cs" t="Include" />
+        </e>
+        <e p="IConfigurationManager.cs" t="Include" />
+        <e p="SystemConfiguration.cs" t="Include" />
+        <e p="UserConfiguration.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Engine.Configuration.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.Configuration.Tests" t="IncludeRecursive">
+        <e p="Engine.Configuration.Tests.csproj" t="IncludeRecursive" />
+        <e p="UserConfigurationTest.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Engine.Configuration.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.Core" t="IncludeRecursive">
+        <e p="Characters" t="Include" />
+        <e p="Engine.Core.csproj" t="IncludeRecursive" />
         <e p="GameThread.cs" t="Include" />
-        <e p="Resources" t="Include">
-          <e p="Libraries" t="Include">
-            <e p="Bindings" t="Include">
-              <e p="Raylib-cs" t="Include">
-                <e p="Easings.cs" t="Include" />
-                <e p="Physac.cs" t="Include" />
-                <e p="Raygui.cs" t="Include" />
-                <e p="Raylib.cs" t="Include" />
-                <e p="Raymath.cs" t="Include" />
-                <e p="Rlgl.cs" t="Include" />
-              </e>
-              <e p="SDL2" t="Include">
-                <e p="SDL2.cs" t="Include" />
-                <e p="SDL2_image.cs" t="Include" />
-                <e p="SDL2_mixer.cs" t="Include" />
-                <e p="SDL2_ttf.cs" t="Include" />
-              </e>
-            </e>
-            <e p="LibraryManager.cs" t="Include" />
-            <e p="Linux" t="Include">
-              <e p="libSDL2-2.0.so.0.10.0" t="Include" />
-              <e p="libSDL2_image-2.0.so.0.2.3" t="Include" />
-              <e p="libSDL2_mixer-2.0.so.0.2.2" t="Include" />
-              <e p="libSDL2_ttf-2.0.so.0.14.1" t="Include" />
-              <e p="libglfw.so.3.3" t="Include" />
-              <e p="libraylib.so.3.0.0" t="Include" />
-            </e>
-            <e p="Windows" t="Include">
-              <e p="SDL2.dll" t="Include" />
-              <e p="SDL2_image.dll" t="Include" />
-              <e p="SDL2_mixer.dll" t="Include" />
-              <e p="SDL2_ttf.dll" t="Include" />
-              <e p="glfw3.dll" t="Include" />
-              <e p="libFLAC-8.dll" t="Include" />
-              <e p="libfreetype-6.dll" t="Include" />
-              <e p="libjpeg-9.dll" t="Include" />
-              <e p="libmodplug-1.dll" t="Include" />
-              <e p="libmpg123-0.dll" t="Include" />
-              <e p="libogg-0.dll" t="Include" />
-              <e p="libopus-0.dll" t="Include" />
-              <e p="libopusfile-0.dll" t="Include" />
-              <e p="libpng16-16.dll" t="Include" />
-              <e p="libvorbis-0.dll" t="Include" />
-              <e p="libvorbisfile-3.dll" t="Include" />
-              <e p="raylib.dll" t="Include" />
-              <e p="zlib1.dll" t="Include" />
+        <e p="LibraryManager.cs" t="Include" />
+        <e p="PlayerAction.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Engine.Core.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
-          <e p="Shaders" t="Include">
+        </e>
+      </e>
+      <e p="Engine.Core.Tests" t="IncludeRecursive">
+        <e p="Engine.Core.Tests.csproj" t="IncludeRecursive" />
+        <e p="UnitTest1.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Engine.Core.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.GUI" t="IncludeRecursive">
+        <e p="Engine.GUI.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Engine.GUI.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.Graphics" t="IncludeRecursive">
+        <e p="DisplayConfiguration.cs" t="Include" />
+        <e p="Engine.Graphics.csproj" t="IncludeRecursive" />
+        <e p="GraphicsManager.cs" t="Include" />
+        <e p="IGraphicsManager.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+        </e>
+        <e p="Shaders" t="Include">
+          <e p="Resources" t="Include">
             <e p="main.frag.glsl" t="Include" />
             <e p="main.geom.glsl" t="Include" />
             <e p="main.vert.glsl" t="Include" />
           </e>
-        </e>
-        <e p="ResourcesPipeline" t="Include">
-          <e p="IResourcesManager.cs" t="Include" />
-          <e p="ResourcesManager.cs" t="Include" />
-          <e p="Shaders" t="Include">
-            <e p="GlShaderCache.cs" t="Include" />
-            <e p="IShaderCache.cs" t="Include" />
-            <e p="Models" t="Include">
-              <e p="GlShaderProgram.cs" t="Include" />
-              <e p="IShaderProgram.cs" t="Include" />
-              <e p="VkShaderProgram.cs" t="Include" />
-            </e>
-            <e p="VkShaderCache.cs" t="Include" />
+          <e p="ShaderProgram" t="Include">
+            <e p="GlShaderProgram.cs" t="Include" />
+            <e p="IShaderProgram.cs" t="Include" />
           </e>
-        </e>
-        <e p="Screen" t="Include">
-          <e p="Layers" t="Include">
-            <e p="LayerBase.cs" t="Include" />
-            <e p="LayerStack.cs" t="Include" />
-          </e>
-          <e p="ScreenBase.cs" t="Include" />
-          <e p="ScreenManager.cs" t="Include" />
-        </e>
-        <e p="State" t="Include">
-          <e p="IState.cs" t="Include" />
-          <e p="IStateMachine.cs" t="Include" />
-          <e p="StateMachine.cs" t="Include" />
-          <e p="States.cs" t="Include" />
-        </e>
-        <e p="Utilities" t="Include">
-          <e p="ConsoleLog.cs" t="Include" />
-          <e p="LibraryLoader.cs" t="Include" />
-          <e p="ResourceLoader.cs" t="Include" />
-          <e p="ServiceManager.cs" t="Include" />
-          <e p="Timing.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="Core.AssemblyInfo.cs" t="Include" />
+            <e p="netstandard2.1" t="Include">
+              <e p="Engine.Graphics.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
-        <e p="settings.json" t="Include" />
       </e>
-      <e p="Core.Tests" t="IncludeRecursive">
-        <e p="Core.Tests.csproj" t="IncludeRecursive" />
-        <e p="CoreSystem" t="Include">
-          <e p="GraphicsManagerTests.cs" t="Include" />
-        </e>
-        <e p="ResourcesPipeline" t="Include">
-          <e p="ResourcesManagerTests.cs" t="Include" />
-        </e>
-        <e p="Settings.json" t="Include" />
+      <e p="Engine.Graphics.Tests" t="IncludeRecursive">
+        <e p="Engine.Graphics.Tests.csproj" t="IncludeRecursive" />
+        <e p="GraphicsManager_Tests.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netcoreapp3.1" t="Include">
-              <e p="Core.Tests.AssemblyInfo.cs" t="Include" />
+              <e p="Engine.Graphics.Tests.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
       </e>
+      <e p="Engine.Input.Tests" t="IncludeRecursive">
+        <e p="Engine.Input.Tests.csproj" t="IncludeRecursive" />
+        <e p="InputManager_Tests.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Engine.Input.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.Scene" t="IncludeRecursive">
+        <e p="Engine.Scene.csproj" t="IncludeRecursive" />
+        <e p="Enumerations" t="Include">
+          <e p="SceneState.cs" t="Include" />
+        </e>
+        <e p="Exceptions" t="Include" />
+        <e p="IScene.cs" t="Include" />
+        <e p="ISceneManager.cs" t="Include" />
+        <e p="Layers" t="Include">
+          <e p="LayerBase.cs" t="Include" />
+          <e p="LayerStack.cs" t="Include" />
+        </e>
+        <e p="Properties" t="Include">
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+        </e>
+        <e p="SceneBase.cs" t="Include" />
+        <e p="SceneManager.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Engine.Scene.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.State" t="IncludeRecursive">
+        <e p="Engine.State.csproj" t="IncludeRecursive" />
+        <e p="IState.cs" t="Include" />
+        <e p="IStateMachine.cs" t="Include" />
+        <e p="StateMachine.cs" t="Include" />
+        <e p="States.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Engine.State.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.Utilities" t="IncludeRecursive">
+        <e p="Assertions" t="Include">
+          <e p="UnnecessaryLock.cs" t="Include" />
+        </e>
+        <e p="Engine.Utilities.csproj" t="IncludeRecursive" />
+        <e p="IO" t="Include">
+          <e p="EmbeddedResourceUtility.cs" t="Include" />
+        </e>
+        <e p="Logger" t="Include">
+          <e p="ConsoleLogger.cs" t="Include" />
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Engine.Utilities.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Engine.Utilities.Tests" t="IncludeRecursive">
+        <e p="Engine.Utilities.Tests.csproj" t="IncludeRecursive" />
+        <e p="UnitTest1.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netcoreapp3.1" t="Include">
+              <e p="Engine.Utilities.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Games" t="Include" />
       <e p="Reload" t="IncludeRecursive">
         <e p="Assets" t="Include">
           <e p="Music" t="Include">
+            <e p="Intro.aup" t="Include" />
             <e p="Intro.mp3" t="Include" />
+            <e p="Intro.ogg" t="Include" />
             <e p="Intro2.wav" t="Include" />
+            <e p="Intro_data" t="Include">
+              <e p="e08" t="Include">
+                <e p="d08" t="Include">
+                  <e p="e080805b.au" t="Include" />
+                  <e p="e0808167.au" t="Include" />
+                  <e p="e08081b4.au" t="Include" />
+                  <e p="e08081f4.au" t="Include" />
+                  <e p="e080822e.au" t="Include" />
+                  <e p="e0808251.au" t="Include" />
+                  <e p="e0808346.au" t="Include" />
+                  <e p="e08083bf.au" t="Include" />
+                  <e p="e08083e3.au" t="Include" />
+                  <e p="e0808524.au" t="Include" />
+                  <e p="e080855f.au" t="Include" />
+                  <e p="e0808564.au" t="Include" />
+                  <e p="e080859e.au" t="Include" />
+                  <e p="e08085ff.au" t="Include" />
+                  <e p="e0808621.au" t="Include" />
+                  <e p="e0808648.au" t="Include" />
+                  <e p="e0808649.au" t="Include" />
+                  <e p="e0808756.au" t="Include" />
+                  <e p="e08087a4.au" t="Include" />
+                  <e p="e08087ee.au" t="Include" />
+                  <e p="e080881e.au" t="Include" />
+                  <e p="e0808863.au" t="Include" />
+                  <e p="e08088cf.au" t="Include" />
+                  <e p="e08088d8.au" t="Include" />
+                  <e p="e0808908.au" t="Include" />
+                  <e p="e080892f.au" t="Include" />
+                  <e p="e08089c0.au" t="Include" />
+                  <e p="e08089dd.au" t="Include" />
+                  <e p="e0808a5e.au" t="Include" />
+                  <e p="e0808b0b.au" t="Include" />
+                  <e p="e0808bd7.au" t="Include" />
+                  <e p="e0808c10.au" t="Include" />
+                  <e p="e0808c5d.au" t="Include" />
+                  <e p="e0808ca2.au" t="Include" />
+                  <e p="e0808ca6.au" t="Include" />
+                  <e p="e0808cc1.au" t="Include" />
+                  <e p="e0808cdf.au" t="Include" />
+                  <e p="e0808ce0.au" t="Include" />
+                  <e p="e0808d05.au" t="Include" />
+                  <e p="e0808df3.au" t="Include" />
+                  <e p="e0808e71.au" t="Include" />
+                  <e p="e0808ea5.au" t="Include" />
+                  <e p="e0808ead.au" t="Include" />
+                  <e p="e0808f40.au" t="Include" />
+                  <e p="e0808f5e.au" t="Include" />
+                  <e p="e0808f5f.au" t="Include" />
+                  <e p="e0808f74.au" t="Include" />
+                  <e p="e0808f90.au" t="Include" />
+                </e>
+              </e>
+            </e>
           </e>
           <e p="Scenes" t="Include">
             <e p="Common" t="Include">
@@ -1502,11 +1702,18 @@
           </e>
           <e p="Sounds" t="Include" />
         </e>
+        <e p="Characters" t="Include">
+          <e p="Player.cs" t="Include" />
+        </e>
         <e p="Program.cs" t="Include" />
-        <e p="Reload.cs" t="Include" />
         <e p="Reload.csproj" t="IncludeRecursive" />
-        <e p="Screens" t="Include">
-          <e p="IntroScreen.cs" t="Include" />
+        <e p="ReloadBase.cs" t="Include" />
+        <e p="Scenes" t="Include">
+          <e p="Commands" t="Include">
+            <e p="Commands.cs" t="Include" />
+          </e>
+          <e p="IntroScene.cs" t="Include" />
+          <e p="MainMenuScene.cs" t="Include" />
         </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
@@ -1517,7 +1724,125 @@
           </e>
         </e>
       </e>
+      <e p="Reload.Core" t="IncludeRecursive">
+        <e p="Actor.cs" t="Include" />
+        <e p="ActorState.cs" t="Include" />
+        <e p="Collections" t="Include">
+          <e p="FastList.cs" t="Include" />
+          <e p="FastListStruct.cs" t="Include" />
+          <e p="IObservableCollectionChanged.cs" t="Include" />
+          <e p="IReadOnlySet.cs" t="Include" />
+          <e p="NotifyCollectionChangedEventArgs.cs" t="Include" />
+          <e p="ObservableDictionary.cs" t="Include" />
+          <e p="PoolListStruct.cs" t="Include" />
+          <e p="ReadOnlySet.cs" t="Include" />
+        </e>
+        <e p="Commands" t="Include">
+          <e p="ActionCommand.cs" t="Include" />
+          <e p="Command.cs" t="Include" />
+          <e p="InputConstants.cs" t="Include" />
+          <e p="RangeCommand.cs" t="Include" />
+          <e p="StateCommand.cs" t="Include" />
+        </e>
+        <e p="Reload.Core.csproj" t="IncludeRecursive" />
+        <e p="SubSystems.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.0" t="Include">
+              <e p="Reload.Core.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Reload.Engine" t="IncludeRecursive">
+        <e p="Game.cs" t="Include" />
+        <e p="Reload.Engine.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Reload.Engine.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Reload.Game" t="IncludeRecursive">
+        <e p="GameBase.cs" t="Include" />
+        <e p="GameContext.cs" t="Include" />
+        <e p="GamePlatform.cs" t="Include" />
+        <e p="GameSystemBase.cs" t="Include" />
+        <e p="Graphics" t="Include">
+          <e p="PixelFormat.cs" t="Include" />
+        </e>
+        <e p="IContentable.cs" t="Include" />
+        <e p="IDrawable.cs" t="Include" />
+        <e p="IGame.cs" t="Include" />
+        <e p="IGameSystemBase.cs" t="Include" />
+        <e p="IUpdateable.cs" t="Include" />
+        <e p="Platforms" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+        </e>
+        <e p="Reload.Game.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Reload.Game.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Reload.Input" t="IncludeRecursive">
+        <e p="Configuration" t="Include">
+          <e p="KeyboardConfiguration.cs" t="Include" />
+          <e p="MouseConfiguration.cs" t="Include" />
+        </e>
+        <e p="Contexts" t="Include">
+          <e p="InputContextBase.cs" t="Include" />
+          <e p="InputContextType.cs" t="Include" />
+        </e>
+        <e p="Reload.Input.csproj" t="IncludeRecursive" />
+        <e p="ReloadInput.cs" t="Include" />
+        <e p="ReloadInputHandler.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Reload.Input.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="Reload.sln" t="IncludeFlat" />
+      <e p="Tests" t="Include">
+        <e p="Engine" t="Include">
+          <e p="System" t="Include" />
+        </e>
+      </e>
+      <e p="build" t="IncludeRecursive">
+        <e p="Build.cs" t="Include" />
+        <e p="Libraries" t="Include">
+          <e p="Windows" t="Include">
+            <e p="oalinst.exe" t="Include" />
+          </e>
+        </e>
+        <e p="_build.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="boot" t="Include" />
+        <e p="config" t="Include" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="RefitStubs.g.cs" t="Include" />
+            <e p="_build.AssemblyInfo.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="build.cmd" t="Include" />
+      <e p="build.ps1" t="Include" />
+      <e p="build.sh" t="Include" />
       <e p="packages" t="ExcludeRecursive" />
     </e>
   </component>

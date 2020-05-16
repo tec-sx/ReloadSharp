@@ -1,4 +1,6 @@
-﻿namespace Reload.Engine
+﻿using Reload.Core.Commands;
+
+namespace Reload.Engine
 {
     using global::Engine.AssetPipeline;
     using global::Engine.AssetPipeline.Audio;
@@ -18,7 +20,6 @@
 
     public abstract class Game : GameBase
     {
-        private Queue<Command> commandQueue = new Queue<Command>();
 
         /// <summary>
         /// Static event that will be fired when a game is initialized
@@ -109,10 +110,7 @@
 
             Window = GraphicsManager.CreateWindow(ConfigurationManager.CreateDisplayConfiguration());
 
-            InputManager.Initialize(
-                ConfigurationManager.CreateKeyboardConfiguration(),
-                ConfigurationManager.CreateMouseConfiguration());
-
+            InputManager.Initialize();
             AudioManager.Initialize();
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
 

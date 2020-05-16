@@ -1,27 +1,28 @@
 ﻿namespace Reload.Input
 {
-    using Reload.Core;
     using Reload.Game;
-    using Reload.Input.Configuration;
-    using Reload.Input.Source;
     using Silk.NET.Input;
     using Silk.NET.Input.Common;
-    using Silk.NET.Input.Extensions;
     using System;
     using System.Collections.Generic;
 
     public class ReloadInput
     {
-        private IInputContext context;
+        private IInputContext _context;
 
-        public GameBase Game { get; }
+        private readonly GameBase _game;
 
-        public ReloadInputHandler Handler { get; private set; }
+        public IReadOnlyList<IKeyboard> Keyboards => _context.Keyboards;
+        
+        public IReadOnlyList<IMouse> Mices => _context.Mice;
 
+        public ReloadInputHandler Handler { get; }
 
         public ReloadInput(IGame game)
         {
-            Game = game as GameBase;
+            _game = game as GameBase;
+            
+            Handler = new ReloadInputHandler();
         }
 
         public void Update()
@@ -29,22 +30,23 @@
 
         }
 
-        public void Initialize(
-            KeyboardConfiguration keyboardConfiguration,
-            MouseConfiguration mouseConfiguration)
+        public void Initialize()
         {
-            Game.Window.Load += () =>
+            _game.Window.Load += () =>
             {
-                context = Game.Window.CreateInput();
-                //keyboard = new ReloadKeyboard(inputContext.Keyboards[0]);
-                //mouse = new Mouse(inputContext.Mice[0], Game);
+                _context = _game.Window.CreateInput();
+                
+                Handler.Initialize(_context.Keyboards, _context.Mice);
             };
 
-            Game.Activated += OnApplicationResumed;
-            Game.Deactivated += OnApplicationPaused;
+            _game.Activated += OnApplicationResumed;
+            _game.Deactivated += OnApplicationPaused;
         }
-
-        public void RegisterCommand(Key control, Command command) => commands.Add(control, command);
+        
+        public void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
+        {
+            Console.WriteLine("Hola");
+        }
 
         private void OnApplicationPaused(object sender, EventArgs e)
         {
