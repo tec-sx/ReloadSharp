@@ -7,6 +7,8 @@
     [Serializable]
     public class UserConfiguration
     {
+        public int UserId { get; } = 0;
+
         #region Display
 
         public Point DisplayResolution { get; set; } = new Point(1280, 720);
@@ -24,6 +26,9 @@
         #endregion
 
         #region Controls
+
+        public int KeyboardId { get; set; }
+        public int MouseId { get; set; }
 
         public Key KeyUp { get; set; } = Key.W;
         public Key KeyDown { get; set; } = Key.S;

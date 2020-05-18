@@ -13,6 +13,8 @@
 
         public event Action<Command, int> FireRangeCommand;
 
+        public event Action<char> FireTextInput;
+
         private Dictionary<string, InputContext> _inputContexts;
 
         private readonly Stack<InputContext> _activeContexts;
@@ -99,6 +101,7 @@
 
         public void HandleTextInput(IKeyboard keyboard, char character)
         {
+            FireTextInput?.Invoke(character);
         }
 
         public void EnableTextInput(IKeyboard keyboard)

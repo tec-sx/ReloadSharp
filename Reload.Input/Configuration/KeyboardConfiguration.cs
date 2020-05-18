@@ -4,6 +4,7 @@
 
     public struct KeyboardConfiguration
     {
+        public int KeyboardId;
         public Key Up;
         public Key Down;
         public Key Left;

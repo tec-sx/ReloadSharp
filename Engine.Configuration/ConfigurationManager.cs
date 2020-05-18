@@ -49,6 +49,7 @@
         {
             return new KeyboardConfiguration
             {
+                KeyboardId = userConfiguration.KeyboardId,
                 Up = userConfiguration.KeyUp,
                 Down = userConfiguration.KeyDown,
                 Left = userConfiguration.KeyLeft,
@@ -67,6 +68,7 @@
         {
             return new MouseConfiguration
             {
+                MouseId = userConfiguration.MouseId,
                 Interact = userConfiguration.MouseInteract
             };
         }

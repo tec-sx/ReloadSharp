@@ -4,6 +4,7 @@
 
     public struct MouseConfiguration
     {
+        public int MouseId;
         public MouseButton Interact;
     }
 }
