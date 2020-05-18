@@ -6,6 +6,9 @@ namespace Reload.Core
 
     public abstract class Actor
     {
+        public Guid Uid { get; set; }
+        public string Name { get; set; }
+
         public ActorState ActiveState = ActorState.Idle;
         public ActorState PreviousState = ActorState.Idle;
 

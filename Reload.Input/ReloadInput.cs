@@ -16,13 +16,13 @@
 
         public IReadOnlyList<IMouse> Mices => _context.Mice;
 
-        public ReloadInputHandler Handler { get; }
+        public InputHandler Handler { get; }
 
         public ReloadInput(IGame game)
         {
             _game = game as GameBase;
 
-            Handler = new ReloadInputHandler();
+            Handler = new InputHandler();
         }
 
         public void Update()

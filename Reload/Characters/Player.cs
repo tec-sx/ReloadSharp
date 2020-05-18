@@ -14,6 +14,7 @@ namespace ReloadGame.Characters
         {
             IsIdle = true;
             RunningIsHeld = false;
+            Name = "Ivan";
         }
 
         public override void Jump()

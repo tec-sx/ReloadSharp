@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Reload.Core\Reload.Core.csproj" />
+    <ProjectReference Include="..\Reload.DataAccess\Reload.DataAccess.csproj" />
     <ProjectReference Include="..\Reload.Game\Reload.Game.csproj" />
   </ItemGroup>
 

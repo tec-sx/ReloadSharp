@@ -65,6 +65,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Game", "Reload.Game\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Engine", "Reload.Engine\Reload.Engine.csproj", "{80DBBA61-9A45-447D-B138-1209E7010B7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.DataAccess", "Reload.DataAccess\Reload.DataAccess.csproj", "{9AAAEF1B-C19D-43A4-B292-027B782AEB65}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -161,6 +163,10 @@ Global
 		{80DBBA61-9A45-447D-B138-1209E7010B7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80DBBA61-9A45-447D-B138-1209E7010B7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80DBBA61-9A45-447D-B138-1209E7010B7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9AAAEF1B-C19D-43A4-B292-027B782AEB65}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9AAAEF1B-C19D-43A4-B292-027B782AEB65}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9AAAEF1B-C19D-43A4-B292-027B782AEB65}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9AAAEF1B-C19D-43A4-B292-027B782AEB65}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -193,6 +199,7 @@ Global
 		{B56FEF8E-E3B1-439C-A139-25893C638403} = {AF88642A-CD9E-4DDD-9663-AA2F6B14727F}
 		{D3D3B425-C206-4A8F-8F47-4BFCE93E59BE} = {FB98081B-CA4B-461E-9FA3-2F1085E295CB}
 		{80DBBA61-9A45-447D-B138-1209E7010B7A} = {FB98081B-CA4B-461E-9FA3-2F1085E295CB}
+		{9AAAEF1B-C19D-43A4-B292-027B782AEB65} = {AF88642A-CD9E-4DDD-9663-AA2F6B14727F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A519BFB5-B378-4C0B-B29E-095A0C925278}

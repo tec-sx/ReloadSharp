@@ -17,6 +17,8 @@ namespace Reload.Engine
     using Silk.NET.Windowing.Common;
     using System.Collections.Generic;
     using Reload.Core;
+    using Reload.DataAccess;
+    using Microsoft.EntityFrameworkCore;
 
     public abstract class Game : GameBase
     {
@@ -63,6 +65,16 @@ namespace Reload.Engine
         /// </summary>
         public ISceneManager SceneManager { get; }
 
+        /// <summary>
+        /// Persistent Data Access.
+        /// </summary>
+        public PersistentDb PersistentDb { get; }
+
+        /// <summary>
+        /// In memory Data Access.
+        /// </summary>
+        public InMemoryDb InMemoryDb { get; }
+
         protected abstract void OnInitialize();
         protected abstract void OnLoadContent();
         protected abstract void OnUpdate(double deltaTime);
@@ -81,6 +93,8 @@ namespace Reload.Engine
             SubSystems.RegisterSingleton<IGraphicsManager, GraphicsManager>();
             SubSystems.RegisterSingleton<ReloadInput>();
             SubSystems.RegisterSingleton<IAudioManager, AudioManager>();
+
+            SubSystems.Register<PersistentDb>();
             #endregion
 
             #region Simultaion sub-systems
@@ -102,6 +116,8 @@ namespace Reload.Engine
 
             AssetsManager = SubSystems.GetInstance<IAssetsManager>();
             SceneManager = SubSystems.GetInstance<ISceneManager>();
+
+            PersistentDb = SubSystems.GetInstance<PersistentDb>();
         }
 
         private void Initialize()
