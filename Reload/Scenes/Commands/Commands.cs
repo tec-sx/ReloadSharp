@@ -7,7 +7,7 @@
     {
         public JumpCommand()
         { }
-        
+
         public override void Execute(Actor actor) => actor.Jump();
     }
 

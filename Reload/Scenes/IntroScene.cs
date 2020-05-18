@@ -18,7 +18,9 @@ namespace ReloadGame.Scenes
         {
             _bgMusicStream = Manager.Assets.LoadMusic("Intro");
 
-            Manager.Input.Handler.RegisterKeyCommand(Manager.Input.Keyboards[0], Key.Space, new JumpCommand());
+            Manager.Input.Handler.RegisterKeyCommand(0, Key.Space, new JumpCommand());
+            Manager.Input.Handler.RegisterKeyCommand(0, Key.W, new WalkCommand());
+            Manager.Input.Handler.RegisterKeyCommand(0, Key.ShiftLeft, new RunCommand());
 
             Manager.Input.Handler.FireActionCommand += player.HandleActionCommand;
             Manager.Input.Handler.FireStateCommand += player.HandleStateCommand;

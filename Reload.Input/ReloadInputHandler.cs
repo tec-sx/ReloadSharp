@@ -8,16 +8,16 @@
     public class ReloadInputHandler
     {
         public event Action<Command> FireActionCommand;
-        
+
         public event Action<Command, bool> FireStateCommand;
-        
+
         public event Action<Command, int> FireRangeCommand;
 
-        private readonly Dictionary<(IKeyboard, Key), Command> _keyCommands;
+        private readonly Dictionary<(int, Key), Command> _keyCommands;
 
         public ReloadInputHandler()
         {
-            _keyCommands = new Dictionary<(IKeyboard, Key), Command>(16);
+            _keyCommands = new Dictionary<(int, Key), Command>(16);
         }
 
         public void Initialize(IReadOnlyList<IKeyboard> keyboards, IReadOnlyList<IMouse> mice)
@@ -29,22 +29,26 @@
             }
         }
 
-        public void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
+        public void Update()
         {
-            if (!_keyCommands.TryGetValue((keyboard, key), out var command))
+        }
+
+        private void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
+        {
+            if (!_keyCommands.TryGetValue((keyboard.Index, key), out var command))
             {
                 return;
             }
 
-            switch(command.Type)
+            switch (command.Type)
             {
-                case InputType.ActionPress :
+                case InputType.ActionPress:
                     FireActionCommand?.Invoke(command);
                     break;
-                case InputType.State :
+                case InputType.State:
                     FireStateCommand?.Invoke(command, true);
                     break;
-                case InputType.Range :
+                case InputType.Range:
                     FireRangeCommand?.Invoke(command, 1);
                     break;
                 default:
@@ -52,33 +56,33 @@
             };
         }
 
-        public void HandleKeyUp(IKeyboard keyboard, Key key, int arg)
+        private void HandleKeyUp(IKeyboard keyboard, Key key, int arg)
         {
-            if (!_keyCommands.TryGetValue((keyboard, key), out var command))
+            if (!_keyCommands.TryGetValue((keyboard.Index, key), out var command))
             {
                 return;
             }
-            
-            switch(command.Type)
+
+            switch (command.Type)
             {
-                case InputType.ActionRelease :
+                case InputType.ActionRelease:
                     FireActionCommand?.Invoke(command);
                     break;
-                case InputType.State :
+                case InputType.State:
                     FireStateCommand?.Invoke(command, false);
                     break;
-                case InputType.Range :
+                case InputType.Range:
                     FireRangeCommand?.Invoke(command, 0);
                     break;
                 default:
                     return;
             };
         }
-        
+
         public void HandleTextInput(IKeyboard keyboard, char character)
         {
         }
-        
+
         public void EnableTextInput(IKeyboard keyboard)
         {
             keyboard.KeyDown -= HandleKeyDown;
@@ -93,9 +97,9 @@
             keyboard.KeyUp += HandleKeyUp;
         }
 
-        public void RegisterKeyCommand(IKeyboard keyboard, Key key, Command command)
-        {
-            _keyCommands.Add((keyboard, key), command);
-         }
+        //public void RegisterKeyCommand(int keyboardIndex, Key key, Command command)
+        //{
+        //    _keyCommands.Add((keyboardIndex, key), command);
+        //}
     }
 }

@@ -13,12 +13,12 @@ namespace Reload.Core
         {
             ((ActionCommand)command).Execute(this);
         }
-        
+
         public void HandleStateCommand(Command command, bool state)
         {
             ((StateCommand)command).Execute(this, state);
         }
-        
+
         public void HandleRangeCommand(Command command, int range)
         {
             ((RangeCommand)command).Execute(this, range);
@@ -39,9 +39,9 @@ namespace Reload.Core
             Console.WriteLine("Run");
         }
 
-        public virtual void Stop()
+        public virtual void Idle()
         {
-            Console.WriteLine("Stopped.");
+            Console.WriteLine("Idle");
         }
 
     }
