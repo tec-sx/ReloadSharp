@@ -6,7 +6,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class ReloadInput
+    public class InputManager
     {
         private IInputContext _context;
 
@@ -18,10 +18,9 @@
 
         public InputHandler Handler { get; }
 
-        public ReloadInput(IGame game)
+        public InputManager(IGame game)
         {
             _game = game as GameBase;
-
             Handler = new InputHandler();
         }
 

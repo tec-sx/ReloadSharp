@@ -13,16 +13,12 @@
 
         public event Action<Command, int> FireRangeCommand;
 
-        private readonly Dictionary<(int, Key), Command> _keyCommands;
+        private Dictionary<string, InputContext> _inputContexts;
 
-        private readonly Dictionary<string, InputContext> _inputContexts;
         private readonly Stack<InputContext> _activeContexts;
-
-        private MappedInput _currentMappedInput;
 
         public InputHandler()
         {
-            _keyCommands = new Dictionary<(int, Key), Command>(16);
             _inputContexts = new Dictionary<string, InputContext>(16);
             _activeContexts = new Stack<InputContext>(4);
         }
@@ -36,11 +32,13 @@
             }
         }
 
+        public void LoadContexts(Dictionary<string, InputContext> contexts) => _inputContexts = contexts;
+
         public void Update()
         {
         }
 
-        public void PushContext(string name)
+        public void PushActiveContext(string name)
         {
             if (_inputContexts.TryGetValue(name, out var context))
             {
@@ -48,14 +46,14 @@
             }
         }
 
-        public void PopContext()
+        public void PopActiveContext()
         {
             _activeContexts.Pop();
         }
 
         private void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
         {
-            if (!_keyCommands.TryGetValue((keyboard.Index, key), out var command))
+            if (_activeContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
             {
                 return;
             }
@@ -78,7 +76,7 @@
 
         private void HandleKeyUp(IKeyboard keyboard, Key key, int arg)
         {
-            if (!_keyCommands.TryGetValue((keyboard.Index, key), out var command))
+            if (!_activeContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
             {
                 return;
             }
@@ -115,11 +113,6 @@
             keyboard.KeyChar -= HandleTextInput;
             keyboard.KeyDown += HandleKeyDown;
             keyboard.KeyUp += HandleKeyUp;
-        }
-
-        public void RegisterKeyCommand(int keyboardIndex, Key key, Command command)
-        {
-            _keyCommands.Add((keyboardIndex, key), command);
         }
     }
 }

@@ -48,7 +48,7 @@ namespace Reload.Engine
         /// <summary>
         /// Input manager.
         /// </summary>
-        public ReloadInput InputManager { get; }
+        public InputManager InputManager { get; }
 
         /// <summary>
         /// Audio manager.
@@ -91,10 +91,8 @@ namespace Reload.Engine
 
             SubSystems.RegisterSingleton<IConfigurationManager, ConfigurationManager>();
             SubSystems.RegisterSingleton<IGraphicsManager, GraphicsManager>();
-            SubSystems.RegisterSingleton<ReloadInput>();
+            SubSystems.RegisterSingleton<InputManager>();
             SubSystems.RegisterSingleton<IAudioManager, AudioManager>();
-
-            SubSystems.Register<PersistentDb>();
             #endregion
 
             #region Simultaion sub-systems
@@ -111,7 +109,7 @@ namespace Reload.Engine
 
             ConfigurationManager = SubSystems.GetInstance<ConfigurationManager>();
             GraphicsManager = SubSystems.GetInstance<GraphicsManager>();
-            InputManager = SubSystems.GetInstance<ReloadInput>();
+            InputManager = SubSystems.GetInstance<InputManager>();
             AudioManager = SubSystems.GetInstance<AudioManager>();
 
             AssetsManager = SubSystems.GetInstance<IAssetsManager>();

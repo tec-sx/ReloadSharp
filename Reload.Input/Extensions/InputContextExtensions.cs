@@ -11,67 +11,67 @@
     {
         public static void SaveInputContext(this InputContext inputContext)
         {
-            using (var dbContext = new PersistentDb())
-            {
-                var inputContextUid = inputContext.Uid != null ? inputContext.Uid : new Guid();
+            //using (var dbContext = new PersistentDb())
+            //{
+            //    var inputContextUid = inputContext.Uid != null ? inputContext.Uid : new Guid();
 
-                var keyCommands = inputContext.KeyboardCommands
-                    .Select(k => new KeyValuePair<int, string>((int)k.Key, k.Value.ToString()));
+            //    var keyCommands = inputContext.KeyCommands
+            //        .Select(k => new KeyValuePair<int, string>((int)k.Key, k.Value.ToString()));
 
-                var mouseButtonCommands = inputContext.MouseButtonCommands
-                    .Select(k => new KeyValuePair<int, string>((int)k.Key, k.Value.ToString()));
+            //    var mouseButtonCommands = inputContext.MouseButtonCommands
+            //        .Select(k => new KeyValuePair<int, string>((int)k.Key, k.Value.ToString()));
 
-                var input = new DataAccess.Models.InputContext
-                {
-                    Uid = inputContextUid,
-                    KeyboardCommands = keyCommands,
-                    MouseButtonCommands = mouseButtonCommands,
-                    MouseScrollCommands = new List<KeyValuePair<int, string>>()
-                };
+            //    var input = new DataAccess.Models.InputContext
+            //    {
+            //        Uid = inputContextUid,
+            //        KeyboardCommands = keyCommands,
+            //        MouseButtonCommands = mouseButtonCommands,
+            //        MouseScrollCommands = new List<KeyValuePair<int, string>>()
+            //    };
 
-                dbContext.InputContexts.Add(input);
-                dbContext.SaveChanges();
-            }
+            //    dbContext.InputContexts.Add(input);
+            //    dbContext.SaveChanges();
+            //}
         }
 
         public static void LoadInputContext(this InputContext inputContext, Guid uid)
         {
             using (var dbContext = new PersistentDb())
             {
-                var dbInput = dbContext.InputContexts.FirstOrDefault(c => c.Uid == uid);
+                //var dbInput = dbContext.InputContexts.FirstOrDefault(c => c.Uid == uid);
 
-                if (dbInput == null)
-                {
-                    return;
-                }
+                //if (dbInput == null)
+                //{
+                //    return;
+                //}
 
-                inputContext.Uid = dbInput.Uid;
+                //inputContext.Uid = dbInput.Uid;
 
-                foreach (var keyCommand in dbInput.KeyboardCommands)
-                {
-                    var key = (Key)keyCommand.Key;
-                    var command = (Command)Activator.CreateInstance(Type.GetType(keyCommand.Value));
+                //foreach (var keyCommand in dbInput.KeyboardCommands)
+                //{
+                //    var key = (Key)keyCommand.Key;
+                //    var command = (Command)Activator.CreateInstance(Type.GetType(keyCommand.Value));
 
-                    inputContext.MapKeyToCommand(key, command);
-                }
+                //    inputContext.MapKeyToCommand(key, command);
+                //}
 
-                foreach (var mouseButtonCommand in dbInput.MouseButtonCommands)
-                {
-                    var key = (MouseButton)mouseButtonCommand.Key;
-                    var command = (Command)Activator.CreateInstance(Type.GetType(mouseButtonCommand.Value));
+                //foreach (var mouseButtonCommand in dbInput.MouseButtonCommands)
+                //{
+                //    var key = (MouseButton)mouseButtonCommand.Key;
+                //    var command = (Command)Activator.CreateInstance(Type.GetType(mouseButtonCommand.Value));
 
-                    inputContext.MapMouseButtonToCommand(key, command);
-                }
+                //    inputContext.MapMouseButtonToCommand(key, command);
+                //}
 
-                foreach (var mouseScrollCommand in dbInput.MouseScrollCommands)
-                {
-                    var key = new ScrollWheel(
-                        mouseScrollCommand.Key,
-                        mouseScrollCommand.Key);
-                    var command = (Command)Activator.CreateInstance(Type.GetType(mouseScrollCommand.Value));
+                //foreach (var mouseScrollCommand in dbInput.MouseScrollCommands)
+                //{
+                //    var key = new ScrollWheel(
+                //        mouseScrollCommand.Key,
+                //        mouseScrollCommand.Key);
+                //    var command = (Command)Activator.CreateInstance(Type.GetType(mouseScrollCommand.Value));
 
-                    inputContext.MapMouseScrollToCommand(key, command);
-                }
+                //    inputContext.MapMouseScrollToCommand(key, command);
+                //}
             }
         }
     }

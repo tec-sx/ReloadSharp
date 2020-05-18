@@ -2,10 +2,12 @@ namespace ReloadGame.Scenes
 {
     using Engine.AssetPipeline.Audio.Models;
     using Engine.Scene;
+    using Reload.Input;
     using ReloadGame.Characters;
     using Scenes.Commands;
     using Silk.NET.Input.Common;
     using System;
+    using System.Collections.Generic;
 
     public class IntroScene : SceneBase
     {
@@ -18,9 +20,19 @@ namespace ReloadGame.Scenes
         {
             _bgMusicStream = Manager.Assets.LoadMusic("Intro");
 
-            Manager.Input.Handler.RegisterKeyCommand(0, Key.Space, new JumpCommand());
-            Manager.Input.Handler.RegisterKeyCommand(0, Key.W, new WalkCommand());
-            Manager.Input.Handler.RegisterKeyCommand(0, Key.ShiftLeft, new RunCommand());
+            var mainContext = new InputContext();
+
+            mainContext.MapKeyToCommand(0, Key.Space, new JumpCommand());
+            mainContext.MapKeyToCommand(0, Key.W, new WalkCommand());
+            mainContext.MapKeyToCommand(0, Key.ShiftLeft, new RunCommand());
+
+            var contexts = new Dictionary<string, InputContext>
+            {
+                {"main", mainContext }
+            };
+
+            Manager.Input.Handler.LoadContexts(contexts);
+            Manager.Input.Handler.PushActiveContext("main");
 
             Manager.Input.Handler.FireActionCommand += player.HandleActionCommand;
             Manager.Input.Handler.FireStateCommand += player.HandleStateCommand;
