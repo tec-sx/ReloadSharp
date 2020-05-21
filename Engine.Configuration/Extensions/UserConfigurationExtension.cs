@@ -23,6 +23,12 @@
 
         public static void Load(this UserConfiguration destination)
         {
+#if DEBUG
+            if (File.Exists(ConfigurationFilePath))
+            {
+                File.Delete(ConfigurationFilePath);
+            }
+#endif
             if (destination is null)
             {
                 throw new ArgumentNullException(nameof(destination));

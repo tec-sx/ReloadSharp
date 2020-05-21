@@ -55,7 +55,7 @@
 
         private void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
         {
-            if (_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
+            if (!_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
             {
                 return;
             }
