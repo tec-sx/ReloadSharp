@@ -20,13 +20,13 @@ namespace ReloadGame.Scenes
         {
             _bgMusicStream = Manager.Assets.LoadMusic("Intro");
 
-            var mainContext = new InputContext();
+            var mainContext = new InputMappingContext();
 
             mainContext.MapKeyToCommand(0, Key.Space, new JumpCommand());
             mainContext.MapKeyToCommand(0, Key.W, new WalkCommand());
             mainContext.MapKeyToCommand(0, Key.ShiftLeft, new RunCommand());
 
-            var contexts = new Dictionary<string, InputContext>
+            var contexts = new Dictionary<string, InputMappingContext>
             {
                 {"main", mainContext }
             };

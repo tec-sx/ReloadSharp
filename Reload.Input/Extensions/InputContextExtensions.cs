@@ -9,7 +9,7 @@
 
     public static class InputContextExtensions
     {
-        public static void SaveInputContext(this InputContext inputContext)
+        public static void SaveInputContext(this InputMappingContext inputContext)
         {
             //using (var dbContext = new PersistentDb())
             //{
@@ -34,7 +34,7 @@
             //}
         }
 
-        public static void LoadInputContext(this InputContext inputContext, Guid uid)
+        public static void LoadInputContext(this InputMappingContext inputContext, Guid uid)
         {
             using (var dbContext = new PersistentDb())
             {

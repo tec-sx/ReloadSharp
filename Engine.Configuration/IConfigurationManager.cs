@@ -8,7 +8,7 @@
     {
         DisplayConfiguration CreateDisplayConfiguration();
         AssetsConfiguration CreateAssetsConfiguration();
-        KeyboardConfiguration CreateKeyboardConfiguration();
+        InputConfiguration CreateKeyboardConfiguration();
         MouseConfiguration CreateMouseConfiguration();
     }
 }

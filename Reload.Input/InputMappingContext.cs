@@ -5,14 +5,14 @@
     using System;
     using System.Collections.Generic;
 
-    public class InputContext
+    public class InputMappingContext
     {
         public Guid Uid { get; set; }
         internal Dictionary<(int, Key), Command> KeyCommands { get; private set; }
         internal Dictionary<(int, MouseButton), Command> MouseButtonCommands { get; private set; }
         internal Dictionary<ScrollWheel, Command> MouseScrollCommands { get; private set; }
 
-        public InputContext()
+        public InputMappingContext()
         {
             KeyCommands = new Dictionary<(int, Key), Command>(16);
             MouseButtonCommands = new Dictionary<(int, MouseButton), Command>(16);

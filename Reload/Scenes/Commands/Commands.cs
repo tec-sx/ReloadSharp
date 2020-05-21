@@ -17,10 +17,7 @@
         {
         }
 
-        public override void Execute(Actor actor, bool state)
-        {
-            actor.Walk(state);
-        }
+        public override void Execute(Actor actor, bool state) => actor.Walk(state);
     }
 
     public class RunCommand : StateCommand
@@ -29,9 +26,6 @@
         {
         }
 
-        public override void Execute(Actor actor, bool state)
-        {
-            actor.Run(state);
-        }
+        public override void Execute(Actor actor, bool state) => actor.Run(state);
     }
 }

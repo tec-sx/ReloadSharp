@@ -15,14 +15,14 @@
 
         public event Action<char> FireTextInput;
 
-        private Dictionary<string, InputContext> _inputContexts;
+        private Dictionary<string, InputMappingContext> _bindingContexts;
 
-        private readonly Stack<InputContext> _activeContexts;
+        private readonly Stack<InputMappingContext> _activeBindingContexts;
 
         public InputHandler()
         {
-            _inputContexts = new Dictionary<string, InputContext>(16);
-            _activeContexts = new Stack<InputContext>(4);
+            _bindingContexts = new Dictionary<string, InputMappingContext>(16);
+            _activeBindingContexts = new Stack<InputMappingContext>(4);
         }
 
         public void Initialize(IReadOnlyList<IKeyboard> keyboards, IReadOnlyList<IMouse> mice)
@@ -34,7 +34,7 @@
             }
         }
 
-        public void LoadContexts(Dictionary<string, InputContext> contexts) => _inputContexts = contexts;
+        public void LoadContexts(Dictionary<string, InputMappingContext> contexts) => _bindingContexts = contexts;
 
         public void Update()
         {
@@ -42,20 +42,20 @@
 
         public void PushActiveContext(string name)
         {
-            if (_inputContexts.TryGetValue(name, out var context))
+            if (_bindingContexts.TryGetValue(name, out var context))
             {
-                _activeContexts.Push(context);
+                _activeBindingContexts.Push(context);
             }
         }
 
         public void PopActiveContext()
         {
-            _activeContexts.Pop();
+            _activeBindingContexts.Pop();
         }
 
         private void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
         {
-            if (_activeContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
+            if (_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
             {
                 return;
             }
@@ -78,7 +78,7 @@
 
         private void HandleKeyUp(IKeyboard keyboard, Key key, int arg)
         {
-            if (!_activeContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
+            if (!_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
             {
                 return;
             }

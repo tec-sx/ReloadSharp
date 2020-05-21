@@ -2,7 +2,7 @@
 {
     using Silk.NET.Input.Common;
 
-    public struct KeyboardConfiguration
+    public struct InputConfiguration
     {
         public int KeyboardId;
         public Key Up;
@@ -16,5 +16,8 @@
         public Key ToggleFightMode;
         public Key Select;
         public Key Pause;
+
+        public int MouseId;
+        public MouseButton Interact;
     }
 }

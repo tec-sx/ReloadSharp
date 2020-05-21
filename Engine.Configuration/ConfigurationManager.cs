@@ -45,9 +45,9 @@
             };
         }
 
-        public KeyboardConfiguration CreateKeyboardConfiguration()
+        public InputConfiguration CreateKeyboardConfiguration()
         {
-            return new KeyboardConfiguration
+            return new InputConfiguration
             {
                 KeyboardId = userConfiguration.KeyboardId,
                 Up = userConfiguration.KeyUp,
