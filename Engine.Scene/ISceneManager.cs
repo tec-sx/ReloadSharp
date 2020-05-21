@@ -14,6 +14,8 @@
 
         IScene MoveToNextScreen();
         IScene MoveToPrevScreen();
+
+        void Run();
         void Update(double deltaTime);
         void Render(double deltaTime);
         IScene AddScene<T>() where T : IScene, new();

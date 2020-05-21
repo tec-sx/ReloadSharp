@@ -11,7 +11,7 @@
 
             var context = new InputMappingContext();
 
-            context.MapKeyToCommand(keyboard, configuration.Jump, );
+            //context.MapKeyToCommand(keyboard, configuration.Jump, );
 
             return context;
         }

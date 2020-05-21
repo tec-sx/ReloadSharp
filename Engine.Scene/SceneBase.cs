@@ -2,6 +2,7 @@ namespace Engine.Scene
 {
     using Engine.Scene.Enumerations;
     using Engine.Scene.Layers;
+    using System;
 
     /// <summary>
     /// Scene base abstract class. every scene, be it gameplay,
@@ -9,6 +10,9 @@ namespace Engine.Scene
     /// </summary>
     public abstract class SceneBase : IScene
     {
+        ///<inheritdoc>
+        public event Action<SceneState> SceneStateChange;
+
         /// <summary>
         /// The currrent scene's layers stack.
         /// </summary>
@@ -17,7 +21,7 @@ namespace Engine.Scene
         /// <summary>
         /// Current scene's state.
         /// </summary>
-        public SceneState State { get; private set; }
+        private SceneState _state;
 
         /// <summary>
         /// Reference to the next scene.
@@ -39,7 +43,7 @@ namespace Engine.Scene
         /// </summary>
         protected SceneBase()
         {
-            State = SceneState.None;
+            _state = SceneState.Ready;
             Layers = new LayerStack();
         }
 
@@ -80,17 +84,19 @@ namespace Engine.Scene
         /// </summary>
         public void Run()
         {
-            State = SceneState.Running;
+            if (_state != SceneState.Ready)
+            {
+                throw new ApplicationException(Properties.Resources.SceneIsAlreadyRunningExceptionMessage);
+            }
+
+            OnEnter();
+            ChangeSceneState(SceneState.Running);
         }
 
-        /// <summary>
-        /// If screen is running, calls <see cref="OnUpdate(double)"/>
-        /// for current screen and then updates all layers.
-        /// </summary>
-        /// <param name="deltaTime"></param>
+        /// <inheritdoc>
         public void Update(double deltaTime)
         {
-            if (State != SceneState.Running)
+            if (_state != SceneState.Running)
             {
                 return;
             }
@@ -99,18 +105,34 @@ namespace Engine.Scene
             Layers.Update();
         }
 
-        /// <summary>
-        /// If screen is running, calls <see cref="OnRender(double)"/>
-        /// </summary>
-        /// <param name="deltaTime"></param>
+        /// <inheritdoc>
         public void Render(double deltaTime)
         {
-            if (State != SceneState.Running)
+            if (_state != SceneState.Running)
             {
                 return;
             }
 
             OnRender(deltaTime);
+        }
+
+        /// <inheritdoc>
+        public void Pause()
+        {
+            ChangeSceneState(SceneState.Paused);
+        }
+
+        /// <inheritdoc>
+        public void Resume()
+        {
+            ChangeSceneState(SceneState.Running);
+        }
+
+        /// <inheritdoc>
+        public void ChangeSceneState(SceneState state)
+        {
+            _state = state;
+            SceneStateChange?.Invoke(state);
         }
     }
 }

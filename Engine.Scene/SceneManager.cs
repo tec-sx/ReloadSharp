@@ -63,6 +63,16 @@ namespace Engine.Scene
             return ActiveScene;
         }
 
+        public void Run()
+        {
+            if (ActiveScene == null)
+            {
+                throw new ApplicationException("No scenes added.");
+            }
+
+            ActiveScene.Run();
+        }
+
         /// <summary>
         /// Checks the active scene's state and
         /// updates it or swithes between scenes.
@@ -70,47 +80,7 @@ namespace Engine.Scene
         /// <param name="deltaTime"></param>
         public void Update(double deltaTime)
         {
-            if (ActiveScene == null)
-            {
-                ExitProgram?.Invoke();
-            }
-            switch (ActiveScene.State)
-            {
-                case SceneState.Running:
-                    ActiveScene.Update(deltaTime);
-                    break;
-                case SceneState.Paused:
-                    break;
-                case SceneState.ChangeNext:
-                    {
-                        ActiveScene.OnLeave();
-                        ActiveScene = MoveToNextScreen();
-
-                        ActiveScene?.Run();
-                        ActiveScene?.OnEnter();
-
-                        break;
-                    }
-                case SceneState.ChangePrev:
-                    {
-                        ActiveScene.OnLeave();
-                        ActiveScene = MoveToPrevScreen();
-
-                        ActiveScene?.Run();
-                        ActiveScene?.OnEnter();
-
-                        break;
-                    }
-                case SceneState.ExitProgram:
-                    ExitProgram?.Invoke();
-                    break;
-                case SceneState.None:
-                    throw new ApplicationException(
-                        Properties.Resources.SceneNotInitializedExceptionMessage);
-                default:
-                    throw new ApplicationException(
-                        Properties.Resources.InvalidSceneStateExceptionMessage);
-            }
+            ActiveScene?.Update(deltaTime);
         }
 
         /// <summary>
@@ -119,7 +89,7 @@ namespace Engine.Scene
         /// <param name="deltaTime"></param>
         public void Render(double deltaTime)
         {
-            ActiveScene.Render(deltaTime);
+            ActiveScene?.Render(deltaTime);
         }
 
         /// <summary>
@@ -152,6 +122,47 @@ namespace Engine.Scene
             }
 
             return newScene;
+        }
+
+        /// <summary>
+        /// Callback method for when the <see cref="SceneBase.SceneStateChange"/> event is fired.
+        /// </summary>
+        /// <param name="state"></param>
+        public void SceneStateChanged(SceneState state)
+        {
+            switch (state)
+            {
+                case SceneState.Running:
+                    break;
+                case SceneState.Paused:
+                    break;
+                case SceneState.ChangeNext:
+                    {
+                        ActiveScene.OnLeave();
+                        ActiveScene = MoveToNextScreen();
+
+                        ActiveScene?.Run();
+
+                        break;
+                    }
+                case SceneState.ChangePrev:
+                    {
+                        ActiveScene.OnLeave();
+                        ActiveScene = MoveToPrevScreen();
+
+                        ActiveScene?.Run();
+
+                        break;
+                    }
+                case SceneState.ExitProgram:
+                    ExitProgram?.Invoke();
+                    break;
+                case SceneState.Ready:
+                    break;
+                default:
+                    throw new ApplicationException(
+                        Properties.Resources.InvalidSceneStateExceptionMessage);
+            }
         }
     }
 }

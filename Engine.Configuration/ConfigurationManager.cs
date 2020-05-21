@@ -60,18 +60,11 @@
                 OpenInventory = userConfiguration.KeyOpenInventory,
                 ToggleFightMode = userConfiguration.KeyToggleFightMode,
                 Select = userConfiguration.KeySelect,
-                Pause = userConfiguration.KeyPause
-            };
-        }
+                Pause = userConfiguration.KeyPause,
 
-        public MouseConfiguration CreateMouseConfiguration()
-        {
-            return new MouseConfiguration
-            {
                 MouseId = userConfiguration.MouseId,
                 Interact = userConfiguration.MouseInteract
             };
         }
-
     }
 }

@@ -132,7 +132,7 @@
   <data name="PrevScreenIsNullExceptionMessage" xml:space="preserve">
     <value>Current active screen is the first screen.</value>
   </data>
-  <data name="SceneNotInitializedExceptionMessage" xml:space="preserve">
-    <value>Scene is not yet initialized.</value>
+  <data name="SceneIsAlreadyRunningExceptionMessage" xml:space="preserve">
+    <value>Scene is already running.</value>
   </data>
 </root>

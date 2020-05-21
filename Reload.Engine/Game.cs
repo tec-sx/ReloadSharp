@@ -138,9 +138,7 @@ namespace Reload.Engine
         private void LoadContent()
         {
             OnLoadContent();
-
-            SceneManager.ActiveScene.OnEnter();
-            SceneManager.ActiveScene.Run();
+            SceneManager.Run();
 
             IsLoaded = true;
         }

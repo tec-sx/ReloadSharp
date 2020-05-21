@@ -106,11 +106,11 @@ namespace Engine.Scene.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Scene is not yet initialized..
+        ///   Looks up a localized string similar to Scene is already running..
         /// </summary>
-        internal static string SceneNotInitializedExceptionMessage {
+        internal static string SceneIsAlreadyRunningExceptionMessage {
             get {
-                return ResourceManager.GetString("SceneNotInitializedExceptionMessage", resourceCulture);
+                return ResourceManager.GetString("SceneIsAlreadyRunningExceptionMessage", resourceCulture);
             }
         }
     }
