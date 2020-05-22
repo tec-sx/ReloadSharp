@@ -12,11 +12,11 @@ namespace Reload.Engine
     using global::Engine.Scene;
     using Reload.Game;
     using Reload.Input;
-    using SimpleInjector;
     using System;
     using Silk.NET.Windowing.Common;
     using Reload.DataAccess;
     using global::Engine.GUI;
+    using Microsoft.Extensions.DependencyInjection;
 
     public abstract class Game : GameBase
     {
@@ -31,7 +31,7 @@ namespace Reload.Engine
         /// </summary>
         public static event Action GameDestroyed;
 
-        public Container SubSystems;
+        public ServiceProvider SubSystems;
 
         /// <summary>
         /// Configuration manager.
@@ -73,7 +73,7 @@ namespace Reload.Engine
         /// </summary>
         public InMemoryDb InMemoryDb { get; }
 
-        public UiLayer Ui { get; set; } = new UiLayer();
+        public App UiApp { get; set; } = new App();
 
         protected abstract void OnInitialize();
         protected abstract void OnLoadContent();
@@ -83,39 +83,36 @@ namespace Reload.Engine
 
         public Game()
         {
-            SubSystems = new Container();
 
-            SubSystems.RegisterInstance(this as IGame);
-
+            SubSystems = new ServiceCollection()
             #region Core sub-systems
-
-            SubSystems.RegisterSingleton<IConfigurationManager, ConfigurationManager>();
-            SubSystems.RegisterSingleton<IGraphicsManager, GraphicsManager>();
-            SubSystems.RegisterSingleton<InputManager>();
-            SubSystems.RegisterSingleton<IAudioManager, AudioManager>();
+                .AddSingleton(this as IGame)
+                .AddSingleton<IConfigurationManager, ConfigurationManager>()
+                .AddSingleton<IGraphicsManager, GraphicsManager>()
+                .AddSingleton<InputManager>()
+                .AddSingleton<IAudioManager, AudioManager>()
             #endregion
-
             #region Simultaion sub-systems
+                .AddSingleton<ITextureCache, TextureCache>()
+                .AddSingleton<IGameObjectCache, GameObjectCache>()
+                .AddSingleton<IAudioCache, AudioCache>()
 
-            SubSystems.RegisterSingleton<ITextureCache, TextureCache>();
-            SubSystems.RegisterSingleton<IGameObjectCache, GameObjectCache>();
-            SubSystems.RegisterSingleton<IAudioCache, AudioCache>();
-
-            SubSystems.RegisterSingleton<IAssetsManager, AssetsManager>();
-            SubSystems.RegisterSingleton<ISceneManager, SceneManager>();
+                .AddSingleton<IAssetsManager, AssetsManager>()
+                .AddSingleton<ISceneManager, SceneManager>()
             #endregion
 
-            SubSystems.Verify();
+                .BuildServiceProvider();
 
-            ConfigurationManager = SubSystems.GetInstance<ConfigurationManager>();
-            GraphicsManager = SubSystems.GetInstance<GraphicsManager>();
-            InputManager = SubSystems.GetInstance<InputManager>();
-            AudioManager = SubSystems.GetInstance<AudioManager>();
 
-            AssetsManager = SubSystems.GetInstance<IAssetsManager>();
-            SceneManager = SubSystems.GetInstance<ISceneManager>();
+            ConfigurationManager = SubSystems.GetService<IConfigurationManager>();
+            GraphicsManager = SubSystems.GetService<IGraphicsManager>();
+            InputManager = SubSystems.GetService<InputManager>();
+            AudioManager = SubSystems.GetService<IAudioManager>();
 
-            PersistentDb = SubSystems.GetInstance<PersistentDb>();
+            AssetsManager = SubSystems.GetService<IAssetsManager>();
+            SceneManager = SubSystems.GetService<ISceneManager>();
+
+            PersistentDb = SubSystems.GetService<PersistentDb>();
         }
 
         private void Initialize()
@@ -134,7 +131,7 @@ namespace Reload.Engine
             Window.Closing += ShutDownSubSystems;
             SceneManager.ExitProgram += Window.Close;
 
-            Ui.Initialize();
+            UiApp.Run();
         }
 
         private void LoadContent()
@@ -149,7 +146,6 @@ namespace Reload.Engine
         {
             OnUpdate(deltaTime);
 
-            Ui.Update(deltaTime);
             SceneManager.Update(deltaTime);
         }
 
@@ -157,7 +153,6 @@ namespace Reload.Engine
         {
             OnRender(deltaTime);
 
-            Ui.Render();
             SceneManager.Render(deltaTime);
         }
 

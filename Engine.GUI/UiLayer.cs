@@ -27,20 +27,21 @@
                 }
             });
 #endif
+
             GUI.Init();
             GUI.SetXamlProvider(new LocalXamlProvider());
             GUI.SetTextureProvider(new LocalTextureProvider());
             GUI.SetFontProvider(new LocalFontProvider());
 
-            FrameworkElement xaml = (FrameworkElement)GUI.LoadXaml("./MenuTest.xaml");
+            FrameworkElement xaml = (FrameworkElement)GUI.LoadXaml("MenuTest.xaml");
             _view = GUI.CreateView(xaml);
             _view.SetSize(1280, 768);
 
             //_view.SetIsPPAAEnabled(true);
 
             // Renderer initialization with an OpenGL device
-            var device = new RenderDeviceGL();
-            _view.Renderer.Init(device);
+            //var device = new Render);
+            //_view.Renderer.Init(device);
         }
 
         public void Update(double deltaTime)
@@ -54,7 +55,7 @@
 
         public void Render()
         {
-            _view.Renderer.Render();
+            //_view.Renderer.Render();
         }
 
         public void OnReshape(int width, int height)
