@@ -32,10 +32,10 @@ namespace Engine.Graphics.Tests
 
             // Act
             var graphicsManager = new GraphicsManager();
-            graphicsManager.CreateWindow(displayConfiguration);
+            var window = graphicsManager.CreateWindow(displayConfiguration);
 
             // Assert
-            graphicsManager.Window.API.API
+            window.API.API
                 .Should().Match<ContextAPI>(api => api == ContextAPI.OpenGL || api == ContextAPI.OpenGLES);
 
         }

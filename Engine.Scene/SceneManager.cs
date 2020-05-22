@@ -63,6 +63,7 @@ namespace Engine.Scene
             return ActiveScene;
         }
 
+        ///<inheritdoc>
         public void Run()
         {
             if (ActiveScene == null)

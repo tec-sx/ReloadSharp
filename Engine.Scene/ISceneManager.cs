@@ -15,6 +15,9 @@
         IScene MoveToNextScreen();
         IScene MoveToPrevScreen();
 
+        /// <summary>
+        /// Run the scene manager and the active scene.
+        /// </summary>
         void Run();
         void Update(double deltaTime);
         void Render(double deltaTime);

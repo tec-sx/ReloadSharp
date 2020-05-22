@@ -13,6 +13,7 @@
     <ProjectReference Include="..\Engine.Audio\Engine.Audio.csproj" />
     <ProjectReference Include="..\Engine.Configuration\Engine.Configuration.csproj" />
     <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
+    <ProjectReference Include="..\Engine.GUI\Engine.GUI.csproj" />
     <ProjectReference Include="..\Engine.Scene\Engine.Scene.csproj" />
     <ProjectReference Include="..\Engine.State\Engine.State.csproj" />
     <ProjectReference Include="..\Reload.Core\Reload.Core.csproj" />

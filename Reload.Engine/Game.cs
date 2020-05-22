@@ -15,10 +15,8 @@ namespace Reload.Engine
     using SimpleInjector;
     using System;
     using Silk.NET.Windowing.Common;
-    using System.Collections.Generic;
-    using Reload.Core;
     using Reload.DataAccess;
-    using Microsoft.EntityFrameworkCore;
+    using global::Engine.GUI;
 
     public abstract class Game : GameBase
     {
@@ -74,6 +72,8 @@ namespace Reload.Engine
         /// In memory Data Access.
         /// </summary>
         public InMemoryDb InMemoryDb { get; }
+
+        public UiLayer Ui { get; set; } = new UiLayer();
 
         protected abstract void OnInitialize();
         protected abstract void OnLoadContent();
@@ -133,6 +133,8 @@ namespace Reload.Engine
             Window.Render += Render;
             Window.Closing += ShutDownSubSystems;
             SceneManager.ExitProgram += Window.Close;
+
+            Ui.Initialize();
         }
 
         private void LoadContent()
@@ -147,6 +149,7 @@ namespace Reload.Engine
         {
             OnUpdate(deltaTime);
 
+            Ui.Update(deltaTime);
             SceneManager.Update(deltaTime);
         }
 
@@ -154,6 +157,7 @@ namespace Reload.Engine
         {
             OnRender(deltaTime);
 
+            Ui.Render();
             SceneManager.Render(deltaTime);
         }
 

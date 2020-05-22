@@ -5,7 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Noesis.GUI" Version="2.2.6" />
+    <PackageReference Include="Noesis.App" Version="3.0.0" />
+    <PackageReference Include="Noesis.GUI" Version="3.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="MenuTest.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
   </ItemGroup>
 
 </Project>
