@@ -1,4 +1,4 @@
-﻿namespace Engine.Utilities.Assertions
+﻿namespace Reload.Utilities.Assertions
 {
     using System.Diagnostics;
 

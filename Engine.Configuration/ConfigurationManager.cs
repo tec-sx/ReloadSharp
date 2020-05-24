@@ -1,8 +1,10 @@
-﻿namespace Engine.Configuration
+﻿using Reload.AssetPipeline;
+
+namespace Reload.Configuration
 {
-    using Engine.AssetPipeline;
-    using Engine.Configuration.Extensions;
-    using Engine.Graphics;
+    using Reload.AssetPipeline;
+    using Reload.Configuration.Extensions;
+    using Reload.Graphics;
     using Reload.Input.Configuration;
 
     public class ConfigurationManager : IConfigurationManager

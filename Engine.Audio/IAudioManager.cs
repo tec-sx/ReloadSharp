@@ -1,6 +1,8 @@
-﻿namespace Engine.Audio
+﻿using Reload.Common.Models;
+
+namespace Reload.Audio
 {
-    using Engine.Common.Models;
+    using Reload.Common.Models;
 
     public interface IAudioManager : ISubSystem
     {

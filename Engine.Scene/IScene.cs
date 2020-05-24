@@ -1,6 +1,8 @@
-﻿namespace Engine.Scene
+﻿using Reload.Scene.Enumerations;
+
+namespace Reload.Scene
 {
-    using Engine.Scene.Enumerations;
+    using Reload.Scene.Enumerations;
     using System;
 
     public interface IScene

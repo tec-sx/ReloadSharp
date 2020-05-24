@@ -1,0 +1,17 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <TargetFramework>netstandard2.1</TargetFramework>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Ultz.SilkExtensions.ImGui" Version="1.0.0" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
+      <ProjectReference Include="..\Reload.Graphics\Reload.Graphics.csproj" />
+      <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
+    </ItemGroup>
+
+</Project>

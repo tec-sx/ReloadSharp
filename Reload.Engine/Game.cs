@@ -1,26 +1,25 @@
 ﻿using Reload.Core.Commands;
+using Reload.UI;
 
 namespace Reload.Engine
 {
-    using global::Engine.AssetPipeline;
-    using global::Engine.AssetPipeline.Audio;
-    using global::Engine.AssetPipeline.GameObjects;
-    using global::Engine.AssetPipeline.Textures;
-    using global::Engine.Audio;
-    using global::Engine.Configuration;
-    using global::Engine.Graphics;
-    using global::Engine.Scene;
+    using global::Reload.AssetPipeline;
+    using global::Reload.AssetPipeline.Audio;
+    using global::Reload.AssetPipeline.GameObjects;
+    using global::Reload.AssetPipeline.Textures;
+    using global::Reload.Audio;
+    using global::Reload.Configuration;
+    using global::Reload.Graphics;
+    using global::Reload.Scene;
     using Reload.Game;
     using Reload.Input;
     using System;
     using Silk.NET.Windowing.Common;
     using Reload.DataAccess;
-    using global::Engine.GUI;
     using Microsoft.Extensions.DependencyInjection;
 
     public abstract class Game : GameBase
     {
-
         /// <summary>
         /// Static event that will be fired when a game is initialized
         /// </summary>
@@ -41,7 +40,7 @@ namespace Reload.Engine
         /// <summary>
         /// Graphics manager.
         /// </summary>
-        public IGraphicsManager GraphicsManager { get; }
+        public GraphicsManager GraphicsManager { get; }
 
         /// <summary>
         /// Input manager.
@@ -63,17 +62,7 @@ namespace Reload.Engine
         /// </summary>
         public ISceneManager SceneManager { get; }
 
-        /// <summary>
-        /// Persistent Data Access.
-        /// </summary>
-        public PersistentDb PersistentDb { get; }
-
-        /// <summary>
-        /// In memory Data Access.
-        /// </summary>
-        public InMemoryDb InMemoryDb { get; }
-
-        public App UiApp { get; set; } = new App();
+        public UserInterfaceManager UserInterfaceManager { get; }
 
         protected abstract void OnInitialize();
         protected abstract void OnLoadContent();
@@ -81,38 +70,43 @@ namespace Reload.Engine
         protected abstract void OnRender(double deltaTime);
         protected abstract void OnShutDown();
 
-        public Game()
+        public Game(string[] args) : base(args)
         {
-
             SubSystems = new ServiceCollection()
-            #region Core sub-systems
+
+                #region Core sub-systems
+
                 .AddSingleton(this as IGame)
                 .AddSingleton<IConfigurationManager, ConfigurationManager>()
-                .AddSingleton<IGraphicsManager, GraphicsManager>()
+                .AddSingleton<GraphicsManager>()
                 .AddSingleton<InputManager>()
                 .AddSingleton<IAudioManager, AudioManager>()
-            #endregion
-            #region Simultaion sub-systems
+
+                #endregion
+
+                #region Simultaion sub-systems
+
                 .AddSingleton<ITextureCache, TextureCache>()
                 .AddSingleton<IGameObjectCache, GameObjectCache>()
                 .AddSingleton<IAudioCache, AudioCache>()
-
                 .AddSingleton<IAssetsManager, AssetsManager>()
                 .AddSingleton<ISceneManager, SceneManager>()
-            #endregion
+                .AddTransient<UserInterfaceManager>()
+
+                #endregion
 
                 .BuildServiceProvider();
 
 
             ConfigurationManager = SubSystems.GetService<IConfigurationManager>();
-            GraphicsManager = SubSystems.GetService<IGraphicsManager>();
+            GraphicsManager = SubSystems.GetService<GraphicsManager>();
             InputManager = SubSystems.GetService<InputManager>();
             AudioManager = SubSystems.GetService<IAudioManager>();
 
             AssetsManager = SubSystems.GetService<IAssetsManager>();
             SceneManager = SubSystems.GetService<ISceneManager>();
 
-            PersistentDb = SubSystems.GetService<PersistentDb>();
+            UserInterfaceManager = SubSystems.GetService<UserInterfaceManager>();
         }
 
         private void Initialize()
@@ -121,21 +115,21 @@ namespace Reload.Engine
 
             Window = GraphicsManager.CreateWindow(ConfigurationManager.CreateDisplayConfiguration());
 
-            InputManager.Initialize();
             AudioManager.Initialize();
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
 
-            Window.Load += LoadContent;
+            Window.Load += OnWindowLoad;
             Window.Update += Update;
             Window.Render += Render;
             Window.Closing += ShutDownSubSystems;
             SceneManager.ExitProgram += Window.Close;
-
-            UiApp.Run();
         }
 
-        private void LoadContent()
+        private void OnWindowLoad()
         {
+            InputManager.Load();
+            UserInterfaceManager.Load();
+
             OnLoadContent();
             SceneManager.Run();
 
@@ -152,8 +146,9 @@ namespace Reload.Engine
         private void Render(double deltaTime)
         {
             OnRender(deltaTime);
-
+            
             SceneManager.Render(deltaTime);
+            UserInterfaceManager.Render();
         }
 
         public override void Run()
@@ -168,9 +163,13 @@ namespace Reload.Engine
         private void ShutDownSubSystems()
         {
             OnShutDown();
-
+            
             AssetsManager.ShutDown();
             AudioManager.ShutDown();
+            
+            UserInterfaceManager.ShutDown();
+            InputManager.ShutDown();
+            GraphicsManager.ShutDown();
         }
     }
 }

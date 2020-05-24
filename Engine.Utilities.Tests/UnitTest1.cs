@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Engine.Utilities.Tests
+namespace Reload.Utilities.Tests
 {
     public class Tests
     {

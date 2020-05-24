@@ -3,9 +3,9 @@ namespace ReloadGame
     using Reload.Engine;
     using Scenes;
 
-    public class ReloadBase : Game
+    public class ReloadGame : Game
     {
-        public ReloadBase()
+        public ReloadGame(string[] args) : base(args)
         {}
 
         protected override void OnInitialize()

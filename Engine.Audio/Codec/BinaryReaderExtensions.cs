@@ -1,4 +1,4 @@
-﻿namespace Engine.Audio.Codec
+﻿namespace Reload.Audio.Codec
 {
     using System.IO;
 

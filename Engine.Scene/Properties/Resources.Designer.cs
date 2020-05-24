@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Engine.Scene.Properties {
+namespace Reload.Scene.Properties {
     using System;
     
     

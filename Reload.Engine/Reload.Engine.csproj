@@ -7,7 +7,6 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.0-preview.4.20251.6" />
-    <PackageReference Include="SimpleInjector" Version="4.10.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,12 +14,12 @@
     <ProjectReference Include="..\Engine.Audio\Engine.Audio.csproj" />
     <ProjectReference Include="..\Engine.Configuration\Engine.Configuration.csproj" />
     <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
-    <ProjectReference Include="..\Engine.GUI\Engine.GUI.csproj" />
     <ProjectReference Include="..\Engine.Scene\Engine.Scene.csproj" />
     <ProjectReference Include="..\Engine.State\Engine.State.csproj" />
     <ProjectReference Include="..\Reload.Core\Reload.Core.csproj" />
     <ProjectReference Include="..\Reload.Game\Reload.Game.csproj" />
     <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
+    <ProjectReference Include="..\Reload.UI\Reload.UI.csproj" />
   </ItemGroup>
 
 </Project>

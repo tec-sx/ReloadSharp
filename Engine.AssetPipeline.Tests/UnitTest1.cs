@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Engine.AssetPipeline.Tests
+namespace Reload.AssetPipeline.Tests
 {
     public class Tests
     {

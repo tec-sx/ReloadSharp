@@ -1,6 +1,8 @@
-﻿namespace Engine.Audio.Codec
+﻿using Reload.Audio.Backend;
+
+namespace Reload.Audio.Codec
 {
-    using Engine.Audio.Backend;
+    using Reload.Audio.Backend;
     using System;
 
     internal abstract class Decoder

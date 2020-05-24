@@ -8,13 +8,13 @@
 
     public class InputManager
     {
-        private IInputContext _context;
+        public IInputContext InputContext;
 
         private readonly GameBase _game;
 
-        public IReadOnlyList<IKeyboard> Keyboards => _context.Keyboards;
+        public IReadOnlyList<IKeyboard> Keyboards => InputContext.Keyboards;
 
-        public IReadOnlyList<IMouse> Mices => _context.Mice;
+        public IReadOnlyList<IMouse> Mices => InputContext.Mice;
 
         public InputHandler Handler { get; }
 
@@ -29,17 +29,21 @@
             Handler.Update();
         }
 
-        public void Initialize()
+        /// <summary>
+        /// Initialize game input. call on window load.
+        /// </summary>
+        public void Load()
         {
-            _game.Window.Load += () =>
-            {
-                _context = _game.Window.CreateInput();
-
-                Handler.Initialize(_context.Keyboards, _context.Mice);
-            };
-
+            InputContext = _game.Window.CreateInput();
+            Handler.Initialize(InputContext.Keyboards, InputContext.Mice);
+           
             _game.Activated += OnApplicationResumed;
             _game.Deactivated += OnApplicationPaused;
+        }
+
+        public void ShutDown()
+        {
+            InputContext?.Dispose();
         }
 
         private void OnApplicationPaused(object sender, EventArgs e)
@@ -49,6 +53,5 @@
         private void OnApplicationResumed(object sender, EventArgs e)
         {
         }
-
     }
 }

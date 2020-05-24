@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Engine.Audio.Properties {
+namespace Reload.Audio.Properties {
     using System;
     
     

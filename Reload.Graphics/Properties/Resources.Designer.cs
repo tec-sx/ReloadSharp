@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Engine.Graphics.Properties {
+namespace Reload.Graphics.Properties {
     using System;
     
     

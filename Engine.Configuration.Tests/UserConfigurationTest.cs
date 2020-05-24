@@ -1,11 +1,11 @@
-using Engine.Configuration.Extensions;
+using Reload.Configuration.Extensions;
 using System.Drawing;
 using System.IO;
 using Xunit;
 using Xunit.Extensions.Ordering;
 
 [assembly: CollectionBehavior(DisableTestParallelization = true)]
-namespace Engine.Configuration.Tests
+namespace Reload.Configuration.Tests
 {
     public class UserConfigurationTest
     {

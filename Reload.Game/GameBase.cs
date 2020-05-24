@@ -1,3 +1,5 @@
+using Silk.NET.OpenGL;
+
 namespace Reload.Game
 {
     using Silk.NET.Windowing.Common;
@@ -24,8 +26,10 @@ namespace Reload.Game
         /// <inheritdoc />
         public bool IsMouseVisible { get; set; }
 
-        protected GameBase()
-        { }
+        protected GameBase(string[] args)
+        {
+            
+        }
 
         /// <summary>
         /// Run the game.

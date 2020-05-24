@@ -1,4 +1,4 @@
-﻿namespace Engine.AssetPipeline.GameObjects.Models
+﻿namespace Reload.AssetPipeline.GameObjects.Models
 {
     using SharpGLTF.Schema2;
 

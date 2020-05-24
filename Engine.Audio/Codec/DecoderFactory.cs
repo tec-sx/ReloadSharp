@@ -1,7 +1,10 @@
-﻿namespace Engine.Audio.Codec
+﻿using Reload.Audio.Codec.Mp3;
+using Reload.Audio.Codec.Vorbis;
+
+namespace Reload.Audio.Codec
 {
-    using Engine.Audio.Codec.Mp3;
-    using Engine.Audio.Codec.Vorbis;
+    using Reload.Audio.Codec.Mp3;
+    using Reload.Audio.Codec.Vorbis;
     using System;
     using System.IO;
     using System.Linq;

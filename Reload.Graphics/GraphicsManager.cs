@@ -1,8 +1,11 @@
-namespace Engine.Graphics
+using Silk.NET.Vulkan;
+
+namespace Reload.Graphics
 {
-    using Engine.ResourcesPipeline.Shaders.ShaderProgram;
+    using Shaders.ShaderProgram;
     using Silk.NET.GLFW;
     using Silk.NET.OpenGL;
+    using Silk.NET.Windowing;
     using Silk.NET.Windowing.Common;
     using System;
     using System.Collections.Generic;
@@ -13,8 +16,10 @@ namespace Engine.Graphics
     /// The main graphics manager class. Add as singleton in the
     /// service manager.
     /// </summary>
-    public sealed class GraphicsManager : IGraphicsManager
+    public sealed class GraphicsManager
     {
+        public GL GlApi { get; private set; }
+
         /// <summary>
         /// Creates a new Silk.NET window with the provided configuration.
         /// </summary>
@@ -24,13 +29,18 @@ namespace Engine.Graphics
         public IWindow CreateWindow(DisplayConfiguration displayConfiguration)
         {
             var options = CreateWindowOptionsFromConfiguration(displayConfiguration);
-            var window = Silk.NET.Windowing.Window.Create(options);
+            var window = Window.Create(options);
 
             if (window == null)
             {
                 throw new NotSupportedException($"{options.API.API.ToString()} is not supported.");
             }
 
+            if (window.API.API == ContextAPI.OpenGL || window.API.API == ContextAPI.OpenGL)
+            {
+                GlApi = window.CreateOpenGL();
+            }
+            
             return window;
         }
 
@@ -61,7 +71,7 @@ namespace Engine.Graphics
                 throw new ApplicationException(Properties.Resources.ShaderDictionaryNullOrEmpty);
             }
 
-            var shaderProgram = new GlShaderProgram();
+            var shaderProgram = new GlShaderProgram(GlApi);
 
             foreach (var (shaderType, shaderFile) in shaderFiles)
             {
@@ -76,6 +86,11 @@ namespace Engine.Graphics
             shaderProgram.LinkShaders();
 
             return shaderProgram;
+        }
+        
+        public void ShutDown()
+        {
+            GlApi?.Dispose();
         }
 
         /// <summary>
@@ -96,7 +111,7 @@ namespace Engine.Graphics
             options.FramesPerSecond = displayConfiguration.TargetFps;
             options.VSync = displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Adaptive;
             options.RunningSlowTolerance = 5;
-            options.UseSingleThreadedWindow = false;
+            options.UseSingleThreadedWindow = true;
 
             return options;
         }

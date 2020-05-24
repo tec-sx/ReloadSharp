@@ -1,4 +1,4 @@
-﻿namespace Engine.AssetPipeline.Textures.Models
+﻿namespace Reload.AssetPipeline.Textures.Models
 {
     public interface ITexture
     {

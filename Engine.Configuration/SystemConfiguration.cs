@@ -1,4 +1,4 @@
-namespace Engine.Configuration
+namespace Reload.Configuration
 {
     internal static class SystemConfiguration
     {

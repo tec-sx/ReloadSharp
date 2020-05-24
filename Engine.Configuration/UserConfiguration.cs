@@ -1,4 +1,4 @@
-﻿namespace Engine.Configuration
+﻿namespace Reload.Configuration
 {
     using Silk.NET.Input.Common;
     using System;

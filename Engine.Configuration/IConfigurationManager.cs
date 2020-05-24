@@ -1,7 +1,7 @@
-﻿namespace Engine.Configuration
+﻿namespace Reload.Configuration
 {
-    using Engine.AssetPipeline;
-    using Engine.Graphics;
+    using Reload.AssetPipeline;
+    using Reload.Graphics;
     using Reload.Input.Configuration;
 
     public interface IConfigurationManager

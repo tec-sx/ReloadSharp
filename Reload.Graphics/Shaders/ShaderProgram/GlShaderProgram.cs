@@ -1,6 +1,8 @@
-namespace Engine.ResourcesPipeline.Shaders.ShaderProgram
+using Reload.Utilities.IO;
+
+namespace Reload.Graphics.Shaders.ShaderProgram
 {
-    using Engine.Utilities.IO;
+    using Reload.Utilities.IO;
     using Silk.NET.OpenGL;
     using System;
     using System.Collections.Generic;
@@ -53,9 +55,9 @@ namespace Engine.ResourcesPipeline.Shaders.ShaderProgram
         /// linking.
         /// </summary>
         /// <param name="glApi"></param>
-        public GlShaderProgram()
+        public GlShaderProgram(GL glApi)
         {
-            gl = GL.GetApi();
+            gl = glApi;
             ProgramHandle = gl.CreateProgram();
             shadersTemp = new List<uint>();
             linkingIsComplete = false;

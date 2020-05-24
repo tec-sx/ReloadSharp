@@ -1,4 +1,4 @@
-﻿namespace Engine.Audio.Codec.Vorbis
+﻿namespace Reload.Audio.Codec.Vorbis
 {
     using NVorbis;
     using System;

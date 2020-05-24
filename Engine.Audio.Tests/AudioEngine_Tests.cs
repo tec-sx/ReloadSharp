@@ -1,6 +1,6 @@
-﻿namespace Engine.Audio.Tests
+﻿namespace Reload.Audio.Tests
 {
-    using Engine.Audio;
+    using Reload.Audio;
     using FluentAssertions;
     using NUnit.Framework;
     using System.IO;

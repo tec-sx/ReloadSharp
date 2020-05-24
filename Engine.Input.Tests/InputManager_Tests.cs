@@ -1,6 +1,6 @@
 using NUnit.Framework;
 
-namespace Engine.Input.Tests
+namespace Reload.Input.Tests
 {
     public class InputManager_Tests
     {

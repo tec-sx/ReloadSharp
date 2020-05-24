@@ -181,77 +181,6 @@
           </e>
         </e>
       </e>
-      <e p="Engine.Core" t="IncludeRecursive">
-        <e p="Characters" t="Include" />
-        <e p="Engine.Core.csproj" t="IncludeRecursive" />
-        <e p="GameThread.cs" t="Include" />
-        <e p="LibraryManager.cs" t="Include" />
-        <e p="PlayerAction.cs" t="Include" />
-        <e p="Properties" t="Include">
-          <e p="Resources.Designer.cs" t="Include" />
-          <e p="Resources.resx" t="Include" />
-        </e>
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Engine.Core.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.Core.Tests" t="IncludeRecursive">
-        <e p="Engine.Core.Tests.csproj" t="IncludeRecursive" />
-        <e p="UnitTest1.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="Engine.Core.Tests.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.GUI" t="IncludeRecursive">
-        <e p="Engine.GUI.csproj" t="IncludeRecursive" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Engine.GUI.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.Graphics" t="IncludeRecursive">
-        <e p="DisplayConfiguration.cs" t="Include" />
-        <e p="Engine.Graphics.csproj" t="IncludeRecursive" />
-        <e p="GraphicsManager.cs" t="Include" />
-        <e p="IGraphicsManager.cs" t="Include" />
-        <e p="Properties" t="Include">
-          <e p="Resources.Designer.cs" t="Include" />
-          <e p="Resources.resx" t="Include" />
-        </e>
-        <e p="Shaders" t="Include">
-          <e p="Resources" t="Include">
-            <e p="main.frag.glsl" t="Include" />
-            <e p="main.geom.glsl" t="Include" />
-            <e p="main.vert.glsl" t="Include" />
-          </e>
-          <e p="ShaderProgram" t="Include">
-            <e p="GlShaderProgram.cs" t="Include" />
-            <e p="IShaderProgram.cs" t="Include" />
-          </e>
-        </e>
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Engine.Graphics.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
       <e p="Engine.Graphics.Tests" t="IncludeRecursive">
         <e p="Engine.Graphics.Tests.csproj" t="IncludeRecursive" />
         <e p="GraphicsManager_Tests.cs" t="Include" />
@@ -1707,7 +1636,7 @@
         </e>
         <e p="Program.cs" t="Include" />
         <e p="Reload.csproj" t="IncludeRecursive" />
-        <e p="ReloadBase.cs" t="Include" />
+        <e p="ReloadGame.cs" t="Include" />
         <e p="Scenes" t="Include">
           <e p="Commands" t="Include">
             <e p="Commands.cs" t="Include" />
@@ -1755,6 +1684,24 @@
           </e>
         </e>
       </e>
+      <e p="Reload.DataAccess" t="IncludeRecursive">
+        <e p="FileDataAccess.cs" t="Include" />
+        <e p="InMemoryDb.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="InputContext.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+        </e>
+        <e p="PersistentDb.cs" t="Include" />
+        <e p="Reload.DataAccess.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Reload.DataAccess.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="Reload.Engine" t="IncludeRecursive">
         <e p="Game.cs" t="Include" />
         <e p="Reload.Engine.csproj" t="IncludeRecursive" />
@@ -1795,23 +1742,63 @@
           </e>
         </e>
       </e>
+      <e p="Reload.Graphics" t="IncludeRecursive">
+        <e p="DisplayConfiguration.cs" t="Include" />
+        <e p="GraphicsManager.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+        </e>
+        <e p="Reload.Graphics.csproj" t="IncludeRecursive" />
+        <e p="Shaders" t="Include">
+          <e p="Resources" t="Include">
+            <e p="main.frag.glsl" t="Include" />
+            <e p="main.geom.glsl" t="Include" />
+            <e p="main.vert.glsl" t="Include" />
+          </e>
+          <e p="ShaderProgram" t="Include">
+            <e p="GlShaderProgram.cs" t="Include" />
+            <e p="IShaderProgram.cs" t="Include" />
+          </e>
+        </e>
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Reload.Graphics.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="Reload.Input" t="IncludeRecursive">
         <e p="Configuration" t="Include">
-          <e p="KeyboardConfiguration.cs" t="Include" />
-          <e p="MouseConfiguration.cs" t="Include" />
+          <e p="InputConfiguration.cs" t="Include" />
         </e>
-        <e p="Contexts" t="Include">
-          <e p="InputContextBase.cs" t="Include" />
-          <e p="InputContextType.cs" t="Include" />
+        <e p="Extensions" t="Include">
+          <e p="InputContextExtensions.cs" t="Include" />
         </e>
+        <e p="InputHandler.cs" t="Include" />
+        <e p="InputManager.cs" t="Include" />
+        <e p="InputMappingContext.cs" t="Include" />
+        <e p="InputMappingContextFactory.cs" t="Include" />
         <e p="Reload.Input.csproj" t="IncludeRecursive" />
-        <e p="ReloadInput.cs" t="Include" />
-        <e p="ReloadInputHandler.cs" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
             <e p="netstandard2.1" t="Include">
               <e p="Reload.Input.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Reload.UI" t="IncludeRecursive">
+        <e p="Reload.UI.csproj" t="IncludeRecursive" />
+        <e p="UserInterfaceManager.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="netstandard2.1" t="Include">
+              <e p="Reload.UI.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>

@@ -1,4 +1,4 @@
-namespace Engine.ResourcesPipeline.Shaders.ShaderProgram
+namespace Reload.Graphics.Shaders.ShaderProgram
 {
     using Silk.NET.OpenGL;
 

@@ -3,7 +3,7 @@ using NUnit.Framework;
 using Silk.NET.Windowing.Common;
 using System.Drawing;
 
-namespace Engine.Graphics.Tests
+namespace Reload.Graphics.Tests
 {
     public class GraphicsManager_Tests
     {

@@ -1,4 +1,4 @@
-﻿namespace Engine.Audio.Codec.Mp3
+﻿namespace Reload.Audio.Codec.Mp3
 {
     using NLayer;
     using System;
