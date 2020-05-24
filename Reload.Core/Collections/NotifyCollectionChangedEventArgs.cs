@@ -9,44 +9,44 @@
         {
             Action = action;
             Item = item;
-            OldItem = oldItem;
+            this.OldItem = oldItem;
             Index = index;
-            CollectionChanged = collectionChanged;
+            this.CollectionChanged = collectionChanged;
         }
 
         public NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction action, object key, object item, object oldItem, bool collectionChanged)
         {
             Action = action;
             Item = item;
-            OldItem = oldItem;
+            this.OldItem = oldItem;
             Key = key;
             Index = -1;
-            CollectionChanged = collectionChanged;
+            this.CollectionChanged = collectionChanged;
         }
 
         /// <summary>
         /// Gets the type of action performed.
         /// Allowed values are <see cref="NotifyCollectionChangedAction.Add"/> and <see cref="NotifyCollectionChangedAction.Remove"/>.
         /// </summary>
-        public NotifyCollectionChangedAction Action { get; private set; }
+        public NotifyCollectionChangedAction Action { get; }
 
         /// <summary>
         /// Gets the added or removed item (if dictionary, value only).
         /// </summary>
-        public object Item { get; private set; }
+        public object Item { get; }
 
         /// <summary>
         /// Gets the previous value. Only valid if <see cref="Action"/> is <see cref="NotifyCollectionChangedAction.Add"/> and <see cref=""/>
         /// </summary>
-        public object OldItem { get; private set; }
+        public object OldItem { get; }
 
         /// <summary>Gets the added or removed key (if dictionary).</summary>
-        public object Key { get; private set; }
+        public object Key { get; }
 
         /// <summary>
         /// Gets the index in the collection (if applicable).
         /// </summary>
-        public int Index { get; private set; }
+        public int Index { get; }
 
         /// <summary>
         /// Gets a value indicating whether [collection changed (not a replacement but real insertion/removal)].
@@ -54,6 +54,6 @@
         /// <value>
         ///   <c>true</c> if [collection changed]; otherwise, <c>false</c>.
         /// </value>
-        public bool CollectionChanged { get; private set; }
+        public bool CollectionChanged { get; }
     }
 }

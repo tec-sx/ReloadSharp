@@ -117,43 +117,29 @@
             AudioManager.Initialize();
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
 
-            Window.Load += OnWindowLoad;
-            Window.Update += Update;
-            Window.Render += Render;
-            Window.Closing += ShutDownSubSystems;
-            SceneManager.ExitProgram += Window.Close;
-        }
-
-        private void OnWindowLoad()
-        {
-            InputManager.Load();
-            UserInterfaceManager.Load();
-
-            OnLoadContent();
-            SceneManager.Run();
+            Window.Load += InputManager.Load;
+            Window.Load += UserInterfaceManager.Load;
+            Window.Load += OnLoadContent;
 
             IsLoaded = true;
-        }
 
-        private void Update(double deltaTime)
-        {
-            OnUpdate(deltaTime);
+            Window.Update += OnUpdate;
+            Window.Update += SceneManager.Update;
+            Window.Update += UserInterfaceManager.Update;
 
-            SceneManager.Update(deltaTime);
-        }
+            Window.Render += OnRender;
+            Window.Render += SceneManager.Render;
+            Window.Render += UserInterfaceManager.Render;
 
-        private void Render(double deltaTime)
-        {
-            OnRender(deltaTime);
-            
-            SceneManager.Render(deltaTime);
-            UserInterfaceManager.Render();
+            Window.Closing += ShutDownSubSystems;
+            SceneManager.ExitProgram += Window.Close;
         }
 
         public override void Run()
         {
             Initialize();
 
+            SceneManager.Run();
             Window.Run();
 
             ShutDownSubSystems();
@@ -162,10 +148,10 @@
         private void ShutDownSubSystems()
         {
             OnShutDown();
-            
+
             AssetsManager.ShutDown();
             AudioManager.ShutDown();
-            
+
             UserInterfaceManager.ShutDown();
             InputManager.ShutDown();
             GraphicsManager.ShutDown();

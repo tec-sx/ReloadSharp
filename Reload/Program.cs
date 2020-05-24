@@ -1,11 +1,8 @@
-﻿using System;
-
-namespace ReloadGame
+﻿namespace ReloadGame
 {
-    class Program
+    public static class Program
     {
-        [STAThread]
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             var game = new ReloadGame(args);
             game.Run();

@@ -1,10 +1,7 @@
-﻿using Reload.Audio.Backend;
-using Reload.Audio.Codec;
-
-namespace Reload.Audio
+﻿namespace Reload.Audio
 {
-    using Reload.Audio.Backend;
-    using Reload.Audio.Codec;
+    using Backend;
+    using Codec;
     using Silk.NET.OpenAL;
     using System;
     using System.Diagnostics;
@@ -13,21 +10,20 @@ namespace Reload.Audio
     using System.Threading;
     using System.Threading.Tasks;
 
-    public class AudioSource : IDisposable
+    public sealed class AudioSource : IDisposable
     {
         private readonly uint _source;
         private readonly Decoder _decoder;
         private readonly BufferChain _bufferChain;
         private readonly Stopwatch _timer;
-        public byte[] Data;
+        private byte[] _data;
 
         public float Gain
         {
             get => ALNative.GetSourceProperty(_source, SourceFloat.Gain);
             set
             {
-                float normalValue;
-                normalValue = value > 1.0f ? 1.0f : value <= 0 ? 0.001f : value;
+                var normalValue = value > 1.0f ? 1.0f : value <= 0 ? 0.001f : value;
                 ALNative.SetSourceProperty(_source, SourceFloat.Gain, normalValue);
             }
         }
@@ -79,14 +75,15 @@ namespace Reload.Audio
             _bufferChain = new BufferChain(_source);
             _decoder = DecoderFactory.CreateDecoder(stream);
 
-            Data = _decoder.ReadSamples(TimeSpan.FromSeconds(1));
-            _bufferChain.QueueData(Data, _decoder.Format);
+            _data = _decoder.ReadSamples(TimeSpan.FromSeconds(1));
+            _bufferChain.QueueData(_data, _decoder.Format);
 
             _timer = new Stopwatch();
         }
 
         public void Dispose()
         {
+            _bufferChain.Dispose();
             ALNative.DeleteSource(_source);
         }
 
@@ -96,14 +93,14 @@ namespace Reload.Audio
             ALNative.SourcePlay(_source);
             _timer.Start();
 
-            var task = Task.Run(() =>
+            Task.Run(() =>
             {
                 while (IsPlaying)
                 {
                     if (_bufferChain.BuffersQueued < 3 && !_decoder.IsFinished)
                     {
-                        Data = _decoder.ReadSamples(TimeSpan.FromSeconds(1));
-                        _bufferChain.QueueData(Data, _decoder.Format);
+                        _data = _decoder.ReadSamples(TimeSpan.FromSeconds(1));
+                        _bufferChain.QueueData(_data, _decoder.Format);
                     }
 
                     Thread.Sleep(100);

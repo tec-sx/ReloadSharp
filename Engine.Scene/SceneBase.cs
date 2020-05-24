@@ -96,7 +96,7 @@ namespace Reload.Scene
             ChangeSceneState(SceneState.Running);
         }
 
-        /// <inheritdoc>
+        /// <inheritdoc/>
         public void Update(double deltaTime)
         {
             if (_state != SceneState.Running)
@@ -108,7 +108,7 @@ namespace Reload.Scene
             Layers.Update();
         }
 
-        /// <inheritdoc>
+        /// <inheritdoc/>
         public void Render(double deltaTime)
         {
             if (_state != SceneState.Running)

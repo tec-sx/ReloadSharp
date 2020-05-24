@@ -3,7 +3,6 @@ using Silk.NET.Vulkan;
 namespace Reload.Graphics
 {
     using Shaders.ShaderProgram;
-    using Silk.NET.GLFW;
     using Silk.NET.OpenGL;
     using Silk.NET.Windowing;
     using Silk.NET.Windowing.Common;
@@ -19,6 +18,7 @@ namespace Reload.Graphics
     public sealed class GraphicsManager
     {
         public GL GlApi { get; private set; }
+        public Vk VkApi { get; private set; }
 
         /// <summary>
         /// Creates a new Silk.NET window with the provided configuration.
@@ -38,9 +38,13 @@ namespace Reload.Graphics
 
             if (window.API.API == ContextAPI.OpenGL || window.API.API == ContextAPI.OpenGL)
             {
-                GlApi = window.CreateOpenGL();
+                GlApi = GL.GetApi(window);
             }
-            
+            else if (window.API.API == ContextAPI.Vulkan)
+            {
+                VkApi = Vk.GetApi();
+            }
+
             return window;
         }
 
@@ -87,10 +91,11 @@ namespace Reload.Graphics
 
             return shaderProgram;
         }
-        
+
         public void ShutDown()
         {
             GlApi?.Dispose();
+            VkApi?.Dispose();
         }
 
         /// <summary>
@@ -109,7 +114,7 @@ namespace Reload.Graphics
             options.WindowState = displayConfiguration.InFullScreen ? WindowState.Fullscreen : WindowState.Normal;
             options.UpdatesPerSecond = displayConfiguration.TargetFps;
             options.FramesPerSecond = displayConfiguration.TargetFps;
-            options.VSync = displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Adaptive;
+            options.VSync = displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Off;
             options.RunningSlowTolerance = 5;
             options.UseSingleThreadedWindow = true;
 

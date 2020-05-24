@@ -1,5 +1,8 @@
+using System.Drawing;
 using Reload.AssetPipeline;
+using Reload.Graphics;
 using Reload.Scene.Enumerations;
+using Silk.NET.OpenGL;
 
 namespace Reload.Scene
 {
@@ -25,6 +28,8 @@ namespace Reload.Scene
         /// </summary>
         public InputManager Input { get; }
 
+        public GraphicsManager Graphics { get; }
+
         /// <summary>
         /// Reference to the asset manager.
         /// </summary>
@@ -39,11 +44,13 @@ namespace Reload.Scene
         /// Initialize scene manager.
         /// </summary>
         /// <param name="assets"></param>
-        /// /// <param name="event"></param>
-        public SceneManager(IAssetsManager assets, InputManager input)
+        /// <param name="input"></param>
+        /// <param name="graphics"></param>
+        public SceneManager(IAssetsManager assets, InputManager input, GraphicsManager graphics)
         {
             Assets = assets;
             Input = input;
+            Graphics = graphics;
         }
 
         /// <summary>
@@ -93,6 +100,9 @@ namespace Reload.Scene
         /// <param name="deltaTime"></param>
         public void Render(double deltaTime)
         {
+            var gl = Graphics.GlApi;
+            gl.ClearColor(Color.FromArgb(255, 0, 32, 48));
+            gl.Clear((uint)(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit));
             ActiveScene?.Render(deltaTime);
         }
 

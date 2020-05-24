@@ -1,11 +1,8 @@
-﻿using System;
+﻿using ImGuiNET;
+using Reload.Core.Collections;
 using Reload.Graphics;
 using Reload.Game;
 using Reload.Input;
-using Silk.NET.Input.Common;
-using Silk.NET.OpenGL;
-using Silk.NET.Windowing;
-using Silk.NET.Windowing.Common;
 using Ultz.SilkExtensions.ImGui;
 
 namespace Reload.UI
@@ -16,12 +13,20 @@ namespace Reload.UI
         private readonly IGame _game;
         private readonly GraphicsManager _graphics;
         private readonly InputManager _input;
-        
+
+        private FastList<IUserInterface> _uiLayers;
+        private DebugUi _debugLayer;
+
         public UserInterfaceManager(IGame game, GraphicsManager graphics, InputManager input)
         {
             _game = game;
             _graphics = graphics;
             _input = input;
+            _uiLayers = new FastList<IUserInterface>();
+
+#if DEBUG
+            _debugLayer = new DebugUi(_game);
+#endif
         }
 
         public void Load()
@@ -32,14 +37,29 @@ namespace Reload.UI
             _controller = new ImGuiController(gl, window, inputContext);
         }
 
-        public void Render()
+        public void Update(double deltaTime)
         {
-            ImGuiNET.ImGui.ShowDemoWindow();
+            _controller.Update((float)deltaTime);
+        }
+
+        public void Render(double deltaTime)
+        {
+            ImGui.BeginMainMenuBar();
+
+            for (var i = 0; i < _uiLayers.Count; i++)
+            {
+                _uiLayers[i].Draw();
+            }
+#if DEBUG
+            _debugLayer.Draw();
+#endif
+            ImGui.End();
+
             _controller.Render();
         }
 
         public void ShutDown()
-        {    
+        {
             _controller?.Dispose();
         }
     }

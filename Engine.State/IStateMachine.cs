@@ -1,6 +1,6 @@
 namespace Reload.State
 {
-    public interface IStateMachine<T>
+    public interface IStateMachine<in T>
     {
         void PushState(T state);
         void PopState();

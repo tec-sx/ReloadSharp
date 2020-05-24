@@ -1,8 +1,6 @@
-﻿using Reload.Audio.Backend;
-
-namespace Reload.Audio
+﻿namespace Reload.Audio
 {
-    using Reload.Audio.Backend;
+    using Backend;
     using Silk.NET.OpenAL;
     using System;
     using System.Collections.Generic;
@@ -13,7 +11,7 @@ namespace Reload.Audio
         private readonly List<AudioBuffer> _buffers;
 
         private readonly int _numBuffers = 3;
-        private int _currentBuffer = 0;
+        private int _currentBuffer;
 
         public int BuffersQueued
         {
@@ -29,7 +27,7 @@ namespace Reload.Audio
             _source = source;
             _buffers = new List<AudioBuffer>();
 
-            for (int i = 0; i < _numBuffers; i++)
+            for (var i = 0; i < _numBuffers; i++)
             {
                 _buffers.Add(new AudioBuffer());
             }
@@ -51,10 +49,10 @@ namespace Reload.Audio
             _currentBuffer++;
             _currentBuffer %= 3;
 
-            ALNative.SourceQueueBuffers(_source, new uint[] { buffer });
+            ALNative.SourceQueueBuffers(_source, new [] { buffer });
         }
 
-        public void RemoveProcessed()
+        private void RemoveProcessed()
         {
             var processed = ALNative.GetSourceProperty(_source, GetSourceInteger.BuffersProcessed);
 
