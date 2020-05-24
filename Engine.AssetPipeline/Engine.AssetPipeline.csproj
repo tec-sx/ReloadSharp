@@ -5,12 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Engine.Audio\Engine.Audio.csproj" />
-    <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
+    <ProjectReference Include="..\Reload.Audio\Reload.Audio.csproj" />
+    <ProjectReference Include="..\Reload.Graphics\Reload.Graphics.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Backend\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SharpGLTF.Core" Version="1.0.0-alpha0017" />
+    <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.0-alpha0017" />
   </ItemGroup>
 
 </Project>

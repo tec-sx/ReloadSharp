@@ -11,9 +11,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Engine.AssetPipeline\Engine.AssetPipeline.csproj" />
-    <ProjectReference Include="..\Engine.Audio\Engine.Audio.csproj" />
+    <ProjectReference Include="..\Reload.Audio\Reload.Audio.csproj" />
     <ProjectReference Include="..\Engine.Configuration\Engine.Configuration.csproj" />
-    <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
+    <ProjectReference Include="..\Reload.Graphics\Reload.Graphics.csproj" />
     <ProjectReference Include="..\Engine.Scene\Engine.Scene.csproj" />
     <ProjectReference Include="..\Engine.State\Engine.State.csproj" />
     <ProjectReference Include="..\Reload.Core\Reload.Core.csproj" />

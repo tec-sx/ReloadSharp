@@ -5,7 +5,7 @@ namespace Reload.Audio
     using Reload.Audio.Backend;
     using Silk.NET.OpenAL;
 
-    public sealed class AudioManager : IAudioManager
+    public sealed class AudioManager
     {
         public AudioContext Context { get; private set; }
 

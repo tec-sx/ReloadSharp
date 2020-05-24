@@ -1,16 +1,15 @@
-﻿using Reload.Core.Commands;
-using Reload.UI;
-
-namespace Reload.Engine
+﻿namespace Reload.Engine
 {
-    using global::Reload.AssetPipeline;
-    using global::Reload.AssetPipeline.Audio;
-    using global::Reload.AssetPipeline.GameObjects;
-    using global::Reload.AssetPipeline.Textures;
-    using global::Reload.Audio;
-    using global::Reload.Configuration;
-    using global::Reload.Graphics;
-    using global::Reload.Scene;
+    using Reload.Core.Commands;
+    using Reload.UI;
+    using Reload.AssetPipeline;
+    using Reload.AssetPipeline.Audio;
+    using Reload.AssetPipeline.GameObjects;
+    using Reload.AssetPipeline.Textures;
+    using Reload.Audio;
+    using Reload.Configuration;
+    using Reload.Graphics;
+    using Reload.Scene;
     using Reload.Game;
     using Reload.Input;
     using System;
@@ -35,7 +34,7 @@ namespace Reload.Engine
         /// <summary>
         /// Configuration manager.
         /// </summary>
-        public IConfigurationManager ConfigurationManager { get; }
+        public ConfigurationManager ConfigurationManager { get; }
 
         /// <summary>
         /// Graphics manager.
@@ -50,7 +49,7 @@ namespace Reload.Engine
         /// <summary>
         /// Audio manager.
         /// </summary>
-        public IAudioManager AudioManager { get; }
+        public AudioManager AudioManager { get; }
 
         /// <summary>
         /// Assets manager.
@@ -77,10 +76,10 @@ namespace Reload.Engine
                 #region Core sub-systems
 
                 .AddSingleton(this as IGame)
-                .AddSingleton<IConfigurationManager, ConfigurationManager>()
+                .AddSingleton<ConfigurationManager>()
                 .AddSingleton<GraphicsManager>()
                 .AddSingleton<InputManager>()
-                .AddSingleton<IAudioManager, AudioManager>()
+                .AddSingleton<AudioManager>()
 
                 #endregion
 
@@ -98,10 +97,10 @@ namespace Reload.Engine
                 .BuildServiceProvider();
 
 
-            ConfigurationManager = SubSystems.GetService<IConfigurationManager>();
+            ConfigurationManager = SubSystems.GetService<ConfigurationManager>();
             GraphicsManager = SubSystems.GetService<GraphicsManager>();
             InputManager = SubSystems.GetService<InputManager>();
-            AudioManager = SubSystems.GetService<IAudioManager>();
+            AudioManager = SubSystems.GetService<AudioManager>();
 
             AssetsManager = SubSystems.GetService<IAssetsManager>();
             SceneManager = SubSystems.GetService<ISceneManager>();

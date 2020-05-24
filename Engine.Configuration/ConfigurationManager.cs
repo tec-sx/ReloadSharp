@@ -7,26 +7,26 @@ namespace Reload.Configuration
     using Reload.Graphics;
     using Reload.Input.Configuration;
 
-    public class ConfigurationManager : IConfigurationManager
+    public class ConfigurationManager
     {
-        private readonly UserConfiguration userConfiguration;
+        private readonly UserConfiguration _userConfiguration;
 
         public ConfigurationManager()
         {
-            userConfiguration = new UserConfiguration();
-            userConfiguration.Load();
+            _userConfiguration = new UserConfiguration();
+            _userConfiguration.Load();
         }
 
         public DisplayConfiguration CreateDisplayConfiguration()
         {
             return new DisplayConfiguration
             {
-                Resolution = userConfiguration.DisplayResolution,
-                RefreshRate = userConfiguration.DisplayRefreshRate,
+                Resolution = _userConfiguration.DisplayResolution,
+                RefreshRate = _userConfiguration.DisplayRefreshRate,
                 TargetFps = SystemConfiguration.TargetFps,
-                InFullScreen = userConfiguration.DisplayInFullScreen,
-                EnableVSync = userConfiguration.DisplayEnableVsync,
-                EnableVulkan = userConfiguration.DisplayEnableVulkan,
+                InFullScreen = _userConfiguration.DisplayInFullScreen,
+                EnableVSync = _userConfiguration.DisplayEnableVsync,
+                EnableVulkan = _userConfiguration.DisplayEnableVulkan,
                 WindowTitle = $"{SystemConfiguration.ProgramName} - v.{SystemConfiguration.ProgramVersion}",
             };
         }
@@ -51,21 +51,21 @@ namespace Reload.Configuration
         {
             return new InputConfiguration
             {
-                KeyboardId = userConfiguration.KeyboardId,
-                Up = userConfiguration.KeyUp,
-                Down = userConfiguration.KeyDown,
-                Left = userConfiguration.KeyLeft,
-                Right = userConfiguration.KeyRight,
-                Run = userConfiguration.KeyRun,
-                Duck = userConfiguration.KeyDuck,
-                Jump = userConfiguration.KeyJump,
-                OpenInventory = userConfiguration.KeyOpenInventory,
-                ToggleFightMode = userConfiguration.KeyToggleFightMode,
-                Select = userConfiguration.KeySelect,
-                Pause = userConfiguration.KeyPause,
+                KeyboardId = _userConfiguration.KeyboardId,
+                Up = _userConfiguration.KeyUp,
+                Down = _userConfiguration.KeyDown,
+                Left = _userConfiguration.KeyLeft,
+                Right = _userConfiguration.KeyRight,
+                Run = _userConfiguration.KeyRun,
+                Duck = _userConfiguration.KeyDuck,
+                Jump = _userConfiguration.KeyJump,
+                OpenInventory = _userConfiguration.KeyOpenInventory,
+                ToggleFightMode = _userConfiguration.KeyToggleFightMode,
+                Select = _userConfiguration.KeySelect,
+                Pause = _userConfiguration.KeyPause,
 
-                MouseId = userConfiguration.MouseId,
-                Interact = userConfiguration.MouseInteract
+                MouseId = _userConfiguration.MouseId,
+                Interact = _userConfiguration.MouseInteract
             };
         }
     }
