@@ -1,3 +1,5 @@
+using Reload.UI;
+
 namespace Reload.Scene
 {
     using System.Drawing;
@@ -12,7 +14,7 @@ namespace Reload.Scene
     /// The scene manager. Instantiated as singleton in the
     /// service manager.
     /// </summary>
-    public class SceneManager : ISceneManager
+    public class SceneManager
     {
         /// <summary>
         /// Event invoked when scene reaches ExitProgram state,
@@ -43,6 +45,7 @@ namespace Reload.Scene
         /// <param name="assets"></param>
         /// <param name="input"></param>
         /// <param name="graphics"></param>
+        /// <param name="uiManager"></param>
         public SceneManager(IAssetsManager assets, InputManager input, GraphicsManager graphics)
         {
             Assets = assets;
@@ -100,6 +103,7 @@ namespace Reload.Scene
             var gl = Graphics.Gl;
             gl.ClearColor(Color.FromArgb(255, 2, 70, 89));
             gl.Clear((uint)(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit));
+
             ActiveScene?.Render(deltaTime);
         }
 
@@ -112,7 +116,7 @@ namespace Reload.Scene
         {
             var newScene = new T
             {
-                Manager = this as ISceneManager
+                Manager = this
             };
 
             if (ActiveScene == null)

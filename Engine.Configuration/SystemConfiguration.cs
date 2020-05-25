@@ -8,7 +8,7 @@ namespace Reload.Configuration
         #endregion
 
         #region Graphics
-        public const int TargetFps = 60;
+        public const int TargetFps = 120;
         #endregion
 
         #region Audio

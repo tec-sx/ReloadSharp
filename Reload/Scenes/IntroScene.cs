@@ -10,15 +10,12 @@ namespace ReloadGame.Scenes
 
     public class IntroScene : SceneBase
     {
-        private IMusic _bgMusicStream;
         private Player player = new Player();
         //public MoveDirection moveDirection;
         //public MoveStatus moveStatus;
 
         public override void OnEnter()
         {
-            _bgMusicStream = Manager.Assets.LoadMusic("Intro");
-
             var mainContext = new InputMappingContext();
 
             mainContext.MapKeyToCommand(0, Key.Space, new JumpCommand());
@@ -36,12 +33,10 @@ namespace ReloadGame.Scenes
             Manager.Input.Handler.FireActionCommand += player.HandleActionCommand;
             Manager.Input.Handler.FireStateCommand += player.HandleStateCommand;
             Manager.Input.Handler.FireRangeCommand += player.HandleRangeCommand;
-            //_bgMusicStream.Play();
         }
 
         public override void OnLeave()
         {
-            _bgMusicStream.Stop();
         }
 
         public override void OnUpdate(double deltaTime)

@@ -1,21 +1,17 @@
-﻿using System.Drawing;
-using ImGuiNET;
-using Reload.Core.Collections;
-using Reload.Graphics;
-using Reload.Game;
-using Reload.Input;
-using Ultz.SilkExtensions.ImGui;
-
-namespace Reload.UI
+﻿namespace Reload.UI
 {
+    using System.Drawing;
+    using Graphics;
+    using Game;
+    using Input;
+    using Ultz.SilkExtensions.ImGui;
+
     public class UserInterfaceManager
     {
         private ImGuiController _controller;
         private readonly IGame _game;
         private readonly GraphicsManager _graphics;
         private readonly InputManager _input;
-
-        private readonly FastList<IUserInterface> _uiLayers;
         private readonly DebugUi _debugLayer;
 
         public UserInterfaceManager(IGame game, GraphicsManager graphics, InputManager input)
@@ -23,8 +19,6 @@ namespace Reload.UI
             _game = game;
             _graphics = graphics;
             _input = input;
-            _uiLayers = new FastList<IUserInterface>();
-
 #if DEBUG
             _debugLayer = new DebugUi(_game);
 #endif
@@ -45,14 +39,9 @@ namespace Reload.UI
 
         public void Render(double deltaTime)
         {
-            for (var i = 0; i < _uiLayers.Count; i++)
-            {
-                _uiLayers[i].Draw(deltaTime);
-            }
 #if DEBUG
             _debugLayer.Draw(deltaTime);
 #endif
-
             _controller.Render();
         }
 

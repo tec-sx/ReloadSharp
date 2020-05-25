@@ -14,7 +14,7 @@ namespace Reload.Scene
 
         IScene NextScene { get; set; }
         IScene PrevScene { get; set; }
-        ISceneManager Manager { get; set; }
+        SceneManager Manager { get; set; }
 
         abstract void OnEnter();
         abstract void OnLeave();

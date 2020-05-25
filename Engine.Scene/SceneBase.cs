@@ -36,7 +36,7 @@ namespace Reload.Scene
         /// <summary>
         /// The scene manager managing the current scene.
         /// </summary>
-        public ISceneManager Manager { get; set; }
+        public SceneManager Manager { get; set; }
 
         /// <summary>
         /// Scene base constructor.
@@ -102,7 +102,7 @@ namespace Reload.Scene
             }
 
             OnUpdate(deltaTime);
-            Layers.Update();
+            Layers.Update(deltaTime);
         }
 
         /// <inheritdoc/>
@@ -112,6 +112,8 @@ namespace Reload.Scene
             {
                 return;
             }
+
+            Layers.Draw(deltaTime);
 
             OnRender(deltaTime);
         }

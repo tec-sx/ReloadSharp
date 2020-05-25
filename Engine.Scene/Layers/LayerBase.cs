@@ -1,10 +1,12 @@
+using Reload.Core;
+
 namespace Reload.Scene.Layers
 {
     /// <summary>
     /// Layer base abstract class. Every layer
     /// must inherit this class.
     /// </summary>
-    public abstract class LayerBase
+    public abstract class LayerBase : IDrawable
     {
         /// <summary>
         /// Override this method to add logic upon attaching the
@@ -21,12 +23,13 @@ namespace Reload.Scene.Layers
         /// <summary>
         /// Override this method to add update logic.
         /// </summary>
-        public abstract void OnUpdate();
+        public abstract void Update(double deltaTime);
+
 
         /// <summary>
-        /// Override this method to add logic
-        /// for handling events.
+        /// Override this method to draw the layer.
         /// </summary>
-        public abstract void OnEvent();
+        /// <param name="deltaTime"></param>
+        public abstract void Draw(double deltaTime);
     }
 }

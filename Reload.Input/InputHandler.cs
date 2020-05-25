@@ -56,7 +56,7 @@
 
         private void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
         {
-            if (!_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
+            if (_activeBindingContexts.Count == 0 || !_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
             {
                 return;
             }
@@ -79,7 +79,7 @@
 
         private void HandleKeyUp(IKeyboard keyboard, Key key, int arg)
         {
-            if (!_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
+            if (_activeBindingContexts.Count == 0 || !_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
             {
                 return;
             }

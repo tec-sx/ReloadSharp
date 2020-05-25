@@ -1,5 +1,8 @@
 using System;
 using System.Collections.Generic;
+using Reload.Core;
+using Reload.Core.Collections;
+using Reload.UI;
 
 namespace Reload.Scene.Layers
 {
@@ -9,19 +12,19 @@ namespace Reload.Scene.Layers
     public class LayerStack
     {
         private int layerInsertIndex;
-        private readonly List<LayerBase> layers;
+        private readonly FastList<LayerBase> _layers;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         public LayerStack()
         {
-            layers = new List<LayerBase>();
+            _layers = new FastList<LayerBase>();
             layerInsertIndex = 0;
         }
 
         /// <summary>
-        /// Push new layer to the first half of the layers list;
+        /// Push new layer to the first half of the _layers list;
         /// </summary>
         /// <param name="layer"></param>
         public void PushLayer(LayerBase layer)
@@ -32,7 +35,7 @@ namespace Reload.Scene.Layers
                     Properties.Resources.LayerNullParameterExceptionMessage);
             }
 
-            layers.Insert(layerInsertIndex++, layer);
+            _layers.Insert(layerInsertIndex++, layer);
         }
 
         /// <summary>
@@ -47,7 +50,7 @@ namespace Reload.Scene.Layers
                     Properties.Resources.OverlayNullParameterExceptionMessage);
             }
 
-            layers.Add(overlay);
+            _layers.Add(overlay);
         }
 
         /// <summary>
@@ -64,7 +67,7 @@ namespace Reload.Scene.Layers
 
             layer.OnDetach();
 
-            layers.Remove(layer);
+            _layers.Remove(layer);
             layerInsertIndex--;
         }
 
@@ -81,26 +84,35 @@ namespace Reload.Scene.Layers
             }
 
             overlay.OnDetach();
-            layers.Remove(overlay);
+            _layers.Remove(overlay);
         }
 
         /// <summary>
-        /// Update all layers
+        /// Update all _layers
         /// </summary>
-        public void Update() => layers.ForEach(layer => layer.OnUpdate());
+        public void Update(double deltaTime)
+        {
+            for (var i = 0; i < _layers.Count; i++)
+            {
+                _layers[i].Update(deltaTime);
+            }
+        }
+
+        public void Draw(double deltaTime)
+        {
+            for (var i = 0; i < _layers.Count; i++)
+            {
+                _layers[i].Draw(deltaTime);
+            }
+        }
 
         /// <summary>
-        /// Handle events for all layers
-        /// </summary>
-        public void HandleEvent() => layers.ForEach(layer => layer.OnEvent());
-
-        /// <summary>
-        /// Detach all layers and clears layer stack.
+        /// Detach all _layers and clears layer stack.
         /// </summary>
         public void ClearStack()
         {
-            layers.ForEach(layer => layer.OnDetach());
-            layers.Clear();
+            _layers.ForEach(layer => layer.OnDetach());
+            _layers.Clear();
         }
     }
 }

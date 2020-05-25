@@ -59,7 +59,7 @@
         /// <summary>
         /// Game scene manager.
         /// </summary>
-        public ISceneManager SceneManager { get; }
+        public SceneManager SceneManager { get; }
 
         public UserInterfaceManager UserInterfaceManager { get; }
 
@@ -89,8 +89,8 @@
                 .AddSingleton<IGameObjectCache, GameObjectCache>()
                 .AddSingleton<IAudioCache, AudioCache>()
                 .AddSingleton<IAssetsManager, AssetsManager>()
-                .AddSingleton<ISceneManager, SceneManager>()
-                .AddTransient<UserInterfaceManager>()
+                .AddSingleton<UserInterfaceManager>()
+                .AddSingleton<SceneManager>()
 
                 #endregion
 
@@ -103,7 +103,7 @@
             AudioManager = SubSystems.GetService<AudioManager>();
 
             AssetsManager = SubSystems.GetService<IAssetsManager>();
-            SceneManager = SubSystems.GetService<ISceneManager>();
+            SceneManager = SubSystems.GetService<SceneManager>();
 
             UserInterfaceManager = SubSystems.GetService<UserInterfaceManager>();
         }
@@ -125,15 +125,14 @@
             IsLoaded = true;
 
             Window.Update += OnUpdate;
-            Window.Update += SceneManager.Update;
             Window.Update += UserInterfaceManager.Update;
+            Window.Update += SceneManager.Update;
 
             Window.Resize += UserInterfaceManager.Resize;
 
             Window.Render += OnRender;
             Window.Render += SceneManager.Render;
             Window.Render += UserInterfaceManager.Render;
-
             Window.Closing += ShutDownSubSystems;
             SceneManager.ExitProgram += Window.Close;
         }
