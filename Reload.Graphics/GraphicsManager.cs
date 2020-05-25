@@ -1,4 +1,6 @@
-using Silk.NET.Vulkan;
+using System.Runtime.InteropServices;
+using Reload.Graphics.Properties;
+using Silk.NET.GLFW;
 
 namespace Reload.Graphics
 {
@@ -10,6 +12,7 @@ namespace Reload.Graphics
     using System.Collections.Generic;
     using System.Drawing;
     using System.Runtime.CompilerServices;
+    using Silk.NET.Vulkan;
 
     /// <summary>
     /// The main graphics manager class. Add as singleton in the
@@ -17,8 +20,10 @@ namespace Reload.Graphics
     /// </summary>
     public sealed class GraphicsManager
     {
-        public GL GlApi { get; private set; }
+        public GL Gl { get; private set; }
         public Vk VkApi { get; private set; }
+
+        public Glfw Glfw { get; private set; }
 
         /// <summary>
         /// Creates a new Silk.NET window with the provided configuration.
@@ -26,7 +31,7 @@ namespace Reload.Graphics
         /// <param name="displayConfiguration"></param>
         /// <returns cref="IWindow"></returns>
         /// <exception cref="NotSupportedException"></exception>
-        public IWindow CreateWindow(DisplayConfiguration displayConfiguration)
+        public unsafe IWindow CreateWindow(DisplayConfiguration displayConfiguration)
         {
             var options = CreateWindowOptionsFromConfiguration(displayConfiguration);
             var window = Window.Create(options);
@@ -36,14 +41,18 @@ namespace Reload.Graphics
                 throw new NotSupportedException($"{options.API.API.ToString()} is not supported.");
             }
 
+            Glfw = Glfw.GetApi();
+
             if (window.API.API == ContextAPI.OpenGL || window.API.API == ContextAPI.OpenGL)
             {
-                GlApi = GL.GetApi(window);
+                Gl = GL.GetApi(window);
             }
             else if (window.API.API == ContextAPI.Vulkan)
             {
                 VkApi = Vk.GetApi();
             }
+
+            //Glfw.SetWindowAspectRatio(window.Handle, 16, 9);
 
             return window;
         }
@@ -75,7 +84,7 @@ namespace Reload.Graphics
                 throw new ApplicationException(Properties.Resources.ShaderDictionaryNullOrEmpty);
             }
 
-            var shaderProgram = new GlShaderProgram(GlApi);
+            var shaderProgram = new GlShaderProgram(Gl);
 
             foreach (var (shaderType, shaderFile) in shaderFiles)
             {
@@ -94,7 +103,7 @@ namespace Reload.Graphics
 
         public void ShutDown()
         {
-            GlApi?.Dispose();
+            Gl?.Dispose();
             VkApi?.Dispose();
         }
 
@@ -116,9 +125,35 @@ namespace Reload.Graphics
             options.FramesPerSecond = displayConfiguration.TargetFps;
             options.VSync = displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Off;
             options.RunningSlowTolerance = 5;
-            options.UseSingleThreadedWindow = true;
+            options.UseSingleThreadedWindow = false;
 
             return options;
+        }
+
+        public unsafe void SetupOpenGl()
+        {
+#if DEBUG
+            Gl.Enable(GLEnum.DebugOutput);
+            Gl.Enable(GLEnum.DebugOutputSynchronous);
+            Gl.DebugMessageCallback(OnDebug, null);
+#endif
+        }
+
+        private static void OnDebug(
+            GLEnum source,
+            GLEnum type,
+            int id,
+            GLEnum severity,
+            int length,
+            IntPtr message,
+            IntPtr userparam)
+        {
+            Console.WriteLine(
+                Resources.GraphicsManager_OnDebug,
+                severity.ToString().Substring(13),
+                type.ToString().Substring(9),
+                id,
+                Marshal.PtrToStringAnsi(message));
         }
     }
 }

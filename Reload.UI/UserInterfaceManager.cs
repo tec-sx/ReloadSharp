@@ -1,4 +1,5 @@
-﻿using ImGuiNET;
+﻿using System.Drawing;
+using ImGuiNET;
 using Reload.Core.Collections;
 using Reload.Graphics;
 using Reload.Game;
@@ -14,8 +15,8 @@ namespace Reload.UI
         private readonly GraphicsManager _graphics;
         private readonly InputManager _input;
 
-        private FastList<IUserInterface> _uiLayers;
-        private DebugUi _debugLayer;
+        private readonly FastList<IUserInterface> _uiLayers;
+        private readonly DebugUi _debugLayer;
 
         public UserInterfaceManager(IGame game, GraphicsManager graphics, InputManager input)
         {
@@ -31,7 +32,7 @@ namespace Reload.UI
 
         public void Load()
         {
-            var gl = _graphics.GlApi;
+            var gl = _graphics.Gl;
             var window = _game.Window;
             var inputContext = _input.InputContext;
             _controller = new ImGuiController(gl, window, inputContext);
@@ -44,18 +45,19 @@ namespace Reload.UI
 
         public void Render(double deltaTime)
         {
-            ImGui.BeginMainMenuBar();
-
             for (var i = 0; i < _uiLayers.Count; i++)
             {
-                _uiLayers[i].Draw();
+                _uiLayers[i].Draw(deltaTime);
             }
 #if DEBUG
-            _debugLayer.Draw();
+            _debugLayer.Draw(deltaTime);
 #endif
-            ImGui.End();
 
             _controller.Render();
+        }
+
+        public void Resize(Size size)
+        {
         }
 
         public void ShutDown()

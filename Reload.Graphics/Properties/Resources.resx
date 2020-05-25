@@ -132,4 +132,7 @@
   <data name="ShaderDictionaryNullOrEmpty" xml:space="preserve">
     <value>"Shader dictionary is null or empty."</value>
   </data>
+  <data name="GraphicsManager_OnDebug" xml:space="preserve">
+    <value>|{0}| {1}/{2}: {3}</value>
+  </data>
 </root>

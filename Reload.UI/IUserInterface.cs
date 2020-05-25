@@ -2,6 +2,6 @@
 {
     public interface IUserInterface
     {
-        void Draw();
+        void Draw(double deltaTime);
     }
 }

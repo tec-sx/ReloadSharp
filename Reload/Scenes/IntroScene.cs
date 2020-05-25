@@ -3,10 +3,9 @@ namespace ReloadGame.Scenes
     using Reload.AssetPipeline.Audio.Models;
     using Reload.Scene;
     using Reload.Input;
-    using global::ReloadGame.Characters;
-    using Scenes.Commands;
+    using Characters;
+    using Commands;
     using Silk.NET.Input.Common;
-    using System;
     using System.Collections.Generic;
 
     public class IntroScene : SceneBase

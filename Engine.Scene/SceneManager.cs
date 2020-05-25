@@ -1,14 +1,11 @@
-using System.Drawing;
-using Reload.AssetPipeline;
-using Reload.Graphics;
-using Reload.Scene.Enumerations;
-using Silk.NET.OpenGL;
-
 namespace Reload.Scene
 {
-    using Reload.AssetPipeline;
-    using Reload.Scene.Enumerations;
-    using Reload.Input;
+    using System.Drawing;
+    using Graphics;
+    using Silk.NET.OpenGL;
+    using AssetPipeline;
+    using Enumerations;
+    using Input;
     using System;
 
     /// <summary>
@@ -100,8 +97,8 @@ namespace Reload.Scene
         /// <param name="deltaTime"></param>
         public void Render(double deltaTime)
         {
-            var gl = Graphics.GlApi;
-            gl.ClearColor(Color.FromArgb(255, 0, 32, 48));
+            var gl = Graphics.Gl;
+            gl.ClearColor(Color.FromArgb(255, 2, 70, 89));
             gl.Clear((uint)(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit));
             ActiveScene?.Render(deltaTime);
         }

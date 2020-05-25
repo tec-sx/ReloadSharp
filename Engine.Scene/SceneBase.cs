@@ -1,10 +1,7 @@
-using Reload.Scene.Enumerations;
-using Reload.Scene.Layers;
-
 namespace Reload.Scene
 {
-    using Reload.Scene.Enumerations;
-    using Reload.Scene.Layers;
+    using Enumerations;
+    using Layers;
     using System;
 
     /// <summary>
@@ -13,11 +10,11 @@ namespace Reload.Scene
     /// </summary>
     public abstract class SceneBase : IScene
     {
-        ///<inheritdoc>
+        ///<inheritdoc/>
         public event Action<SceneState> SceneStateChange;
 
         /// <summary>
-        /// The currrent scene's layers stack.
+        /// The current scene's layers stack.
         /// </summary>
         protected LayerStack Layers { get; }
 
@@ -119,19 +116,19 @@ namespace Reload.Scene
             OnRender(deltaTime);
         }
 
-        /// <inheritdoc>
+        /// <inheritdoc/>
         public void Pause()
         {
             ChangeSceneState(SceneState.Paused);
         }
 
-        /// <inheritdoc>
+        /// <inheritdoc/>
         public void Resume()
         {
             ChangeSceneState(SceneState.Running);
         }
 
-        /// <inheritdoc>
+        /// <inheritdoc/>
         public void ChangeSceneState(SceneState state)
         {
             _state = state;

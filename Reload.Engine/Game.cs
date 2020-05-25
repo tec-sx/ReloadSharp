@@ -117,6 +117,7 @@
             AudioManager.Initialize();
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
 
+            Window.Load += GraphicsManager.SetupOpenGl;
             Window.Load += InputManager.Load;
             Window.Load += UserInterfaceManager.Load;
             Window.Load += OnLoadContent;
@@ -126,6 +127,8 @@
             Window.Update += OnUpdate;
             Window.Update += SceneManager.Update;
             Window.Update += UserInterfaceManager.Update;
+
+            Window.Resize += UserInterfaceManager.Resize;
 
             Window.Render += OnRender;
             Window.Render += SceneManager.Render;

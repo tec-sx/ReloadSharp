@@ -16,22 +16,24 @@ namespace Reload.UI
             _game = game;
             _stopwatch = new Stopwatch();
             _stopwatch.Start();
-            _keyColor = new Vector4(205f, 231f, 96f, 1f);
+            _keyColor = new Vector4(0.7f, 0.8f, 0.4f, 1f);
         }
 
-        public void Draw()
+        public void Draw(double deltaTime)
         {
+            ImGui.BeginMainMenuBar();
+
             #region Time based measurments
             ImGui.TextColored(_keyColor, "Fps:");
-            ImGui.Text(_game.Window.FramesPerSecond.ToString("N"));
+            ImGui.Text((1d / deltaTime).ToString("N"));
 
             var ts = _stopwatch.Elapsed;
 
             ImGui.TextColored(_keyColor, "Time:");
             ImGui.Text($"{ts.Hours:00}:{ts.Minutes:00}:{ts.Seconds:00}.{ts.Milliseconds / 10:00}");
             #endregion
+
+            ImGui.EndMainMenuBar();
         }
-
-
     }
 }
