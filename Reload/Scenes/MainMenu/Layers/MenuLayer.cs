@@ -1,5 +1,6 @@
 ﻿using System.IO;
 using Reload.Configuration;
+using Reload.Game;
 
 namespace Reload.Scenes.MainMenu.Layers
 {
@@ -21,28 +22,23 @@ namespace Reload.Scenes.MainMenu.Layers
     {
         private MenuLayout _layout;
         private bool _windowStyleSet;
+        private GameBase _game;
         public Dictionary<string, ImFontPtr> Fonts { get; private set; }
 
         public override void OnAttach()
         {
-            var gameWindow = Scene.SceneManager.Game.Window;
+            _game = Scene.SceneManager.Game;
 
-            gameWindow.Resize += OnResize;
+            _game.Window.Resize += OnResize;
 
             _layout.Size = new Vector2(800, 600);
-            _layout.Position = CalculateMenuPosition(gameWindow.Size.Width, gameWindow.Size.Height);
+            _layout.Position = CalculateMenuPosition(_game.Window.Size.Width, _game.Window.Size.Height);
             _layout.ButtonSize = new Vector2(_layout.Size.X, 80);
-
-            Fonts = new Dictionary<string, ImFontPtr>();
-
-            var io = ImGui.GetIO();
-
-            var orbitron = Path.Combine(ContentPaths.Fonts, "Orbitron.ttf");
-            Fonts.Add(orbitron, io.Fonts.AddFontFromFileTTF(orbitron, 20));
         }
 
         public override void OnDetach()
         {
+            _game.Window.Resize -= OnResize;
         }
 
         public override void Update(double deltaTime)
@@ -64,8 +60,6 @@ namespace Reload.Scenes.MainMenu.Layers
                 style.WindowRounding = 0f;
                 style.WindowMinSize = _layout.Size;
 
-                style.WindowMenuButtonPosition = ImGuiDir.COUNT;
-
                 _windowStyleSet = true;
             }
 
@@ -73,11 +67,6 @@ namespace Reload.Scenes.MainMenu.Layers
 
             if (ImGui.Begin("Main Menu", menuFlags))
             {
-                if (Fonts.TryGetValue("Orbitron.ttf", out var font))
-                {
-                    ImGui.PushFont(font);
-                }
-
                 ImGui.SetWindowPos(_layout.Position);
 
                 ImGui.Text("Reload");

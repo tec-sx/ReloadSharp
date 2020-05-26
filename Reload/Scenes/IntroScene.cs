@@ -37,6 +37,9 @@ namespace ReloadGame.Scenes
 
         public override void OnLeave()
         {
+            SceneManager.Input.Handler.FireActionCommand -= player.HandleActionCommand;
+            SceneManager.Input.Handler.FireStateCommand -= player.HandleStateCommand;
+            SceneManager.Input.Handler.FireRangeCommand -= player.HandleRangeCommand;
         }
 
         public override void OnUpdate(double deltaTime)

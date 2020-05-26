@@ -6,7 +6,7 @@
     using System;
     using System.Collections.Generic;
 
-    public class InputManager
+    public class InputManager : IDisposable
     {
         public IInputContext InputContext;
 
@@ -22,6 +22,8 @@
         {
             _game = game as GameBase;
             Handler = new InputHandler();
+
+
         }
 
         public void Update()
@@ -30,20 +32,15 @@
         }
 
         /// <summary>
-        /// Initialize game input. call on window load.
+        /// Attach game input. call on window load.
         /// </summary>
         public void Initialize()
         {
             InputContext = _game.Window.CreateInput();
-            Handler.Initialize(InputContext.Keyboards, InputContext.Mice);
+            Handler.Attach(InputContext);
 
             _game.Activated += OnApplicationResumed;
             _game.Deactivated += OnApplicationPaused;
-        }
-
-        public void ShutDown()
-        {
-            InputContext?.Dispose();
         }
 
         private void OnApplicationPaused()
@@ -52,6 +49,15 @@
 
         private void OnApplicationResumed()
         {
+        }
+
+        public void Dispose()
+        {
+            _game.Activated -= OnApplicationResumed;
+            _game.Deactivated -= OnApplicationPaused;
+
+            Handler.Detach(InputContext);
+            InputContext?.Dispose();
         }
     }
 }

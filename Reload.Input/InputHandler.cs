@@ -25,12 +25,22 @@
             _activeBindingContexts = new Stack<InputMappingContext>(4);
         }
 
-        public void Initialize(IReadOnlyList<IKeyboard> keyboards, IReadOnlyList<IMouse> mice)
+        public void Attach(IInputContext context)
         {
-            foreach (var keyboard in keyboards)
+            foreach (var keyboard in context.Keyboards)
             {
                 keyboard.KeyDown += HandleKeyDown;
                 keyboard.KeyUp += HandleKeyUp;
+            }
+        }
+
+        public void Detach(IInputContext context)
+        {
+            foreach (var keyboard in context.Keyboards)
+            {
+                keyboard.KeyChar -= HandleTextInput;
+                keyboard.KeyDown -= HandleKeyDown;
+                keyboard.KeyUp -= HandleKeyUp;
             }
         }
 

@@ -32,6 +32,10 @@ namespace Reload.Engine
         /// </summary>
         public static event Action GameDestroyed;
 
+        public TaskManager TaskManager { get; set; }
+
+        #region Sub system properties
+
         public ServiceProvider SubSystems;
 
         /// <summary>
@@ -65,6 +69,8 @@ namespace Reload.Engine
         public SceneManager SceneManager { get; }
 
         public UiManager UiManager { get; }
+
+        #endregion
 
         protected abstract void OnInitialize();
         protected abstract void OnLoadContent();
@@ -109,35 +115,53 @@ namespace Reload.Engine
             SceneManager = SubSystems.GetService<SceneManager>();
 
             UiManager = SubSystems.GetService<UiManager>();
+
+            Window = GraphicsManager.CreateWindow(ConfigurationManager.CreateDisplayConfiguration());
+            AttachHandlers();
+
+            TaskManager = new TaskManager(this);
+        }
+
+        public void AttachHandlers()
+        {
+            // Will detach upon invoking.
+            Window.Load += OnWindowLoad;
+
+            Window.Resize += OnWindowResize;
+            Window.Update += OnWindowUpdate;
+            Window.Render += TaskManager.Render;
+            Window.Closing += ShutDownSubSystems;
+
+            SceneManager.ExitProgram += Window.Close;
+        }
+
+        public void DetachHandlers()
+        {
+            SceneManager.ExitProgram -= Window.Close;
+            Window.Closing -= ShutDownSubSystems;
+            Window.Render -= OnWindowRender;
+            Window.Update -= OnWindowUpdate;
+            Window.Resize -= OnWindowResize;
         }
 
         public override void Run()
         {
-            Window = GraphicsManager.CreateWindow(ConfigurationManager.CreateDisplayConfiguration());
-
-            Window.Load += OnWindowLoad;
-            Window.Resize += OnWindowResize;
-            Window.Update += OnWindowUpdate;
-            Window.Render += OnWindowRender;
-
-            OnInitialize();
-
             Window.Run();
-
-            ShutDownSubSystems();
         }
 
         private void OnWindowLoad()
         {
+            Window.Load -= OnWindowLoad;
+
             GraphicsManager.SetupOpenGl();
             AudioManager.Initialize();
             InputManager.Initialize();
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
             UiManager.Initilize();
 
+            OnInitialize();
             OnLoadContent();
 
-            SceneManager.ExitProgram += Window.Close;
             SceneManager.Run();
         }
 
@@ -162,14 +186,20 @@ namespace Reload.Engine
 
         private void ShutDownSubSystems()
         {
+            DetachHandlers();
             OnShutDown();
 
             AssetsManager.ShutDown();
             AudioManager.ShutDown();
 
-            UiManager.ShutDown();
-            InputManager.ShutDown();
-            GraphicsManager.ShutDown();
+            UiManager.Dispose();
+            InputManager.Dispose();
+            GraphicsManager.Dispose();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            base.Dispose(disposing);
         }
     }
 }

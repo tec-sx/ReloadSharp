@@ -18,7 +18,7 @@ namespace Reload.Graphics
     /// The main graphics manager class. Add as singleton in the
     /// service manager.
     /// </summary>
-    public sealed class GraphicsManager
+    public sealed class GraphicsManager : IDisposable
     {
         public GL Gl { get; private set; }
         public Vk VkApi { get; private set; }
@@ -101,12 +101,6 @@ namespace Reload.Graphics
             return shaderProgram;
         }
 
-        public void ShutDown()
-        {
-            Gl?.Dispose();
-            VkApi?.Dispose();
-        }
-
         /// <summary>
         /// Creates WindowOptions used by Silk.NET Window.Create static method
         ///  from a user defined display configuration.
@@ -125,7 +119,7 @@ namespace Reload.Graphics
             options.FramesPerSecond = displayConfiguration.TargetFps;
             options.VSync = displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Off;
             options.RunningSlowTolerance = 5;
-            options.UseSingleThreadedWindow = true;
+            options.UseSingleThreadedWindow = false;
 
             return options;
         }
@@ -154,6 +148,13 @@ namespace Reload.Graphics
                 type.ToString().Substring(9),
                 id,
                 Marshal.PtrToStringAnsi(message));
+        }
+
+        public void Dispose()
+        {
+            Gl?.Dispose();
+            VkApi?.Dispose();
+            Glfw?.Dispose();
         }
     }
 }

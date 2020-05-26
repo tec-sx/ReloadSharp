@@ -40,7 +40,7 @@ namespace Reload.Scene
         public IScene ActiveScene { get; set; }
 
         /// <summary>
-        /// Initialize scene manager.
+        /// Attach scene manager.
         /// </summary>
         /// <param name="game"></param>
         /// <param name="assets"></param>
@@ -60,8 +60,13 @@ namespace Reload.Scene
         /// <returns>The new active scene</returns>
         public IScene MoveToNextScreen()
         {
+            var oldScene = ActiveScene;
+
             ActiveScene = ActiveScene.NextScene;
+
+            oldScene.SceneStateChange -= SceneStateChanged;
             ActiveScene.SceneStateChange += SceneStateChanged;
+
             return ActiveScene;
         }
 
@@ -71,12 +76,17 @@ namespace Reload.Scene
         /// <returns>The new active scene</returns>
         public IScene MoveToPrevScreen()
         {
+            var oldScene = ActiveScene;
+
             ActiveScene = ActiveScene.PrevScene;
+
+            oldScene.SceneStateChange -= SceneStateChanged;
             ActiveScene.SceneStateChange += SceneStateChanged;
+
             return ActiveScene;
         }
 
-        ///<inheritdoc>
+        ///<inheritdoc/>
         public void Run()
         {
             if (ActiveScene == null)

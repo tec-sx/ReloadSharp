@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 
 namespace Reload.UI
 {
@@ -12,7 +13,7 @@ namespace Reload.UI
     using Configuration;
     using Ultz.SilkExtensions.ImGui;
 
-    public class UiManager
+    public class UiManager : IDisposable
     {
 
         private ImGuiController _controller;
@@ -125,9 +126,9 @@ namespace Reload.UI
             style.WindowRounding = 0.0f;
         }
 
-        public void ShutDown()
+        public void Dispose()
         {
-            //_controller?.Dispose();
+            _controller?.Dispose();
         }
     }
 }
