@@ -32,11 +32,11 @@
         /// <summary>
         /// Initialize game input. call on window load.
         /// </summary>
-        public void Load()
+        public void Initialize()
         {
             InputContext = _game.Window.CreateInput();
             Handler.Initialize(InputContext.Keyboards, InputContext.Mice);
-           
+
             _game.Activated += OnApplicationResumed;
             _game.Deactivated += OnApplicationPaused;
         }
@@ -46,11 +46,11 @@
             InputContext?.Dispose();
         }
 
-        private void OnApplicationPaused(object sender, EventArgs e)
+        private void OnApplicationPaused()
         {
         }
 
-        private void OnApplicationResumed(object sender, EventArgs e)
+        private void OnApplicationResumed()
         {
         }
     }

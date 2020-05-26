@@ -1,3 +1,5 @@
+using Reload.Game;
+using Reload.Scene.Layers;
 using Reload.UI;
 
 namespace Reload.Scene
@@ -22,6 +24,7 @@ namespace Reload.Scene
         /// </summary>
         public event Action ExitProgram;
 
+        public GameBase Game { get; }
         /// <summary>
         /// Reference to the input manager.
         /// </summary>
@@ -42,15 +45,16 @@ namespace Reload.Scene
         /// <summary>
         /// Initialize scene manager.
         /// </summary>
+        /// <param name="game"></param>
         /// <param name="assets"></param>
         /// <param name="input"></param>
         /// <param name="graphics"></param>
-        /// <param name="uiManager"></param>
-        public SceneManager(IAssetsManager assets, InputManager input, GraphicsManager graphics)
+        public SceneManager(IGame game, IAssetsManager assets, InputManager input, GraphicsManager graphics)
         {
             Assets = assets;
             Input = input;
             Graphics = graphics;
+            Game = game as GameBase;
         }
 
         /// <summary>
@@ -60,6 +64,7 @@ namespace Reload.Scene
         public IScene MoveToNextScreen()
         {
             ActiveScene = ActiveScene.NextScene;
+            ActiveScene.SceneStateChange += SceneStateChanged;
             return ActiveScene;
         }
 
@@ -70,6 +75,7 @@ namespace Reload.Scene
         public IScene MoveToPrevScreen()
         {
             ActiveScene = ActiveScene.PrevScene;
+            ActiveScene.SceneStateChange += SceneStateChanged;
             return ActiveScene;
         }
 
@@ -116,12 +122,13 @@ namespace Reload.Scene
         {
             var newScene = new T
             {
-                Manager = this
+                SceneManager = this
             };
 
             if (ActiveScene == null)
             {
                 ActiveScene = newScene;
+                ActiveScene.SceneStateChange += SceneStateChanged;
             }
             else
             {

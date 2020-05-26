@@ -27,12 +27,12 @@ namespace ReloadGame.Scenes
                 {"main", mainContext }
             };
 
-            Manager.Input.Handler.LoadContexts(contexts);
-            Manager.Input.Handler.PushActiveContext("main");
+            SceneManager.Input.Handler.LoadContexts(contexts);
+            SceneManager.Input.Handler.PushActiveContext("main");
 
-            Manager.Input.Handler.FireActionCommand += player.HandleActionCommand;
-            Manager.Input.Handler.FireStateCommand += player.HandleStateCommand;
-            Manager.Input.Handler.FireRangeCommand += player.HandleRangeCommand;
+            SceneManager.Input.Handler.FireActionCommand += player.HandleActionCommand;
+            SceneManager.Input.Handler.FireStateCommand += player.HandleStateCommand;
+            SceneManager.Input.Handler.FireRangeCommand += player.HandleRangeCommand;
         }
 
         public override void OnLeave()
@@ -41,7 +41,7 @@ namespace ReloadGame.Scenes
 
         public override void OnUpdate(double deltaTime)
         {
-            Manager.Input.Update();
+            SceneManager.Input.Update();
         }
 
         public override void OnRender(double deltaTime)

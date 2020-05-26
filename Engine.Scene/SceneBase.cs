@@ -16,7 +16,7 @@ namespace Reload.Scene
         /// <summary>
         /// The current scene's layers stack.
         /// </summary>
-        protected LayerStack Layers { get; }
+        public LayerStack Layers { get; set; }
 
         /// <summary>
         /// Current scene's state.
@@ -36,7 +36,7 @@ namespace Reload.Scene
         /// <summary>
         /// The scene manager managing the current scene.
         /// </summary>
-        public SceneManager Manager { get; set; }
+        public SceneManager SceneManager { get; set; }
 
         /// <summary>
         /// Scene base constructor.
@@ -44,7 +44,7 @@ namespace Reload.Scene
         protected SceneBase()
         {
             _state = SceneState.Ready;
-            Layers = new LayerStack();
+            Layers = new LayerStack(this);
         }
 
         /// <summary>

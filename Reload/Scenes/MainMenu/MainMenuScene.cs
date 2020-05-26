@@ -10,10 +10,10 @@
 
         public override void OnEnter()
         {
-            Layers.PushLayer(new MenuLayer());
+            Layers.PushLayer<MenuLayer>();
 
-            _bgMusicStream = Manager.Assets.LoadMusic("Intro");
-            _bgMusicStream.Play();
+            _bgMusicStream = SceneManager.Assets.LoadMusic("Intro");
+            //_bgMusicStream.Play();
         }
 
         public override void OnLeave()

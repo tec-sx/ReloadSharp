@@ -1,4 +1,7 @@
-﻿namespace Reload.Engine
+﻿using System.Drawing;
+using System.Threading;
+
+namespace Reload.Engine
 {
     using Reload.Core.Commands;
     using Reload.UI;
@@ -61,7 +64,7 @@
         /// </summary>
         public SceneManager SceneManager { get; }
 
-        public UserInterfaceManager UserInterfaceManager { get; }
+        public UiManager UiManager { get; }
 
         protected abstract void OnInitialize();
         protected abstract void OnLoadContent();
@@ -69,7 +72,7 @@
         protected abstract void OnRender(double deltaTime);
         protected abstract void OnShutDown();
 
-        public Game(string[] args) : base(args)
+        protected Game(string[] args) : base(args)
         {
             SubSystems = new ServiceCollection()
 
@@ -89,7 +92,7 @@
                 .AddSingleton<IGameObjectCache, GameObjectCache>()
                 .AddSingleton<IAudioCache, AudioCache>()
                 .AddSingleton<IAssetsManager, AssetsManager>()
-                .AddSingleton<UserInterfaceManager>()
+                .AddSingleton<UiManager>()
                 .AddSingleton<SceneManager>()
 
                 #endregion
@@ -105,46 +108,56 @@
             AssetsManager = SubSystems.GetService<IAssetsManager>();
             SceneManager = SubSystems.GetService<SceneManager>();
 
-            UserInterfaceManager = SubSystems.GetService<UserInterfaceManager>();
-        }
-
-        private void Initialize()
-        {
-            OnInitialize();
-
-            Window = GraphicsManager.CreateWindow(ConfigurationManager.CreateDisplayConfiguration());
-
-            AudioManager.Initialize();
-            AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
-
-            Window.Load += GraphicsManager.SetupOpenGl;
-            Window.Load += InputManager.Load;
-            Window.Load += UserInterfaceManager.Load;
-            Window.Load += OnLoadContent;
-
-            IsLoaded = true;
-
-            Window.Update += OnUpdate;
-            Window.Update += UserInterfaceManager.Update;
-            Window.Update += SceneManager.Update;
-
-            Window.Resize += UserInterfaceManager.Resize;
-
-            Window.Render += OnRender;
-            Window.Render += SceneManager.Render;
-            Window.Render += UserInterfaceManager.Render;
-            Window.Closing += ShutDownSubSystems;
-            SceneManager.ExitProgram += Window.Close;
+            UiManager = SubSystems.GetService<UiManager>();
         }
 
         public override void Run()
         {
-            Initialize();
+            Window = GraphicsManager.CreateWindow(ConfigurationManager.CreateDisplayConfiguration());
 
-            SceneManager.Run();
+            Window.Load += OnWindowLoad;
+            Window.Resize += OnWindowResize;
+            Window.Update += OnWindowUpdate;
+            Window.Render += OnWindowRender;
+
+            OnInitialize();
+
             Window.Run();
 
             ShutDownSubSystems();
+        }
+
+        private void OnWindowLoad()
+        {
+            GraphicsManager.SetupOpenGl();
+            AudioManager.Initialize();
+            InputManager.Initialize();
+            AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
+            UiManager.Initilize();
+
+            OnLoadContent();
+
+            SceneManager.ExitProgram += Window.Close;
+            SceneManager.Run();
+        }
+
+        private void OnWindowResize(Size size)
+        {
+            UiManager.Resize(size);
+        }
+
+        private void OnWindowUpdate(double deltaTime)
+        {
+            OnUpdate(deltaTime);
+            UiManager.Update(deltaTime);
+            SceneManager.Update(deltaTime);
+        }
+
+        private void OnWindowRender(double deltaTime)
+        {
+            OnRender(deltaTime);
+            SceneManager.Render(deltaTime);
+            UiManager.Render(deltaTime);
         }
 
         private void ShutDownSubSystems()
@@ -154,7 +167,7 @@
             AssetsManager.ShutDown();
             AudioManager.ShutDown();
 
-            UserInterfaceManager.ShutDown();
+            UiManager.ShutDown();
             InputManager.ShutDown();
             GraphicsManager.ShutDown();
         }

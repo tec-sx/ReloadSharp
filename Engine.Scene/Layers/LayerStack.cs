@@ -13,13 +13,16 @@ namespace Reload.Scene.Layers
     {
         private int layerInsertIndex;
         private readonly FastList<LayerBase> _layers;
+        private readonly IScene _scene;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public LayerStack()
+        public LayerStack(IScene scene)
         {
             _layers = new FastList<LayerBase>();
+            _scene = scene;
+
             layerInsertIndex = 0;
         }
 
@@ -27,8 +30,13 @@ namespace Reload.Scene.Layers
         /// Push new layer to the first half of the _layers list;
         /// </summary>
         /// <param name="layer"></param>
-        public void PushLayer(LayerBase layer)
+        public void PushLayer<T>() where T : LayerBase, new()
         {
+            var layer = new T
+            {
+                Scene = _scene
+            };
+
             if (layer == null)
             {
                 throw new NullReferenceException(
@@ -36,14 +44,20 @@ namespace Reload.Scene.Layers
             }
 
             _layers.Insert(layerInsertIndex++, layer);
+            layer.OnAttach();
         }
 
         /// <summary>
         /// Push overlay to the second half of the stack
         /// </summary>
         /// <param name="overlay"></param>
-        public void PushOverlay(LayerBase overlay)
+        public void PushOverlay<T>() where T : LayerBase, new()
         {
+            var overlay = new T
+            {
+                Scene = _scene
+            };
+
             if (overlay == null)
             {
                 throw new NullReferenceException(
@@ -51,6 +65,7 @@ namespace Reload.Scene.Layers
             }
 
             _layers.Add(overlay);
+            overlay.OnAttach();
         }
 
         /// <summary>
@@ -66,7 +81,6 @@ namespace Reload.Scene.Layers
             }
 
             layer.OnDetach();
-
             _layers.Remove(layer);
             layerInsertIndex--;
         }

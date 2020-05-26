@@ -1,4 +1,5 @@
 ﻿using Reload.Scene.Enumerations;
+using Reload.Scene.Layers;
 
 namespace Reload.Scene
 {
@@ -14,7 +15,9 @@ namespace Reload.Scene
 
         IScene NextScene { get; set; }
         IScene PrevScene { get; set; }
-        SceneManager Manager { get; set; }
+
+        LayerStack Layers { get; set; }
+        SceneManager SceneManager { get; set; }
 
         abstract void OnEnter();
         abstract void OnLeave();

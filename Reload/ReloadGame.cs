@@ -11,7 +11,7 @@ namespace ReloadGame
         protected override void OnInitialize()
         {
             SceneManager.AddScene<MainMenuScene>();
-            //SceneManager.AddScene<IntroScene>();
+            //Scene.AddScene<IntroScene>();
         }
 
         protected override void OnLoadContent()

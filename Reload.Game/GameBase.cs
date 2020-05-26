@@ -10,17 +10,15 @@ namespace Reload.Game
         /// <summary>
         /// Occurs when [activated].
         /// </summary>
-        public event EventHandler<EventArgs> Activated;
+        public event Action Activated;
 
         /// <summary>
         /// Occurs when [deactivated].
         /// </summary>
-        public event EventHandler<EventArgs> Deactivated;
+        public event Action Deactivated;
 
         /// <inheritdoc />
         public IWindow Window { get; set; }
-
-        public bool IsLoaded { get; protected set; }
 
 
         /// <inheritdoc />
@@ -28,8 +26,10 @@ namespace Reload.Game
 
         protected GameBase(string[] args)
         {
-            
+
         }
+
+        protected void Activate() => Activated?.Invoke();
 
         /// <summary>
         /// Run the game.
