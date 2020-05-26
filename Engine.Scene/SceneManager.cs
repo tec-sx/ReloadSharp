@@ -1,9 +1,6 @@
-using Reload.Game;
-using Reload.Scene.Layers;
-using Reload.UI;
-
 namespace Reload.Scene
 {
+    using Game;
     using System.Drawing;
     using Graphics;
     using Silk.NET.OpenGL;
@@ -51,10 +48,10 @@ namespace Reload.Scene
         /// <param name="graphics"></param>
         public SceneManager(IGame game, IAssetsManager assets, InputManager input, GraphicsManager graphics)
         {
+            Game = game as GameBase;
             Assets = assets;
             Input = input;
             Graphics = graphics;
-            Game = game as GameBase;
         }
 
         /// <summary>

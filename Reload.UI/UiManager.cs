@@ -1,12 +1,15 @@
-﻿using System.Numerics;
+﻿using System.IO;
 
 namespace Reload.UI
 {
+    using System.Collections.Generic;
+    using System.Numerics;
     using ImGuiNET;
     using System.Drawing;
     using Graphics;
     using Game;
     using Input;
+    using Configuration;
     using Ultz.SilkExtensions.ImGui;
 
     public class UiManager
@@ -20,9 +23,6 @@ namespace Reload.UI
 
         public UiManager(IGame game, GraphicsManager graphics, InputManager input)
         {
-            //var io = ImGui.GetIO();
-            //io.ConfigFlags |= ImGuiConfigFlags.NavEnableKeyboard;
-
             _game = game;
             _graphics = graphics;
             _input = input;
@@ -62,6 +62,7 @@ namespace Reload.UI
         {
             var style = ImGui.GetStyle();
             var colors = style.Colors;
+
 
             colors[(int)ImGuiCol.Text] = new Vector4(1.0f, 1.0f, 1.0f, 1.0f);
             colors[(int)ImGuiCol.TextDisabled] = new Vector4(0.5f, 0.5f, 0.5f, 1.0f);

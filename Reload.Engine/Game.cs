@@ -143,7 +143,7 @@ namespace Reload.Engine
 
         private void OnWindowResize(Size size)
         {
-            UiManager.Resize(size);
+            GraphicsManager.Gl.Viewport(size);
         }
 
         private void OnWindowUpdate(double deltaTime)

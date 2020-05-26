@@ -27,6 +27,9 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <None Update="Assets\Fonts\Orbitron-VariableFont_wght.ttf">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </None>
       <None Update="Assets\Music\Intro.ogg">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
@@ -45,6 +48,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Assets\Fonts\" />
       <Folder Include="Assets\Scenes\Common\Models" />
       <Folder Include="Assets\Scenes\Common\Textures" />
       <Folder Include="Assets\Scenes\Sandbox\Models" />

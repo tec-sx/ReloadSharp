@@ -3,7 +3,7 @@ namespace Reload.Configuration
     using System;
     using System.IO;
 
-    internal static class ContentPaths
+    public static class ContentPaths
     {
         #region Configuration
 
@@ -17,6 +17,7 @@ namespace Reload.Configuration
         public static readonly string Sounds = Path.Combine(Assets, "Sounds");
         public static readonly string Textures = Path.Combine(Assets, "Textures");
         public static readonly string Models = Path.Combine(Assets, "Models");
+        public static readonly string Fonts = Path.Combine(Assets, "Fonts");
         #endregion
     }
 }

@@ -1,9 +1,12 @@
-﻿using System.Drawing;
-using System.Numerics;
-using Reload.Scene.Enumerations;
+﻿using System.IO;
+using Reload.Configuration;
 
 namespace Reload.Scenes.MainMenu.Layers
 {
+    using System.Collections.Generic;
+    using System.Drawing;
+    using System.Numerics;
+    using Scene.Enumerations;
     using ImGuiNET;
     using Reload.Scene.Layers;
 
@@ -18,11 +21,7 @@ namespace Reload.Scenes.MainMenu.Layers
     {
         private MenuLayout _layout;
         private bool _windowStyleSet;
-
-        public MenuLayer()
-        {
-
-        }
+        public Dictionary<string, ImFontPtr> Fonts { get; private set; }
 
         public override void OnAttach()
         {
@@ -34,6 +33,12 @@ namespace Reload.Scenes.MainMenu.Layers
             _layout.Position = CalculateMenuPosition(gameWindow.Size.Width, gameWindow.Size.Height);
             _layout.ButtonSize = new Vector2(_layout.Size.X, 80);
 
+            Fonts = new Dictionary<string, ImFontPtr>();
+
+            var io = ImGui.GetIO();
+
+            var orbitron = Path.Combine(ContentPaths.Fonts, "Orbitron.ttf");
+            Fonts.Add(orbitron, io.Fonts.AddFontFromFileTTF(orbitron, 20));
         }
 
         public override void OnDetach()
@@ -68,6 +73,11 @@ namespace Reload.Scenes.MainMenu.Layers
 
             if (ImGui.Begin("Main Menu", menuFlags))
             {
+                if (Fonts.TryGetValue("Orbitron.ttf", out var font))
+                {
+                    ImGui.PushFont(font);
+                }
+
                 ImGui.SetWindowPos(_layout.Position);
 
                 ImGui.Text("Reload");
