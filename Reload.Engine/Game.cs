@@ -89,6 +89,7 @@ namespace Reload.Engine
                 .AddSingleton<GraphicsManager>()
                 .AddSingleton<InputManager>()
                 .AddSingleton<AudioManager>()
+                .AddSingleton<TaskManager>()
 
                 #endregion
 
@@ -110,6 +111,7 @@ namespace Reload.Engine
             GraphicsManager = SubSystems.GetService<GraphicsManager>();
             InputManager = SubSystems.GetService<InputManager>();
             AudioManager = SubSystems.GetService<AudioManager>();
+            TaskManager = SubSystems.GetService<TaskManager>();
 
             AssetsManager = SubSystems.GetService<IAssetsManager>();
             SceneManager = SubSystems.GetService<SceneManager>();
@@ -119,7 +121,6 @@ namespace Reload.Engine
             Window = GraphicsManager.CreateWindow(ConfigurationManager.CreateDisplayConfiguration());
             AttachHandlers();
 
-            TaskManager = new TaskManager(this);
         }
 
         public void AttachHandlers()

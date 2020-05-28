@@ -28,7 +28,7 @@
 
         public void RenderCallback(object threadContext)
         {
-            var deltaTime = (float)threadContext;
+            var deltaTime = (double)threadContext;
             _game.SceneManager.Render(deltaTime);
             _game.UiManager.Render(deltaTime);
             _done.Set();
