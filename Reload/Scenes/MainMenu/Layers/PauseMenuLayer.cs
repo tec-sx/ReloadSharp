@@ -1,21 +1,14 @@
 ﻿namespace Reload.Scenes.MainMenu.Layers
 {
+    using Reload.Game;
     using System.Collections.Generic;
     using System.Drawing;
     using System.Numerics;
-    using Reload.Game;
     using ImGuiNET;
     using Reload.Game.Scenes.Layers;
     using Reload.Game.Scenes.Enumerations;
 
-    public struct MenuLayout
-    {
-        public Vector2 Size { get; set; }
-        public Vector2 Position { get; set; }
-        public Vector2 ButtonSize { get; set; }
-    }
-
-    public class MenuLayer : Layer
+    public class PauseMenuLayer : Layer
     {
         private MenuLayout _layout;
         private bool _windowStyleSet;

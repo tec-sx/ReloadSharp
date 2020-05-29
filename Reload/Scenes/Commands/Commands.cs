@@ -1,9 +1,9 @@
 ﻿namespace ReloadGame.Scenes.Commands
 {
-    using Reload.Core;
-    using Reload.Core.Commands;
-    using Reload.Scene;
-    using Reload.Scene.Enumerations;
+    using Reload.Core.Common;
+    using Reload.Core.Common.Commands;
+    using Reload.Game.Scenes;
+    using Reload.Game.Scenes.Enumerations;
 
     public class JumpCommand : ActionPressCommand
     {
@@ -43,8 +43,8 @@
 
     public class OpenMenuCommand : ActionPressCommand
     {
-        SceneBase scene;
-        public OpenMenuCommand(SceneBase target)
+        Scene scene;
+        public OpenMenuCommand(Scene target)
         {
             scene = target;
         }

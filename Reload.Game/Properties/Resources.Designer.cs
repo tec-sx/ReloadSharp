@@ -77,5 +77,71 @@ namespace Reload.Game.Properties {
                 return ResourceManager.GetString("ProgramVersion", resourceCulture);
             }
         }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid scene state..
+        /// </summary>
+        internal static string InvalidSceneStateExceptionMessage
+        {
+            get
+            {
+                return ResourceManager.GetString("InvalidSceneStateExceptionMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Layer object that is passed as parameter is null..
+        /// </summary>
+        internal static string LayerNullParameterExceptionMessage
+        {
+            get
+            {
+                return ResourceManager.GetString("LayerNullParameterExceptionMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Current active screen is the last screen..
+        /// </summary>
+        internal static string NextScreenIsNullExceptionMessage
+        {
+            get
+            {
+                return ResourceManager.GetString("NextScreenIsNullExceptionMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Overlay object that is passed as parameter  is null..
+        /// </summary>
+        internal static string OverlayNullParameterExceptionMessage
+        {
+            get
+            {
+                return ResourceManager.GetString("OverlayNullParameterExceptionMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Current active screen is the first screen..
+        /// </summary>
+        internal static string PrevScreenIsNullExceptionMessage
+        {
+            get
+            {
+                return ResourceManager.GetString("PrevScreenIsNullExceptionMessage", resourceCulture);
+            }
+        }
+
+        /// <summary>
+        ///   Looks up a localized string similar to Scene is already running..
+        /// </summary>
+        internal static string SceneIsAlreadyRunningExceptionMessage
+        {
+            get
+            {
+                return ResourceManager.GetString("SceneIsAlreadyRunningExceptionMessage", resourceCulture);
+            }
+        }
     }
 }

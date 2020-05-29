@@ -1,11 +1,9 @@
-﻿using Reload.AssetPipeline;
-
-namespace Reload.Configuration
+﻿namespace Reload.Configuration
 {
     using Reload.AssetPipeline;
     using Reload.Configuration.Extensions;
+    using Reload.Engine.Input.Configuration;
     using Reload.Graphics;
-    using Reload.Input.Configuration;
 
     public class ConfigurationManager
     {

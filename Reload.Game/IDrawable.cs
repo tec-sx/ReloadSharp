@@ -10,12 +10,12 @@
         /// <summary>
         /// Occurs when the <see cref="DrawOrder"/> property changes.
         /// </summary>
-        event EventHandler<EventArgs> DrawOrderChanged;
+        event Action DrawOrderChanged;
 
         /// <summary>
         /// Occurs when the <see cref="Visible"/> property changes.
         /// </summary>
-        event EventHandler<EventArgs> VisibleChanged;
+        event Action VisibleChanged;
 
         /// <summary>
         /// Starts the drawing of a frame. This method is followed by calls to Draw and EndDraw.

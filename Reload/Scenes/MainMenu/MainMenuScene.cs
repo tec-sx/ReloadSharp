@@ -2,9 +2,9 @@
 {
     using Reload.AssetPipeline.Audio.Models;
     using Reload.Scenes.MainMenu.Layers;
-    using Reload.Scene;
+    using Reload.Game.Scenes;
 
-    public class MainMenuScene : SceneBase
+    public class MainMenuScene : Scene
     {
         private IMusic _bgMusicStream;
 

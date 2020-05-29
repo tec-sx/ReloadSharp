@@ -78,6 +78,32 @@
             Game = game as GameBase;
         }
 
+        event Action IDrawable.DrawOrderChanged
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        event Action IDrawable.VisibleChanged
+        {
+            add
+            {
+                throw new NotImplementedException();
+            }
+
+            remove
+            {
+                throw new NotImplementedException();
+            }
+        }
+
         public virtual bool BeginDraw()
         {
             return true;

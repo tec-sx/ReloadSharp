@@ -1,13 +1,13 @@
 namespace ReloadGame.Scenes
 {
-    using Reload.Scene;
-    using Reload.Input;
+    using Reload.Game.Scenes;
     using Characters;
     using Commands;
     using Silk.NET.Input.Common;
     using System.Collections.Generic;
+    using Reload.Engine.Input;
 
-    public class IntroScene : SceneBase
+    public class IntroScene : Scene
     {
         private Player player = new Player();
 

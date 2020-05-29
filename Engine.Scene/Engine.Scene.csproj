@@ -26,7 +26,6 @@
   <ItemGroup>
     <ProjectReference Include="..\Engine.AssetPipeline\Engine.AssetPipeline.csproj" />
     <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
-    <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
     <ProjectReference Include="..\Reload.UI\Reload.UI.csproj" />
   </ItemGroup>
 

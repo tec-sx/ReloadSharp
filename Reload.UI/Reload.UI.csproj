@@ -11,8 +11,9 @@
     <ItemGroup>
       <ProjectReference Include="..\Engine.Configuration\Engine.Configuration.csproj" />
       <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
+      <ProjectReference Include="..\Engine\Reload.Engine.Input\Reload.Engine.Input.csproj" />
+      <ProjectReference Include="..\Reload.Game\Reload.Game.csproj" />
       <ProjectReference Include="..\Reload.Graphics\Reload.Graphics.csproj" />
-      <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
     </ItemGroup>
 
 </Project>

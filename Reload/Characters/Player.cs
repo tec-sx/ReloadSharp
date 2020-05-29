@@ -1,10 +1,8 @@
-﻿using Reload.Core.Commands;
-
-namespace ReloadGame.Characters
+﻿namespace ReloadGame.Characters
 {
+    using Reload.Core.Common;
+    using Reload.Core.Common.Commands;
     using System;
-    using Reload.Core;
-    using Reload.Scene;
 
     public class Player : Actor
     {

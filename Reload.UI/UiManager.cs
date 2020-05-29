@@ -1,17 +1,13 @@
-﻿using System;
-using System.IO;
-
-namespace Reload.UI
+﻿namespace Reload.UI
 {
-    using System.Collections.Generic;
+    using System;
     using System.Numerics;
     using ImGuiNET;
     using System.Drawing;
     using Graphics;
     using Game;
-    using Input;
-    using Configuration;
     using Ultz.SilkExtensions.ImGui;
+    using Reload.Engine.Input;
 
     public class UiManager : IDisposable
     {

@@ -10,10 +10,11 @@
     using Reload.Graphics;
     using Reload.Scene;
     using Reload.Game;
-    using Reload.Input;
     using System;
     using Microsoft.Extensions.DependencyInjection;
     using System.Drawing;
+    using Reload.Engine.Input;
+    using Reload.Game.Scenes;
 
     public abstract class Game : GameBase
     {
@@ -167,7 +168,7 @@
 
             GraphicsManager.SetupOpenGl();
             AudioManager.Initialize();
-            InputManager.Initialize();
+            InputManager.Initialize(Window);
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
             UiManager.Initilize();
 

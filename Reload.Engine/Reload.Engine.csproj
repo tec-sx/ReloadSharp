@@ -10,15 +10,15 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Core\Reload.Core.Common\Reload.Core.Common.csproj" />
     <ProjectReference Include="..\Engine.AssetPipeline\Engine.AssetPipeline.csproj" />
+    <ProjectReference Include="..\Engine\Reload.Engine.Input\Reload.Engine.Input.csproj" />
     <ProjectReference Include="..\Reload.Audio\Reload.Audio.csproj" />
     <ProjectReference Include="..\Engine.Configuration\Engine.Configuration.csproj" />
     <ProjectReference Include="..\Reload.Graphics\Reload.Graphics.csproj" />
     <ProjectReference Include="..\Engine.Scene\Engine.Scene.csproj" />
     <ProjectReference Include="..\Engine.State\Engine.State.csproj" />
-    <ProjectReference Include="..\Reload.Core\Reload.Core.csproj" />
     <ProjectReference Include="..\Reload.Game\Reload.Game.csproj" />
-    <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
     <ProjectReference Include="..\Reload.UI\Reload.UI.csproj" />
   </ItemGroup>
 
