@@ -21,6 +21,7 @@ namespace ReloadGame.Scenes
             mainContext.MapKeyToCommand(0, Key.Space, new JumpCommand());
             mainContext.MapKeyToCommand(0, Key.W, new WalkCommand());
             mainContext.MapKeyToCommand(0, Key.ShiftLeft, new RunCommand());
+            mainContext.MapKeyToCommand(0, Key.Escape, new OpenMenuCommand());
 
             var contexts = new Dictionary<string, InputMappingContext>
             {

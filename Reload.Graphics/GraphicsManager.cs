@@ -120,6 +120,9 @@ namespace Reload.Graphics
             options.VSync = displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Off;
             options.RunningSlowTolerance = 5;
             options.UseSingleThreadedWindow = false;
+            options.IsEventDriven = false;
+            options.WindowBorder = WindowBorder.Fixed;
+            options.ShouldSwapAutomatically = false;
 
             return options;
         }

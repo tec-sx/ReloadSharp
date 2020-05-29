@@ -22,8 +22,6 @@
         {
             _game = game as GameBase;
             Handler = new InputHandler();
-
-
         }
 
         public void Update()

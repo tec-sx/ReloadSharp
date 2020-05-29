@@ -71,7 +71,10 @@ namespace Reload.Scenes.MainMenu.Layers
 
                 ImGui.Text("Reload");
 
-                ImGui.Button("Start", _layout.ButtonSize);
+                if (ImGui.Button("Start", _layout.ButtonSize))
+                {
+                    Scene.ChangeSceneState(SceneState.ChangeNext);
+                }
                 ImGui.Button("Settings", _layout.ButtonSize);
 
                 if (ImGui.Button("Exit", _layout.ButtonSize))

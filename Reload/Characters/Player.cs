@@ -4,6 +4,7 @@ namespace ReloadGame.Characters
 {
     using System;
     using Reload.Core;
+    using Reload.Scene;
 
     public class Player : Actor
     {

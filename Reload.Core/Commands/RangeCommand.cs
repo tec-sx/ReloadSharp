@@ -1,10 +1,10 @@
 namespace Reload.Core.Commands
 {
-    public abstract class RangeCommand : Command
+    public abstract class RangeCommand<T> : Command
     {
         protected RangeCommand() : base(InputType.Range)
         { }
 
-        public abstract void Execute(Actor actor, int range);
+        public abstract void Execute(T targetObject, int range);
     }
 }

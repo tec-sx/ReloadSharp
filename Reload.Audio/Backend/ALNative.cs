@@ -1,6 +1,4 @@
-﻿using Reload.Audio.Exceptions;
-
-namespace Reload.Audio.Backend
+﻿namespace Reload.Audio.Backend
 {
     using Reload.Audio.Exceptions;
     using Silk.NET.OpenAL;

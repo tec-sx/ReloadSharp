@@ -1,10 +1,10 @@
 namespace Reload.Core.Commands
 {
-    public abstract class StateCommand : Command
+    public abstract class StateCommand<T> : Command
     {
         protected StateCommand() : base(InputType.State)
         { }
 
-        public abstract void Execute(Actor actor, bool state);
+        public abstract void Execute(T targetObject, bool state);
     }
 }

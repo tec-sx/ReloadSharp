@@ -1,9 +1,5 @@
-﻿using System.Drawing;
-using System.Threading;
-
-namespace Reload.Engine
+﻿namespace Reload.Engine
 {
-    using Reload.Core.Commands;
     using Reload.UI;
     using Reload.AssetPipeline;
     using Reload.AssetPipeline.Audio;
@@ -16,9 +12,8 @@ namespace Reload.Engine
     using Reload.Game;
     using Reload.Input;
     using System;
-    using Silk.NET.Windowing.Common;
-    using Reload.DataAccess;
     using Microsoft.Extensions.DependencyInjection;
+    using System.Drawing;
 
     public abstract class Game : GameBase
     {
@@ -130,7 +125,8 @@ namespace Reload.Engine
 
             Window.Resize += OnWindowResize;
             Window.Update += OnWindowUpdate;
-            Window.Render += TaskManager.Render;
+            //Window.Render += TaskManager.Render;
+            Window.Render += OnWindowRender;
             Window.Closing += ShutDownSubSystems;
 
             SceneManager.ExitProgram += Window.Close;
@@ -147,7 +143,22 @@ namespace Reload.Engine
 
         public override void Run()
         {
-            Window.Run();
+            Window.Initialize();
+
+            while (!Window.IsClosing)
+            {
+                Window.DoEvents();
+
+                if (!Window.IsClosing)
+                {
+                    Window.DoUpdate();
+                    Window.DoRender();
+                    Window.SwapBuffers();
+                }
+            }
+
+            Window.DoEvents();
+            Window.Reset();
         }
 
         private void OnWindowLoad()

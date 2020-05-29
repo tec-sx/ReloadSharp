@@ -19,10 +19,13 @@
 
         private readonly Stack<InputMappingContext> _activeBindingContexts;
 
+        private readonly Queue<Command> _commandQueue;
+
         public InputHandler()
         {
             _bindingContexts = new Dictionary<string, InputMappingContext>(16);
             _activeBindingContexts = new Stack<InputMappingContext>(4);
+            _commandQueue = new Queue<Command>(8);
         }
 
         public void Attach(IInputContext context)
@@ -48,7 +51,16 @@
 
         public void Update()
         {
+            while (_commandQueue.Count != 0)
+            {
+                var command = _commandQueue.Dequeue();
 
+                switch(command.Type)
+                {
+                    case InputType.ActionPress:
+                        (command as 
+                }
+            }
         }
 
         public void PushActiveContext(string name)
@@ -66,7 +78,8 @@
 
         private void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
         {
-            if (_activeBindingContexts.Count == 0 || !_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
+            if (_activeBindingContexts.Count == 0 ||
+                !_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
             {
                 return;
             }
@@ -89,7 +102,8 @@
 
         private void HandleKeyUp(IKeyboard keyboard, Key key, int arg)
         {
-            if (_activeBindingContexts.Count == 0 || !_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
+            if (_activeBindingContexts.Count == 0 ||
+                !_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
             {
                 return;
             }
