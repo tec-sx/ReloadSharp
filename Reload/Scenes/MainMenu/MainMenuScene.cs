@@ -19,6 +19,7 @@
         public override void OnLeave()
         {
             _bgMusicStream.Stop();
+            Layers.ClearStack();
         }
 
         public override void OnRender(double deltaTime)

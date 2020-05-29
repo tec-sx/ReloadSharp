@@ -5,34 +5,50 @@
     using Reload.Scene;
     using Reload.Scene.Enumerations;
 
-    public class JumpCommand : ActionCommand<Actor>
+    public class JumpCommand : ActionPressCommand
     {
-        public JumpCommand()
-        { }
+        Actor actor;
 
-        public override void Execute(Actor actor) => actor.Jump();
-    }
-
-    public class WalkCommand : StateCommand<Actor>
-    {
-        public WalkCommand()
+        public JumpCommand(Actor target)
         {
+            actor = target;
         }
 
-        public override void Execute(Actor actor, bool state) => actor.Walk(state);
+        public override void Execute() => actor.Jump();
     }
 
-    public class RunCommand : StateCommand<Actor>
+    public class WalkCommand : StateCommand
     {
-        public RunCommand()
+        Actor actor;
+
+        public WalkCommand(Actor target)
         {
+            actor = target;
         }
 
-        public override void Execute(Actor actor, bool state) => actor.Run(state);
+        public override void Execute() => actor.Walk(CurrentState);
     }
 
-    public class OpenMenuCommand : ActionCommand<SceneBase>
+    public class RunCommand : StateCommand
     {
-        public override void Execute(SceneBase scene) => scene.ChangeSceneState(SceneState.ChangePrev);
+        Actor actor;
+
+        public RunCommand(Actor target)
+        {
+            actor = target;
+        }
+
+        public override void Execute() => actor.Run(CurrentState);
+    }
+
+    public class OpenMenuCommand : ActionPressCommand
+    {
+        SceneBase scene;
+        public OpenMenuCommand(SceneBase target)
+        {
+            scene = target;
+        }
+
+        public override void Execute() => scene.ChangeSceneState(SceneState.ChangePrev);
     }
 }

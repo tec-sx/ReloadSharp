@@ -24,21 +24,21 @@ namespace ReloadGame.Characters
             base.Jump();
         }
 
-        public override void Walk(bool state)
+        public override void Walk(StateType state)
         {
             Console.Write("Player->");
 
-            if (state)
+            if (state == StateType.Pressed)
             {
                 IsIdle = false;
 
                 if (RunningIsHeld)
                 {
-                    base.Run(true);
+                    base.Run(state);
                 }
                 else
                 {
-                    base.Walk(true);
+                    base.Walk(state);
                 }
             }
             else
@@ -48,17 +48,17 @@ namespace ReloadGame.Characters
             }
         }
 
-        public override void Run(bool state)
+        public override void Run(StateType state)
         {
             Console.Write("Player->");
 
-            if (state)
+            if (state == StateType.Pressed)
             {
                 RunningIsHeld = true;
 
                 if (!IsIdle)
                 {
-                    base.Run(true);
+                    base.Run(state);
                 }
                 else
                 {
@@ -71,7 +71,7 @@ namespace ReloadGame.Characters
 
                 if (!IsIdle)
                 {
-                    base.Walk(true);
+                    base.Walk(state);
                 }
                 else
                 {

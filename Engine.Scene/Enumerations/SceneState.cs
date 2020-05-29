@@ -2,7 +2,7 @@
 {
     public enum SceneState
     {
-        Ready,
+        Stopped,
         Running,
         Paused,
         ExitProgram,

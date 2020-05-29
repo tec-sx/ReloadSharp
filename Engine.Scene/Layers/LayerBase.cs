@@ -8,7 +8,7 @@ namespace Reload.Scene.Layers
     /// </summary>
     public abstract class LayerBase : IDrawable
     {
-        public IScene Scene { get; set; }
+        public SceneBase Scene { get; set; }
         /// <summary>
         /// Override this method to add logic upon attaching the
         /// current layer to the scene.

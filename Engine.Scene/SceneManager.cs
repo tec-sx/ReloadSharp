@@ -37,7 +37,7 @@ namespace Reload.Scene
         /// <summary>
         /// Reference to the current active scene.
         /// </summary>
-        public IScene ActiveScene { get; set; }
+        public SceneBase ActiveScene { get; set; }
 
         /// <summary>
         /// Attach scene manager.
@@ -58,7 +58,7 @@ namespace Reload.Scene
         /// Sets the next screen as the active screen.
         /// </summary>
         /// <returns>The new active scene</returns>
-        public IScene MoveToNextScreen()
+        public SceneBase MoveToNextScreen()
         {
             var oldScene = ActiveScene;
 
@@ -74,7 +74,7 @@ namespace Reload.Scene
         /// Sets the previous screen as the active screen.
         /// </summary>
         /// <returns>The new active scene</returns>
-        public IScene MoveToPrevScreen()
+        public SceneBase MoveToPrevScreen()
         {
             var oldScene = ActiveScene;
 
@@ -125,7 +125,7 @@ namespace Reload.Scene
         /// </summary>
         /// <typeparam name="T"></typeparam>
         /// <returns></returns>
-        public IScene AddScene<T>() where T : IScene, new()
+        public SceneBase AddScene<T>() where T : SceneBase, new()
         {
             var newScene = new T
             {
@@ -162,31 +162,27 @@ namespace Reload.Scene
             switch (state)
             {
                 case SceneState.Running:
+                    if (ActiveScene?.PreviousState == SceneState.Stopped) ActiveScene?.OnEnter();
                     break;
                 case SceneState.Paused:
+                    ActiveScene = MoveToNextScreen();
+                    ActiveScene?.Run();
+                    break;
+                case SceneState.Stopped:
+                    ActiveScene?.OnLeave();
                     break;
                 case SceneState.ChangeNext:
-                    {
-                        ActiveScene.OnLeave();
-                        ActiveScene = MoveToNextScreen();
-
-                        ActiveScene?.Run();
-
-                        break;
-                    }
+                    ActiveScene?.Stop();
+                    ActiveScene = MoveToNextScreen();
+                    ActiveScene?.Run();
+                    break;
                 case SceneState.ChangePrev:
-                    {
-                        ActiveScene.OnLeave();
-                        ActiveScene = MoveToPrevScreen();
-
-                        ActiveScene?.Run();
-
-                        break;
-                    }
+                    ActiveScene?.Stop();
+                    ActiveScene = MoveToPrevScreen();
+                    ActiveScene?.Run();
+                    break;
                 case SceneState.ExitProgram:
                     ExitProgram?.Invoke();
-                    break;
-                case SceneState.Ready:
                     break;
                 default:
                     throw new ApplicationException(

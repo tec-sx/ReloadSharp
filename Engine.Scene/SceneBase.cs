@@ -8,7 +8,7 @@ namespace Reload.Scene
     /// Scene base abstract class. every scene, be it gameplay,
     /// menu, cut scene, etc. must inherit from this class.
     /// </summary>
-    public abstract class SceneBase : IScene
+    public abstract class SceneBase
     {
         ///<inheritdoc/>
         public event Action<SceneState> SceneStateChange;
@@ -21,17 +21,22 @@ namespace Reload.Scene
         /// <summary>
         /// Current scene's state.
         /// </summary>
-        private SceneState _state;
+        public SceneState CurrentState { get; private set; }
+
+        /// <summary>
+        /// Previous scene's state.
+        /// </summary>
+        public SceneState PreviousState { get; private set; }
 
         /// <summary>
         /// Reference to the next scene.
         /// </summary>
-        public IScene NextScene { get; set; }
+        public SceneBase NextScene { get; set; }
 
         /// <summary>
         /// Reference to the previos scene.
         /// </summary>
-        public IScene PrevScene { get; set; }
+        public SceneBase PrevScene { get; set; }
 
         /// <summary>
         /// The scene manager managing the current scene.
@@ -43,7 +48,7 @@ namespace Reload.Scene
         /// </summary>
         protected SceneBase()
         {
-            _state = SceneState.Ready;
+            PreviousState = CurrentState = SceneState.Stopped;
             Layers = new LayerStack(this);
         }
 
@@ -82,21 +87,18 @@ namespace Reload.Scene
         /// <summary>
         /// Sets the scene state to running.
         /// </summary>
-        public void Run()
-        {
-            if (_state != SceneState.Ready)
-            {
-                throw new ApplicationException(Properties.Resources.SceneIsAlreadyRunningExceptionMessage);
-            }
+        public void Run() => ChangeSceneState(SceneState.Running);
 
-            OnEnter();
-            ChangeSceneState(SceneState.Running);
-        }
+        /// <inheritdoc/>
+        public void Pause() => ChangeSceneState(SceneState.Paused);
+
+        /// <inheritdoc/>
+        public void Stop() => ChangeSceneState(SceneState.Stopped);
 
         /// <inheritdoc/>
         public void Update(double deltaTime)
         {
-            if (_state != SceneState.Running)
+            if (CurrentState != SceneState.Running)
             {
                 return;
             }
@@ -108,7 +110,7 @@ namespace Reload.Scene
         /// <inheritdoc/>
         public void Render(double deltaTime)
         {
-            if (_state != SceneState.Running)
+            if (CurrentState != SceneState.Running)
             {
                 return;
             }
@@ -119,21 +121,10 @@ namespace Reload.Scene
         }
 
         /// <inheritdoc/>
-        public void Pause()
-        {
-            ChangeSceneState(SceneState.Paused);
-        }
-
-        /// <inheritdoc/>
-        public void Resume()
-        {
-            ChangeSceneState(SceneState.Running);
-        }
-
-        /// <inheritdoc/>
         public void ChangeSceneState(SceneState state)
         {
-            _state = state;
+            PreviousState = CurrentState;
+            CurrentState = state;
             SceneStateChange?.Invoke(state);
         }
     }

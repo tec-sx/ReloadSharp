@@ -1,10 +1,18 @@
 namespace Reload.Core.Commands
 {
-    public abstract class StateCommand<T> : Command
+    public abstract class StateCommand : Command
     {
-        protected StateCommand() : base(InputType.State)
-        { }
+        public StateType CurrentState;
 
-        public abstract void Execute(T targetObject, bool state);
+        protected StateCommand()
+        {
+            CurrentState = StateType.Released;
+        }
+    }
+
+    public enum StateType
+    {
+        Pressed,
+        Released
     }
 }

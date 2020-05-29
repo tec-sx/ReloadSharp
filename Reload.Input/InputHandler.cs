@@ -7,19 +7,12 @@
 
     public class InputHandler
     {
-        public event Action<Command> FireActionCommand;
-
-        public event Action<Command, bool> FireStateCommand;
-
-        public event Action<Command, int> FireRangeCommand;
-
-        public event Action<char> FireTextInput;
-
         private Dictionary<string, InputMappingContext> _bindingContexts;
 
         private readonly Stack<InputMappingContext> _activeBindingContexts;
 
         private readonly Queue<Command> _commandQueue;
+
 
         public InputHandler()
         {
@@ -48,18 +41,18 @@
         }
 
         public void LoadContexts(Dictionary<string, InputMappingContext> contexts) => _bindingContexts = contexts;
+        public void ClearContexts()
+        {
+            _commandQueue.Clear();
+            _activeBindingContexts.Clear();
+            _bindingContexts.Clear();
+        }
 
         public void Update()
         {
             while (_commandQueue.Count != 0)
             {
-                var command = _commandQueue.Dequeue();
-
-                switch(command.Type)
-                {
-                    case InputType.ActionPress:
-                        (command as 
-                }
+                _commandQueue.Dequeue().Execute();
             }
         }
 
@@ -78,56 +71,52 @@
 
         private void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
         {
-            if (_activeBindingContexts.Count == 0 ||
-                !_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
+            if (_activeBindingContexts.Count == 0)
             {
                 return;
             }
 
-            switch (command.Type)
+            var context = _activeBindingContexts.Peek();
+
+            if (context.KeyActionPressCommands.TryGetValue((keyboard.Index, key), out var actionCommand))
             {
-                case InputType.ActionPress:
-                    FireActionCommand?.Invoke(command);
-                    break;
-                case InputType.State:
-                    FireStateCommand?.Invoke(command, true);
-                    break;
-                case InputType.Range:
-                    FireRangeCommand?.Invoke(command, 1);
-                    break;
-                default:
-                    return;
-            };
+                _commandQueue.Enqueue(actionCommand);
+                return;
+            }
+
+            if (context.KeyStateCommands.TryGetValue((keyboard.Index, key), out var stateCommand))
+            {
+                stateCommand.CurrentState = StateType.Pressed;
+                _commandQueue.Enqueue(stateCommand);
+                return;
+            }
         }
 
         private void HandleKeyUp(IKeyboard keyboard, Key key, int arg)
         {
-            if (_activeBindingContexts.Count == 0 ||
-                !_activeBindingContexts.Peek().KeyCommands.TryGetValue((keyboard.Index, key), out var command))
+            if (_activeBindingContexts.Count == 0)
             {
                 return;
             }
 
-            switch (command.Type)
+            var context = _activeBindingContexts.Peek();
+
+            if (context.KeyActionReleaseCommands.TryGetValue((keyboard.Index, key), out var actionCommand))
             {
-                case InputType.ActionRelease:
-                    FireActionCommand?.Invoke(command);
-                    break;
-                case InputType.State:
-                    FireStateCommand?.Invoke(command, false);
-                    break;
-                case InputType.Range:
-                    FireRangeCommand?.Invoke(command, 0);
-                    break;
-                default:
-                    return;
-            };
+                _commandQueue.Enqueue(actionCommand);
+                return;
+            }
+
+            if (context.KeyStateCommands.TryGetValue((keyboard.Index, key), out var stateCommand))
+            {
+                stateCommand.CurrentState = StateType.Released;
+                _commandQueue.Enqueue(stateCommand);
+                return;
+            }
         }
 
         public void HandleTextInput(IKeyboard keyboard, char character)
-        {
-            FireTextInput?.Invoke(character);
-        }
+        { }
 
         public void EnableTextInput(IKeyboard keyboard)
         {

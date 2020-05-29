@@ -186,6 +186,7 @@
         {
             OnUpdate(deltaTime);
             UiManager.Update(deltaTime);
+            InputManager.Update();
             SceneManager.Update(deltaTime);
         }
 

@@ -13,12 +13,12 @@ namespace Reload.Scene.Layers
     {
         private int layerInsertIndex;
         private readonly FastList<LayerBase> _layers;
-        private readonly IScene _scene;
+        private readonly SceneBase _scene;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public LayerStack(IScene scene)
+        public LayerStack(SceneBase scene)
         {
             _layers = new FastList<LayerBase>();
             _scene = scene;
