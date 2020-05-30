@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ultz.SilkExtensions.ImGui" Version="1.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Reload.Core\Reload.Core.csproj" />
+    <ProjectReference Include="..\Reload.Gameplay\Reload.Gameplay.csproj" />
+    <ProjectReference Include="..\Reload.Graphics\Reload.Graphics.csproj" />
+    <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
+  </ItemGroup>
+
+</Project>

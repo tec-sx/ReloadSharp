@@ -15,7 +15,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Engine.Graphics\Engine.Graphics.csproj" />
-    <ProjectReference Include="..\Reload.Graphics\Reload.Graphics.csproj" />
   </ItemGroup>
 
 </Project>

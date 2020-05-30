@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SharpGLTF.Core" Version="1.0.0-alpha0017" />
+    <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.0-alpha0017" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Reload.Audio\Reload.Audio.csproj" />
+  </ItemGroup>
+
+</Project>

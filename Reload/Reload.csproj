@@ -65,11 +65,4 @@
       <PackageReference Include="Ultz.SilkExtensions.ImGui" Version="1.0.0" />
     </ItemGroup>
 
-    <ItemGroup>
-      <ProjectReference Include="..\Core\Reload.Core.Common\Reload.Core.Common.csproj" />
-      <ProjectReference Include="..\Engine.AssetPipeline\Engine.AssetPipeline.csproj" />
-      <ProjectReference Include="..\Engine\Reload.Engine.Input\Reload.Engine.Input.csproj" />
-      <ProjectReference Include="..\Reload.Engine\Reload.Engine.csproj" />
-    </ItemGroup>
-
 </Project>

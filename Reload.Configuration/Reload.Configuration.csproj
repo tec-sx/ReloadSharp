@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Runtime\Reload.Audio\Reload.Audio.csproj" />
+    <ProjectReference Include="..\Runtime\Reload.Graphics\Reload.Graphics.csproj" />
+  </ItemGroup>
+
+</Project>
