@@ -1,12 +1,11 @@
-﻿namespace Reload.DataAccess
+﻿namespace Reload.Core.DA
 {
     using Microsoft.EntityFrameworkCore;
-    using Reload.DataAccess.Models;
 
     public class PersistentDbContext : DbContext
     {
-        public DbSet<Player> Players { get; set; }
-        public DbSet<InputContext> InputContexts { get; set; }
+        public DbSet<Reload.Core.DA.Models.Player> Players { get; set; }
+        public DbSet<Reload.Core.DA.Models.InputContext> InputContexts { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -15,8 +14,8 @@
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Player>().ToTable("Players");
-            modelBuilder.Entity<InputContext>().ToTable("InputContexts");
+            modelBuilder.Entity<Reload.Core.DA.Models.Player>().ToTable("Players");
+            modelBuilder.Entity<Reload.Core.DA.Models.InputContext>().ToTable("InputContexts");
         }
     }
 }

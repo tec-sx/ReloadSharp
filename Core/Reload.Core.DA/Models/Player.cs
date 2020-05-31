@@ -1,4 +1,4 @@
-﻿namespace Reload.DataAccess.Models
+﻿namespace Reload.Core.DA.Models
 {
     using System;
 

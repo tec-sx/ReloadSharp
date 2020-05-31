@@ -1,0 +1,27 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Reload.Core\Reload.Core.csproj" />
+    <ProjectReference Include="..\..\Runtime\Reload.Assets\Reload.Assets.csproj" />
+    <ProjectReference Include="..\..\Runtime\Reload.Engine\Reload.Engine.csproj" />
+    <ProjectReference Include="..\..\Runtime\Reload.Input\Reload.Input.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Music\Intro.mp3">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Music\Intro.ogg">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Music\Intro2.wav">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

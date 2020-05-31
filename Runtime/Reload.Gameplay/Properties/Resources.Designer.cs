@@ -59,7 +59,7 @@ namespace Reload.Gameplay.Properties {
                 resourceCulture = value;
             }
         }
-        
+
         /// <summary>
         ///   Looks up a localized string similar to Reload.
         /// </summary>

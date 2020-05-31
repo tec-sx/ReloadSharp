@@ -27,6 +27,18 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <Compile Remove="Assets\Scenes\Common\**" />
+      <Compile Remove="Assets\Scenes\Sandbox\**" />
+      <Compile Remove="Assets\Sounds\**" />
+      <EmbeddedResource Remove="Assets\Scenes\Common\**" />
+      <EmbeddedResource Remove="Assets\Scenes\Sandbox\**" />
+      <EmbeddedResource Remove="Assets\Sounds\**" />
+      <None Remove="Assets\Scenes\Common\**" />
+      <None Remove="Assets\Scenes\Sandbox\**" />
+      <None Remove="Assets\Sounds\**" />
+    </ItemGroup>
+
+    <ItemGroup>
       <None Update="Assets\Fonts\Orbitron-VariableFont_wght.ttf">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </None>
@@ -49,12 +61,7 @@
 
     <ItemGroup>
       <Folder Include="Assets\Fonts\" />
-      <Folder Include="Assets\Scenes\Common\Models" />
-      <Folder Include="Assets\Scenes\Common\Textures" />
-      <Folder Include="Assets\Scenes\Sandbox\Models" />
-      <Folder Include="Assets\Scenes\Sandbox\Textures" />
       <Folder Include="Assets\Scenes\Test\Models" />
-      <Folder Include="Assets\Sounds" />
     </ItemGroup>
 
     <ItemGroup>

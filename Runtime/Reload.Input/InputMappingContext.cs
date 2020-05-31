@@ -1,6 +1,6 @@
 ﻿namespace Reload.Input
 {
-    using Reload.Core.Common.Commands;
+    using Reload.Core.Commands;
     using Silk.NET.Input.Common;
     using System;
     using System.Collections.Generic;

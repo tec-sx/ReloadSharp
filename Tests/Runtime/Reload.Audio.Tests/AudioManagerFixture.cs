@@ -4,7 +4,7 @@
 
     public class AudioManagerFixture : IDisposable
     {
-        private AudioManager _audioManager = new AudioManager();
+        private readonly AudioManager _audioManager = new AudioManager();
 
         public void Dispose()
         {

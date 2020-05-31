@@ -1,9 +1,9 @@
 ﻿namespace Reload.Engine
 {
+    using Reload.Gameplay;
     using System;
     using System.Collections.Concurrent;
     using System.Threading;
-    using Reload.Game;
 
     public class GameThread
     {

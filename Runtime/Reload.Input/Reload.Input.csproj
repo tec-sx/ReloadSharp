@@ -8,4 +8,8 @@
     <PackageReference Include="Silk.NET.Input" Version="1.2.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Reload.Core\Reload.Core.csproj" />
+  </ItemGroup>
+
 </Project>

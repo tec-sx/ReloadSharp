@@ -1,4 +1,4 @@
-﻿namespace Reload.Game
+﻿namespace Reload.Gameplay
 {
     /// <summary>
     /// An interface to load and unload asset.

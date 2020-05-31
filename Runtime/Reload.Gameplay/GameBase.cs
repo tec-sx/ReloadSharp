@@ -1,7 +1,7 @@
-namespace Reload.Game
+namespace Reload.Gameplay
 {
-    using Silk.NET.Windowing.Common;
     using System;
+    using Silk.NET.Windowing.Common;
 
     public abstract class GameBase : IGame
     {

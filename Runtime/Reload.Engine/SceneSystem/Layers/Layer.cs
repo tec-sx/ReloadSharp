@@ -1,6 +1,7 @@
 namespace Reload.Engine.SceneSystem.Layers
 {
     using System;
+    using Reload.Gameplay;
 
     /// <summary>
     /// Layer base abstract class. Every layer

@@ -1,4 +1,4 @@
-﻿namespace Reload.Game.Graphics
+﻿namespace Reload.Gameplay.Graphics
 {
     using System;
 

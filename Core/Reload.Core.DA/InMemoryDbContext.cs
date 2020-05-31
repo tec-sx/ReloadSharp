@@ -1,4 +1,4 @@
-﻿namespace Reload.DataAccess
+﻿namespace Reload.Core.DA
 {
     using Microsoft.EntityFrameworkCore;
 

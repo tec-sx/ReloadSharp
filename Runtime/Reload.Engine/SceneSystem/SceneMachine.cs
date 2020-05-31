@@ -1,10 +1,10 @@
 namespace Reload.Engine.SceneSystem
 {
-    using Reload.Game;
+    using Reload.Gameplay;
     using System.Drawing;
     using Reload.Graphics;
     using Silk.NET.OpenGL;
-    using AssetPipeline;
+    using Assets;
     using System;
     using Reload.Input;
     using Reload.Engine.SceneSystem.Enumerations;

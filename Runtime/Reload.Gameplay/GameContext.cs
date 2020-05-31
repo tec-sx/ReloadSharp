@@ -1,7 +1,5 @@
-﻿namespace Reload.Game
+﻿namespace Reload.Gameplay
 {
-    using Reload.Game.Graphics;
-
     /// <summary>
     /// Generic version of <see cref="GameContext"/>. The later is used to describe a generic game Context.
     /// This version enables us to constraint the game context to a specifc toolkit and ensures a better cohesion
@@ -25,12 +23,12 @@
         /// </summary>
         internal int RequestedHeight;
 
-        internal PixelFormat RequestedBackBufferFormat;
+        internal Reload.Gameplay.Graphics.PixelFormat RequestedBackBufferFormat;
 
         /// <summary>
         /// The requested depth stencil format.
         /// </summary>
-        internal PixelFormat RequestedDepthStncilFormat;
+        internal Reload.Gameplay.Graphics.PixelFormat RequestedDepthStncilFormat;
 
         /// <summary>
         /// Indicate whether the game must initialize the default database when it starts running.

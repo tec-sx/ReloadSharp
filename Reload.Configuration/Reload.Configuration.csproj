@@ -5,8 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Runtime\Reload.Assets\Reload.Assets.csproj" />
     <ProjectReference Include="..\Runtime\Reload.Audio\Reload.Audio.csproj" />
     <ProjectReference Include="..\Runtime\Reload.Graphics\Reload.Graphics.csproj" />
+    <ProjectReference Include="..\Runtime\Reload.Input\Reload.Input.csproj" />
   </ItemGroup>
 
 </Project>

@@ -1,12 +1,12 @@
 ﻿namespace Reload.UI
 {
+    using Reload.Gameplay;
     using System;
     using System.Numerics;
     using ImGuiNET;
     using System.Drawing;
     using Ultz.SilkExtensions.ImGui;
     using Reload.Graphics;
-    using Reload.Game;
     using Reload.Input;
 
     public class UiManager : IDisposable

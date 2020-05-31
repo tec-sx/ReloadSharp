@@ -1,20 +1,19 @@
 ﻿namespace Reload.Engine
 {
+    using Reload.Gameplay;
+    using Reload.Engine.SceneSystem;
     using Reload.UI;
-    using Reload.AssetPipeline;
-    using Reload.AssetPipeline.Audio;
-    using Reload.AssetPipeline.GameObjects;
-    using Reload.AssetPipeline.Textures;
+    using Reload.Assets;
+    using Reload.Assets.Audio;
+    using Reload.Assets.GameObjects;
+    using Reload.Assets.Textures;
     using Reload.Audio;
     using Reload.Configuration;
     using Reload.Graphics;
-    using Reload.Scene;
-    using Reload.Game;
     using System;
     using Microsoft.Extensions.DependencyInjection;
     using System.Drawing;
-    using Reload.Engine.Input;
-    using Reload.Game.Scenes;
+    using Reload.Input;
 
     public abstract class Game : GameBase
     {
@@ -61,7 +60,7 @@
         /// <summary>
         /// Game scene manager.
         /// </summary>
-        public SceneMachine SceneManager { get; }
+        public SceneMachine SceneMachine { get; }
 
         public UiManager UiManager { get; }
 
@@ -84,7 +83,6 @@
                 .AddSingleton<GraphicsManager>()
                 .AddSingleton<InputManager>()
                 .AddSingleton<AudioManager>()
-                .AddSingleton<TaskManager>()
 
                 #endregion
 
@@ -108,7 +106,7 @@
             AudioManager = SubSystems.GetService<AudioManager>();
 
             AssetsManager = SubSystems.GetService<IAssetsManager>();
-            SceneManager = SubSystems.GetService<SceneMachine>();
+            SceneMachine = SubSystems.GetService<SceneMachine>();
 
             UiManager = SubSystems.GetService<UiManager>();
 
@@ -127,12 +125,12 @@
             Window.Render += OnWindowRender;
             Window.Closing += ShutDownSubSystems;
 
-            SceneManager.ExitProgram += Window.Close;
+            SceneMachine.ExitProgram += Window.Close;
         }
 
         public void DetachHandlers()
         {
-            SceneManager.ExitProgram -= Window.Close;
+            SceneMachine.ExitProgram -= Window.Close;
             Window.Closing -= ShutDownSubSystems;
             Window.Render -= OnWindowRender;
             Window.Update -= OnWindowUpdate;
@@ -172,7 +170,7 @@
             OnInitialize();
             OnLoadContent();
 
-            SceneManager.Run();
+            SceneMachine.Run();
         }
 
         private void OnWindowResize(Size size)
@@ -185,13 +183,13 @@
             OnUpdate(deltaTime);
             UiManager.Update(deltaTime);
             InputManager.Update();
-            SceneManager.Update(deltaTime);
+            SceneMachine.Update(deltaTime);
         }
 
         private void OnWindowRender(double deltaTime)
         {
             OnRender(deltaTime);
-            SceneManager.Render(deltaTime);
+            SceneMachine.Render(deltaTime);
             UiManager.Render(deltaTime);
         }
 
