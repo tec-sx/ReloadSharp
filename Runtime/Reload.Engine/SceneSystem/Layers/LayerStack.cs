@@ -8,7 +8,7 @@ namespace Reload.Engine.SceneSystem.Layers
     /// </summary>
     public class LayerStack
     {
-        private int layerInsertIndex;
+        private int _layerInsertIndex;
         private readonly List<Layer> _layers;
         private readonly Scene _scene;
 
@@ -17,10 +17,10 @@ namespace Reload.Engine.SceneSystem.Layers
         /// </summary>
         public LayerStack(Scene scene)
         {
-            _layers = new List<Layer>();
+            _layers = new List<Layer>(8);
             _scene = scene;
 
-            layerInsertIndex = 0;
+            _layerInsertIndex = 0;
         }
 
         /// <summary>
@@ -40,7 +40,7 @@ namespace Reload.Engine.SceneSystem.Layers
                     Properties.Resources.LayerNullParameterExceptionMessage);
             }
 
-            _layers.Insert(layerInsertIndex++, layer);
+            _layers.Insert(_layerInsertIndex++, layer);
             layer.OnAttach();
         }
 
@@ -79,7 +79,7 @@ namespace Reload.Engine.SceneSystem.Layers
 
             layer.OnDetach();
             _layers.Remove(layer);
-            layerInsertIndex--;
+            _layerInsertIndex--;
         }
 
         /// <summary>
@@ -124,6 +124,7 @@ namespace Reload.Engine.SceneSystem.Layers
         {
             _layers.ForEach(layer => layer.OnDetach());
             _layers.Clear();
+            _layerInsertIndex = 0;
         }
     }
 }
