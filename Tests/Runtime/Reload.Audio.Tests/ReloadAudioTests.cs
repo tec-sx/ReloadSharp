@@ -6,13 +6,11 @@
     using Xunit;
     using System.IO;
 
-    public class ReloadAudioTests : IClassFixture<AudioManagerFixture>, IDisposable
+    public class ReloadAudioTests : IDisposable
     {
-        private readonly AudioManagerFixture _audioManagerFixture;
+        private readonly AudioManager _audioManager = new AudioManager();
 
-        public ReloadAudioTests(AudioManagerFixture fixture) => _audioManagerFixture = fixture;
-
-        public void Dispose() => _audioManagerFixture.Dispose();
+        public void Dispose() => _audioManager.ShutDown();
 
         [Fact]
         public void Play_Music_Stream_Stereo_Success()

@@ -162,7 +162,6 @@
             Window.Load -= OnWindowLoad;
 
             GraphicsManager.SetupOpenGl();
-            AudioManager.Initialize();
             InputManager.Initialize(Window);
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
             UiManager.Initilize();

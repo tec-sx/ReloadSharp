@@ -7,7 +7,7 @@
     {
         public AudioContext Context { get; private set; }
 
-        public void Initialize()
+        public AudioManager()
         {
             Context = new AudioContext();
             ALNative.SetDistanceModel(DistanceModel.InverseDistanceClamped);
