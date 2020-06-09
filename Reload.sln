@@ -51,11 +51,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Graphics.Tests", "Te
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Game", "Games\Reload.Game\Reload.Game.csproj", "{C69284D3-4016-44F6-BA81-41F85E09F2A5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Core.VFS", "Core\Reload.Core.VFS\Reload.Core.VFS.csproj", "{766895A4-A519-4994-BDC9-C3A07448DFB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Core.VFS", "Core\Reload.Core.VFS\Reload.Core.VFS.csproj", "{766895A4-A519-4994-BDC9-C3A07448DFB1}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{1158DF02-ABA5-4759-9D80-C658A52663C8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Core.VFS.Tests", "Tests\Core\Reload.Core.VFS.Tests\Reload.Core.VFS.Tests.csproj", "{C0A88767-5C62-4BCE-9FCF-6C84C74DB5A5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Core.VFS.Tests", "Tests\Core\Reload.Core.VFS.Tests\Reload.Core.VFS.Tests.csproj", "{C0A88767-5C62-4BCE-9FCF-6C84C74DB5A5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

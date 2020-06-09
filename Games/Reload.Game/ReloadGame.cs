@@ -9,7 +9,7 @@ namespace Reload.Game
 
         protected override void OnInitialize()
         {
-            SceneMachine.AddScene<MainMenuScene>();
+            //SceneMachine.AddScene<MainMenuScene>();
             SceneMachine.AddScene<IntroScene>();
         }
 

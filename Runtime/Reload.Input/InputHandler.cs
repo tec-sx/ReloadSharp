@@ -68,7 +68,7 @@
             _activeBindingContexts.Pop();
         }
 
-        private void HandleKeyDown(IKeyboard keyboard, Key key, int arg)
+        private void HandleKeyDown(IKeyboard keyboard, Key key, int _)
         {
             if (_activeBindingContexts.Count == 0)
             {

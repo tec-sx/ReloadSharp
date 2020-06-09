@@ -1,9 +1,7 @@
 namespace Reload.Core.VFS.Tests
 {
-    using System;
     using Reload.Core.VFS.Structures;
     using System.Collections.Generic;
-    using System.Diagnostics;
     using System.IO;
     using Xunit;
     using FluentAssertions;
@@ -23,10 +21,8 @@ namespace Reload.Core.VFS.Tests
         }
 
         [Fact]
-        public void VfsReadWriteSuccess()
+        public void VirtualFileSystemWriteSuccess()
         {
-            var stopwatch = new Stopwatch();
-
             using (var memory = new MemoryStream())
             {
                 var vfs = new VirtualFileSystem();
@@ -40,38 +36,33 @@ namespace Reload.Core.VFS.Tests
                     vfs.AddAsset(new AssetEntry(randomDataSet.Key), data);
                 }
 
-                stopwatch.Restart();
                 vfs.Write(memory);
-                stopwatch.Stop();
 
-                Console.WriteLine($"Writing data took: {stopwatch.ElapsedMilliseconds}ms.");
+                var dataIsInSet = RandomDataSets.ContainsKey(memory.ToArray().Md5Hash());
+                dataIsInSet.Should().BeTrue();
+            }
+        }
 
-                memory.Position = 0;
+        [Fact]
+        public void VirtualFileSystemReadSuccess()
+        {
+            using var memory = new MemoryStream();
 
-                vfs = new VirtualFileSystem();
-                vfs.Read(memory);
+            var vfs = new VirtualFileSystem();
+            vfs.Read(memory);
 
-                foreach (var group in vfs.Groups)
+            foreach (var group in vfs.Groups)
+            {
+                vfs.ScopeGroup(group);
+
+                foreach (var asset in vfs.Assets)
                 {
-                    vfs.ScopeGroup(group);
-
-                    foreach(var asset in vfs.Assets)
+                    using (var data = vfs.OpenRead(asset))
                     {
-                        stopwatch.Restart();
-
-                        using (var data = vfs.OpenRead(asset))
-                        {
-                            stopwatch.Stop();
-
-                            Console.WriteLine($"Writing data took: {stopwatch.ElapsedMilliseconds}ms.");
-
-                            var dataIsInSet = RandomDataSets.ContainsKey(((MemoryStream)data).ToArray().Md5Hash());
-                            dataIsInSet.Should().BeTrue();
-                        }
+                        var dataIsInSet = RandomDataSets.ContainsKey(((MemoryStream)data).ToArray().Md5Hash());
+                        dataIsInSet.Should().BeTrue();
                     }
                 }
-
-                Console.WriteLine($"Hash for file: {memory.ToArray().Md5Hash()}");
             }
         }
     }

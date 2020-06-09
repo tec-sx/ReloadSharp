@@ -1,7 +1,7 @@
 namespace Reload.Gameplay
 {
     using System;
-    using Silk.NET.Windowing.Common;
+    using Reload.Graphics;
 
     public abstract class GameBase : IGame
     {
@@ -16,7 +16,7 @@ namespace Reload.Gameplay
         public event Action Deactivated;
 
         /// <inheritdoc />
-        public IWindow Window { get; set; }
+        public GameWindow Window { get; set; }
 
 
         /// <inheritdoc />

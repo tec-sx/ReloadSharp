@@ -27,6 +27,7 @@ namespace Reload.Game.Scenes
 
             SceneManager.Input.Handler.LoadContexts(contexts);
             SceneManager.Input.Handler.PushActiveContext("main");
+
         }
 
         public override void OnLeave()

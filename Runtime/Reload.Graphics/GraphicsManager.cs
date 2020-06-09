@@ -2,7 +2,6 @@ namespace Reload.Graphics
 {
     using Shaders.ShaderProgram;
     using Silk.NET.OpenGL;
-    using Silk.NET.Windowing;
     using Silk.NET.Windowing.Common;
     using System;
     using System.Collections.Generic;
@@ -30,30 +29,11 @@ namespace Reload.Graphics
         /// <param name="displayConfiguration"></param>
         /// <returns cref="IWindow"></returns>
         /// <exception cref="NotSupportedException"></exception>
-        public unsafe IWindow CreateWindow(DisplayConfiguration displayConfiguration)
+        public unsafe GameWindow CreateWindow(DisplayConfiguration displayConfiguration)
         {
-            var options = CreateWindowOptionsFromConfiguration(displayConfiguration);
-            var window = Window.Create(options);
-
-            if (window == null)
-            {
-                throw new NotSupportedException($"{options.API.API.ToString()} is not supported.");
-            }
-
-            Glfw = Glfw.GetApi();
-
-            if (window.API.API == ContextAPI.OpenGL || window.API.API == ContextAPI.OpenGL)
-            {
-                Gl = GL.GetApi(window);
-            }
-            else if (window.API.API == ContextAPI.Vulkan)
-            {
-                VkApi = Vk.GetApi();
-            }
-
             //Glfw.SetWindowAspectRatio(window.Handle, 16, 9);
-
-            return window;
+            Glfw = Glfw.GetApi();
+            return new GameWindow(displayConfiguration);
         }
 
         /// <summary>
@@ -98,32 +78,6 @@ namespace Reload.Graphics
             shaderProgram.LinkShaders();
 
             return shaderProgram;
-        }
-
-        /// <summary>
-        /// Creates WindowOptions used by Silk.NET Window.Create static method
-        ///  from a user defined display configuration.
-        /// </summary>
-        /// <param name="displayConfiguration"></param>
-        /// <returns cref="WindowOptions"></returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static WindowOptions CreateWindowOptionsFromConfiguration(DisplayConfiguration displayConfiguration)
-        {
-            var options = displayConfiguration.EnableVulkan ? WindowOptions.DefaultVulkan : WindowOptions.Default;
-
-            options.Title = displayConfiguration.WindowTitle;
-            options.Size = new Size(displayConfiguration.Resolution.X, displayConfiguration.Resolution.Y);
-            options.WindowState = displayConfiguration.InFullScreen ? WindowState.Fullscreen : WindowState.Normal;
-            options.UpdatesPerSecond = displayConfiguration.TargetFps;
-            options.FramesPerSecond = displayConfiguration.TargetFps;
-            options.VSync = displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Off;
-            options.RunningSlowTolerance = 5;
-            options.UseSingleThreadedWindow = false;
-            options.IsEventDriven = false;
-            options.WindowBorder = WindowBorder.Fixed;
-            options.ShouldSwapAutomatically = false;
-
-            return options;
         }
 
         public unsafe void SetupOpenGl()
