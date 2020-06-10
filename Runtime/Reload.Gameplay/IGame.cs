@@ -1,6 +1,6 @@
 ﻿namespace Reload.Gameplay
 {
-    using Reload.Graphics;
+    using Silk.NET.Windowing.Common;
     using System;
 
     public interface IGame : IDisposable
@@ -8,7 +8,7 @@
         /// <summary>
         /// The main game window.
         /// </summary>
-        public GameWindow Window { get; set; }
+        public IWindow Window { get; set; }
         /// <summary>
         /// Is mouse visible.
         /// </summary>

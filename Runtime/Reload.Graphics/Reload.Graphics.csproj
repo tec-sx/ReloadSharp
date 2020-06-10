@@ -9,18 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Shaders\Resources\main.frag.glsl" />
-    <None Remove="Shaders\Resources\main.geom.glsl" />
-    <None Remove="Shaders\Resources\main.vert.glsl" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Shaders\Resources\main.frag.glsl" />
-    <EmbeddedResource Include="Shaders\Resources\main.geom.glsl" />
-    <EmbeddedResource Include="Shaders\Resources\main.vert.glsl" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Silk.NET.OpenGL" Version="1.3.0" />
     <PackageReference Include="Silk.NET.Vulkan" Version="1.3.0" />
     <PackageReference Include="Silk.NET.Windowing" Version="1.3.0" />
@@ -43,10 +31,6 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>

@@ -14,6 +14,7 @@
     using Microsoft.Extensions.DependencyInjection;
     using System.Drawing;
     using Reload.Input;
+    using Reload.Rendering;
 
     public abstract class Game : GameBase
     {
@@ -161,7 +162,7 @@
         {
             Window.Load -= OnWindowLoad;
 
-            GraphicsManager.SetupOpenGl();
+            Renderer.Initialize(Window);
             InputManager.Initialize(Window);
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
             UiManager.Initilize();
@@ -174,7 +175,7 @@
 
         private void OnWindowResize(Size size)
         {
-            GraphicsManager.Gl.Viewport(size);
+            Renderer.OnWindowResize(size);
         }
 
         private void OnWindowUpdate(double deltaTime)
@@ -202,7 +203,6 @@
 
             UiManager.Dispose();
             InputManager.Dispose();
-            GraphicsManager.Dispose();
         }
 
         protected override void Dispose(bool disposing)

@@ -25,6 +25,7 @@
     <ProjectReference Include="..\Reload.Gameplay\Reload.Gameplay.csproj" />
     <ProjectReference Include="..\Reload.Graphics\Reload.Graphics.csproj" />
     <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
+    <ProjectReference Include="..\Reload.Rendering\Reload.Rendering.csproj" />
     <ProjectReference Include="..\Reload.UI\Reload.UI.csproj" />
   </ItemGroup>
 

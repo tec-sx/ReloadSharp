@@ -1,4 +1,4 @@
-namespace Reload.Graphics.Shaders.ShaderProgram
+namespace Reload.Rendering.Platform.OpenGl
 {
     using Reload.Core.IO;
     using Silk.NET.OpenGL;
@@ -10,7 +10,7 @@ namespace Reload.Graphics.Shaders.ShaderProgram
     /// <summary>
     /// OpenGL shader program class.
     /// </summary>
-    public class GlShaderProgram : IShaderProgram
+    public class GlShaderProgram : ShaderProgram
     {
         /// <summary>
         /// Shader file extension.
@@ -20,13 +20,13 @@ namespace Reload.Graphics.Shaders.ShaderProgram
         /// <summary>
         /// OpenGL native api handle.
         /// </summary>
-        private readonly GL gl;
+        private readonly GL _gl;
 
         /// <summary>
         /// A temporary shader list to store compiled shaders ready
         /// for linking.
         /// </summary>
-        private readonly List<uint> shadersTemp;
+        private readonly List<uint> _shadersTemp;
 
         /// <summary>
         /// Blocks <see cref="CompileShader(ShaderType, string)"/>
@@ -34,13 +34,13 @@ namespace Reload.Graphics.Shaders.ShaderProgram
         /// to be called after linkig is complete (<see cref="LinkShaders()"/>
         /// is called).
         /// </summary>
-        private bool linkingIsComplete;
+        private bool _linkingIsComplete;
 
         /// <summary>
         /// The attribute indexer used to bind
         /// to the correct location.
         /// </summary>
-        private uint numberOfAttributes;
+        private uint _numberOfAttributes;
 
         /// <summary>
         /// The shader program handle.
@@ -49,26 +49,26 @@ namespace Reload.Graphics.Shaders.ShaderProgram
 
         /// <summary>
         /// Creates new shader program <see cref="ProgramHandle"/> and intializes
-        /// temporary list <see cref="shadersTemp"/> to store compiled shaders before
+        /// temporary list <see cref="_shadersTemp"/> to store compiled shaders before
         /// linking.
         /// </summary>
         /// <param name="glApi"></param>
-        public GlShaderProgram(GL glApi)
+        public GlShaderProgram()
         {
-            gl = glApi;
-            ProgramHandle = gl.CreateProgram();
-            shadersTemp = new List<uint>();
-            linkingIsComplete = false;
-            numberOfAttributes = 0;
+            _gl = GlRenderer.Gl;
+            ProgramHandle = _gl.CreateProgram();
+            _shadersTemp = new List<uint>();
+            _linkingIsComplete = false;
+            _numberOfAttributes = 0;
         }
 
         /// <summary>
         /// Clean up managed resources.
         /// </summary>
-        public void CleanUp()
+        public override void CleanUp()
         {
-            gl.UseProgram(0);
-            gl.DeleteProgram(ProgramHandle);
+            _gl.UseProgram(0);
+            _gl.DeleteProgram(ProgramHandle);
         }
 
         /// <summary>
@@ -79,11 +79,11 @@ namespace Reload.Graphics.Shaders.ShaderProgram
         /// <param name="type"></param>
         /// <param name="shaderName"></param>
         /// <exception cref="ApplicationException"></exception>
-        public void CompileShader(ShaderType type, string shaderName)
+        public override void CompileShader(ShaderType type, string shaderName)
         {
-            if (linkingIsComplete)
+            if (_linkingIsComplete)
             {
-                Console.WriteLine(Graphics.Properties.Resources.ShaderCantCompile);
+                Console.WriteLine(Properties.Resources.ShaderCantCompile);
                 return;
             }
 
@@ -96,20 +96,20 @@ namespace Reload.Graphics.Shaders.ShaderProgram
             var assembly = Assembly.GetExecutingAssembly();
             var shaderSource = EmbeddedResources.LoadResourceString(assembly, shaderResourceName);
 
-            var handle = gl.CreateShader(type);
+            var handle = _gl.CreateShader(type);
 
-            gl.ShaderSource(handle, shaderSource);
-            gl.CompileShader(handle);
+            _gl.ShaderSource(handle, shaderSource);
+            _gl.CompileShader(handle);
 
-            var infoLog = gl.GetShaderInfoLog(handle);
+            var infoLog = _gl.GetShaderInfoLog(handle);
 
             if (!string.IsNullOrWhiteSpace(infoLog))
             {
-                gl.DeleteShader(handle);
+                _gl.DeleteShader(handle);
                 throw new ApplicationException($"Error compiling shader of type {type}, failed with error {infoLog}");
             }
 
-            shadersTemp.Add(handle);
+            _shadersTemp.Add(handle);
         }
 
         /// <summary>
@@ -118,15 +118,15 @@ namespace Reload.Graphics.Shaders.ShaderProgram
         /// without execution.
         /// </summary>
         /// <param name="attributeName"></param>
-        public void AddAttribute(string attributeName)
+        public override void AddAttribute(string attributeName)
         {
-            if (linkingIsComplete)
+            if (_linkingIsComplete)
             {
-                Console.WriteLine(Graphics.Properties.Resources.ShaderCantAddAttribute);
+                Console.WriteLine(Properties.Resources.ShaderCantAddAttribute);
                 return;
             }
 
-            gl.BindAttribLocation(ProgramHandle, numberOfAttributes++, attributeName);
+            _gl.BindAttribLocation(ProgramHandle, _numberOfAttributes++, attributeName);
         }
 
         /// <summary>
@@ -135,34 +135,34 @@ namespace Reload.Graphics.Shaders.ShaderProgram
         /// for the current program.
         /// </summary>
         /// <exception cref="ApplicationException"></exception>
-        public void LinkShaders()
+        public override void LinkShaders()
         {
-            if (linkingIsComplete)
+            if (_linkingIsComplete)
             {
-                Console.WriteLine(Graphics.Properties.Resources.ShaderCantLink);
+                Console.WriteLine(Properties.Resources.ShaderCantLink);
                 return;
             }
 
-            shadersTemp.ForEach(shaderHandle => gl.AttachShader(ProgramHandle, shaderHandle));
-            gl.LinkProgram(ProgramHandle);
+            _shadersTemp.ForEach(shaderHandle => _gl.AttachShader(ProgramHandle, shaderHandle));
+            _gl.LinkProgram(ProgramHandle);
 
-            var programInfoLog = gl.GetProgramInfoLog(ProgramHandle);
+            var programInfoLog = _gl.GetProgramInfoLog(ProgramHandle);
 
             if (!string.IsNullOrWhiteSpace(programInfoLog))
             {
-                shadersTemp.ForEach(shader => gl.DeleteShader(shader));
+                _shadersTemp.ForEach(shader => _gl.DeleteShader(shader));
                 CleanUp();
 
                 throw new ApplicationException($"Program failed to link with error: {programInfoLog}");
             }
 
-            shadersTemp.ForEach(shaderHandle =>
+            _shadersTemp.ForEach(shaderHandle =>
             {
-                gl.DetachShader(ProgramHandle, shaderHandle);
-                gl.DeleteShader(shaderHandle);
+                _gl.DetachShader(ProgramHandle, shaderHandle);
+                _gl.DeleteShader(shaderHandle);
             });
 
-            linkingIsComplete = true;
+            _linkingIsComplete = true;
         }
 
         /// <summary>
@@ -171,9 +171,9 @@ namespace Reload.Graphics.Shaders.ShaderProgram
         /// <param name="name"></param>
         /// <param name="value"></param>
         /// <exception cref="ApplicationException"></exception>
-        public void SetUniform(string name, int value)
+        public override void SetUniform(string name, int value)
         {
-            var location = gl.GetUniformLocation(ProgramHandle, name);
+            var location = _gl.GetUniformLocation(ProgramHandle, name);
 
             if (location == -1)
             {
@@ -182,7 +182,7 @@ namespace Reload.Graphics.Shaders.ShaderProgram
 
             Use();
 
-            gl.Uniform1(location, value);
+            _gl.Uniform1(location, value);
         }
 
         /// <summary>
@@ -191,9 +191,9 @@ namespace Reload.Graphics.Shaders.ShaderProgram
         /// <param name="name"></param>
         /// <param name="value"></param>
         /// <exception cref="ApplicationException"></exception>
-        public void SetUniform(string name, float value)
+        public override void SetUniform(string name, float value)
         {
-            var location = gl.GetUniformLocation(ProgramHandle, name);
+            var location = _gl.GetUniformLocation(ProgramHandle, name);
 
             if (location == -1)
             {
@@ -202,15 +202,15 @@ namespace Reload.Graphics.Shaders.ShaderProgram
 
             Use();
 
-            gl.Uniform1(location, value);
+            _gl.Uniform1(location, value);
         }
 
         /// <summary>
         /// Use the current program.
         /// </summary>
-        public void Use()
+        public override void Use()
         {
-            gl.UseProgram(ProgramHandle);
+            _gl.UseProgram(ProgramHandle);
         }
     }
 }

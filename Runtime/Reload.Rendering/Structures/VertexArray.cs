@@ -1,9 +1,4 @@
-﻿using Reload.Rendering.Buffers;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Reload.Rendering
+﻿namespace Reload.Rendering.Structures
 {
     public class VertexArray
     {
