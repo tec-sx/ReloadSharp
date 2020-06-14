@@ -13,6 +13,7 @@ namespace Reload.Game.Scenes
     using System.Drawing;
     using Reload.Rendering.Camera;
     using System.Diagnostics;
+    using System.Numerics;
 
     public class IntroScene : Scene
     {
@@ -131,7 +132,7 @@ namespace Reload.Game.Scenes
             RenderCommand.SetClearColor(Color.FromArgb(255, 20, 20, 15));
             RenderCommand.Clear();
 
-            _camera.Rotation = 45f;
+            _camera.Rotation = Quaternion.CreateFromYawPitchRoll(0, 0, 0.5f);
             Renderer.BeginScene(_camera);
 
             Renderer.Submit(_squareShader, _squareVA);
