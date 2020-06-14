@@ -3,6 +3,7 @@ namespace Reload.Rendering
     using Silk.NET.OpenGL;
     using System;
     using System.Collections.Generic;
+    using System.Numerics;
 
     public delegate ShaderProgram CreateShaderDelegate(Dictionary<ShaderType, string> shaderFiles, List<string> attributes);
 
@@ -45,6 +46,13 @@ namespace Reload.Rendering
         /// <param name="name"></param>
         /// <param name="value"></param>
         public abstract void SetUniform(string name, float value);
+
+        /// <summary>
+        /// Sets Matrix 4x4 value to an uniform location.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public abstract void SetUniform(string name, Matrix4x4 value);
 
         /// <summary>
         /// Use the current program.

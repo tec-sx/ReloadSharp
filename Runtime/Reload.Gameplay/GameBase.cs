@@ -5,19 +5,8 @@ namespace Reload.Gameplay
 
     public abstract class GameBase : IGame
     {
-        /// <summary>
-        /// Occurs when [activated].
-        /// </summary>
-        public event Action Activated;
-
-        /// <summary>
-        /// Occurs when [deactivated].
-        /// </summary>
-        public event Action Deactivated;
-
         /// <inheritdoc />
         public IWindow Window { get; set; }
-
 
         /// <inheritdoc />
         public bool IsMouseVisible { get; set; }
@@ -26,8 +15,6 @@ namespace Reload.Gameplay
         {
 
         }
-
-        protected void Activate() => Activated?.Invoke();
 
         /// <summary>
         /// Run the game.

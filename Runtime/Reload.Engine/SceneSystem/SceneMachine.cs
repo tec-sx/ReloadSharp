@@ -113,9 +113,6 @@ namespace Reload.Engine.SceneSystem
         /// <param name="deltaTime"></param>
         public void Render(double deltaTime)
         {
-            RenderCommand.SetClearColor(Color.FromArgb(255, 2, 70, 89));
-            RenderCommand.Clear();
-
             ActiveScene?.Render(deltaTime);
         }
 
@@ -128,7 +125,7 @@ namespace Reload.Engine.SceneSystem
         {
             var newScene = new T
             {
-                SceneManager = this
+                SceneMachine = this
             };
 
             if (ActiveScene == null)

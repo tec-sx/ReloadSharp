@@ -10,8 +10,9 @@ namespace Reload.Game.Scenes
     using System;
     using Reload.Rendering;
     using Silk.NET.OpenGL;
-    using Reload.Configuration;
-    using System.IO;
+    using System.Drawing;
+    using Reload.Rendering.Camera;
+    using System.Diagnostics;
 
     public class IntroScene : Scene
     {
@@ -23,23 +24,13 @@ namespace Reload.Game.Scenes
         private VertexArray _squareVA;
         private ShaderProgram _squareShader;
 
+        private OrtographicCamera _camera;
+
+        private Stopwatch _stopwatch;
+
         public override void OnEnter()
         {
-            var mainContext = new InputMappingContext();
-
-            mainContext.MapKeyToActionPress(0, Key.Space, new JumpCommand(player));
-            mainContext.MapKeyToState(0, Key.W, new WalkCommand(player));
-            mainContext.MapKeyToState(0, Key.ShiftLeft, new RunCommand(player));
-            mainContext.MapKeyToActionPress(0, Key.P, new OpenMenuCommand(this));
-
-            var contexts = new Dictionary<string, Reload.Input.InputMappingContext>
-            {
-                {"main", mainContext }
-            };
-
-            SceneManager.Input.Handler.LoadContexts(contexts);
-            SceneManager.Input.Handler.PushActiveContext("main");
-
+            _camera = new OrtographicCamera(3.2f, 1.8f);
             _triangleVA = VertexArray.Create();
 
             float[] vertices =
@@ -106,11 +97,29 @@ namespace Reload.Game.Scenes
 
             _triangleShader = ShaderProgram.Create(shaders, null);
             _squareShader = ShaderProgram.Create(squareShaders, null);
+
+            var mainContext = new InputMappingContext();
+
+            mainContext.MapKeyToActionPress(0, Key.Space, new JumpCommand(player));
+            //mainContext.MapKeyToState(0, Key.W, new MoveCameraUpCommand(_camera));
+            //mainContext.MapKeyToState(0, Key.S, new MoveCameraDownCommand(_camera));
+            mainContext.MapKeyToActionPress(0, Key.P, new OpenMenuCommand(this));
+
+            var contexts = new Dictionary<string, Reload.Input.InputMappingContext>
+            {
+                {"main", mainContext }
+            };
+
+            SceneMachine.Input.Handler.LoadContexts(contexts);
+            SceneMachine.Input.Handler.PushActiveContext("main");
+
+            _stopwatch = new Stopwatch();
+            _stopwatch.Start();
         }
 
         public override void OnLeave()
         {
-            SceneManager.Input.Handler.ClearContexts();
+            SceneMachine.Input.Handler.ClearContexts();
         }
 
         public override void OnUpdate(double deltaTime)
@@ -119,11 +128,16 @@ namespace Reload.Game.Scenes
 
         public override void OnRender(double deltaTime)
         {
-            _squareShader.Use();
-            Renderer.Submit(_squareVA);
+            RenderCommand.SetClearColor(Color.FromArgb(255, 20, 20, 15));
+            RenderCommand.Clear();
 
-            _triangleShader.Use();
-            Renderer.Submit(_triangleVA);
+            _camera.Rotation = 45f;
+            Renderer.BeginScene(_camera);
+
+            Renderer.Submit(_squareShader, _squareVA);
+            Renderer.Submit(_triangleShader, _triangleVA);
+
+            Renderer.EndScene();
         }
     }
 }

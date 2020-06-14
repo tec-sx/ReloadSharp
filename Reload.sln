@@ -69,11 +69,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Audio", "Audio", "{B14F5E64
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Platform.Audio.OpenAl", "Platform\Audio\Reload.Platform.Audio.OpenAl\Reload.Platform.Audio.OpenAl.csproj", "{7122119A-956E-4BFE-94DA-03E7C4401895}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Platform.Windows", "Platform\Reload.Platform.Windows\Reload.Platform.Windows.csproj", "{B9654671-DD72-4511-8E9B-F257C422663D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Platform.Windows", "Platform\Reload.Platform.Windows\Reload.Platform.Windows.csproj", "{B9654671-DD72-4511-8E9B-F257C422663D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Platform.Linux", "Platform\Reload.Platform.Linux\Reload.Platform.Linux.csproj", "{CF7BCAD3-B39B-4D76-942C-787F3DBB7B1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Platform.Linux", "Platform\Reload.Platform.Linux\Reload.Platform.Linux.csproj", "{CF7BCAD3-B39B-4D76-942C-787F3DBB7B1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Rendering.Tests", "Reload.Rendering.Tests\Reload.Rendering.Tests.csproj", "{F5B8872B-E983-4261-ADBB-3F59847B2399}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Rendering.Tests", "Reload.Rendering.Tests\Reload.Rendering.Tests.csproj", "{F5B8872B-E983-4261-ADBB-3F59847B2399}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Platform.Graphics.DirectX", "Platform\Graphics\Reload.Platform.Graphics.DirectX\Reload.Platform.Graphics.DirectX.csproj", "{9CE78E0A-D914-411B-BEE3-9ED682B5728F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -183,6 +185,10 @@ Global
 		{F5B8872B-E983-4261-ADBB-3F59847B2399}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F5B8872B-E983-4261-ADBB-3F59847B2399}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F5B8872B-E983-4261-ADBB-3F59847B2399}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CE78E0A-D914-411B-BEE3-9ED682B5728F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CE78E0A-D914-411B-BEE3-9ED682B5728F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CE78E0A-D914-411B-BEE3-9ED682B5728F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CE78E0A-D914-411B-BEE3-9ED682B5728F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -219,6 +225,7 @@ Global
 		{B9654671-DD72-4511-8E9B-F257C422663D} = {B65F8FCC-F76B-4272-B274-090695792D22}
 		{CF7BCAD3-B39B-4D76-942C-787F3DBB7B1A} = {B65F8FCC-F76B-4272-B274-090695792D22}
 		{F5B8872B-E983-4261-ADBB-3F59847B2399} = {1158DF02-ABA5-4759-9D80-C658A52663C8}
+		{9CE78E0A-D914-411B-BEE3-9ED682B5728F} = {B090B3EB-9E09-4126-8125-F868413892DF}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A519BFB5-B378-4C0B-B29E-095A0C925278}

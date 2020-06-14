@@ -41,7 +41,7 @@ namespace Reload.Engine.SceneSystem
         /// <summary>
         /// The scene manager managing the current scene.
         /// </summary>
-        public SceneMachine SceneManager { get; set; }
+        public SceneMachine SceneMachine { get; set; }
 
         /// <summary>
         /// Scene base constructor.

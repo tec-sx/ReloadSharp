@@ -17,7 +17,7 @@
 
         public override void OnAttach()
         {
-            _game = Scene.SceneManager.Game;
+            _game = Scene.SceneMachine.Game;
 
             _game.Window.Resize += OnResize;
 

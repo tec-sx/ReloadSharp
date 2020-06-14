@@ -4,6 +4,8 @@
     using Reload.Engine.SceneSystem;
     using Reload.Gameplay.Entities;
     using Reload.Engine.SceneSystem.Enumerations;
+    using Reload.Rendering.Camera;
+    using System.Numerics;
 
     public class JumpCommand : ActionPressCommand
     {
@@ -50,5 +52,41 @@
         }
 
         public override void Execute() => scene.ChangeSceneState(SceneState.ChangePrev);
+    }
+
+    public class MoveCameraUpCommand : StateCommand
+    {
+        private OrtographicCamera _camera;
+
+        public MoveCameraUpCommand(OrtographicCamera camera)
+        {
+            _camera = camera;
+        }
+
+        public override void Execute()
+        {
+            if (CurrentState == StateType.Pressed)
+            {
+                _camera.Position += new Vector3(0.1f, 0.0f, 0.1f);
+            }
+        }
+    }
+
+    public class MoveCameraDownCommand : StateCommand
+    {
+        private OrtographicCamera _camera;
+
+        public MoveCameraDownCommand(OrtographicCamera camera)
+        {
+            _camera = camera;
+        }
+
+        public override void Execute()
+        {
+            if (CurrentState == StateType.Pressed)
+            {
+                _camera.Position -= new Vector3(0.1f, 0.0f, 0.1f);
+            }
+        }
     }
 }

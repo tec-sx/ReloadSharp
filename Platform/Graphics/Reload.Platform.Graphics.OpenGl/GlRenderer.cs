@@ -7,7 +7,7 @@
     using System.Drawing;
     using System.Runtime.InteropServices;
 
-    internal class GlRenderer : RenderingApi
+    internal class GlRenderer : RendererApi
     {
         private GL _gl;
 

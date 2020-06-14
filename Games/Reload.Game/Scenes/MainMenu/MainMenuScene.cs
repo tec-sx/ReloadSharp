@@ -13,7 +13,7 @@
         {
             Layers.PushLayer<MenuLayer>();
 
-            _bgMusicStream = SceneManager.Assets.LoadMusic("Intro");
+            _bgMusicStream = SceneMachine.Assets.LoadMusic("Intro");
             //_bgMusicStream.Play();
         }
 

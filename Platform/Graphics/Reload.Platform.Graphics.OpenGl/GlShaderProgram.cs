@@ -6,54 +6,31 @@ namespace Reload.Platform.Graphics.OpenGl
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Numerics;
     using System.Reflection;
 
-    /// <summary>
-    /// OpenGL shader program class.
-    /// </summary>
+    /// <inheritdoc/>
     public class GlShaderProgram : ShaderProgram
     {
-        /// <summary>
-        /// Shader file extension.
-        /// </summary>
+        /// <inheritdoc/>
         private const string SHADER_EXT = "glsl";
 
-        /// <summary>
-        /// OpenGL native api handle.
-        /// </summary>
+        /// <inheritdoc/>
         private readonly GL _gl;
 
-        /// <summary>
-        /// A temporary shader list to store compiled shaders ready
-        /// for linking.
-        /// </summary>
+        /// <inheritdoc/>
         private readonly List<uint> _shadersTemp;
 
-        /// <summary>
-        /// Blocks <see cref="CompileShader(ShaderType, string)"/>
-        /// and <see cref="AddAttribute(string)"/> methods
-        /// to be called after linkig is complete (<see cref="LinkShaders()"/>
-        /// is called).
-        /// </summary>
+        /// <inheritdoc/>
         private bool _linkingIsComplete;
 
-        /// <summary>
-        /// The attribute indexer used to bind
-        /// to the correct location.
-        /// </summary>
+        /// <inheritdoc/>
         private uint _numberOfAttributes;
 
-        /// <summary>
-        /// The shader program handle.
-        /// </summary>
+        /// <inheritdoc/>
         public uint ProgramHandle { get; }
 
-        /// <summary>
-        /// Creates new shader program <see cref="ProgramHandle"/> and intializes
-        /// temporary list <see cref="_shadersTemp"/> to store compiled shaders before
-        /// linking.
-        /// </summary>
-        /// <param name="glApi"></param>
+        /// <inheritdoc/>
         public GlShaderProgram(GL api)
         {
             _gl = api;
@@ -63,23 +40,14 @@ namespace Reload.Platform.Graphics.OpenGl
             _numberOfAttributes = 0;
         }
 
-        /// <summary>
-        /// Clean up managed resources.
-        /// </summary>
+        /// <inheritdoc/>
         public override void CleanUp()
         {
             _gl.UseProgram(0);
             _gl.DeleteProgram(ProgramHandle);
         }
 
-        /// <summary>
-        /// Compiles the shaders and stores them in a temporary list ready for linking.
-        /// If linking is already complete for current program it logs a warning and continues
-        /// without execution.
-        /// </summary>
-        /// <param name="type"></param>
-        /// <param name="shaderName"></param>
-        /// <exception cref="ApplicationException"></exception>
+        /// <inheritdoc/>
         public override void CompileShader(ShaderType type, string shaderName)
         {
             if (_linkingIsComplete)
@@ -113,12 +81,7 @@ namespace Reload.Platform.Graphics.OpenGl
             _shadersTemp.Add(handle);
         }
 
-        /// <summary>
-        /// Adds an attribute to our shader. Should be called between compiling and linking.
-        /// If linking is already complete for current program it logs a warning and continues
-        /// without execution.
-        /// </summary>
-        /// <param name="attributeName"></param>
+        /// <inheritdoc/>
         public override void AddAttribute(string attributeName)
         {
             if (_linkingIsComplete)
@@ -130,12 +93,7 @@ namespace Reload.Platform.Graphics.OpenGl
             _gl.BindAttribLocation(ProgramHandle, _numberOfAttributes++, attributeName);
         }
 
-        /// <summary>
-        /// Links the shaders stored in the shader temporary list. After successful
-        /// linking, 'CompileShader()' and 'AddAttribute()' methods can no longer be called
-        /// for the current program.
-        /// </summary>
-        /// <exception cref="ApplicationException"></exception>
+        /// <inheritdoc/>
         public override void LinkShaders()
         {
             if (_linkingIsComplete)
@@ -166,12 +124,7 @@ namespace Reload.Platform.Graphics.OpenGl
             _linkingIsComplete = true;
         }
 
-        /// <summary>
-        /// Sets integer value to an uniform location.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        /// <exception cref="ApplicationException"></exception>
+        /// <inheritdoc/>
         public override void SetUniform(string name, int value)
         {
             var location = _gl.GetUniformLocation(ProgramHandle, name);
@@ -186,12 +139,7 @@ namespace Reload.Platform.Graphics.OpenGl
             _gl.Uniform1(location, value);
         }
 
-        /// <summary>
-        /// Sets floating point value to an uniform location.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        /// <exception cref="ApplicationException"></exception>
+        /// <inheritdoc/>
         public override void SetUniform(string name, float value)
         {
             var location = _gl.GetUniformLocation(ProgramHandle, name);
@@ -206,9 +154,22 @@ namespace Reload.Platform.Graphics.OpenGl
             _gl.Uniform1(location, value);
         }
 
-        /// <summary>
-        /// Use the current program.
-        /// </summary>
+        /// <inheritdoc/>
+        public unsafe override void SetUniform(string name, Matrix4x4 value)
+        {
+            var location = _gl.GetUniformLocation(ProgramHandle, name);
+
+            if (location == -1)
+            {
+                throw new ApplicationException($"{name} uniform not found on shader.");
+            }
+
+            Use();
+
+            _gl.UniformMatrix4(location, 1, false, (float*)&value);
+        }
+
+        /// <inheritdoc/>
         public override void Use()
         {
             _gl.UseProgram(ProgramHandle);

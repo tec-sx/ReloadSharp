@@ -4,7 +4,7 @@
     using Silk.NET.Windowing.Common;
     using System.Drawing;
 
-    public class VulkanRenderer : RenderingApi
+    public class VulkanRenderer : RendererApi
     {
         public VulkanRenderer(IWindow window)
         {
