@@ -11,15 +11,19 @@
 
   <ItemGroup>
     <None Remove="Shaders\main.frag.glsl" />
-    <None Remove="Shaders\main.geom.glsl" />
     <None Remove="Shaders\main.vert.glsl" />
+    <None Remove="Shaders\square.frag.glsl" />
+    <None Remove="Shaders\square.vert.glsl" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Shaders\main.frag.glsl">
+    <EmbeddedResource Include="Shaders\square.frag.glsl">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
-    <EmbeddedResource Include="Shaders\main.geom.glsl">
+    <EmbeddedResource Include="Shaders\square.vert.glsl">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Shaders\main.frag.glsl">
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="Shaders\main.vert.glsl">

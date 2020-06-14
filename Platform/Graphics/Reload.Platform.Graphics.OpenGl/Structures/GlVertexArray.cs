@@ -10,13 +10,12 @@
     {
         private GL _gl;
         private uint _handle;
-        private List<VertexBuffer> _vertexBuffers;
 
         public GlVertexArray(GL api)
         {
             _gl = api;
             _handle = _gl.CreateVertexArray();
-            _vertexBuffers = new List<VertexBuffer>();
+            VertexBuffers = new List<VertexBuffer>();
         }
 
         public override void SetIndexBuffer(IndexBuffer indexBuffer)
@@ -50,7 +49,7 @@
                 index++;
             }
 
-            _vertexBuffers.Add(vertexBuffer);
+            VertexBuffers.Add(vertexBuffer);
         }
 
         public override void Bind()

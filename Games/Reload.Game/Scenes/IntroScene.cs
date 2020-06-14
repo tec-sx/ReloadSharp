@@ -17,10 +17,11 @@ namespace Reload.Game.Scenes
     {
         private Player player = new Player();
 
-        private IndexBuffer _indexBuffer;
-        private VertexBuffer _vertexBuffer;
-        private VertexArray _vertexArray;
-        private ShaderProgram _shaderProgram;
+        private VertexArray _triangleVA;
+        private ShaderProgram _triangleShader;
+
+        private VertexArray _squareVA;
+        private ShaderProgram _squareShader;
 
         public override void OnEnter()
         {
@@ -39,7 +40,7 @@ namespace Reload.Game.Scenes
             SceneManager.Input.Handler.LoadContexts(contexts);
             SceneManager.Input.Handler.PushActiveContext("main");
 
-            _vertexArray = VertexArray.Create();
+            _triangleVA = VertexArray.Create();
 
             float[] vertices =
             {
@@ -48,7 +49,7 @@ namespace Reload.Game.Scenes
                 0.0f, 0.5f, 0.0f,       0.8f, 0.8f, 0.2f
             };
 
-            _vertexBuffer = VertexBuffer.Create(new Span<float>(vertices));
+            var triangleVB = VertexBuffer.Create(new Span<float>(vertices));
 
             var layout = new BufferLayout
             {
@@ -56,13 +57,40 @@ namespace Reload.Game.Scenes
                 new BufferElement(ShaderDataType.Float3, "color")
             };
 
-            _vertexBuffer.SetLayout(layout);
-            _vertexArray.AddVertexBuffer(_vertexBuffer);
+            triangleVB.SetLayout(layout);
+            _triangleVA.AddVertexBuffer(triangleVB);
 
             uint[] indices = { 0, 1, 2 };
 
-            _indexBuffer = IndexBuffer.Create(new Span<uint>(indices));
-            _vertexArray.SetIndexBuffer(_indexBuffer);
+            var triangleIB = IndexBuffer.Create(new Span<uint>(indices));
+            _triangleVA.SetIndexBuffer(triangleIB);
+
+
+            float[] squareVertices =
+{
+                -0.75f, -0.75f, 0.0f,
+                 0.75f, -0.75f, 0.0f,
+                 0.75f,  0.75f, 0.0f,
+                -0.75f,  0.75f, 0.0f,
+            };
+
+            _squareVA = VertexArray.Create();
+
+            var squareVB = VertexBuffer.Create(squareVertices);
+
+            var squareVBLayout = new BufferLayout
+            {
+                new BufferElement(ShaderDataType.Float3, "position"),
+            };
+
+            squareVB.SetLayout(squareVBLayout);
+            _squareVA.AddVertexBuffer(squareVB);
+
+            uint[] squareIndices = { 0, 1, 2, 2, 3, 0 };
+
+            var squareIB = IndexBuffer.Create(new Span<uint>(squareIndices));
+            _squareVA.SetIndexBuffer(squareIB);
+
 
             var shaders = new Dictionary<ShaderType, string>
             {
@@ -70,7 +98,14 @@ namespace Reload.Game.Scenes
                 { ShaderType.FragmentShader, "main.frag" }
             };
 
-            _shaderProgram = ShaderProgram.Create(shaders, null);
+            var squareShaders = new Dictionary<ShaderType, string>
+            {
+                { ShaderType.VertexShader, "square.vert" },
+                { ShaderType.FragmentShader, "square.frag" }
+            };
+
+            _triangleShader = ShaderProgram.Create(shaders, null);
+            _squareShader = ShaderProgram.Create(squareShaders, null);
         }
 
         public override void OnLeave()
@@ -84,9 +119,11 @@ namespace Reload.Game.Scenes
 
         public override void OnRender(double deltaTime)
         {
-            _shaderProgram.Use();
+            _squareShader.Use();
+            Renderer.Submit(_squareVA);
 
-            Renderer.Submit(_vertexArray);
+            _triangleShader.Use();
+            Renderer.Submit(_triangleVA);
         }
     }
 }

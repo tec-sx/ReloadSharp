@@ -1,10 +1,13 @@
-﻿namespace Reload.Rendering.Structures
+﻿using System.Collections.Generic;
+
+namespace Reload.Rendering.Structures
 {
     public delegate VertexArray CreateVertexArrayDelegate();
 
     public abstract class VertexArray
     {
         public IndexBuffer IndexBuffer { get; protected set; }
+        public List<VertexBuffer> VertexBuffers { get; protected set; }
 
         public abstract void Bind();
         public abstract void Unbind();
