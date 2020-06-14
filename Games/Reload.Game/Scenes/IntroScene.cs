@@ -102,8 +102,8 @@ namespace Reload.Game.Scenes
             var mainContext = new InputMappingContext();
 
             mainContext.MapKeyToActionPress(0, Key.Space, new JumpCommand(player));
-            //mainContext.MapKeyToState(0, Key.W, new MoveCameraUpCommand(_camera));
-            //mainContext.MapKeyToState(0, Key.S, new MoveCameraDownCommand(_camera));
+            mainContext.MapKeyToState(0, Key.W, new MoveCameraUpCommand(_camera));
+            mainContext.MapKeyToState(0, Key.S, new MoveCameraDownCommand(_camera));
             mainContext.MapKeyToActionPress(0, Key.P, new OpenMenuCommand(this));
 
             var contexts = new Dictionary<string, Reload.Input.InputMappingContext>

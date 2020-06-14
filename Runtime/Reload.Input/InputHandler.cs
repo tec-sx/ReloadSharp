@@ -10,7 +10,7 @@
 
         private readonly Stack<InputMappingContext> _activeBindingContexts;
 
-        private readonly Queue<Command> _commandQueue;
+        private Queue<Command> _commandQueue;
 
 
         public InputHandler()
@@ -49,10 +49,20 @@
 
         public void Update()
         {
+            Queue<Command> pressedCommand = new Queue<Command>(8);
+
             while (_commandQueue.Count != 0)
             {
-                _commandQueue.Dequeue().Execute();
+                var command = _commandQueue.Dequeue();
+                command.Execute();
+
+                if (command is StateCommand && (command as StateCommand).CurrentState == StateType.Pressed)
+                {
+                    pressedCommand.Enqueue(command);
+                }
             }
+
+            _commandQueue = pressedCommand;
         }
 
         public void PushActiveContext(string name)
