@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Reload.Configuration
+namespace Reload.Platform.Linux
 {
     public class Class1
     {

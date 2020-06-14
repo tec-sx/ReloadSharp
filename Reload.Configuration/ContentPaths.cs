@@ -18,6 +18,7 @@ namespace Reload.Configuration
         public static readonly string Textures = Path.Combine(Assets, "Textures");
         public static readonly string Models = Path.Combine(Assets, "Models");
         public static readonly string Fonts = Path.Combine(Assets, "Fonts");
+        public static readonly string Shaders = Path.Combine(Assets, "Shaders");
         #endregion
     }
 }

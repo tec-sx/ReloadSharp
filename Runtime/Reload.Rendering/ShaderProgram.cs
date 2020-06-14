@@ -1,10 +1,10 @@
 namespace Reload.Rendering
 {
-    using Reload.Rendering.Platform.OpenGl;
     using Silk.NET.OpenGL;
-    using Silk.NET.Windowing.Common;
     using System;
     using System.Collections.Generic;
+
+    public delegate ShaderProgram CreateShaderDelegate(Dictionary<ShaderType, string> shaderFiles, List<string> attributes);
 
     public abstract class ShaderProgram
     {
@@ -57,18 +57,6 @@ namespace Reload.Rendering
         public abstract void CleanUp();
 
         /// <summary>
-        /// Creates (Compiles and links) a new shader program from
-        /// the shader files dictionary.
-        /// </summary>
-        /// <param name="shaderFiles"></param>
-        /// <returns cref="IShaderProgram"></returns>
-        /// <exception cref="ApplicationException"></exception>
-        public static ShaderProgram CreateShader(Dictionary<ShaderType, string> shaderFiles)
-        {
-            return CreateShader(shaderFiles, null);
-        }
-
-        /// <summary>
         /// Creates (Compiles adds attributes and then links) a new shader program from
         /// the shader files dictionary and attribute list.
         /// </summary>
@@ -76,37 +64,6 @@ namespace Reload.Rendering
         /// <param name="attributes"></param>
         /// <returns cref="IShaderProgram"></returns>
         /// <exception cref="ApplicationException"></exception>
-        public static ShaderProgram CreateShader(Dictionary<ShaderType, string> shaderFiles, List<string> attributes)
-        {
-            ShaderProgram shaderProgram;
-
-            if (shaderFiles == null || shaderFiles.Count == 0)
-            {
-                throw new ApplicationException(Properties.Resources.ShaderDictionaryNullOrEmpty);
-            }
-
-            if (RendererApi.Api == ContextAPI.OpenGL)
-            {
-                shaderProgram = new GlShaderProgram();
-            }
-            else
-            {
-                throw new ApplicationException(Properties.Resources.BackendNotSupportedError);
-            }
-
-            foreach (var (shaderType, shaderFile) in shaderFiles)
-            {
-                shaderProgram.CompileShader(shaderType, shaderFile);
-            }
-
-            if (attributes != null && attributes.Count > 0)
-            {
-                attributes.ForEach(attribute => shaderProgram.AddAttribute(attribute));
-            }
-
-            shaderProgram.LinkShaders();
-
-            return shaderProgram;
-        }
+        public static CreateShaderDelegate Create;
     }
 }

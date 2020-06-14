@@ -1,9 +1,9 @@
 ﻿namespace Reload.Core.VFS.Structures
 {
-    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.IO;
 
-    public class AssetIndex : List<AssetEntry>, IFsStructure
+    public class AssetIndex : Collection<AssetEntry>, IFsStructure
     {
         public void Read(BinaryReader reader)
         {

@@ -9,12 +9,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Shaders\main.frag.glsl" />
-    <EmbeddedResource Include="Shaders\main.geom.glsl" />
-    <EmbeddedResource Include="Shaders\main.vert.glsl" />
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Silk.NET.OpenGL" Version="1.3.0" />
     <PackageReference Include="Silk.NET.Vulkan" Version="1.3.0" />
     <PackageReference Include="Silk.NET.Windowing.Common" Version="1.3.0" />

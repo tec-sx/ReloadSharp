@@ -15,6 +15,7 @@
     using System.Drawing;
     using Reload.Input;
     using Reload.Rendering;
+    using Reload.Platform.Graphics.OpenGl;
 
     public abstract class Game : GameBase
     {
@@ -63,7 +64,7 @@
         /// </summary>
         public SceneMachine SceneMachine { get; }
 
-        public UiManager UiManager { get; }
+        //public UiManager UiManager { get; }
 
         #endregion
 
@@ -93,7 +94,7 @@
                 .AddSingleton<IGameObjectCache, GameObjectCache>()
                 .AddSingleton<IAudioCache, AudioCache>()
                 .AddSingleton<IAssetsManager, AssetsManager>()
-                .AddSingleton<UiManager>()
+                //.AddSingleton<UiManager>()
                 .AddSingleton<SceneMachine>()
 
                 #endregion
@@ -109,7 +110,7 @@
             AssetsManager = SubSystems.GetService<IAssetsManager>();
             SceneMachine = SubSystems.GetService<SceneMachine>();
 
-            UiManager = SubSystems.GetService<UiManager>();
+            //UiManager = SubSystems.GetService<UiManager>();
 
             Window = GraphicsManager.CreateWindow(ConfigurationManager.CreateDisplayConfiguration());
             AttachHandlers();
@@ -162,10 +163,12 @@
         {
             Window.Load -= OnWindowLoad;
 
-            Renderer.Initialize(Window);
+            new GlContext(Window);
+
+            Renderer.Initialize();
             InputManager.Initialize(Window);
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
-            UiManager.Initilize();
+            //UiManager.Initilize();
 
             OnInitialize();
             OnLoadContent();
@@ -181,7 +184,7 @@
         private void OnWindowUpdate(double deltaTime)
         {
             OnUpdate(deltaTime);
-            UiManager.Update(deltaTime);
+            //UiManager.Update(deltaTime);
             InputManager.Update();
             SceneMachine.Update(deltaTime);
         }
@@ -190,7 +193,7 @@
         {
             OnRender(deltaTime);
             SceneMachine.Render(deltaTime);
-            UiManager.Render(deltaTime);
+            //UiManager.Render(deltaTime);
         }
 
         private void ShutDownSubSystems()
@@ -201,7 +204,7 @@
             AssetsManager.ShutDown();
             AudioManager.ShutDown();
 
-            UiManager.Dispose();
+            //UiManager.Dispose();
             InputManager.Dispose();
         }
 

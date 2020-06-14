@@ -1,14 +1,13 @@
 ﻿namespace Reload.Rendering
 {
-    using Silk.NET.Windowing.Common;
     using Reload.Rendering.Structures;
     using System.Drawing;
 
     public static class Renderer
     {
-        public static void Initialize(IWindow window)
+        public static void Initialize()
         {
-            RenderCommand.Initialize(window);
+
         }
 
         public static void ShutDown()

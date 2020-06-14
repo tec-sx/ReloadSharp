@@ -1,54 +1,52 @@
-﻿namespace Reload.Rendering.Platform.OpenGl
+﻿namespace Reload.Platform.Graphics.OpenGl
 {
+    using Reload.Rendering;
     using Reload.Rendering.Structures;
     using Silk.NET.OpenGL;
-    using Silk.NET.Windowing.Common;
     using System;
     using System.Drawing;
     using System.Runtime.InteropServices;
 
-    public class GlRenderer : RendererApi
+    internal class GlRenderer : RenderingApi
     {
-        public static GL Gl { get; private set; }
+        private GL _gl;
 
-        public GlRenderer(IWindow window)
+        public unsafe GlRenderer(GL api)
         {
-            Gl = GL.GetApi(window);
+            _gl = api;
+
+#if DEBUG
+            _gl.Enable(GLEnum.DebugOutput);
+            _gl.Enable(GLEnum.DebugOutputSynchronous);
+            _gl.DebugMessageCallback(OnDebug, null);
+#endif
         }
 
         public override void SetViewport(Size size)
         {
-            Gl.Viewport(size);
+            _gl.Viewport(size);
         }
 
         public override void Clear()
         {
-            Gl.Clear(
-                (uint)ClearBufferMask.ColorBufferBit |
-                (uint)ClearBufferMask.DepthBufferBit);
+            _gl.Clear((uint)(
+                ClearBufferMask.ColorBufferBit |
+                ClearBufferMask.DepthBufferBit |
+                ClearBufferMask.StencilBufferBit));
         }
 
         public override void SetClearColor(Color color)
         {
-            Gl.ClearColor(color);
+            _gl.ClearColor(color);
         }
 
-        public override void DrawIndexed(VertexArray vertexArray)
+        public unsafe override void DrawIndexed(VertexArray vertexArray)
         {
-            Gl.DrawElements(
-                PrimitiveType.Triangles,
+            _gl.DrawElements(
+                GLEnum.Triangles,
                 vertexArray.IndexBuffer.Count,
-                DrawElementsType.UnsignedInt,
+                GLEnum.UnsignedInt,
                 null);
-        }
-
-        public unsafe void SetupOpenGl()
-        {
-#if DEBUG
-            Gl.Enable(GLEnum.DebugOutput);
-            Gl.Enable(GLEnum.DebugOutputSynchronous);
-            Gl.DebugMessageCallback(OnDebug, null);
-#endif
         }
 
         private static void OnDebug(

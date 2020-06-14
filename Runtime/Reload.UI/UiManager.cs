@@ -30,10 +30,10 @@
 
         public void Initilize()
         {
-            var gl = _graphics.Gl;
+            //var gl = _graphics.Gl;
             var window = _game.Window;
             var inputContext = _input.InputContext;
-            _controller = new ImGuiController(gl, window, inputContext);
+            //_controller = new ImGuiController(gl, window, inputContext);
 
             SetStyles();
         }

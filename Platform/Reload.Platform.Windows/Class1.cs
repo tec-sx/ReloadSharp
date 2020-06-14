@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Reload.Platform.Graphics.Vulkan
+namespace Reload.Platform.Windows
 {
     public class Class1
     {

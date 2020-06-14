@@ -1,6 +1,7 @@
-namespace Reload.Rendering.Platform.OpenGl
+namespace Reload.Platform.Graphics.OpenGl
 {
     using Reload.Core.IO;
+    using Reload.Rendering;
     using Silk.NET.OpenGL;
     using System;
     using System.Collections.Generic;
@@ -53,9 +54,9 @@ namespace Reload.Rendering.Platform.OpenGl
         /// linking.
         /// </summary>
         /// <param name="glApi"></param>
-        public GlShaderProgram()
+        public GlShaderProgram(GL api)
         {
-            _gl = GlRenderer.Gl;
+            _gl = api;
             ProgramHandle = _gl.CreateProgram();
             _shadersTemp = new List<uint>();
             _linkingIsComplete = false;

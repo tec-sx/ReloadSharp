@@ -1,41 +1,21 @@
 ﻿namespace Reload.Rendering
 {
-    using Silk.NET.Windowing.Common;
     using System.Drawing;
-    using System.Runtime.CompilerServices;
     using Reload.Rendering.Structures;
 
-    public class RenderCommand
+    public delegate void ParameterlessDelegate();
+    public delegate void VertexArrayDrawDelegate(VertexArray vertexArray);
+    public delegate void SetColorDelegate(Color color);
+    public delegate void SetSizeDelegate(Size size);
+
+    public static class RenderCommand
     {
-        private static RendererApi _rendererAPI;
+        public static SetSizeDelegate SetViewport;
 
-        internal static void Initialize(IWindow window)
-        {
-            _rendererAPI = RendererApi.Create(window);
-        }
+        public static SetColorDelegate SetClearColor;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetViewport(Size size)
-        {
-            _rendererAPI.SetViewport(size);
-        }
+        public static ParameterlessDelegate Clear;
 
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void SetClearColor(Color color)
-        {
-            _rendererAPI.SetClearColor(color);
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void Clear()
-        {
-            _rendererAPI.Clear();
-        }
-
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static void DrawIndexed(VertexArray vertexArray)
-        {
-            _rendererAPI.DrawIndexed(vertexArray);
-        }
+        public static VertexArrayDrawDelegate DrawIndexed;
     }
 }

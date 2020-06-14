@@ -3,11 +3,11 @@ namespace Reload.Engine.SceneSystem
     using Reload.Gameplay;
     using System.Drawing;
     using Reload.Graphics;
-    using Silk.NET.OpenGL;
     using Assets;
     using System;
     using Reload.Input;
     using Reload.Engine.SceneSystem.Enumerations;
+    using Reload.Rendering;
 
     /// <summary>
     /// The scene manager. Instantiated as singleton in the
@@ -113,9 +113,8 @@ namespace Reload.Engine.SceneSystem
         /// <param name="deltaTime"></param>
         public void Render(double deltaTime)
         {
-            var gl = Graphics.Gl;
-            gl.ClearColor(Color.FromArgb(255, 2, 70, 89));
-            gl.Clear((uint)(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit | ClearBufferMask.StencilBufferBit));
+            RenderCommand.SetClearColor(Color.FromArgb(255, 2, 70, 89));
+            RenderCommand.Clear();
 
             ActiveScene?.Render(deltaTime);
         }

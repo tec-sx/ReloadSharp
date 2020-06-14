@@ -1,26 +1,29 @@
-﻿namespace Reload.Rendering.Platform.OpenGl
+﻿namespace Reload.Platform.Graphics.OpenGl.Structures
 {
     using Reload.Rendering.Structures;
     using Silk.NET.OpenGL;
     using System;
 
-    public class GlVertexBuffer : VertexBuffer
+    public class GlIndexBuffer : IndexBuffer
     {
-        private const BufferTargetARB _bufferType = BufferTargetARB.ArrayBuffer;
+        private const BufferTargetARB _bufferType = BufferTargetARB.ElementArrayBuffer;
 
         private GL _gl;
         private uint _handle;
 
-        public unsafe GlVertexBuffer(Span<float> data)
+        public unsafe GlIndexBuffer(Span<uint> data, GL api)
         {
-            _gl = GlRenderer.Gl;
+            _gl = api;
             _handle = _gl.CreateBuffer();
+            _gl.BindBuffer(_bufferType, _handle);
+
+            Count = (uint)data.Length;
 
             fixed (void* dataPtr = data)
             {
                 _gl.BufferData(
                     _bufferType,
-                    (UIntPtr)(data.Length * sizeof(float)),
+                    (UIntPtr)(Count * sizeof(uint)),
                     dataPtr,
                     BufferUsageARB.StaticDraw);
             }

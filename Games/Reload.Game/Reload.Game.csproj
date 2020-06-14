@@ -6,10 +6,29 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Assets\Shaders\main.frag.glsl" />
+    <None Remove="Assets\Shaders\main.geom.glsl" />
+    <None Remove="Assets\Shaders\main.vert.glsl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Shaders\main.frag.glsl">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Shaders\main.geom.glsl">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Shaders\main.vert.glsl">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\..\Core\Reload.Core\Reload.Core.csproj" />
     <ProjectReference Include="..\..\Runtime\Reload.Assets\Reload.Assets.csproj" />
     <ProjectReference Include="..\..\Runtime\Reload.Engine\Reload.Engine.csproj" />
     <ProjectReference Include="..\..\Runtime\Reload.Input\Reload.Input.csproj" />
+    <ProjectReference Include="..\..\Runtime\Reload.Rendering\Reload.Rendering.csproj" />
   </ItemGroup>
 
   <ItemGroup>

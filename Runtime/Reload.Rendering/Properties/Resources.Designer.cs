@@ -61,78 +61,11 @@ namespace Reload.Rendering.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Graphics backend is not supported..
+        ///   Looks up a localized string similar to Unknownshader data type..
         /// </summary>
-        internal static string BackendNotSupportedError {
+        internal static string UnknownShaderDataType {
             get {
-                return ResourceManager.GetString("BackendNotSupportedError", resourceCulture);
-            }
-        }
-
-
-        /// <summary>
-        ///   Looks up a localized string similar to |{0}| {1}/{2}: {3}.
-        /// </summary>
-        internal static string GraphicsManager_OnDebug
-        {
-            get
-            {
-                return ResourceManager.GetString("GraphicsManager_OnDebug", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to &quot;OpenGL native api binding is null&quot;.
-        /// </summary>
-        internal static string OpenGlApiIsNull
-        {
-            get
-            {
-                return ResourceManager.GetString("OpenGlApiIsNull", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to &quot;Can&apos;t add attribute. Linking already complete.&quot;.
-        /// </summary>
-        internal static string ShaderCantAddAttribute
-        {
-            get
-            {
-                return ResourceManager.GetString("ShaderCantAddAttribute", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to &quot;Can&apos;t compile shader. Linking already complete.&quot;.
-        /// </summary>
-        internal static string ShaderCantCompile
-        {
-            get
-            {
-                return ResourceManager.GetString("ShaderCantCompile", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to &quot;Can&apos;t link shaders. Linking already complete.&quot;.
-        /// </summary>
-        internal static string ShaderCantLink
-        {
-            get
-            {
-                return ResourceManager.GetString("ShaderCantLink", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to &quot;Shader dictionary is null or empty.&quot;.
-        /// </summary>
-        internal static string ShaderDictionaryNullOrEmpty
-        {
-            get
-            {
-                return ResourceManager.GetString("ShaderDictionaryNullOrEmpty", resourceCulture);
+                return ResourceManager.GetString("UnknownShaderDataType", resourceCulture);
             }
         }
     }

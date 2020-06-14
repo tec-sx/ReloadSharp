@@ -117,7 +117,31 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="BackendNotSupportedError" xml:space="preserve">
+    <value>Graphics backend is not supported.</value>
+  </data>
+  <data name="GraphicsManager_OnDebug" xml:space="preserve">
+    <value>|{0}| {1}/{2}: {3}.</value>
+  </data>
+  <data name="OpenGlApiIsNull" xml:space="preserve">
+    <value>OpenGL native api binding is null.</value>
+  </data>
+  <data name="ShaderCantAddAttribute" xml:space="preserve">
+    <value>Can't add attribute. Linking already complete.</value>
+  </data>
+  <data name="ShaderCantCompile" xml:space="preserve">
+    <value>Can't compile shader. Linking already complete.</value>
+  </data>
+  <data name="ShaderCantLink" xml:space="preserve">
+    <value>Can't link shaders. Linking already complete.</value>
+  </data>
+  <data name="ShaderDictionaryNullOrEmpty" xml:space="preserve">
+    <value>Shader dictionary is null or empty.</value>
+  </data>
   <data name="UnknownShaderDataType" xml:space="preserve">
     <value>Unknownshader data type.</value>
+  </data>
+  <data name="VertexBufferHasNoLayout" xml:space="preserve">
+    <value>Vertex buffer has no layout.</value>
   </data>
 </root>
