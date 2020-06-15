@@ -28,6 +28,9 @@
             VertexBuffer.Create += (vertices) => new GlVertexBuffer(vertices, Api);
             IndexBuffer.Create += (indices) => new GlIndexBuffer(indices, Api);
             VertexArray.Create += () => new GlVertexArray(Api);
+
+            Texture2D.CreateBlank += (width, height) => new GlTexture2D(width, height, Api);
+            Texture2D.CreateFromFile += (filePath) => new GlTexture2D(filePath, Api);
         }
 
 
