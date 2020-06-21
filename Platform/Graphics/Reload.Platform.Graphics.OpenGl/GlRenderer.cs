@@ -30,9 +30,7 @@
         public override void Clear()
         {
             _gl.Clear((uint)(
-                ClearBufferMask.ColorBufferBit |
-                ClearBufferMask.DepthBufferBit |
-                ClearBufferMask.StencilBufferBit));
+                ClearBufferMask.ColorBufferBit));
         }
 
         public override void SetClearColor(Color color)

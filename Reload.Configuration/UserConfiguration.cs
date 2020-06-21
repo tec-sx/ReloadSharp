@@ -14,7 +14,7 @@
         public Point DisplayResolution { get; set; } = new Point(1280, 720);
         public int DisplayRefreshRate { get; set; } = 60;
         public bool DisplayInFullScreen { get; set; } = false;
-        public bool DisplayEnableVsync { get; set; } = false;
+        public bool DisplayEnableVsync { get; set; } = true;
         public bool DisplayEnableVulkan { get; set; } = false;
         #endregion
 

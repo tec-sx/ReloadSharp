@@ -166,7 +166,7 @@ namespace Reload.Platform.Graphics.OpenGl
 
             Use();
 
-            _gl.UniformMatrix4(location, 1, true, (float*)&value);
+            _gl.UniformMatrix4(location, 1, false, (float*)&value);
         }
 
         /// <inheritdoc/>

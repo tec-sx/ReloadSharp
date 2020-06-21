@@ -31,7 +31,7 @@ namespace Reload.Game.Scenes
 
         public override void OnEnter()
         {
-            _camera = new OrtographicCamera(6.4f, 3.6f);
+            _camera = new OrtographicCamera(8f, 4.5f);
             _triangleVA = VertexArray.Create();
 
             float[] vertices =
@@ -125,14 +125,16 @@ namespace Reload.Game.Scenes
 
         public override void OnUpdate(double deltaTime)
         {
+            _camera.Rotation += 8f;
+
+            _camera.RecalculateViewMatrix();
         }
 
         public override void OnRender(double deltaTime)
         {
-            RenderCommand.SetClearColor(Color.FromArgb(255, 20, 20, 15));
+            RenderCommand.SetClearColor(Color.FromArgb(0, 20, 20, 15));
             RenderCommand.Clear();
 
-            _camera.Rotation = Quaternion.CreateFromYawPitchRoll(0, 0, 0.5f);
             Renderer.BeginScene(_camera);
 
             Renderer.Submit(_squareShader, _squareVA);

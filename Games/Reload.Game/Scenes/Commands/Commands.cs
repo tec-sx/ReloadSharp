@@ -67,12 +67,7 @@
 
         public override void Execute()
         {
-
-            if (CurrentState == StateType.Pressed)
-            {
-
-                _camera.Position += new Vector3(0.0f, 0.01f, 0.01f);
-            }
+            _camera.Position.X += 0.01f;
         }
     }
 
@@ -84,13 +79,14 @@
         public MoveCameraDownCommand(OrtographicCamera camera)
         {
             _camera = camera;
+            Console.WriteLine(_camera.Position);
         }
 
         public override void Execute()
         {
             if (CurrentState == StateType.Pressed)
             {
-                _camera.Position -= new Vector3(0.0f, 0.01f, 0.01f);
+                _camera.Position.X -= 0.01f;
             }
         }
     }

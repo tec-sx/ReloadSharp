@@ -26,7 +26,7 @@
             _dataFormat = GLEnum.Rgba;
 
             _gl.CreateTextures(GLEnum.Texture2D, 1, (uint*)_handle);
-            _gl.TextureStorage2D(_handle, 1, _internalFormat, width, height);
+               _gl.TextureStorage2D(_handle, 1, _internalFormat, width, height);
 
             _gl.TextureParameter(_handle, GLEnum.TextureMinFilter, (int)GLEnum.Linear);
             _gl.TextureParameter(_handle, GLEnum.TextureMagFilter, (int)GLEnum.Linear);
@@ -48,12 +48,16 @@
 
         public override void Bind(uint slot)
         {
-            throw new System.NotImplementedException();
         }
 
         public override void SetData(object data)
         {
             throw new System.NotImplementedException();
+        }
+
+        public override void Dispose()
+        {
+            _gl.DeleteTexture(_handle);
         }
     }
 }
