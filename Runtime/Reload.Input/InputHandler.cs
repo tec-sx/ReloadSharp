@@ -10,14 +10,21 @@
 
         private readonly Stack<InputMappingContext> _activeBindingContexts;
 
-        private Queue<Command> _commandQueue;
+        private Queue<ActionPressCommand> _actionPressCommandQueue;
+        private Queue<ActionReleaseCommand> _actionReleaseCommandQueue;
+
+        private List<StateCommand> _stateCommandList;
 
 
         public InputHandler()
         {
             _bindingContexts = new Dictionary<string, InputMappingContext>(16);
             _activeBindingContexts = new Stack<InputMappingContext>(4);
-            _commandQueue = new Queue<Command>(8);
+
+            _actionPressCommandQueue = new Queue<ActionPressCommand>(64);
+            _actionReleaseCommandQueue = new Queue<ActionReleaseCommand>(64);
+
+            _stateCommandList = new List<StateCommand>(64);
         }
 
         public void Attach(IInputContext context)
@@ -42,27 +49,23 @@
         public void LoadContexts(Dictionary<string, InputMappingContext> contexts) => _bindingContexts = contexts;
         public void ClearContexts()
         {
-            _commandQueue.Clear();
+            _actionPressCommandQueue.Clear();
             _activeBindingContexts.Clear();
             _bindingContexts.Clear();
         }
 
         public void Update()
         {
-            Queue<Command> pressedCommand = new Queue<Command>(8);
-
-            while (_commandQueue.Count != 0)
+            for (int i = 0; i < _stateCommandList.Count; i++)
             {
-                var command = _commandQueue.Dequeue();
-                command.Execute();
-
-                if (command is StateCommand && (command as StateCommand).CurrentState == StateType.Pressed)
-                {
-                    pressedCommand.Enqueue(command);
-                }
+                _stateCommandList[i].Execute();
             }
 
-            _commandQueue = pressedCommand;
+            while (_actionPressCommandQueue.Count != 0)
+            {
+                var command = _actionPressCommandQueue.Dequeue();
+                command.Execute();
+            }
         }
 
         public void PushActiveContext(string name)
@@ -87,16 +90,16 @@
 
             var context = _activeBindingContexts.Peek();
 
-            if (context.KeyActionPressCommands.TryGetValue((keyboard.Index, key), out var actionCommand))
+            if (context.KeyActionPressCommands.TryGetValue((keyboard.Index, key), out ActionPressCommand actionCommand))
             {
-                _commandQueue.Enqueue(actionCommand);
+                _actionPressCommandQueue.Enqueue(actionCommand);
                 return;
             }
 
-            if (context.KeyStateCommands.TryGetValue((keyboard.Index, key), out var stateCommand))
+            if (context.KeyStateCommands.TryGetValue((keyboard.Index, key), out StateCommand stateCommand))
             {
                 stateCommand.CurrentState = StateType.Pressed;
-                _commandQueue.Enqueue(stateCommand);
+                _stateCommandList.Add(stateCommand);
                 return;
             }
         }
@@ -112,14 +115,14 @@
 
             if (context.KeyActionReleaseCommands.TryGetValue((keyboard.Index, key), out var actionCommand))
             {
-                _commandQueue.Enqueue(actionCommand);
+                _actionReleaseCommandQueue.Enqueue(actionCommand);
                 return;
             }
 
             if (context.KeyStateCommands.TryGetValue((keyboard.Index, key), out var stateCommand))
             {
                 stateCommand.CurrentState = StateType.Released;
-                _commandQueue.Enqueue(stateCommand);
+                _stateCommandList.Remove(stateCommand);
                 return;
             }
         }

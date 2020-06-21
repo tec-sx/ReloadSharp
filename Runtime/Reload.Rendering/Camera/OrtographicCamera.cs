@@ -7,7 +7,6 @@ namespace Reload.Rendering.Camera
     {
         public Matrix4x4 ProjectionMatrix { get; }
         public Matrix4x4 ViewMatrix =>
-                Matrix4x4.Identity *
                 Matrix4x4.CreateFromQuaternion(Rotation) *
                 Matrix4x4.CreateTranslation(Position);
 
@@ -19,6 +18,8 @@ namespace Reload.Rendering.Camera
         public OrtographicCamera(float width, float height)
         {
             ProjectionMatrix = Matrix4x4.CreateOrthographic(width, height, -1.0f, 1.0f);
+            Position = Vector3.Zero;
+            Rotation = new Quaternion(0.0f, 0.0f, 0.0f, 0.0f);
         }
     }
 }

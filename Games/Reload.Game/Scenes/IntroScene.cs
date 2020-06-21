@@ -31,7 +31,7 @@ namespace Reload.Game.Scenes
 
         public override void OnEnter()
         {
-            _camera = new OrtographicCamera(3.2f, 1.8f);
+            _camera = new OrtographicCamera(6.4f, 3.6f);
             _triangleVA = VertexArray.Create();
 
             float[] vertices =

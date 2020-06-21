@@ -6,6 +6,7 @@
     using Reload.Engine.SceneSystem.Enumerations;
     using Reload.Rendering.Camera;
     using System.Numerics;
+    using System;
 
     public class JumpCommand : ActionPressCommand
     {
@@ -57,6 +58,7 @@
     public class MoveCameraUpCommand : StateCommand
     {
         private OrtographicCamera _camera;
+        private Vector3 _position = Vector3.Zero;
 
         public MoveCameraUpCommand(OrtographicCamera camera)
         {
@@ -65,9 +67,11 @@
 
         public override void Execute()
         {
+
             if (CurrentState == StateType.Pressed)
             {
-                _camera.Position += new Vector3(0.1f, 0.0f, 0.1f);
+
+                _camera.Position += new Vector3(0.0f, 0.01f, 0.01f);
             }
         }
     }
@@ -75,6 +79,7 @@
     public class MoveCameraDownCommand : StateCommand
     {
         private OrtographicCamera _camera;
+        private Vector3 _position = Vector3.Zero;
 
         public MoveCameraDownCommand(OrtographicCamera camera)
         {
@@ -85,7 +90,7 @@
         {
             if (CurrentState == StateType.Pressed)
             {
-                _camera.Position -= new Vector3(0.1f, 0.0f, 0.1f);
+                _camera.Position -= new Vector3(0.0f, 0.01f, 0.01f);
             }
         }
     }
