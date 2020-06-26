@@ -2,6 +2,7 @@
 {
     using System;
     using Reload.Engine;
+    using Silk.NET.Windowing.Common;
 
     public static class Program
     {
@@ -9,7 +10,8 @@
         {
             var game = new ReloadGame(args);
             var gameThread = new GameThread(game);
-
+            
+            game.CreateWindow();
             gameThread.Run();
 
             Console.ReadKey();

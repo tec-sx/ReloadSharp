@@ -10,7 +10,7 @@
 
     public class GlContext
     {
-        internal GL Api;
+        public GL Api { get; }
 
         public GlContext(IWindow window)
         {

@@ -4,6 +4,8 @@
     using Reload.Configuration.Extensions;
     using Reload.Input.Configuration;
     using Reload.Graphics;
+    using System.Drawing;
+    using Silk.NET.Windowing.Common;
 
     public class ConfigurationManager
     {
@@ -15,7 +17,7 @@
             _userConfiguration.Load();
         }
 
-        public DisplayConfiguration CreateDisplayConfiguration()
+        public DisplayConfiguration CreateDefaultDisplayConfiguration()
         {
             return new DisplayConfiguration
             {
@@ -26,6 +28,8 @@
                 EnableVSync = _userConfiguration.DisplayEnableVsync,
                 EnableVulkan = _userConfiguration.DisplayEnableVulkan,
                 WindowTitle = $"{SystemConfiguration.ProgramName} - v.{SystemConfiguration.ProgramVersion}",
+                WindowBorder = WindowBorder.Fixed,
+                Position = new Point(100, 100)
             };
         }
 

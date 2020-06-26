@@ -1,6 +1,7 @@
 namespace Reload.Platform.Graphics.OpenGl
 {
     using Reload.Core.IO;
+    using Reload.Core.Utils;
     using Reload.Rendering;
     using Silk.NET.OpenGL;
     using System;
@@ -56,11 +57,11 @@ namespace Reload.Platform.Graphics.OpenGl
                 return;
             }
 
-            var shaderNameWithExt = $".{shaderName}.{SHADER_EXT}";
+            shaderFileName = $".{shaderName}.{SHADER_EXT}";
 
             var shaderResourceName = GetType().Assembly
                 .GetManifestResourceNames()
-                .First(resourceName => resourceName.EndsWith(shaderNameWithExt, StringComparison.InvariantCulture));
+                .First(resourceName => resourceName.EndsWith(shaderFileName, StringComparison.InvariantCulture));
 
             var assembly = Assembly.GetExecutingAssembly();
             var shaderSource = EmbeddedResources.LoadResourceString(assembly, shaderResourceName);
@@ -125,14 +126,31 @@ namespace Reload.Platform.Graphics.OpenGl
         }
 
         /// <inheritdoc/>
-        public override void SetUniform(string name, int value)
+        public override int GetUniform(string name)
         {
-            var location = _gl.GetUniformLocation(ProgramHandle, name);
+            if (uniformLocationCache.TryGetValue(name, out var location))
+            {
+                return location;
+            }
+
+            location = _gl.GetUniformLocation(ProgramHandle, name);
 
             if (location == -1)
             {
-                throw new ApplicationException($"{name} uniform not found on shader.");
+                Logger.PrintWarning($"Uniform {name} not found in shader {shaderFileName}. ");
             }
+            else
+            {
+                uniformLocationCache.Add(name, location);
+            }
+
+            return location;
+        }
+
+        /// <inheritdoc/>
+        public override void SetUniform(string name, int value)
+        {
+            var location = GetUniform(name);
 
             Use();
 
@@ -142,12 +160,7 @@ namespace Reload.Platform.Graphics.OpenGl
         /// <inheritdoc/>
         public override void SetUniform(string name, float value)
         {
-            var location = _gl.GetUniformLocation(ProgramHandle, name);
-
-            if (location == -1)
-            {
-                throw new ApplicationException($"{name} uniform not found on shader.");
-            }
+            var location = GetUniform(name);
 
             Use();
 
@@ -157,16 +170,22 @@ namespace Reload.Platform.Graphics.OpenGl
         /// <inheritdoc/>
         public unsafe override void SetUniform(string name, Matrix4x4 value)
         {
-            var location = _gl.GetUniformLocation(ProgramHandle, name);
-
-            if (location == -1)
-            {
-                throw new ApplicationException($"{name} uniform not found on shader.");
-            }
+            var location = GetUniform(name);
 
             Use();
 
             _gl.UniformMatrix4(location, 1, false, (float*)&value);
+        }
+
+
+        /// <inheritdoc/>
+        public unsafe override void SetUniform(string name, Vector4 value)
+        {
+            var location = GetUniform(name);
+
+            Use();
+
+            _gl.Uniform4(location, value);
         }
 
         /// <inheritdoc/>

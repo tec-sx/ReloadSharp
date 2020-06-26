@@ -67,7 +67,7 @@
 
         public override void Execute()
         {
-            _camera.Position.X += 0.01f;
+            _camera.Position.Y -= 0.01f;
         }
     }
 
@@ -79,14 +79,46 @@
         public MoveCameraDownCommand(OrtographicCamera camera)
         {
             _camera = camera;
-            Console.WriteLine(_camera.Position);
         }
 
         public override void Execute()
         {
             if (CurrentState == StateType.Pressed)
             {
-                _camera.Position.X -= 0.01f;
+                _camera.Position.Y += 0.01f;
+            }
+        }
+    }
+
+    public class RotateCameraLeft : StateCommand
+    {
+        private OrtographicCamera _camera;
+
+        public RotateCameraLeft(OrtographicCamera camera)
+        {
+            _camera = camera;
+        }
+
+        public override void Execute()
+        {
+            _camera.Rotation -= 0.01f;
+        }
+    }
+
+    public class RotateCameraRight : StateCommand
+    {
+        private OrtographicCamera _camera;
+
+        public RotateCameraRight(OrtographicCamera camera)
+        {
+            _camera = camera;
+        }
+
+        public override void Execute()
+        {
+            if (CurrentState == StateType.Pressed)
+            {
+                _camera.Rotation += 0.01f;
             }
         }
     }

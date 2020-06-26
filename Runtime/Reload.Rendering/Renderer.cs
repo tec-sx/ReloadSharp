@@ -39,13 +39,21 @@
 
         }
 
-        public static void Submit(ShaderProgram shader, VertexArray vertexArray)
+        public static void Submit(ShaderProgram shader, VertexArray vertexArray, Matrix4x4 transform)
         {
             shader.Use();
+            
             shader.SetUniform("u_viewProjection", _sceneData.ViewProjectionMatrix);
+            shader.SetUniform("u_Transform", transform);
+
             vertexArray.Bind();
 
             RenderCommand.DrawIndexed(vertexArray);
+        }
+
+        public static void Submit(ShaderProgram shader, VertexArray vertexArray)
+        {
+            Submit(shader, vertexArray, Matrix4x4.Identity);
         }
     }
 

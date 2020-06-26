@@ -2,6 +2,13 @@
 {
     using Reload.Rendering;
     using Silk.NET.OpenGL;
+    using SixLabors.ImageSharp;
+    using SixLabors.ImageSharp.PixelFormats;
+    using SixLabors.ImageSharp.Processing;
+    using System.Runtime.InteropServices;
+    using SixLabors.ImageSharp.Advanced;
+    using Reload.Core.Utils;
+    using System;
 
     public class GlTexture2D : Texture2D
     {
@@ -11,43 +18,61 @@
         private PathStringFormat _path;
         private uint _handle;
 
-        public GlTexture2D(string filepath, GL api)
+        public unsafe GlTexture2D(string filepath, GL api)
         {
             _gl = api;
+
+            Image<Rgba32> image = Image.Load<Rgba32>(filepath);
+
+            image.Mutate(image => image.Flip(FlipMode.Vertical));
+
+            if (!image.TryGetSinglePixelSpan(out var pixelSpan))
+            {
+                Logger.PrintError("Can't load texture");
+                throw new ApplicationException();
+            }
+
+            fixed (void* data = &MemoryMarshal.GetReference(pixelSpan))
+            {
+                Load((uint)image.Width, (uint)image.Height, data);
+            }
         }
 
-        public unsafe GlTexture2D(uint width, uint height, GL api)
+        public GlTexture2D(uint width, uint height, GL api)
         {
-            _gl = api;
+            throw new NotImplementedException();
+        }
+
+        private unsafe void Load(uint width, uint height, void* data)
+        {
             Width = width;
             Height = height;
 
-            _internalFormat = GLEnum.Rgba8;
+            _internalFormat = GLEnum.Rgba;
             _dataFormat = GLEnum.Rgba;
 
-            _gl.CreateTextures(GLEnum.Texture2D, 1, (uint*)_handle);
-               _gl.TextureStorage2D(_handle, 1, _internalFormat, width, height);
+            _handle = _gl.GenTexture();
 
-            _gl.TextureParameter(_handle, GLEnum.TextureMinFilter, (int)GLEnum.Linear);
-            _gl.TextureParameter(_handle, GLEnum.TextureMagFilter, (int)GLEnum.Linear);
+            _gl.ActiveTexture(TextureUnit.Texture0);
+            _gl.BindTexture(TextureTarget.Texture2D, _handle);
 
-            _gl.TextureParameter(_handle, GLEnum.TextureWrapS, (int)GLEnum.Repeat);
-            _gl.TextureParameter(_handle, GLEnum.TextureWrapT, (int)GLEnum.Repeat);
+            _gl.TexImage2D(TextureTarget.Texture2D, 0, (int)_internalFormat, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data);
+            
+            _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)GLEnum.Repeat);
+            _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)GLEnum.Repeat);
+            _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)GLEnum.Linear);
+            _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)GLEnum.Linear);
 
-            // Alternative
-            //_handle = _gl.GenTexture();
-
-            //_gl.TexImage2D(TextureTarget.Texture2D, 0, (int)InternalFormat.Rgba, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data);
-            //_gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)GLEnum.ClampToEdge);
-            //_gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)GLEnum.ClampToEdge);
-            //_gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)GLEnum.Linear);
-            //_gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)GLEnum.Linear);
-
-
+            //Generating mipmaps.
+            _gl.GenerateMipmap(TextureTarget.Texture2D);
         }
 
-        public override void Bind(uint slot)
+        public override void Bind(uint slot = 0)
         {
+            var slotUnit = Utils.TextureSlotIdToTextureUnit(slot);
+
+            _gl.ActiveTexture(slotUnit);
+            _gl.BindTexture(TextureTarget.Texture2D, _handle);
         }
 
         public override void SetData(object data)

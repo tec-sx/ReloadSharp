@@ -8,11 +8,11 @@
 
     public class InputManager : IDisposable
     {
-        public IInputContext InputContext;
+        public IInputContext Context;
 
-        public IReadOnlyList<IKeyboard> Keyboards => InputContext.Keyboards;
+        public IReadOnlyList<IKeyboard> Keyboards => Context.Keyboards;
 
-        public IReadOnlyList<IMouse> Mices => InputContext.Mice;
+        public IReadOnlyList<IMouse> Mices => Context.Mice;
 
         public InputHandler Handler { get; }
 
@@ -31,14 +31,14 @@
         /// </summary>
         public void Initialize(IWindow window)
         {
-            InputContext = window.CreateInput();
-            Handler.Attach(InputContext);
+            Context = window.CreateInput();
+            Handler.Attach(Context);
         }
 
         public void Dispose()
         {
-            Handler.Detach(InputContext);
-            InputContext?.Dispose();
+            Handler.Detach(Context);
+            Context?.Dispose();
         }
     }
 }

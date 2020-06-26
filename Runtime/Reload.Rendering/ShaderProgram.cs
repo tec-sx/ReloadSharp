@@ -9,6 +9,19 @@ namespace Reload.Rendering
 
     public abstract class ShaderProgram
     {
+
+        protected string shaderFileName;
+        protected Dictionary<string, int> uniformLocationCache;
+
+
+        /// <summary>
+        /// Default constructor.
+        /// </summary>
+        public ShaderProgram()
+        {
+            uniformLocationCache = new Dictionary<string, int>();
+        }
+
         /// <summary>
         /// Compiles the shaders and stores them in a temporary list ready for linking.
         /// If linking is already complete for current program it logs a warning and continues
@@ -41,6 +54,13 @@ namespace Reload.Rendering
         public abstract void SetUniform(string name, int value);
 
         /// <summary>
+        /// Gets uniform location.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <returns></returns>
+        public abstract int GetUniform(string name);
+
+        /// <summary>
         /// Sets floating point value to an uniform location.
         /// </summary>
         /// <param name="name"></param>
@@ -53,6 +73,13 @@ namespace Reload.Rendering
         /// <param name="name"></param>
         /// <param name="value"></param>
         public abstract void SetUniform(string name, Matrix4x4 value);
+
+        /// <summary>
+        /// Sets Vector 4 value to an uniform location.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public abstract void SetUniform(string name, Vector4 value);
 
         /// <summary>
         /// Use the current program.

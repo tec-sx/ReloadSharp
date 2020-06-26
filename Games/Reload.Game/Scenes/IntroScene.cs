@@ -12,8 +12,8 @@ namespace Reload.Game.Scenes
     using Silk.NET.OpenGL;
     using System.Drawing;
     using Reload.Rendering.Camera;
-    using System.Diagnostics;
     using System.Numerics;
+    using System.Diagnostics;
 
     public class IntroScene : Scene
     {
@@ -27,11 +27,23 @@ namespace Reload.Game.Scenes
 
         private OrtographicCamera _camera;
 
+        private float _camerSpeed;
+        private Vector3 _cameraPosition;
+
+        private float _cameraRotation;
+        private float _cameraRotationSpeed;
+
+        private Vector3 _squarePosition;
+        private float _squareMoveSpeed;
+
+        private float _triangleRotation;
+
         private Stopwatch _stopwatch;
+
 
         public override void OnEnter()
         {
-            _camera = new OrtographicCamera(8f, 4.5f);
+            _camera = new OrtographicCamera(16f, 9f);
             _triangleVA = VertexArray.Create();
 
             float[] vertices =
@@ -104,6 +116,8 @@ namespace Reload.Game.Scenes
             mainContext.MapKeyToActionPress(0, Key.Space, new JumpCommand(player));
             mainContext.MapKeyToState(0, Key.W, new MoveCameraUpCommand(_camera));
             mainContext.MapKeyToState(0, Key.S, new MoveCameraDownCommand(_camera));
+            mainContext.MapKeyToState(0, Key.A, new RotateCameraLeft(_camera));
+            mainContext.MapKeyToState(0, Key.D, new RotateCameraRight(_camera));
             mainContext.MapKeyToActionPress(0, Key.P, new OpenMenuCommand(this));
 
             var contexts = new Dictionary<string, Reload.Input.InputMappingContext>
@@ -114,19 +128,23 @@ namespace Reload.Game.Scenes
             SceneMachine.Input.Handler.LoadContexts(contexts);
             SceneMachine.Input.Handler.PushActiveContext("main");
 
+
+            _squareMoveSpeed = 5f;
+
             _stopwatch = new Stopwatch();
             _stopwatch.Start();
         }
 
         public override void OnLeave()
         {
+            _stopwatch.Stop();
             SceneMachine.Input.Handler.ClearContexts();
         }
 
         public override void OnUpdate(double deltaTime)
         {
-            _camera.Rotation += 8f;
-
+            _squarePosition.Y = MathF.Sin((float)(_stopwatch.Elapsed.Milliseconds *  deltaTime * 0.1f));
+            _triangleRotation += 1f * (float)deltaTime;
             _camera.RecalculateViewMatrix();
         }
 
@@ -137,8 +155,35 @@ namespace Reload.Game.Scenes
 
             Renderer.BeginScene(_camera);
 
-            Renderer.Submit(_squareShader, _squareVA);
-            Renderer.Submit(_triangleShader, _triangleVA);
+            Matrix4x4 triangleTransform = Matrix4x4.CreateFromAxisAngle(Vector3.UnitZ, _triangleRotation);
+
+            Matrix4x4 squareScale = Matrix4x4.CreateScale(0.1f);
+
+            Vector4 blueColor = new Vector4(0.6f, 0.2f, 0.3f, 1.0f);
+            Vector4 redColor = new Vector4(0.2f, 0.3f, 0.6f, 1.0f);
+
+            for (int y = 0; y < 20; y++)
+            {
+                for (int x = 0; x < 20; x++)
+                {
+                    Vector3 position = new Vector3(x * 2f, y * 2f, 0.0f);
+                    Matrix4x4 transform = Matrix4x4.CreateTranslation(position) * squareScale;
+
+                    if (x % 2 == 0)
+                    {
+                        _squareShader.SetUniform("u_Color", redColor);
+                    }
+                    else
+                    {
+                        _squareShader.SetUniform("u_Color", blueColor);
+                    }
+
+                    Renderer.Submit(_squareShader, _squareVA, transform);
+                }
+            }
+
+            Renderer.Submit(_triangleShader, _triangleVA, triangleTransform);
+
 
             Renderer.EndScene();
         }

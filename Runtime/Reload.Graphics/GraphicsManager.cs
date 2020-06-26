@@ -43,8 +43,9 @@ namespace Reload.Graphics
             options.RunningSlowTolerance = 5;
             options.UseSingleThreadedWindow = false;
             options.IsEventDriven = false;
-            options.WindowBorder = WindowBorder.Fixed;
+            options.WindowBorder = displayConfiguration.WindowBorder;
             options.ShouldSwapAutomatically = false;
+            options.Position = displayConfiguration.Position;
 
             return options;
         }

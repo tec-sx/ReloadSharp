@@ -20,7 +20,7 @@ namespace Reload.Rendering.Camera
 
         public OrtographicCamera(float width, float height)
         {
-            _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, -1.0f, 1.0f);
+            _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, -10.0f, 10.0f);
             _viewMatrix = Matrix4x4.Identity;
             _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
 
@@ -37,7 +37,7 @@ namespace Reload.Rendering.Camera
         public void RecalculateViewMatrix()
         {
             var transform = Matrix4x4.CreateTranslation(Position) *
-                            Matrix4x4.CreateRotationZ((float)(Rotation * Math.PI) / 1800);
+                            Matrix4x4.CreateRotationZ((float)(Rotation * Math.PI));
 
             Matrix4x4.Invert(transform, out _viewMatrix);
             _viewProjectionMatrix = _projectionMatrix * _viewMatrix;

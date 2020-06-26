@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Shaders\main.frag.glsl" />
+    <None Remove="Assets\Shaders\main.vert.glsl" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Assets\Shaders\main.frag.glsl">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Assets\Shaders\main.vert.glsl">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Reload.Configuration\Reload.Configuration.csproj" />
+    <ProjectReference Include="..\..\Runtime\Reload.Engine\Reload.Engine.csproj" />
+    <ProjectReference Include="..\..\Runtime\Reload.Input\Reload.Input.csproj" />
+    <ProjectReference Include="..\..\Runtime\Reload.Rendering\Reload.Rendering.csproj" />
+    <ProjectReference Include="..\..\Runtime\Reload.UI\Reload.UI.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Textures\test.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

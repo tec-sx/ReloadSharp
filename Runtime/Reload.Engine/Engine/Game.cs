@@ -64,7 +64,7 @@
         /// </summary>
         public SceneMachine SceneMachine { get; }
 
-        //public UiManager UiManager { get; }
+        public UiManager UiManager { get; }
 
         #endregion
 
@@ -94,7 +94,7 @@
                 .AddSingleton<IGameObjectCache, GameObjectCache>()
                 .AddSingleton<IAudioCache, AudioCache>()
                 .AddSingleton<IAssetsManager, AssetsManager>()
-                //.AddSingleton<UiManager>()
+                .AddSingleton<UiManager>()
                 .AddSingleton<SceneMachine>()
 
                 #endregion
@@ -110,11 +110,18 @@
             AssetsManager = SubSystems.GetService<IAssetsManager>();
             SceneMachine = SubSystems.GetService<SceneMachine>();
 
-            //UiManager = SubSystems.GetService<UiManager>();
+            UiManager = SubSystems.GetService<UiManager>();
+        }
 
-            Window = GraphicsManager.CreateWindow(ConfigurationManager.CreateDisplayConfiguration());
+        public void CreateWindow()
+        {
+            CreateWindow(ConfigurationManager.CreateDefaultDisplayConfiguration());
+        }
+
+        public void CreateWindow(DisplayConfiguration configuration)
+        {
+            Window = GraphicsManager.CreateWindow(configuration);
             AttachHandlers();
-
         }
 
         public void AttachHandlers()
@@ -163,12 +170,12 @@
         {
             Window.Load -= OnWindowLoad;
 
-            new GlContext(Window);
+            var glContext = new GlContext(Window);
 
             Renderer.Initialize();
             InputManager.Initialize(Window);
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
-            //UiManager.Initilize();
+            UiManager.Initilize(glContext.Api, Window, InputManager.Context);
 
             OnInitialize();
             OnLoadContent();
@@ -184,16 +191,13 @@
         private void OnWindowUpdate(double deltaTime)
         {
             OnUpdate(deltaTime);
-            //UiManager.Update(deltaTime);
             InputManager.Update();
-            SceneMachine.Update(deltaTime);
         }
 
         private void OnWindowRender(double deltaTime)
         {
             OnRender(deltaTime);
-            SceneMachine.Render(deltaTime);
-            //UiManager.Render(deltaTime);
+            
         }
 
         private void ShutDownSubSystems()

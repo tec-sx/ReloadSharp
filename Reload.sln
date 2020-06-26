@@ -75,7 +75,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Platform.Linux", "Pl
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Rendering.Tests", "Reload.Rendering.Tests\Reload.Rendering.Tests.csproj", "{F5B8872B-E983-4261-ADBB-3F59847B2399}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Platform.Graphics.DirectX", "Platform\Graphics\Reload.Platform.Graphics.DirectX\Reload.Platform.Graphics.DirectX.csproj", "{9CE78E0A-D914-411B-BEE3-9ED682B5728F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Platform.Graphics.DirectX", "Platform\Graphics\Reload.Platform.Graphics.DirectX\Reload.Platform.Graphics.DirectX.csproj", "{9CE78E0A-D914-411B-BEE3-9ED682B5728F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Shaders", "Runtime\Reload.Shaders\Reload.Shaders.csproj", "{8767E728-788D-410F-8460-F0FE30D57FDD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Core.Utils", "Core\Reload.Core.Utils\Reload.Core.Utils.csproj", "{FF6ADA6F-0650-4ABB-916D-027F38D5A553}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{B2ACFD3D-8044-4494-A9A8-E0C13AB70BB3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Editor", "Tools\Reload.Editor\Reload.Editor.csproj", "{281E64EC-2706-48C0-98AF-91402288BBEE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -189,6 +197,18 @@ Global
 		{9CE78E0A-D914-411B-BEE3-9ED682B5728F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9CE78E0A-D914-411B-BEE3-9ED682B5728F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9CE78E0A-D914-411B-BEE3-9ED682B5728F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8767E728-788D-410F-8460-F0FE30D57FDD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8767E728-788D-410F-8460-F0FE30D57FDD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8767E728-788D-410F-8460-F0FE30D57FDD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8767E728-788D-410F-8460-F0FE30D57FDD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF6ADA6F-0650-4ABB-916D-027F38D5A553}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF6ADA6F-0650-4ABB-916D-027F38D5A553}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF6ADA6F-0650-4ABB-916D-027F38D5A553}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF6ADA6F-0650-4ABB-916D-027F38D5A553}.Release|Any CPU.Build.0 = Release|Any CPU
+		{281E64EC-2706-48C0-98AF-91402288BBEE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{281E64EC-2706-48C0-98AF-91402288BBEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{281E64EC-2706-48C0-98AF-91402288BBEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{281E64EC-2706-48C0-98AF-91402288BBEE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -226,6 +246,9 @@ Global
 		{CF7BCAD3-B39B-4D76-942C-787F3DBB7B1A} = {B65F8FCC-F76B-4272-B274-090695792D22}
 		{F5B8872B-E983-4261-ADBB-3F59847B2399} = {1158DF02-ABA5-4759-9D80-C658A52663C8}
 		{9CE78E0A-D914-411B-BEE3-9ED682B5728F} = {B090B3EB-9E09-4126-8125-F868413892DF}
+		{8767E728-788D-410F-8460-F0FE30D57FDD} = {FB98081B-CA4B-461E-9FA3-2F1085E295CB}
+		{FF6ADA6F-0650-4ABB-916D-027F38D5A553} = {AF88642A-CD9E-4DDD-9663-AA2F6B14727F}
+		{281E64EC-2706-48C0-98AF-91402288BBEE} = {B2ACFD3D-8044-4494-A9A8-E0C13AB70BB3}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A519BFB5-B378-4C0B-B29E-095A0C925278}

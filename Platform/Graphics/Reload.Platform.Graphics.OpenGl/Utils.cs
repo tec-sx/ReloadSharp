@@ -26,5 +26,45 @@
                 _ => throw new ApplicationException(Resources.UnknownShaderDataType)
             };
         }
+
+        public static TextureUnit TextureSlotIdToTextureUnit(uint slot)
+        {
+            return slot switch
+            {
+                0 => TextureUnit.Texture0,
+                1 => TextureUnit.Texture1,
+                2 => TextureUnit.Texture2,
+                3 => TextureUnit.Texture3,
+                4 => TextureUnit.Texture4,
+                5 => TextureUnit.Texture5,
+                6 => TextureUnit.Texture6,
+                7 => TextureUnit.Texture7,
+                8 => TextureUnit.Texture8,
+                9 => TextureUnit.Texture9,
+                10 => TextureUnit.Texture10,
+                11 => TextureUnit.Texture11,
+                12 => TextureUnit.Texture12,
+                13 => TextureUnit.Texture13,
+                14 => TextureUnit.Texture14,
+                15 => TextureUnit.Texture15,
+                16 => TextureUnit.Texture16,
+                17 => TextureUnit.Texture17,
+                18 => TextureUnit.Texture18,
+                19 => TextureUnit.Texture19,
+                20 => TextureUnit.Texture20,
+                21 => TextureUnit.Texture21,
+                22 => TextureUnit.Texture22,
+                23 => TextureUnit.Texture23,
+                24 => TextureUnit.Texture24,
+                25 => TextureUnit.Texture25,
+                26 => TextureUnit.Texture26,
+                27 => TextureUnit.Texture27,
+                28 => TextureUnit.Texture28,
+                29 => TextureUnit.Texture29,
+                30 => TextureUnit.Texture30,
+                31 => TextureUnit.Texture31,
+                _ => throw new ApplicationException(Resources.UnknownShaderDataType)
+            };
+        }
     }
 }

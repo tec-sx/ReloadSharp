@@ -1,5 +1,6 @@
 ﻿namespace Reload.Graphics
 {
+    using Silk.NET.Windowing.Common;
     using System.Drawing;
 
     public struct DisplayConfiguration
@@ -38,5 +39,15 @@
         /// System set window title.
         /// </summary>
         public string WindowTitle { get; set; }
+
+        /// <summary>
+        /// Hide window borders.
+        /// </summary>
+        public WindowBorder WindowBorder { get; set; }
+
+        /// <summary>
+        /// Window position.
+        /// </summary>
+        public Point Position { get; set; }
     }
 }

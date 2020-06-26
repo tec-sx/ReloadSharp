@@ -34,9 +34,11 @@
   <ItemGroup>
     <PackageReference Include="Silk.NET.OpenGL" Version="1.3.0" />
     <PackageReference Include="Silk.NET.Windowing.Common" Version="1.3.0" />
+    <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-rc0003" />
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Reload.Core.Utils\Reload.Core.Utils.csproj" />
     <ProjectReference Include="..\..\..\Runtime\Reload.Rendering\Reload.Rendering.csproj" />
   </ItemGroup>
 

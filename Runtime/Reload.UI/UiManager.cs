@@ -1,41 +1,39 @@
 ﻿namespace Reload.UI
 {
-    using Reload.Gameplay;
     using System;
     using System.Numerics;
     using ImGuiNET;
     using System.Drawing;
     using Ultz.SilkExtensions.ImGui;
-    using Reload.Graphics;
-    using Reload.Input;
+    using Silk.NET.OpenGL;
+    using Silk.NET.Windowing.Common;
+    using Silk.NET.Input.Common;
+    using System.Collections.Generic;
 
     public class UiManager : IDisposable
     {
-
         private ImGuiController _controller;
-        private readonly IGame _game;
-        private readonly GraphicsManager _graphics;
-        private readonly InputManager _input;
-        private readonly DebugUi _debugLayer;
+        private List<UiWindow> _uiWindows;
 
-        public UiManager(IGame game, GraphicsManager graphics, InputManager input)
+        public UiManager()
         {
-            _game = game;
-            _graphics = graphics;
-            _input = input;
-#if DEBUG
-            _debugLayer = new DebugUi(_game);
-#endif
         }
 
-        public void Initilize()
+        public void Initilize(GL api, IWindow appWindow, IInputContext inputContext)
         {
-            //var gl = _graphics.Gl;
-            var window = _game.Window;
-            var inputContext = _input.InputContext;
-            //_controller = new ImGuiController(gl, window, inputContext);
+            _controller = new ImGuiController(api, appWindow, inputContext);
+            _uiWindows = new List<UiWindow>();
 
+            var io = ImGui.GetIO();
+
+            io.ConfigFlags |= ImGuiConfigFlags.NavEnableKeyboard;
+            
             SetStyles();
+        }
+
+        public void AddWindow(UiWindow window)
+        {
+            _uiWindows.Add(window);
         }
 
         public void Update(double deltaTime)
@@ -45,9 +43,12 @@
 
         public void Render(double deltaTime)
         {
-#if DEBUG
-            _debugLayer.Draw(deltaTime);
-#endif
+
+            for (int i = 0; i < _uiWindows.Count; i++)
+            {
+                _uiWindows[i].Draw();
+            }
+
             _controller.Render();
         }
 
