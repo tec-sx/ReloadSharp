@@ -39,6 +39,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Reload.Core.Utils\Reload.Core.Utils.csproj" />
+    <ProjectReference Include="..\..\..\Reload.Configuration\Reload.Configuration.csproj" />
     <ProjectReference Include="..\..\..\Runtime\Reload.Rendering\Reload.Rendering.csproj" />
   </ItemGroup>
 

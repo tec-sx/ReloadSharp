@@ -5,6 +5,7 @@
 
     public abstract class RendererApi
     {
+        public abstract void Initialize();
         public abstract void SetClearColor(Color color);
         public abstract void Clear();
         public abstract void DrawIndexed(VertexArray vertexArray);

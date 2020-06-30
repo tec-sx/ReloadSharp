@@ -1,9 +1,9 @@
-﻿using Reload.Rendering.Structures;
-using Reload.Rendering.Properties;
-using System;
-
-namespace Reload.Rendering
+﻿namespace Reload.Rendering
 {
+    using Reload.Rendering.Structures;
+    using Reload.Rendering.Properties;
+    using System;
+
     public static class Utils
     {
         public static uint GetShaderDatatypeSize(ShaderDataType type)

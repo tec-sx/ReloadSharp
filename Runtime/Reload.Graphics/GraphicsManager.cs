@@ -41,7 +41,7 @@ namespace Reload.Graphics
             options.FramesPerSecond = displayConfiguration.TargetFps;
             options.VSync = displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Off;
             options.RunningSlowTolerance = 5;
-            options.UseSingleThreadedWindow = false;
+            options.UseSingleThreadedWindow = true;
             options.IsEventDriven = false;
             options.WindowBorder = displayConfiguration.WindowBorder;
             options.ShouldSwapAutomatically = false;

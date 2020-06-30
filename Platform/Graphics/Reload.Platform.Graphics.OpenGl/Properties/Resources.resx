@@ -120,6 +120,9 @@
   <data name="BackendNotSupportedError" xml:space="preserve">
     <value>Graphics backend is not supported.</value>
   </data>
+  <data name="EmptyShaderSource" xml:space="preserve">
+    <value>Empty shader source string passed</value>
+  </data>
   <data name="GraphicsManager_OnDebug" xml:space="preserve">
     <value>|{0}| {1}/{2}: {3}.</value>
   </data>

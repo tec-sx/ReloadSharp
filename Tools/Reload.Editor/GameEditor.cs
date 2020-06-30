@@ -19,6 +19,8 @@
             _mainGui = new MainGuiLayer(UiManager, Window);
             
             SceneMachine.AddScene<MainViewport>();
+
+            Renderer.Initialize();
         }
 
         protected override void OnLoadContent()

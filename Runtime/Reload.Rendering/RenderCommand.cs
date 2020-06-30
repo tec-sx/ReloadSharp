@@ -10,6 +10,8 @@
 
     public static class RenderCommand
     {
+        public static ParameterlessDelegate Initialize;
+
         public static SetSizeDelegate SetViewport;
 
         public static SetColorDelegate SetClearColor;

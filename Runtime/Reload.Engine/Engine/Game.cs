@@ -172,7 +172,6 @@
 
             var glContext = new GlContext(Window);
 
-            Renderer.Initialize();
             InputManager.Initialize(Window);
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
             UiManager.Initilize(glContext.Api, Window, InputManager.Context);

@@ -4,8 +4,9 @@
     using Reload.Rendering.Structures;
     using Silk.NET.OpenGL;
     using System;
+    using System.Collections.Generic;
 
-    internal static class Utils
+    public static class Utils
     {
         public static GLEnum ShaderDataTypeToGlBaseType(ShaderDataType type)
         {
@@ -66,5 +67,15 @@
                 _ => throw new ApplicationException(Resources.UnknownShaderDataType)
             };
         }
+
+        public static Dictionary<string, ShaderType> ShaderTypes = new Dictionary<string, ShaderType>
+        {
+            {"vertex", ShaderType.VertexShader},
+            {"fragment", ShaderType.FragmentShader },
+            {"geometry", ShaderType.GeometryShader },
+            {"compute", ShaderType.ComputeShader },
+            {"tess_control", ShaderType.TessControlShader },
+            {"tess_evaluation", ShaderType.TessEvaluationShader }
+        };
     }
 }

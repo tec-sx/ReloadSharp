@@ -70,6 +70,15 @@ namespace Reload.Platform.Graphics.OpenGl.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Empty shader source string passed.
+        /// </summary>
+        internal static string EmptyShaderSource {
+            get {
+                return ResourceManager.GetString("EmptyShaderSource", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to |{0}| {1}/{2}: {3}..
         /// </summary>
         internal static string GraphicsManager_OnDebug {

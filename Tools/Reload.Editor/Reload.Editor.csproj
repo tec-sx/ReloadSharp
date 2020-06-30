@@ -6,20 +6,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Assets\Shaders\main.frag.glsl" />
-    <None Remove="Assets\Shaders\main.vert.glsl" />
+    <PackageReference Include="ShaderGen" Version="1.2.0-beta3" />
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Include="Assets\Shaders\main.frag.glsl">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Assets\Shaders\main.vert.glsl">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
+    <ProjectReference Include="..\..\Platform\Graphics\Reload.Platform.Graphics.OpenGl\Reload.Platform.Graphics.OpenGl.csproj" />
     <ProjectReference Include="..\..\Reload.Configuration\Reload.Configuration.csproj" />
     <ProjectReference Include="..\..\Runtime\Reload.Engine\Reload.Engine.csproj" />
     <ProjectReference Include="..\..\Runtime\Reload.Input\Reload.Input.csproj" />
@@ -28,6 +19,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Assets\Shaders\main.glsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Textures\download.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\Textures\test.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

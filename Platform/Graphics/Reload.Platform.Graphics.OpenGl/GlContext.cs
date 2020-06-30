@@ -1,12 +1,13 @@
 ﻿namespace Reload.Platform.Graphics.OpenGl
 {
+    using Reload.Configuration;
     using Reload.Platform.Graphics.OpenGl.Structures;
     using Reload.Rendering;
     using Reload.Rendering.Structures;
     using Silk.NET.OpenGL;
     using Silk.NET.Windowing.Common;
-    using System;
     using System.Collections.Generic;
+    using System.IO;
 
     public class GlContext
     {
@@ -18,6 +19,7 @@
 
             var glRenderer = new GlRenderer(Api);
 
+            RenderCommand.Initialize += glRenderer.Initialize;
             RenderCommand.Clear += glRenderer.Clear;
             RenderCommand.SetClearColor += glRenderer.SetClearColor;
             RenderCommand.SetViewport += glRenderer.SetViewport;
@@ -34,18 +36,18 @@
         }
 
 
-        private ShaderProgram CreateShader(Dictionary<ShaderType, string> shaderFiles, List<string> attributes)
+        public ShaderProgram CreateShader(string source, List<string> attributes)
         {
-            if (shaderFiles == null || shaderFiles.Count == 0)
-            {
-                throw new ApplicationException(Properties.Resources.ShaderDictionaryNullOrEmpty);
-            }
+            string shaderFile = Path.Combine(ContentPaths.Shaders, $"{source}.glsl");
+            string shaderString = File.ReadAllText(shaderFile);
 
             ShaderProgram shaderProgram = new GlShaderProgram(Api);
 
-            foreach (var (shaderType, shaderFile) in shaderFiles)
+            var shaderSources = shaderProgram.PreProcessShader(shaderString);
+
+            foreach (var (shaderType, shaderSource) in shaderSources)
             {
-                shaderProgram.CompileShader(shaderType, shaderFile);
+                shaderProgram.CompileShader(shaderType, shaderSource);
             }
 
             if (attributes != null && attributes.Count > 0)

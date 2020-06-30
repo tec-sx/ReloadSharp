@@ -1,6 +1,7 @@
 ﻿namespace Reload.Editor.Scenes
 {
     using Reload.Configuration;
+    using Reload.Core.Utils;
     using Reload.Editor.Scenes.Layers.Components;
     using Reload.Engine.SceneSystem;
     using Reload.Rendering;
@@ -11,7 +12,10 @@
     using System.Collections.Generic;
     using System.Drawing;
     using System.IO;
+    using System.Linq;
     using System.Numerics;
+    using System.Text;
+    using System.Text.RegularExpressions;
 
     public class MainViewport : Scene
     {
@@ -24,6 +28,7 @@
         private ShaderProgram _squareShader;
 
         private Texture2D _squareTexture;
+        private Texture2D _mexicoTexture;
 
         private float _squareScale;
         private Vector3 _squarePosition;
@@ -55,15 +60,13 @@
             _squareVA.AddVertexBuffer(_squareVB);
             _squareVA.SetIndexBuffer(_squareIB);
 
-            var squareShaders = new Dictionary<ShaderType, string>
-            {
-                { ShaderType.VertexShader, "square.vert" },
-                { ShaderType.FragmentShader, "square.frag" }
-            };
 
-            _squareShader = ShaderProgram.Create(squareShaders, null);
+            _squareShader = ShaderProgram.Create("main", null);
+
+            string shaderFile = Path.Combine(ContentPaths.Shaders, $"main.glsl");
 
             _squareTexture = Texture2D.CreateFromFile(Path.Combine(ContentPaths.Textures, "test.png"));
+            _mexicoTexture = Texture2D.CreateFromFile(Path.Combine(ContentPaths.Textures, "download.png"));
 
             _squareShader.SetUniform("u_texture", 0);
 
@@ -84,6 +87,7 @@
 
         public override void OnRender(double deltaTime)
         {
+            Renderer.Initialize();
             RenderCommand.SetClearColor(Color.AliceBlue);
             RenderCommand.Clear();
 

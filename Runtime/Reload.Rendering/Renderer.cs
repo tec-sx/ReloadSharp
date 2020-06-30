@@ -16,7 +16,7 @@
 
         public static void Initialize()
         {
-
+            RenderCommand.Initialize();
         }
 
         public static void ShutDown()

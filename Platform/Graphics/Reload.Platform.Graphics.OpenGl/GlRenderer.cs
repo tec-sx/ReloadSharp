@@ -22,6 +22,12 @@
 #endif
         }
 
+        public override void Initialize()
+        {
+            _gl.Enable(EnableCap.Blend);
+            _gl.BlendFunc(BlendingFactor.One, BlendingFactor.OneMinusSrcAlpha);
+        }
+
         public override void SetViewport(Size size)
         {
             _gl.Viewport(size);
@@ -30,7 +36,8 @@
         public override void Clear()
         {
             _gl.Clear((uint)(
-                ClearBufferMask.ColorBufferBit));
+                ClearBufferMask.ColorBufferBit |
+                ClearBufferMask.DepthBufferBit));
         }
 
         public override void SetClearColor(Color color)

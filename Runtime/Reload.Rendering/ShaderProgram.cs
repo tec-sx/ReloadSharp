@@ -5,14 +5,13 @@ namespace Reload.Rendering
     using System.Collections.Generic;
     using System.Numerics;
 
-    public delegate ShaderProgram CreateShaderDelegate(Dictionary<ShaderType, string> shaderFiles, List<string> attributes);
+    //public delegate ShaderProgram CreateShaderDelegate(string source, List<string> attributes);
 
     public abstract class ShaderProgram
     {
 
         protected string shaderFileName;
         protected Dictionary<string, int> uniformLocationCache;
-
 
         /// <summary>
         /// Default constructor.
@@ -23,13 +22,19 @@ namespace Reload.Rendering
         }
 
         /// <summary>
+        /// Split the shader string in corresponding shader types.
+        /// </summary>
+        /// <param name="shaderString"></param>
+        public abstract Dictionary<ShaderType, string> PreProcessShader(string shaderString);
+
+        /// <summary>
         /// Compiles the shaders and stores them in a temporary list ready for linking.
         /// If linking is already complete for current program it logs a warning and continues
         /// without execution.
         /// </summary>
         /// <param name="type"></param>
-        /// <param name="shaderName"></param>
-        public abstract void CompileShader(ShaderType type, string shaderName);
+        /// <param name="shaderString"></param>
+        public abstract void CompileShader(ShaderType type, string shaderString);
 
         /// <summary>
         /// Adds an attribute to our shader. Should be called between compiling and linking.
@@ -82,7 +87,7 @@ namespace Reload.Rendering
         public abstract void SetUniform(string name, Vector4 value);
 
         /// <summary>
-        /// Use the current program.
+        /// Use (Bind) the current program.
         /// </summary>
         public abstract void Use();
 
@@ -92,13 +97,14 @@ namespace Reload.Rendering
         public abstract void CleanUp();
 
         /// <summary>
-        /// Creates (Compiles adds attributes and then links) a new shader program from
-        /// the shader files dictionary and attribute list.
+        /// Creates (Compiles, adds attributes and then links) a new shader program from
+        /// the shader file and attribute list.
         /// </summary>
-        /// <param name="shaderFiles"></param>
+        /// <param name="source"></param>
         /// <param name="attributes"></param>
         /// <returns cref="IShaderProgram"></returns>
         /// <exception cref="ApplicationException"></exception>
-        public static CreateShaderDelegate Create;
+        //public static CreateShaderDelegate Create;
+        public static Func<string, List<string>, ShaderProgram> Create;
     }
 }

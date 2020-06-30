@@ -13,8 +13,8 @@
     public class GlTexture2D : Texture2D
     {
         private GL _gl;
-        private GLEnum _internalFormat;
-        private GLEnum _dataFormat;
+        private InternalFormat _internalFormat;
+        private PixelFormat _dataFormat;
         private PathStringFormat _path;
         private uint _handle;
 
@@ -31,7 +31,7 @@
                 Logger.PrintError("Can't load texture");
                 throw new ApplicationException();
             }
-
+            
             fixed (void* data = &MemoryMarshal.GetReference(pixelSpan))
             {
                 Load((uint)image.Width, (uint)image.Height, data);
@@ -48,20 +48,20 @@
             Width = width;
             Height = height;
 
-            _internalFormat = GLEnum.Rgba;
-            _dataFormat = GLEnum.Rgba;
+            _internalFormat = InternalFormat.Rgba;
+            _dataFormat = PixelFormat.Rgba;
 
             _handle = _gl.GenTexture();
 
             _gl.ActiveTexture(TextureUnit.Texture0);
             _gl.BindTexture(TextureTarget.Texture2D, _handle);
 
-            _gl.TexImage2D(TextureTarget.Texture2D, 0, (int)_internalFormat, width, height, 0, PixelFormat.Rgba, PixelType.UnsignedByte, data);
+            _gl.TexImage2D(TextureTarget.Texture2D, 0, (int)_internalFormat, width, height, 0, _dataFormat, PixelType.UnsignedByte, data);
             
             _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapS, (int)GLEnum.Repeat);
             _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureWrapT, (int)GLEnum.Repeat);
             _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMinFilter, (int)GLEnum.Linear);
-            _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)GLEnum.Linear);
+            _gl.TexParameter(TextureTarget.Texture2D, TextureParameterName.TextureMagFilter, (int)GLEnum.Nearest);
 
             //Generating mipmaps.
             _gl.GenerateMipmap(TextureTarget.Texture2D);

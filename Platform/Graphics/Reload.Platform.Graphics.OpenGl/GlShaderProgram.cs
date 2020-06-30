@@ -1,22 +1,20 @@
 namespace Reload.Platform.Graphics.OpenGl
 {
+    using Reload.Configuration;
     using Reload.Core.IO;
     using Reload.Core.Utils;
     using Reload.Rendering;
     using Silk.NET.OpenGL;
     using System;
     using System.Collections.Generic;
+    using System.IO;
     using System.Linq;
     using System.Numerics;
-    using System.Reflection;
 
     /// <inheritdoc/>
     public class GlShaderProgram : ShaderProgram
     {
-        /// <inheritdoc/>
-        private const string SHADER_EXT = "glsl";
 
-        /// <inheritdoc/>
         private readonly GL _gl;
 
         /// <inheritdoc/>
@@ -48,23 +46,51 @@ namespace Reload.Platform.Graphics.OpenGl
             _gl.DeleteProgram(ProgramHandle);
         }
 
+        public override Dictionary<ShaderType, string> PreProcessShader(string source)
+        {
+            if (string.IsNullOrWhiteSpace(source))
+            {
+                Logger.PrintError(Properties.Resources.EmptyShaderSource);
+                throw new ApplicationException(Properties.Resources.EmptyShaderSource);
+            }
+
+            var shaders = new Dictionary<ShaderType, string>(Utils.ShaderTypes.Count);
+            var rawSplitShaders = source.Split("#type", StringSplitOptions.RemoveEmptyEntries);
+            
+            foreach (string rawShaderString in rawSplitShaders)
+            {
+                int newLineIndex = rawShaderString.IndexOf(Environment.NewLine);
+
+                if (newLineIndex <= 0)
+                {
+                    throw new ApplicationException(Properties.Resources.EmptyShaderSource);
+                }
+
+                string line = rawShaderString.Substring(0, newLineIndex);
+                
+                if (string.IsNullOrWhiteSpace(line))
+                {
+                    Logger.PrintError(Properties.Resources.EmptyShaderSource);
+                    throw new ApplicationException(Properties.Resources.EmptyShaderSource);
+                }
+
+                if (Utils.ShaderTypes.TryGetValue(line.Trim(), out var shaderType))
+                {
+                    shaders.Add(shaderType, rawShaderString.Substring(newLineIndex + 1));
+                }
+            }
+
+            return shaders;
+        }
+
         /// <inheritdoc/>
-        public override void CompileShader(ShaderType type, string shaderName)
+        public override void CompileShader(ShaderType type, string shaderSource)
         {
             if (_linkingIsComplete)
             {
-                Console.WriteLine(Properties.Resources.ShaderCantCompile);
+                Logger.PrintWarning(Properties.Resources.ShaderCantCompile);
                 return;
             }
-
-            shaderFileName = $".{shaderName}.{SHADER_EXT}";
-
-            var shaderResourceName = GetType().Assembly
-                .GetManifestResourceNames()
-                .First(resourceName => resourceName.EndsWith(shaderFileName, StringComparison.InvariantCulture));
-
-            var assembly = Assembly.GetExecutingAssembly();
-            var shaderSource = EmbeddedResources.LoadResourceString(assembly, shaderResourceName);
 
             var handle = _gl.CreateShader(type);
 
