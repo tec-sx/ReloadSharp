@@ -34,6 +34,11 @@
             _sceneData.ViewProjectionMatrix = camera.ViewProjectionMatrix;
         }
 
+        public static void BeginScene(PerspectiveCamera camera)
+        {
+            _sceneData.ViewProjectionMatrix = camera.ModelViewProjectionMatrix;
+        }
+
         public static void EndScene()
         {
 

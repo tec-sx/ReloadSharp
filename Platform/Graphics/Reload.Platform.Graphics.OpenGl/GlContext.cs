@@ -36,12 +36,12 @@
         }
 
 
-        public ShaderProgram CreateShader(string source, List<string> attributes)
+        public ShaderProgram CreateShader(string fileName, List<string> attributes)
         {
-            string shaderFile = Path.Combine(ContentPaths.Shaders, $"{source}.glsl");
+            string shaderFile = Path.Combine(ContentPaths.Shaders, $"{fileName}.glsl");
             string shaderString = File.ReadAllText(shaderFile);
 
-            ShaderProgram shaderProgram = new GlShaderProgram(Api);
+            ShaderProgram shaderProgram = new GlShaderProgram(fileName, Api);
 
             var shaderSources = shaderProgram.PreProcessShader(shaderString);
 

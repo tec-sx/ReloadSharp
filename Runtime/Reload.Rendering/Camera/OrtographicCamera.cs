@@ -18,9 +18,9 @@ namespace Reload.Rendering.Camera
         public Vector3 Position;
         public float Rotation;
 
-        public OrtographicCamera(float width, float height)
+        public OrtographicCamera(float left, float right, float top, float bottom)
         {
-            _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, -10.0f, 10.0f);
+            _projectionMatrix = Matrix4x4.CreateOrthographicOffCenter(left, right, top, bottom, 0.01f, 100.0f);
             _viewMatrix = Matrix4x4.Identity;
             _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
 
@@ -28,9 +28,9 @@ namespace Reload.Rendering.Camera
             Rotation = 0;
         }
 
-        public void SetProjection(float width, float height)
+        public void SetProjection(float width, float height, float nearPane, float farPane)
         {
-            _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, -1.0f, 1.0f);
+            _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, nearPane, farPane);
             _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
         }
 

@@ -190,7 +190,7 @@
         private void OnWindowUpdate(double deltaTime)
         {
             OnUpdate(deltaTime);
-            InputManager.Update();
+            InputManager.Update(deltaTime);
         }
 
         private void OnWindowRender(double deltaTime)

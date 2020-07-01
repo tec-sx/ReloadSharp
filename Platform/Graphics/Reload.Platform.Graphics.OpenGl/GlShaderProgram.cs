@@ -1,14 +1,10 @@
 namespace Reload.Platform.Graphics.OpenGl
 {
-    using Reload.Configuration;
-    using Reload.Core.IO;
     using Reload.Core.Utils;
     using Reload.Rendering;
     using Silk.NET.OpenGL;
     using System;
     using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
     using System.Numerics;
 
     /// <inheritdoc/>
@@ -30,8 +26,10 @@ namespace Reload.Platform.Graphics.OpenGl
         public uint ProgramHandle { get; }
 
         /// <inheritdoc/>
-        public GlShaderProgram(GL api)
+        public GlShaderProgram(string name, GL api)
+            :base()
         {
+            Name = name;
             _gl = api;
             ProgramHandle = _gl.CreateProgram();
             _shadersTemp = new List<uint>();
@@ -129,7 +127,11 @@ namespace Reload.Platform.Graphics.OpenGl
                 return;
             }
 
-            _shadersTemp.ForEach(shaderHandle => _gl.AttachShader(ProgramHandle, shaderHandle));
+            foreach (var shaderHandle in _shadersTemp)
+            {
+                _gl.AttachShader(ProgramHandle, shaderHandle);
+            }
+
             _gl.LinkProgram(ProgramHandle);
 
             var programInfoLog = _gl.GetProgramInfoLog(ProgramHandle);
@@ -163,7 +165,7 @@ namespace Reload.Platform.Graphics.OpenGl
 
             if (location == -1)
             {
-                Logger.PrintWarning($"Uniform {name} not found in shader {shaderFileName}. ");
+                Logger.PrintWarning($"Uniform {name} not found in shader {Name}. ");
             }
             else
             {
@@ -203,6 +205,17 @@ namespace Reload.Platform.Graphics.OpenGl
             _gl.UniformMatrix4(location, 1, false, (float*)&value);
         }
 
+
+        /// <inheritdoc/>
+        public unsafe override void SetUniform(string name, Vector3 value)
+        {
+            var location = GetUniform(name);
+
+            Use();
+
+            _gl.Uniform3(location, value);
+
+        }
 
         /// <inheritdoc/>
         public unsafe override void SetUniform(string name, Vector4 value)

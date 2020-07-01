@@ -1,7 +1,9 @@
 ﻿namespace Reload.Input
 {
     using Reload.Core.Commands;
+    using Reload.Core.Utils;
     using Silk.NET.Input.Common;
+    using Silk.NET.OpenAL;
     using System.Collections.Generic;
 
     public class InputHandler
@@ -15,6 +17,7 @@
 
         private List<StateCommand> _stateCommandList;
 
+        private Queue<RangeCommand> _rangeCommandQueue;
 
         public InputHandler()
         {
@@ -25,6 +28,8 @@
             _actionReleaseCommandQueue = new Queue<ActionReleaseCommand>(64);
 
             _stateCommandList = new List<StateCommand>(64);
+
+            _rangeCommandQueue = new Queue<RangeCommand>(64);
         }
 
         public void Attach(IInputContext context)
@@ -33,6 +38,11 @@
             {
                 keyboard.KeyDown += HandleKeyDown;
                 keyboard.KeyUp += HandleKeyUp;
+            }
+
+            foreach (var mouse in context.Mice)
+            {
+                mouse.Scroll += HandleMouseScroll;
             }
         }
 
@@ -54,17 +64,21 @@
             _bindingContexts.Clear();
         }
 
-        public void Update()
+        public void Update(double deltaTime)
         {
             for (int i = 0; i < _stateCommandList.Count; i++)
             {
-                _stateCommandList[i].Execute();
+                _stateCommandList[i].Execute(deltaTime);
             }
 
-            while (_actionPressCommandQueue.Count != 0)
+            while (_actionPressCommandQueue.TryDequeue(out var actioCommand))
             {
-                var command = _actionPressCommandQueue.Dequeue();
-                command.Execute();
+                actioCommand.Execute(deltaTime);
+            }
+
+            while (_rangeCommandQueue.TryDequeue(out var rangeCommand))
+            {
+                rangeCommand.Execute(deltaTime);
             }
         }
 
@@ -100,7 +114,6 @@
             {
                 stateCommand.CurrentState = StateType.Pressed;
                 _stateCommandList.Add(stateCommand);
-                return;
             }
         }
 
@@ -123,7 +136,6 @@
             {
                 stateCommand.CurrentState = StateType.Released;
                 _stateCommandList.Remove(stateCommand);
-                return;
             }
         }
 
@@ -142,6 +154,22 @@
             keyboard.KeyChar -= HandleTextInput;
             keyboard.KeyDown += HandleKeyDown;
             keyboard.KeyUp += HandleKeyUp;
+        }
+
+        public void HandleMouseScroll(IMouse mouse, ScrollWheel scroll)
+        {
+            if (_activeBindingContexts.Count == 0)
+            {
+                return;
+            }
+
+            var context = _activeBindingContexts.Peek();
+
+            if (context.MouseScrollRangeCommands.TryGetValue(mouse.Index, out var rangeCommand))
+            {
+                rangeCommand.Value = scroll.Y;
+                _rangeCommandQueue.Enqueue(rangeCommand);
+            }
         }
     }
 }

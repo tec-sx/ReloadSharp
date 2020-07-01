@@ -10,6 +10,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Core\Reload.Core\Reload.Core.csproj" />
     <ProjectReference Include="..\..\Platform\Graphics\Reload.Platform.Graphics.OpenGl\Reload.Platform.Graphics.OpenGl.csproj" />
     <ProjectReference Include="..\..\Reload.Configuration\Reload.Configuration.csproj" />
     <ProjectReference Include="..\..\Runtime\Reload.Engine\Reload.Engine.csproj" />
@@ -19,6 +20,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Assets\Shaders\grid.glsl">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <None Update="Assets\Shaders\main.glsl">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

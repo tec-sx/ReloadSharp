@@ -21,9 +21,9 @@
             Handler = new InputHandler();
         }
 
-        public void Update()
+        public void Update(double deltaTime)
         {
-            Handler.Update();
+            Handler.Update(deltaTime);
         }
 
         /// <summary>

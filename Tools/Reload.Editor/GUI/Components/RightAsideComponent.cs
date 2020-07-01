@@ -67,9 +67,9 @@
                             float oldRotationY = _rotation.Y;
                             float oldRotationZ = _rotation.Z;
 
-                            ImGui.SliderFloat("Rotation X", ref _rotation.X, -6.202f, 6.202f);
-                            ImGui.SliderFloat("Rotation Y", ref _rotation.Y, -6.202f, 6.202f);
-                            ImGui.SliderFloat("Rotation Z", ref _rotation.Z, -6.202f, 6.202f);
+                            ImGui.SliderFloat("Rotation X", ref _rotation.X, -180.0f, 180.0f);
+                            ImGui.SliderFloat("Rotation Y", ref _rotation.Y, -180.0f, 180.0f);
+                            ImGui.SliderFloat("Rotation Z", ref _rotation.Z, -180.0f, 180.0f);
 
                             if (oldRotationX != _rotation.X || oldRotationY != _rotation.Y || oldRotationZ != _rotation.Z)
                             {

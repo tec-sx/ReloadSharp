@@ -4,28 +4,31 @@
     using Reload.Core.Utils;
     using Reload.Editor.Scenes.Layers.Components;
     using Reload.Engine.SceneSystem;
+    using Reload.Input;
     using Reload.Rendering;
     using Reload.Rendering.Camera;
     using Reload.Rendering.Structures;
-    using Silk.NET.OpenGL;
-    using System;
+    using Silk.NET.Input.Common;
     using System.Collections.Generic;
     using System.Drawing;
     using System.IO;
-    using System.Linq;
     using System.Numerics;
-    using System.Text;
-    using System.Text.RegularExpressions;
 
     public class MainViewport : Scene
     {
-        private OrtographicCamera _orthoCamera;
+        private ShaderLibrary _shaderLibrary;
+        private OrtographicCameraController _cameraController;
 
         private VertexBuffer _squareVB;
         private BufferLayout _squareBufferLayout;
         private IndexBuffer _squareIB;
         private VertexArray _squareVA;
-        private ShaderProgram _squareShader;
+        //private ShaderProgram _squareShader;
+
+        private VertexBuffer _gridVB;
+        private BufferLayout _gridBufferLayout;
+        private IndexBuffer  _gridIB;
+        private VertexArray  _gridVA;
 
         private Texture2D _squareTexture;
         private Texture2D _mexicoTexture;
@@ -44,12 +47,37 @@
                 -0.75f,  0.75f, 0.0f, /* Texture */ 0.0f, 1.0f,
             };
 
+            float[] gridVertices =
+                {
+                -1.0f,  1.0f, 0.0f, // Top Left
+	            -1.0f, -1.0f, 0.0f, // Bottom Left
+	             1.0f, -1.0f, 0.0f, // Bottom Right
+	             1.0f,  1.0f, 0.0f, // Top Right
+            };
+
             uint[] squareIndices = { 0, 1, 2, 2, 3, 0 };
+
+            // Grid
+
+            _gridBufferLayout = new BufferLayout
+            {
+                new BufferElement(ShaderDataType.Float3, "aPosition")
+            };
+
+            _gridVB = VertexBuffer.Create(gridVertices);
+            _gridVB.SetLayout(_gridBufferLayout);
+            _gridIB = IndexBuffer.Create(squareIndices);
+
+            _gridVA = VertexArray.Create();
+            _gridVA.AddVertexBuffer(_gridVB);
+            _gridVA.SetIndexBuffer(_gridIB);
+
+            //Square
 
             _squareBufferLayout = new BufferLayout
             {
-                new BufferElement(ShaderDataType.Float3, "position"),
-                new BufferElement(ShaderDataType.Float2, "texCoord")
+                new BufferElement(ShaderDataType.Float3, "a_position"),
+                new BufferElement(ShaderDataType.Float2, "a_texCoord")
             };
 
             _squareVB = VertexBuffer.Create(squareVertices);
@@ -61,22 +89,37 @@
             _squareVA.SetIndexBuffer(_squareIB);
 
 
-            _squareShader = ShaderProgram.Create("main", null);
+            _shaderLibrary = new ShaderLibrary();
 
-            string shaderFile = Path.Combine(ContentPaths.Shaders, $"main.glsl");
+            var squareShader = _shaderLibrary.Load("main");
+            var gridShader = _shaderLibrary.Load("grid");
 
             _squareTexture = Texture2D.CreateFromFile(Path.Combine(ContentPaths.Textures, "test.png"));
             _mexicoTexture = Texture2D.CreateFromFile(Path.Combine(ContentPaths.Textures, "download.png"));
 
-            _squareShader.SetUniform("u_texture", 0);
+            squareShader.SetUniform("u_texture", 0);
 
-            _orthoCamera = new OrtographicCamera(16, 9);
-            
+            gridShader.SetUniform("color", Vector3.Zero);
+
+
+            // Create Camera
+            CreateCameraController();
+
+            // Map input contexts
+            MapInput();
+
             _squareScale = 3.0f;
             _squarePosition = Vector3.Zero;
             _squareRotation = Vector3.Zero;
 
             RightAsideComponent.SizeValueChanged += (value) => _squareScale = value;
+            //RightAsideComponent.PositionChanged += (value) => _perspectiveCamera.MoveCamera(value);
+            //RightAsideComponent.RotationChanged += (value) =>
+            //{
+            //    _perspectiveCamera.HorizontalAngle = value.Y;
+            //    _perspectiveCamera.VerticalAngle = value.X;
+            //};
+
             RightAsideComponent.PositionChanged += (value) => _squarePosition = value;
             RightAsideComponent.RotationChanged += (value) => _squareRotation = value;
         }
@@ -91,22 +134,60 @@
             RenderCommand.SetClearColor(Color.AliceBlue);
             RenderCommand.Clear();
 
-            Renderer.BeginScene(_orthoCamera);
+            var squareShader = _shaderLibrary["main"];
+            var gridShader = _shaderLibrary["grid"];
+
+            Renderer.BeginScene(_cameraController.Camera);
             {
                 Matrix4x4 transform = Matrix4x4.CreateScale(_squareScale)
                                     * Matrix4x4.CreateTranslation(_squarePosition)
-                                    * Matrix4x4.CreateRotationX(_squareRotation.X)
-                                    * Matrix4x4.CreateRotationY(_squareRotation.Y)
-                                    * Matrix4x4.CreateRotationZ(_squareRotation.Z);
+                                    * Matrix4x4.CreateRotationX(ReloadMath.DegreesToRadiants(_squareRotation.X))
+                                    * Matrix4x4.CreateRotationY(ReloadMath.DegreesToRadiants(_squareRotation.Y))
+                                    * Matrix4x4.CreateRotationZ(ReloadMath.DegreesToRadiants(_squareRotation.Z));
+
+                Matrix4x4 gridTransform = Matrix4x4.CreateRotationX(ReloadMath.DegreesToRadiants(45.0f));
 
                 _squareTexture.Bind();
-                Renderer.Submit(_squareShader, _squareVA, transform);
+                
+                _cameraController.OnUpdate(deltaTime);
+                Renderer.Submit(gridShader, _gridVA, gridTransform);
+                Renderer.Submit(squareShader, _squareVA, transform);
             }
             Renderer.EndScene();
         }
 
         public override void OnUpdate(double deltaTime)
         {
+        }
+
+        public void CreateCameraController()
+        {
+            var aspectRatio = SceneMachine.Game.Window.Size.Width / SceneMachine.Game.Window.Size.Height;
+            Logger.PrintInfo($"Aspect ration is: {aspectRatio}");
+            _cameraController = new OrtographicCameraController(aspectRatio, true);
+        }
+
+        public void MapInput()
+        {
+            var mainContext = new InputMappingContext();
+
+            mainContext.MapKeyToState(0, Key.W, _cameraController.MoveUp);
+            mainContext.MapKeyToState(0, Key.S, _cameraController.MoveDown);
+            mainContext.MapKeyToState(0, Key.A, _cameraController.MoveLeft);
+            mainContext.MapKeyToState(0, Key.D, _cameraController.MoveRight);
+
+            mainContext.MapKeyToState(0, Key.Q, _cameraController.RotateLeft);
+            mainContext.MapKeyToState(0, Key.E, _cameraController.RotateRight);
+
+            mainContext.MapMouseScrollToRange(0, _cameraController.Zoom);
+
+            var contexts = new Dictionary<string, Reload.Input.InputMappingContext>
+            {
+                {"main", mainContext }
+            };
+
+            SceneMachine.Input.Handler.LoadContexts(contexts);
+            SceneMachine.Input.Handler.PushActiveContext("main");
         }
     }
 }

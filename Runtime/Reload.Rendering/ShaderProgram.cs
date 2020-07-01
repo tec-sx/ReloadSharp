@@ -10,8 +10,9 @@ namespace Reload.Rendering
     public abstract class ShaderProgram
     {
 
-        protected string shaderFileName;
         protected Dictionary<string, int> uniformLocationCache;
+
+        public string Name { get; protected set; }
 
         /// <summary>
         /// Default constructor.
@@ -85,6 +86,13 @@ namespace Reload.Rendering
         /// <param name="name"></param>
         /// <param name="value"></param>
         public abstract void SetUniform(string name, Vector4 value);
+
+        /// <summary>
+        /// Sets Vector 3 value to an uniform location.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public abstract void SetUniform(string name, Vector3 value);
 
         /// <summary>
         /// Use (Bind) the current program.

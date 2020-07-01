@@ -16,10 +16,10 @@
         internal Dictionary<(int, MouseButton), ActionReleaseCommand> MouseActionReleaseCommands { get; private set; }
         internal Dictionary<(int, MouseButton), StateCommand> MouseStateCommands { get; private set; }
 
-        internal Dictionary<ScrollWheel, ActionPressCommand> MouseScrollActionPressCommands { get; private set; }
-        internal Dictionary<ScrollWheel, ActionReleaseCommand> MouseScrollActionReleaseCommands { get; private set; }
-        internal Dictionary<ScrollWheel, StateCommand> MouseScrollStateCommands { get; private set; }
-        internal Dictionary<ScrollWheel, RangeCommand> MouseScrollRangeCommands { get; private set; }
+        internal Dictionary<int, ActionPressCommand> MouseScrollActionPressCommands { get; private set; }
+        internal Dictionary<int, ActionReleaseCommand> MouseScrollActionReleaseCommands { get; private set; }
+        internal Dictionary<int, StateCommand> MouseScrollStateCommands { get; private set; }
+        internal Dictionary<int, RangeCommand> MouseScrollRangeCommands { get; private set; }
 
         public InputMappingContext()
         {
@@ -31,10 +31,10 @@
             MouseActionReleaseCommands = new Dictionary<(int, MouseButton), ActionReleaseCommand>(16);
             MouseStateCommands = new Dictionary<(int, MouseButton), StateCommand>(16);
 
-            MouseScrollActionPressCommands = new Dictionary<ScrollWheel, ActionPressCommand>(2);
-            MouseScrollActionReleaseCommands = new Dictionary<ScrollWheel, ActionReleaseCommand>(2);
-            MouseScrollStateCommands = new Dictionary<ScrollWheel, StateCommand>(2);
-            MouseScrollRangeCommands = new Dictionary<ScrollWheel, RangeCommand>(2);
+            MouseScrollActionPressCommands = new Dictionary<int, ActionPressCommand>(2);
+            MouseScrollActionReleaseCommands = new Dictionary<int, ActionReleaseCommand>(2);
+            MouseScrollStateCommands = new Dictionary<int, StateCommand>(2);
+            MouseScrollRangeCommands = new Dictionary<int, RangeCommand>(2);
         }
 
 
@@ -76,24 +76,24 @@
 
 
 
-        public void MapMouseScrollToActionPress(ScrollWheel scroll, ActionPressCommand command)
+        public void MapMouseScrollToActionPress(int mouseId, ActionPressCommand command)
         {
-            MouseScrollActionPressCommands.Add(scroll, command);
+            MouseScrollActionPressCommands.Add(mouseId, command);
         }
 
-        public void MapMouseScrollToActionRelease(ScrollWheel scroll, ActionReleaseCommand command)
+        public void MapMouseScrollToActionRelease(int mouseId, ActionReleaseCommand command)
         {
-            MouseScrollActionReleaseCommands.Add(scroll, command);
+            MouseScrollActionReleaseCommands.Add(mouseId, command);
         }
 
-        public void MapMouseScrollToState(ScrollWheel scroll, StateCommand command)
+        public void MapMouseScrollToState(int mouseId, StateCommand command)
         {
-            MouseScrollStateCommands.Add(scroll, command);
+            MouseScrollStateCommands.Add(mouseId, command);
         }
 
-        public void MapMouseScrollToRange(ScrollWheel scroll, RangeCommand command)
+        public void MapMouseScrollToRange(int mouseId, RangeCommand command)
         {
-            MouseScrollRangeCommands.Add(scroll, command);
+            MouseScrollRangeCommands.Add(mouseId, command);
         }
     }
 }
