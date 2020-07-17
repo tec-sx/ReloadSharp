@@ -17,7 +17,7 @@
     public class MainViewport : Scene
     {
         private ShaderLibrary _shaderLibrary;
-        private OrtographicCameraController _cameraController;
+        private PerspectiveCameraController _cameraController;
 
         private VertexBuffer _squareVB;
         private BufferLayout _squareBufferLayout;
@@ -162,22 +162,25 @@
 
         public void CreateCameraController()
         {
-            var aspectRatio = SceneMachine.Game.Window.Size.Width / SceneMachine.Game.Window.Size.Height;
-            Logger.PrintInfo($"Aspect ration is: {aspectRatio}");
-            _cameraController = new OrtographicCameraController(aspectRatio, true);
+            //var width = SceneMachine.Game.Window.Size.Width;
+            //var height = SceneMachine.Game.Window.Size.Height;
+            //_cameraController = new OrtographicCameraController(width, height, true);
+
+            var perspectiveFov = Matrix4x4.CreatePerspectiveFieldOfView(ReloadMath.DegreesToRadiants(45.0f), 16 / 9, 0.1f, 10000.0f);
+            _cameraController = new PerspectiveCameraController(perspectiveFov);
         }
 
         public void MapInput()
         {
             var mainContext = new InputMappingContext();
 
-            mainContext.MapKeyToState(0, Key.W, _cameraController.MoveUp);
-            mainContext.MapKeyToState(0, Key.S, _cameraController.MoveDown);
-            mainContext.MapKeyToState(0, Key.A, _cameraController.MoveLeft);
-            mainContext.MapKeyToState(0, Key.D, _cameraController.MoveRight);
+            //mainContext.MapKeyToState(0, Key.W, _cameraController.MoveUp);
+            //mainContext.MapKeyToState(0, Key.S, _cameraController.MoveDown);
+            //mainContext.MapKeyToState(0, Key.A, _cameraController.MoveLeft);
+            //mainContext.MapKeyToState(0, Key.D, _cameraController.MoveRight);
 
-            mainContext.MapKeyToState(0, Key.Q, _cameraController.RotateLeft);
-            mainContext.MapKeyToState(0, Key.E, _cameraController.RotateRight);
+            //mainContext.MapKeyToState(0, Key.Q, _cameraController.RotateLeft);
+            //mainContext.MapKeyToState(0, Key.E, _cameraController.RotateRight);
 
             mainContext.MapMouseScrollToRange(0, _cameraController.Zoom);
 

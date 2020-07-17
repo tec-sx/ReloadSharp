@@ -1,13 +1,11 @@
 namespace Reload.Engine.SceneSystem
 {
     using Reload.Gameplay;
-    using System.Drawing;
     using Reload.Graphics;
     using Assets;
     using System;
     using Reload.Input;
     using Reload.Engine.SceneSystem.Enumerations;
-    using Reload.Rendering;
 
     /// <summary>
     /// The scene manager. Instantiated as singleton in the

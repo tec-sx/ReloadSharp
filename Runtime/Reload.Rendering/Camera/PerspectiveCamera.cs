@@ -2,69 +2,88 @@
 {
     using Reload.Core.Utils;
     using System;
+    using System.Drawing;
     using System.Numerics;
 
     public class PerspectiveCamera
     {
-        private Vector3 _up;
-        private Vector3 _right;
-        private Vector3 _forward;
+        private Vector3 _rotation;
         
-        private Matrix4x4 _modelMatrix;
-        private Matrix4x4 _projectionMatrix;
-        private Matrix4x4 _viewMatrix;
-        private Matrix4x4 _modelViewProjectionMatrix;
 
-        private float _initialFoV;
+        private bool _panning;
+        private bool _rotating;
 
-        private Vector3 _position;
-        public float HorizontalAngle { get; set; }
-        public float VerticalAngle { get; set; }
+        private Vector2 _initialMousePosition;
+        private Vector3 _initialFocalPoint;
+        private Vector3 _initialRotation;
 
-        public Vector3 Up => _up;
-        public Vector3 Right => _right;
-        public Vector3 Forward => _forward;
+        private float _yaw;
+        private float _pitch;
+        private float _roll;
 
-        public Matrix4x4 ViewMatrix => _viewMatrix;
-        public Matrix4x4 ProjectionMatrix => _projectionMatrix;
-        public Matrix4x4 ModelViewProjectionMatrix => _modelViewProjectionMatrix;
+        public Size ViewportSize { get; set; }
+
+        public Vector3 FocalPoint { get; set; }
+        public float Distance { get; set; }
+
+        public Matrix4x4 ViewMatrix { get; private set; }
+        public Matrix4x4 ProjectionMatrix { get; set; }
+        public Matrix4x4 ViewProjectionMatrix => ProjectionMatrix * ViewMatrix;
+
+        public float Exposure { get; private set; }
+        public float RotationSpeed { get; private set; }
+
+        private Quaternion Orientation => Quaternion.CreateFromYawPitchRoll(_yaw, _pitch, _roll);
+
+        public Vector3 RightDirection => Vector3.Transform(Vector3.UnitX, Orientation);
+        public Vector3 UpDirection => Vector3.Transform(Vector3.UnitY, Orientation);
+        public Vector3 ForwardDirection => Vector3.Transform(Vector3.UnitZ, Orientation);
+        private Vector3 Position => FocalPoint - ForwardDirection * Distance;
+        
+        public PerspectiveCamera(Matrix4x4 projectionMatrix)
+           : this()
+        {
+            ProjectionMatrix = projectionMatrix;
+            _rotation = new Vector3(90.0f, 0.0f, 0.0f);
+            FocalPoint = Vector3.Zero;
+
+            Vector3 position = new Vector3( -5.0f, 5.0f, 5.0f );
+            Distance = Vector3.Distance(position, FocalPoint);
+
+            _yaw = 3.0f * MathF.PI / 4.0f;
+            _pitch = MathF.PI / 4.0f;
+            _roll = 0.0f;
+
+            UpdateCameraView();
+        }
 
         public PerspectiveCamera()
-            : this(new Vector3(0.0f, 0.0f, 0.0f), -0.0f, 0.0f, 45.0f)
-        { }
-
-        public PerspectiveCamera(Vector3 position, float horizontalAngle, float verticalAngle, float initialFoV)
         {
-            _modelMatrix = Matrix4x4.Identity;
-            _position = position;
-            HorizontalAngle = horizontalAngle;
-            VerticalAngle = verticalAngle;
-            _initialFoV = initialFoV;
-
-            Update();
+            Exposure = 0.8f;
+            RotationSpeed = 0.8f;
         }
 
-        public void Update()
+        public void Focus()
         {
-            _forward = new Vector3(
-                (float)(Math.Cos(VerticalAngle) * Math.Sin(HorizontalAngle)),
-                (float)Math.Sin(HorizontalAngle),
-                (float)(Math.Cos(VerticalAngle) * Math.Cos(HorizontalAngle)));
 
-            _right = new Vector3(
-                (float)Math.Sin(HorizontalAngle - Math.PI / 2.0f),
-                0.0f,
-                (float)Math.Cos(HorizontalAngle - Math.PI / 2.0f));
-
-            _up = Vector3.Cross(_right, _forward);
-
-            float fovInRadiants = ReloadMath.DegreesToRadiants(_initialFoV);
-
-            _projectionMatrix = Matrix4x4.CreatePerspectiveFieldOfView(fovInRadiants, 16 / 9, 0.001f, 10000.0f);
-            _viewMatrix = Matrix4x4.CreateLookAt(_position, _position + _forward, _up);
-            _modelViewProjectionMatrix = _projectionMatrix * _viewMatrix * _modelMatrix;
         }
 
-        public void MoveCamera(Vector3 movementVector) => _position = movementVector;
+        private void UpdateCameraView()
+        {
+            Vector3 position = Position;
+            Quaternion orientation = Orientation;
+            
+            _rotation = orientation.ToEulerAngles() * (180.0f / MathF.PI);
+            
+            var newViewMatrix = Matrix4x4.CreateTranslation(position) * Matrix4x4.CreateFromQuaternion(orientation);
+            Matrix4x4.Invert(newViewMatrix, out var invertedViewMatrix);
+
+            ViewMatrix = invertedViewMatrix;
+        }
+
+        public void OnUpdate(double deltaTime)
+        {
+            UpdateCameraView();
+        }
     }
 }

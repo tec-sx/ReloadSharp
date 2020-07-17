@@ -3,17 +3,41 @@
     using System;
     using System.Numerics;
 
+    [Flags]
+    public enum MaterialFlag
+    {
+        None = 0,
+        DepthTest = 1 << 1,
+        Blend = 1 << 2
+    }
+
     public abstract class Material
     {
+        private MaterialFlag _materialFlags;
+        public MaterialFlag MaterialFlags
+        {
+            get => _materialFlags;
+            set => _materialFlags |= value;
+        }
+
         public Material(ShaderProgram shader)
         {
 
         }
 
-        public abstract void Set(string uniformName, float value);
+        public void Bind()
+        {
 
-        public abstract void Set(string uniformName, Vector4 value);
+        }
 
-        public abstract void Set(string uniformName, Matrix4x4 value);
+        public void Set<T>(string name, T value)
+        {
+
+        }
+
+        public class MaterialInstance
+        {
+
+        }
     }
 }

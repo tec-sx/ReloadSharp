@@ -1,48 +1,45 @@
-﻿#type vertex
-#version 330 core
+﻿// Grid Shader
 
-layout (location = 0) in vec3 aPosition;
-out vec2 fragCoord;
+#type vertex
+#version 430
 
+layout(location = 0) in vec3 a_Position;
+layout(location = 1) in vec2 a_TexCoord;
+
+uniform mat4 u_ViewProjection;
 uniform mat4 u_Transform;
-uniform mat4 u_viewProjection;
+
+out vec2 v_TexCoord;
 
 void main()
 {
-	fragCoord = aPosition.xy;
-	gl_Position = u_viewProjection * u_Transform * vec4(aPosition, 1.0);
+	vec4 position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
+	gl_Position = position;
+
+	v_TexCoord = a_TexCoord;
 }
 
 #type fragment
-#version 330
+#version 430
 
-in vec2 fragCoord;
-out vec4 fragColor;
+layout(location = 0) out vec4 color;
 
-uniform vec3 color;
+uniform float u_Scale;
+uniform float u_Res;
 
-const float PI = 3.1415926535897932384626433832795;
-const vec2 CANVAS_SIZE = vec2(2);
+in vec2 v_TexCoord;
 
-vec2 convert_to_cell_coords(vec2 coord, vec2 grid);
-
-float lineWidth = 0.01;
-vec2 grid = vec2(4);
-vec2 cellSize = CANVAS_SIZE / grid;
+float grid(vec2 st, float res)
+{
+	vec2 grid = fract(st);
+	return step(res, grid.x) * step(res, grid.y);
+}
 
 void main()
 {
-	vec2 cellCoord = convert_to_cell_coords(fragCoord, cellSize);
-	vec2 cutoff = convert_to_cell_coords(vec2(1.0 - lineWidth), cellSize);
+	float scale = u_Scale;
+	float resolution = u_Res;
 
-	vec2 alpha = step(cutoff, cellCoord);
-	if (max(alpha.x, alpha.y) == 0.0)
-		discard;
-
-	fragColor = vec4(color, 1.0);
-}
-
-vec2 convert_to_cell_coords(vec2 coord, vec2 cellSize)
-{
-	return cos(((2 * PI) / cellSize) * coord);
+	float x = grid(v_TexCoord * scale, resolution);
+	color = vec4(vec3(0.2), 0.5) * (1.0 - x);
 }

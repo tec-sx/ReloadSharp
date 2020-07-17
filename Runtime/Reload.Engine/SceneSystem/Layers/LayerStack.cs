@@ -6,20 +6,18 @@ namespace Reload.Engine.SceneSystem.Layers
     /// <summary>
     /// The scene's layer stack.
     /// </summary>
-    public class LayerStack
+    public class LayerStack : List<Layer>
     {
         private int _layerInsertIndex;
-        private readonly List<Layer> _layers;
         private readonly Scene _scene;
 
         /// <summary>
         /// Constructor.
         /// </summary>
         public LayerStack(Scene scene)
+            : base(8)
         {
-            _layers = new List<Layer>(8);
             _scene = scene;
-
             _layerInsertIndex = 0;
         }
 
@@ -40,7 +38,7 @@ namespace Reload.Engine.SceneSystem.Layers
                     Properties.Resources.LayerNullParameterExceptionMessage);
             }
 
-            _layers.Insert(_layerInsertIndex++, layer);
+            Insert(_layerInsertIndex++, layer);
             layer.OnAttach();
         }
 
@@ -61,7 +59,7 @@ namespace Reload.Engine.SceneSystem.Layers
                     Properties.Resources.OverlayNullParameterExceptionMessage);
             }
 
-            _layers.Add(overlay);
+            Add(overlay);
             overlay.OnAttach();
         }
 
@@ -78,7 +76,7 @@ namespace Reload.Engine.SceneSystem.Layers
             }
 
             layer.OnDetach();
-            _layers.Remove(layer);
+            Remove(layer);
             _layerInsertIndex--;
         }
 
@@ -95,7 +93,7 @@ namespace Reload.Engine.SceneSystem.Layers
             }
 
             overlay.OnDetach();
-            _layers.Remove(overlay);
+            Remove(overlay);
         }
 
         /// <summary>
@@ -103,17 +101,17 @@ namespace Reload.Engine.SceneSystem.Layers
         /// </summary>
         public void Update(double deltaTime)
         {
-            for (var i = 0; i < _layers.Count; i++)
+            for (var i = 0; i < Count; i++)
             {
-                _layers[i].Update(deltaTime);
+                this[i].Update(deltaTime);
             }
         }
 
         public void Draw(double deltaTime)
         {
-            for (var i = 0; i < _layers.Count; i++)
+            for (var i = 0; i < Count; i++)
             {
-                _layers[i].Draw(deltaTime);
+                this[i].Draw(deltaTime);
             }
         }
 
@@ -122,8 +120,8 @@ namespace Reload.Engine.SceneSystem.Layers
         /// </summary>
         public void ClearStack()
         {
-            _layers.ForEach(layer => layer.OnDetach());
-            _layers.Clear();
+            ForEach(layer => layer.OnDetach());
+            Clear();
             _layerInsertIndex = 0;
         }
     }

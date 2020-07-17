@@ -13,6 +13,7 @@
     public static class Renderer
     {
         private static SceneData _sceneData = new SceneData();
+        private static PerspectiveCamera _camera;
 
         public static void Initialize()
         {
@@ -31,12 +32,14 @@
 
         public static void BeginScene(OrtographicCamera camera)
         {
-            _sceneData.ViewProjectionMatrix = camera.ViewProjectionMatrix;
+            //_camera = camera;
+            //_sceneData.ViewProjectionMatrix = camera.ViewProjectionMatrix;
         }
 
         public static void BeginScene(PerspectiveCamera camera)
         {
-            _sceneData.ViewProjectionMatrix = camera.ModelViewProjectionMatrix;
+            _camera = camera;
+            _sceneData.ViewProjectionMatrix = camera.ViewProjectionMatrix;
         }
 
         public static void EndScene()

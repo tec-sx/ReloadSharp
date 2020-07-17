@@ -1,6 +1,7 @@
 ﻿namespace Reload.Rendering.Camera
 {
     using Reload.Core.Commands;
+    using System.Drawing;
     using System.Numerics;
 
     public class OrtographicCameraController
@@ -26,16 +27,12 @@
         public RotateLeftCommand RotateLeft;
         public RotateRightCommand RotateRight;
 
-        public OrtographicCameraController(float aspectRatio, bool rotationIsEnabled)
+        public OrtographicCameraController(float width, float height, bool rotationIsEnabled)
         {
             _zoomLevel = 1.0f;
-            _aspectRatio = aspectRatio;
+            _aspectRatio = width / height;
 
-            Camera = new OrtographicCamera(
-                -_aspectRatio * _zoomLevel, 
-                _aspectRatio * _zoomLevel, 
-                -_zoomLevel,
-                _zoomLevel);
+            Camera = new OrtographicCamera(width, height);
 
             _rotationIsEnabled = rotationIsEnabled;
 
@@ -53,6 +50,11 @@
             MoveDown = new MoveDownCommand(this);
             RotateLeft = new RotateLeftCommand(this);
             RotateRight = new RotateRightCommand(this);
+        }
+
+        public void OnResize(Size size)
+        {
+
         }
 
         public void OnUpdate(double deltaTime)

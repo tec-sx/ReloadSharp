@@ -1,8 +1,8 @@
-﻿using System;
-using System.Numerics;
-
-namespace Reload.Rendering.Camera
+﻿namespace Reload.Rendering.Camera
 {
+    using System.Numerics;
+    using System;
+
     public class OrtographicCamera
     {
         private Matrix4x4 _projectionMatrix;
@@ -18,9 +18,9 @@ namespace Reload.Rendering.Camera
         public Vector3 Position;
         public float Rotation;
 
-        public OrtographicCamera(float left, float right, float top, float bottom)
+        public OrtographicCamera(float width, float height)
         {
-            _projectionMatrix = Matrix4x4.CreateOrthographicOffCenter(left, right, top, bottom, 0.01f, 100.0f);
+            _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, 0.01f, 100.0f);
             _viewMatrix = Matrix4x4.Identity;
             _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
 

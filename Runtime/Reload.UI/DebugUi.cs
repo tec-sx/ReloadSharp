@@ -5,7 +5,6 @@
     using System.Diagnostics;
     using Reload.Gameplay;
     using ImGuiNET;
-    using Reload.Core.Collections;
 
     public class DebugUi: IUserInterface
     {
@@ -17,7 +16,7 @@
         private readonly Vector4 _keyColor;
         private readonly Queue<float> _memoryPlot;
 
-        private FastList<double> _fpsList;
+        private List<double> _fpsList;
 
         public DebugUi(IGame game)
         {
@@ -27,7 +26,7 @@
             _keyColor = new Vector4(0.7f, 0.8f, 0.4f, 1f);
             _memoryPlot = new Queue<float>(MemoryPlotSize);
 
-            _fpsList = new FastList<double>(fpsMaxSamples);
+            _fpsList = new List<double>(fpsMaxSamples);
         }
 
         public void Draw(double deltaTime)

@@ -213,7 +213,7 @@ namespace Reload.Platform.Graphics.OpenGl
 
             Use();
 
-            _gl.Uniform3(location, value);
+            _gl.Uniform3(location, value.X, value.Y, value.Z);
 
         }
 
@@ -224,7 +224,7 @@ namespace Reload.Platform.Graphics.OpenGl
 
             Use();
 
-            _gl.Uniform4(location, value);
+            _gl.Uniform4(location, value.X, value.Y, value.Z, value.W);
         }
 
         /// <inheritdoc/>

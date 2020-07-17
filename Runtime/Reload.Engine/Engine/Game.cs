@@ -78,7 +78,7 @@
         {
             SubSystems = new ServiceCollection()
 
-                #region Core sub-systems
+            #region Core sub-systems
 
                 .AddSingleton(this as IGame)
                 .AddSingleton<ConfigurationManager>()
@@ -86,9 +86,9 @@
                 .AddSingleton<InputManager>()
                 .AddSingleton<AudioManager>()
 
-                #endregion
+            #endregion
 
-                #region Simultaion sub-systems
+            #region Simultaion sub-systems
 
                 .AddSingleton<ITextureCache, TextureCache>()
                 .AddSingleton<IGameObjectCache, GameObjectCache>()
@@ -97,7 +97,7 @@
                 .AddSingleton<UiManager>()
                 .AddSingleton<SceneMachine>()
 
-                #endregion
+            #endregion
 
                 .BuildServiceProvider();
 
@@ -196,7 +196,6 @@
         private void OnWindowRender(double deltaTime)
         {
             OnRender(deltaTime);
-            
         }
 
         private void ShutDownSubSystems()
@@ -214,6 +213,7 @@
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
+            GameDestroyed.Invoke();
         }
     }
 }

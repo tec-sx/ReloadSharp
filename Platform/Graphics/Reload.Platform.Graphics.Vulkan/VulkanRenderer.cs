@@ -20,6 +20,11 @@
             throw new System.NotImplementedException();
         }
 
+        public override void Initialize()
+        {
+            throw new System.NotImplementedException();
+        }
+
         public override void SetClearColor(Color color)
         {
             throw new System.NotImplementedException();

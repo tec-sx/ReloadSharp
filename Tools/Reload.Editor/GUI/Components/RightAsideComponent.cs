@@ -3,7 +3,7 @@
     using ImGuiNET;
     using Reload.UI;
     using System;
-    using System.Numerics;
+    using  System.Numerics;
 
     public class RightAsideComponent : UiWindow
     {
@@ -26,6 +26,7 @@
                 }
                 else
                 {
+                    
                     var position = new Vector2(Program.Editor.Window.Size.Width - ImGui.GetWindowWidth(), 50);
                     var size = new Vector2(Program.Editor.Window.Monitor.Bounds.Width / 5, Program.Editor.Window.Size.Height - 50);
 
@@ -70,6 +71,7 @@
                             ImGui.SliderFloat("Rotation X", ref _rotation.X, -180.0f, 180.0f);
                             ImGui.SliderFloat("Rotation Y", ref _rotation.Y, -180.0f, 180.0f);
                             ImGui.SliderFloat("Rotation Z", ref _rotation.Z, -180.0f, 180.0f);
+
 
                             if (oldRotationX != _rotation.X || oldRotationY != _rotation.Y || oldRotationZ != _rotation.Z)
                             {
