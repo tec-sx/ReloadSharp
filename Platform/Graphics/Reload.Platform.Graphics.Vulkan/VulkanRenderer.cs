@@ -34,5 +34,10 @@
         {
             throw new System.NotImplementedException();
         }
+
+        public override void SetViewport(Point location, Size size)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }

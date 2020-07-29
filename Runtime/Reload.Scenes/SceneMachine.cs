@@ -1,12 +1,12 @@
-namespace Reload.Engine.SceneSystem
+namespace Reload.Scenes
 {
+    using Reload.Scenes.Enumerations;
+    using System;
+    using Reload.Assets;
     using Reload.Gameplay;
     using Reload.Graphics;
-    using Assets;
-    using System;
     using Reload.Input;
-    using Reload.Engine.SceneSystem.Enumerations;
-
+    
     /// <summary>
     /// The scene manager. Instantiated as singleton in the
     /// service manager.
@@ -179,8 +179,8 @@ namespace Reload.Engine.SceneSystem
                     ExitProgram?.Invoke();
                     break;
                 default:
-                    throw new ApplicationException(
-                        Properties.Resources.InvalidSceneStateExceptionMessage);
+                    // TODO: Move the string to resources file.
+                    throw new ApplicationException("Invalid scene state");
             }
         }
     }

@@ -1,4 +1,4 @@
-namespace Reload.Engine.SceneSystem.Layers
+namespace Reload.Scenes.Layers
 {
     using System;
     using System.Collections.Generic;
@@ -34,8 +34,8 @@ namespace Reload.Engine.SceneSystem.Layers
 
             if (layer == null)
             {
-                throw new NullReferenceException(
-                    Properties.Resources.LayerNullParameterExceptionMessage);
+                // TODO: Move the string to resources file.
+                throw new NullReferenceException("Layer object that is passed as parameter is null");
             }
 
             Insert(_layerInsertIndex++, layer);
@@ -55,8 +55,8 @@ namespace Reload.Engine.SceneSystem.Layers
 
             if (overlay == null)
             {
-                throw new NullReferenceException(
-                    Properties.Resources.OverlayNullParameterExceptionMessage);
+                // TODO: Move the string to resources file.
+                throw new NullReferenceException("Overlay object that is passed as parameter  is null");
             }
 
             Add(overlay);
@@ -71,8 +71,8 @@ namespace Reload.Engine.SceneSystem.Layers
         {
             if (layer == null)
             {
-                throw new NullReferenceException(
-                    Properties.Resources.LayerNullParameterExceptionMessage);
+                // TODO: Move the string to resources file.
+                throw new NullReferenceException("Layer object that is passed as parameter is null");
             }
 
             layer.OnDetach();
@@ -88,8 +88,8 @@ namespace Reload.Engine.SceneSystem.Layers
         {
             if (overlay == null)
             {
-                throw new NullReferenceException(
-                    Properties.Resources.OverlayNullParameterExceptionMessage);
+                // TODO: Move the string to resources file.
+                throw new NullReferenceException("Overlay object that is passed as parameter  is null");
             }
 
             overlay.OnDetach();

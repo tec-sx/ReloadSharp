@@ -156,7 +156,7 @@ namespace Reload.Platform.Graphics.OpenGl
         /// <inheritdoc/>
         public override int GetUniform(string name)
         {
-            if (uniformLocationCache.TryGetValue(name, out var location))
+            if (UniformLocationCache.TryGetValue(name, out var location))
             {
                 return location;
             }
@@ -169,7 +169,7 @@ namespace Reload.Platform.Graphics.OpenGl
             }
             else
             {
-                uniformLocationCache.Add(name, location);
+                UniformLocationCache.Add(name, location);
             }
 
             return location;

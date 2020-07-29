@@ -1,28 +1,278 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$USER_HOME$/.Rider2019.3/system/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/.Rider2019.3/system/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_Reload.-868020023.00" t="ExcludeRecursive" />
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.1/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/.cache/JetBrains/Rider2020.1/resharper-host/local/Transient/ReSharperHost/v201/SolutionCaches/_Reload.-406278401.00" t="ExcludeRecursive" />
     <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.2.0/build/netcoreapp1.0" t="Include">
       <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
     </e>
-    <e p="$USER_HOME$/.nuget/packages/microsoft.net.test.sdk/16.4.0/build/netcoreapp2.1" t="Include">
-      <e p="Microsoft.NET.Test.Sdk.Program.cs" t="Include" />
-    </e>
-    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.dll" t="Include" />
-    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/NUnit3.TestAdapter.pdb" t="Include" />
-    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.api.dll" t="Include" />
-    <e p="$USER_HOME$/.nuget/packages/nunit3testadapter/3.15.1/build/netcoreapp2.0/nunit.engine.dll" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.reporters.netcoreapp10.dll" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.utility.netcoreapp10.dll" t="Include" />
     <e p="$USER_HOME$/.nuget/packages/xunit.runner.visualstudio/2.4.0/build/netcoreapp1.0/xunit.runner.visualstudio.dotnetcore.testadapter.dll" t="Include" />
     <e p="$PROJECT_DIR$" t="IncludeFlat">
       <e p=".nuke" t="Include" />
+      <e p="Core/Reload.Core" t="IncludeRecursive">
+        <e p="Collections" t="Include">
+          <e p="IObservableCollectionChanged.cs" t="Include" />
+          <e p="IReadOnlySet.cs" t="Include" />
+          <e p="NotifyCollectionChangedEventArgs.cs" t="Include" />
+          <e p="ObservableDictionary.cs" t="Include" />
+          <e p="ReadOnlySet.cs" t="Include" />
+        </e>
+        <e p="Commands" t="Include">
+          <e p="ActionPressCommand.cs" t="Include" />
+          <e p="ActionReleaseCommand.cs" t="Include" />
+          <e p="Command.cs" t="Include" />
+          <e p="RangeCommand.cs" t="Include" />
+          <e p="StateCommand.cs" t="Include" />
+        </e>
+        <e p="Reload.Core.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Reload.Core.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Core/Reload.Core.DA" t="IncludeRecursive">
+        <e p="FileDataAccess.cs" t="Include" />
+        <e p="InMemoryDbContext.cs" t="Include" />
+        <e p="Models" t="Include">
+          <e p="InputContext.cs" t="Include" />
+          <e p="Player.cs" t="Include" />
+        </e>
+        <e p="PersistentDbContext.cs" t="Include" />
+        <e p="Reload.Core.DA.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Reload.Core.DA.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Core/Reload.Core.IO" t="IncludeRecursive">
+        <e p="EmbeddedResources.cs" t="Include" />
+        <e p="Reload.Core.IO.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Reload.Core.IO.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Core/Reload.Core.Serialization" t="IncludeRecursive">
+        <e p="Class1.cs" t="Include" />
+        <e p="Reload.Core.Serialization.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Reload.Core.Serialization.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Core/Reload.Core.Utils" t="IncludeRecursive">
+        <e p="Logger.cs" t="Include" />
+        <e p="Reload.Core.Utils.csproj" t="IncludeRecursive" />
+        <e p="ReloadMath.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Reload.Core.Utils.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Core/Reload.Core.VFS" t="IncludeRecursive">
+        <e p="Extensions" t="Include">
+          <e p="ByteArrayExtensions.cs" t="Include" />
+        </e>
+        <e p="GroupFlags.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+        </e>
+        <e p="Reload.Core.VFS.csproj" t="IncludeRecursive" />
+        <e p="Structures" t="Include">
+          <e p="AssetEntry.cs" t="Include" />
+          <e p="AssetIndex.cs" t="Include" />
+          <e p="GroupEntry.cs" t="Include" />
+          <e p="GroupIndex.cs" t="Include" />
+          <e p="Header.cs" t="Include" />
+          <e p="IFsStructure.cs" t="Include" />
+        </e>
+        <e p="VirtualFileSystem.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Reload.Core.VFS.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
       <e p="Engine" t="Include">
         <e p="Core" t="Include" />
         <e p="Runtime" t="Include" />
       </e>
-      <e p="Engine.AssetPipeline" t="IncludeRecursive">
+      <e p="Games" t="Include">
+        <e p="Reload.Game" t="IncludeRecursive">
+          <e p="Reload.Game.csproj" t="IncludeRecursive" />
+        </e>
+      </e>
+      <e p="Platform" t="Include">
+        <e p="Audio" t="Include">
+          <e p="Reload.Platform.Audio.OpenAl" t="IncludeRecursive">
+            <e p="Class1.cs" t="Include" />
+            <e p="Reload.Platform.Audio.OpenAl.csproj" t="IncludeRecursive" />
+            <e p="bin" t="ExcludeRecursive" />
+            <e p="obj" t="ExcludeRecursive">
+              <e p="Debug" t="Include">
+                <e p="net5.0" t="Include">
+                  <e p="Reload.Platform.Audio.OpenAl.AssemblyInfo.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Graphics" t="Include">
+          <e p="Reload.Platform.Graphics.DirectX" t="IncludeRecursive">
+            <e p="Class1.cs" t="Include" />
+            <e p="Reload.Platform.Graphics.DirectX.csproj" t="IncludeRecursive" />
+            <e p="bin" t="ExcludeRecursive" />
+            <e p="obj" t="ExcludeRecursive">
+              <e p="Debug" t="Include">
+                <e p="net5.0" t="Include">
+                  <e p="Reload.Platform.Graphics.DirectX.AssemblyInfo.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+          <e p="Reload.Platform.Graphics.OpenGl" t="IncludeRecursive">
+            <e p="GlContext.cs" t="Include" />
+            <e p="GlRenderer.cs" t="Include" />
+            <e p="GlShaderProgram.cs" t="Include" />
+            <e p="GlTexture2D.cs" t="Include" />
+            <e p="GlTextureCube.cs" t="Include" />
+            <e p="Properties" t="Include">
+              <e p="Resources.Designer.cs" t="Include" />
+              <e p="Resources.resx" t="Include" />
+            </e>
+            <e p="Reload.Platform.Graphics.OpenGl.csproj" t="IncludeRecursive" />
+            <e p="Shaders" t="Include">
+              <e p="main.frag.glsl" t="Include" />
+              <e p="main.vert.glsl" t="Include" />
+              <e p="square.frag.glsl" t="Include" />
+              <e p="square.vert.glsl" t="Include" />
+            </e>
+            <e p="Structures" t="Include">
+              <e p="GlIndexBuffer.cs" t="Include" />
+              <e p="GlShaderResourceDeclaration.cs" t="Include" />
+              <e p="GlShaderUniformBufferDeclaration.cs" t="Include" />
+              <e p="GlShaderUniformDeclaration.cs" t="Include" />
+              <e p="GlVertexArray.cs" t="Include" />
+              <e p="GlVertexBuffer.cs" t="Include" />
+            </e>
+            <e p="Utils.cs" t="Include" />
+            <e p="bin" t="ExcludeRecursive" />
+            <e p="obj" t="ExcludeRecursive">
+              <e p="Debug" t="Include">
+                <e p="net5.0" t="Include">
+                  <e p="Reload.Platform.Graphics.OpenGl.AssemblyInfo.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+          <e p="Reload.Platform.Graphics.Vulkan" t="IncludeRecursive">
+            <e p="Reload.Platform.Graphics.Vulkan.csproj" t="IncludeRecursive" />
+            <e p="VulkanRenderer.cs" t="Include" />
+            <e p="bin" t="ExcludeRecursive" />
+            <e p="obj" t="ExcludeRecursive">
+              <e p="Debug" t="Include">
+                <e p="net5.0" t="Include">
+                  <e p="Reload.Platform.Graphics.Vulkan.AssemblyInfo.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Reload.Platform.Linux" t="IncludeRecursive">
+          <e p="Class1.cs" t="Include" />
+          <e p="Reload.Platform.Linux.csproj" t="IncludeRecursive" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="net5.0" t="Include">
+                <e p="Reload.Platform.Linux.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Reload.Platform.Windows" t="IncludeRecursive">
+          <e p="PlatformWindows.cs" t="Include" />
+          <e p="Reload.Platform.Windows.csproj" t="IncludeRecursive" />
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="net5.0" t="Include">
+                <e p="Reload.Platform.Windows.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Reload.Configuration" t="IncludeRecursive">
+        <e p="ConfigurationManager.cs" t="Include" />
+        <e p="ContentPaths.cs" t="Include" />
+        <e p="Extensions" t="Include">
+          <e p="UserConfigurationExtension.cs" t="Include" />
+        </e>
+        <e p="Reload.Configuration.csproj" t="IncludeRecursive" />
+        <e p="SystemConfiguration.cs" t="Include" />
+        <e p="UserConfiguration.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Reload.Configuration.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Reload.Core.Tests" t="IncludeRecursive">
+        <e p="Reload.Core.Tests.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Reload.Core.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Reload.Rendering.Tests" t="IncludeRecursive">
+        <e p="BufferLayoutTests.cs" t="Include" />
+        <e p="MaterialTests.cs" t="Include" />
+        <e p="Reload.Rendering.Tests.csproj" t="IncludeRecursive" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Reload.Rendering.Tests.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Reload.sln" t="IncludeFlat" />
+      <e p="Runtime/Reload.Assets" t="IncludeRecursive">
         <e p="AssetsConfiguration.cs" t="Include" />
         <e p="AssetsManager.cs" t="Include" />
         <e p="Audio" t="Include">
@@ -35,8 +285,6 @@
             <e p="Sound.cs" t="Include" />
           </e>
         </e>
-        <e p="Backend" t="Include" />
-        <e p="Engine.AssetPipeline.csproj" t="IncludeRecursive" />
         <e p="GameObjects" t="Include">
           <e p="GameObjectCache.cs" t="Include" />
           <e p="IGameObjectCache.cs" t="Include" />
@@ -46,6 +294,7 @@
           </e>
         </e>
         <e p="IAssetsManager.cs" t="Include" />
+        <e p="Reload.Assets.csproj" t="IncludeRecursive" />
         <e p="Textures" t="Include">
           <e p="ITextureCache.cs" t="Include" />
           <e p="Models" t="Include">
@@ -57,1550 +306,15 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Engine.AssetPipeline.AssemblyInfo.cs" t="Include" />
+            <e p="net5.0" t="Include">
+              <e p="Reload.Assets.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
       </e>
-      <e p="Engine.AssetPipeline.Tests" t="IncludeRecursive">
-        <e p="Engine.AssetPipeline.Tests.csproj" t="IncludeRecursive" />
-        <e p="UnitTest1.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="Engine.AssetPipeline.Tests.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.Audio.Tests" t="IncludeRecursive">
-        <e p="Assets" t="Include">
-          <e p="Background.Original.ogg" t="Include" />
-          <e p="FormatTestSounds" t="Include">
-            <e p="Example.ogg" t="Include" />
-            <e p="Test.mp3" t="Include" />
-          </e>
-          <e p="Snare.ogg" t="Include" />
-        </e>
-        <e p="AudioEngine_Tests.cs" t="Include" />
-        <e p="Engine.Audio.Tests.csproj" t="IncludeRecursive" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="Engine.Audio.Tests.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.Configuration" t="IncludeRecursive">
-        <e p="ConfigurationManager.cs" t="Include" />
-        <e p="ContentPaths.cs" t="Include" />
-        <e p="Engine.Configuration.csproj" t="IncludeRecursive" />
-        <e p="Extensions" t="Include">
-          <e p="UserConfigurationExtension.cs" t="Include" />
-        </e>
-        <e p="SystemConfiguration.cs" t="Include" />
-        <e p="UserConfiguration.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Engine.Configuration.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.Configuration.Tests" t="IncludeRecursive">
-        <e p="Engine.Configuration.Tests.csproj" t="IncludeRecursive" />
-        <e p="UserConfigurationTest.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="Engine.Configuration.Tests.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.Graphics.Tests" t="IncludeRecursive">
-        <e p="Engine.Graphics.Tests.csproj" t="IncludeRecursive" />
-        <e p="GraphicsManager_Tests.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="Engine.Graphics.Tests.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.Input.Tests" t="IncludeRecursive">
-        <e p="Engine.Input.Tests.csproj" t="IncludeRecursive" />
-        <e p="InputManager_Tests.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="Engine.Input.Tests.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.Scene" t="IncludeRecursive">
-        <e p="Engine.Scene.csproj" t="IncludeRecursive" />
-        <e p="Enumerations" t="Include">
-          <e p="SceneState.cs" t="Include" />
-        </e>
-        <e p="Exceptions" t="Include" />
-        <e p="IScene.cs" t="Include" />
-        <e p="ISceneManager.cs" t="Include" />
-        <e p="Layers" t="Include">
-          <e p="LayerBase.cs" t="Include" />
-          <e p="LayerStack.cs" t="Include" />
-        </e>
-        <e p="Properties" t="Include">
-          <e p="Resources.Designer.cs" t="Include" />
-          <e p="Resources.resx" t="Include" />
-        </e>
-        <e p="SceneBase.cs" t="Include" />
-        <e p="SceneManager.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Engine.Scene.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.State" t="IncludeRecursive">
-        <e p="Engine.State.csproj" t="IncludeRecursive" />
-        <e p="IState.cs" t="Include" />
-        <e p="IStateMachine.cs" t="Include" />
-        <e p="StateMachine.cs" t="Include" />
-        <e p="States.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Engine.State.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.Utilities" t="IncludeRecursive">
-        <e p="Assertions" t="Include">
-          <e p="UnnecessaryLock.cs" t="Include" />
-        </e>
-        <e p="Engine.Utilities.csproj" t="IncludeRecursive" />
-        <e p="IO" t="Include">
-          <e p="EmbeddedResourceUtility.cs" t="Include" />
-        </e>
-        <e p="Logger" t="Include">
-          <e p="ConsoleLogger.cs" t="Include" />
-        </e>
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Engine.Utilities.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Engine.Utilities.Tests" t="IncludeRecursive">
-        <e p="Engine.Utilities.Tests.csproj" t="IncludeRecursive" />
-        <e p="UnitTest1.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="Engine.Utilities.Tests.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Games" t="Include" />
-      <e p="Reload" t="IncludeRecursive">
-        <e p="Assets" t="Include">
-          <e p="Music" t="Include">
-            <e p="Intro.aup" t="Include" />
-            <e p="Intro.mp3" t="Include" />
-            <e p="Intro.ogg" t="Include" />
-            <e p="Intro2.wav" t="Include" />
-            <e p="Intro_data" t="Include">
-              <e p="e08" t="Include">
-                <e p="d08" t="Include">
-                  <e p="e080805b.au" t="Include" />
-                  <e p="e0808167.au" t="Include" />
-                  <e p="e08081b4.au" t="Include" />
-                  <e p="e08081f4.au" t="Include" />
-                  <e p="e080822e.au" t="Include" />
-                  <e p="e0808251.au" t="Include" />
-                  <e p="e0808346.au" t="Include" />
-                  <e p="e08083bf.au" t="Include" />
-                  <e p="e08083e3.au" t="Include" />
-                  <e p="e0808524.au" t="Include" />
-                  <e p="e080855f.au" t="Include" />
-                  <e p="e0808564.au" t="Include" />
-                  <e p="e080859e.au" t="Include" />
-                  <e p="e08085ff.au" t="Include" />
-                  <e p="e0808621.au" t="Include" />
-                  <e p="e0808648.au" t="Include" />
-                  <e p="e0808649.au" t="Include" />
-                  <e p="e0808756.au" t="Include" />
-                  <e p="e08087a4.au" t="Include" />
-                  <e p="e08087ee.au" t="Include" />
-                  <e p="e080881e.au" t="Include" />
-                  <e p="e0808863.au" t="Include" />
-                  <e p="e08088cf.au" t="Include" />
-                  <e p="e08088d8.au" t="Include" />
-                  <e p="e0808908.au" t="Include" />
-                  <e p="e080892f.au" t="Include" />
-                  <e p="e08089c0.au" t="Include" />
-                  <e p="e08089dd.au" t="Include" />
-                  <e p="e0808a5e.au" t="Include" />
-                  <e p="e0808b0b.au" t="Include" />
-                  <e p="e0808bd7.au" t="Include" />
-                  <e p="e0808c10.au" t="Include" />
-                  <e p="e0808c5d.au" t="Include" />
-                  <e p="e0808ca2.au" t="Include" />
-                  <e p="e0808ca6.au" t="Include" />
-                  <e p="e0808cc1.au" t="Include" />
-                  <e p="e0808cdf.au" t="Include" />
-                  <e p="e0808ce0.au" t="Include" />
-                  <e p="e0808d05.au" t="Include" />
-                  <e p="e0808df3.au" t="Include" />
-                  <e p="e0808e71.au" t="Include" />
-                  <e p="e0808ea5.au" t="Include" />
-                  <e p="e0808ead.au" t="Include" />
-                  <e p="e0808f40.au" t="Include" />
-                  <e p="e0808f5e.au" t="Include" />
-                  <e p="e0808f5f.au" t="Include" />
-                  <e p="e0808f74.au" t="Include" />
-                  <e p="e0808f90.au" t="Include" />
-                </e>
-              </e>
-            </e>
-          </e>
-          <e p="Scenes" t="Include">
-            <e p="Common" t="Include">
-              <e p="Models" t="Include" />
-              <e p="Textures" t="Include" />
-            </e>
-            <e p="Sandbox" t="Include">
-              <e p="Models" t="Include" />
-              <e p="Textures" t="Include" />
-            </e>
-            <e p="Test" t="Include">
-              <e p="Models" t="Include">
-                <e p="2CylinderEngine" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="2CylinderEngine.gltf" t="Include" />
-                    <e p="2CylinderEngine0.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="2CylinderEngine.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="2CylinderEngine.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="2CylinderEngine.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="AlphaBlendModeTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="AlphaBlendLabels.png" t="Include" />
-                    <e p="AlphaBlendModeTest.bin" t="Include" />
-                    <e p="AlphaBlendModeTest.gltf" t="Include" />
-                    <e p="MatBed_baseColor.jpg" t="Include" />
-                    <e p="MatBed_normal.jpg" t="Include" />
-                    <e p="MatBed_occlusionRoughnessMetallic.jpg" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="AlphaBlendModeTest.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="AlphaBlendModeTest.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="BlendFail.jpg" t="Include" />
-                    <e p="CutoffDefaultFail.jpg" t="Include" />
-                    <e p="CutoffTests.jpg" t="Include" />
-                    <e p="CutoffValueFail.jpg" t="Include" />
-                    <e p="MissingBorder.png" t="Include" />
-                    <e p="OpaqueFail.jpg" t="Include" />
-                    <e p="OpaqueVsBlend.jpg" t="Include" />
-                    <e p="screenshot.png" t="Include" />
-                    <e p="screenshot_large.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="AnimatedCube" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="AnimatedCube.bin" t="Include" />
-                    <e p="AnimatedCube.gltf" t="Include" />
-                    <e p="AnimatedCube_BaseColor.png" t="Include" />
-                    <e p="AnimatedCube_MetallicRoughness.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.gif" t="Include" />
-                  </e>
-                </e>
-                <e p="AnimatedMorphCube" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="AnimatedMorphCube.bin" t="Include" />
-                    <e p="AnimatedMorphCube.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="AnimatedMorphCube.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Quantized" t="Include">
-                    <e p="AnimatedMorphCube.bin" t="Include" />
-                    <e p="AnimatedMorphCube.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.gif" t="Include" />
-                  </e>
-                </e>
-                <e p="AnimatedMorphSphere" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="AnimatedMorphSphere.bin" t="Include" />
-                    <e p="AnimatedMorphSphere.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="AnimatedMorphSphere.glb" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.gif" t="Include" />
-                  </e>
-                </e>
-                <e p="AnimatedTriangle" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="AnimatedTriangle.gltf" t="Include" />
-                    <e p="animation.bin" t="Include" />
-                    <e p="simpleTriangle.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="AnimatedTriangle.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="animation.png" t="Include" />
-                    <e p="screenshot.gif" t="Include" />
-                    <e p="simpleTriangle.png" t="Include" />
-                  </e>
-                </e>
-                <e p="AntiqueCamera" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="AntiqueCamera.bin" t="Include" />
-                    <e p="AntiqueCamera.gltf" t="Include" />
-                    <e p="camera_camera_BaseColor.png" t="Include" />
-                    <e p="camera_camera_Normal.png" t="Include" />
-                    <e p="camera_camera_Roughness.png" t="Include" />
-                    <e p="camera_tripod_BaseColor.png" t="Include" />
-                    <e p="camera_tripod_Normal.png" t="Include" />
-                    <e p="camera_tripod_Roughness.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="AntiqueCamera.glb" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="Avocado" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Avocado.bin" t="Include" />
-                    <e p="Avocado.gltf" t="Include" />
-                    <e p="Avocado_baseColor.png" t="Include" />
-                    <e p="Avocado_normal.png" t="Include" />
-                    <e p="Avocado_roughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="Avocado.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="Avocado.gltf" t="Include" />
-                    <e p="Avocado_baseColor.png" t="Include" />
-                    <e p="Avocado_normal.png" t="Include" />
-                    <e p="Avocado_roughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-Quantized" t="Include">
-                    <e p="Avocado.bin" t="Include" />
-                    <e p="Avocado.gltf" t="Include" />
-                    <e p="Avocado_baseColor.png" t="Include" />
-                    <e p="Avocado_normal.png" t="Include" />
-                    <e p="Avocado_roughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-pbrSpecularGlossiness" t="Include">
-                    <e p="Avocado.bin" t="Include" />
-                    <e p="Avocado.gltf" t="Include" />
-                    <e p="Avocado_baseColor.png" t="Include" />
-                    <e p="Avocado_diffuse.png" t="Include" />
-                    <e p="Avocado_normal.png" t="Include" />
-                    <e p="Avocado_roughnessMetallic.png" t="Include" />
-                    <e p="Avocado_specularGlossiness.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="BarramundiFish" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="BarramundiFish.bin" t="Include" />
-                    <e p="BarramundiFish.gltf" t="Include" />
-                    <e p="BarramundiFish_baseColor.png" t="Include" />
-                    <e p="BarramundiFish_normal.png" t="Include" />
-                    <e p="BarramundiFish_occlusionRoughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="BarramundiFish.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="BarramundiFish.gltf" t="Include" />
-                    <e p="BarramundiFish_baseColor.png" t="Include" />
-                    <e p="BarramundiFish_normal.png" t="Include" />
-                    <e p="BarramundiFish_occlusionRoughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-pbrSpecularGlossiness" t="Include">
-                    <e p="BarramundiFish.bin" t="Include" />
-                    <e p="BarramundiFish.gltf" t="Include" />
-                    <e p="BarramundiFish_baseColor.png" t="Include" />
-                    <e p="BarramundiFish_diffuse.png" t="Include" />
-                    <e p="BarramundiFish_normal.png" t="Include" />
-                    <e p="BarramundiFish_occlusion.png" t="Include" />
-                    <e p="BarramundiFish_roughnessMetallic.png" t="Include" />
-                    <e p="BarramundiFish_specularGlossiness.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="BoomBox" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="BoomBox.bin" t="Include" />
-                    <e p="BoomBox.gltf" t="Include" />
-                    <e p="BoomBox_baseColor.png" t="Include" />
-                    <e p="BoomBox_emissive.png" t="Include" />
-                    <e p="BoomBox_normal.png" t="Include" />
-                    <e p="BoomBox_occlusionRoughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="BoomBox.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="BoomBox.gltf" t="Include" />
-                    <e p="BoomBox_baseColor.png" t="Include" />
-                    <e p="BoomBox_emissive.png" t="Include" />
-                    <e p="BoomBox_normal.png" t="Include" />
-                    <e p="BoomBox_occlusionRoughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-pbrSpecularGlossiness" t="Include">
-                    <e p="BoomBox.bin" t="Include" />
-                    <e p="BoomBox.gltf" t="Include" />
-                    <e p="BoomBox_baseColor.png" t="Include" />
-                    <e p="BoomBox_diffuse.png" t="Include" />
-                    <e p="BoomBox_emissive.png" t="Include" />
-                    <e p="BoomBox_normal.png" t="Include" />
-                    <e p="BoomBox_occlusion.png" t="Include" />
-                    <e p="BoomBox_roughnessMetallic.png" t="Include" />
-                    <e p="BoomBox_specularGlossiness.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="BoomBoxWithAxes" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="BoomBoxWithAxes.bin" t="Include" />
-                    <e p="BoomBoxWithAxes.gltf" t="Include" />
-                    <e p="BoomBoxWithAxes_baseColor.png" t="Include" />
-                    <e p="BoomBoxWithAxes_baseColor1.png" t="Include" />
-                    <e p="BoomBoxWithAxes_emissive.png" t="Include" />
-                    <e p="BoomBoxWithAxes_normal.png" t="Include" />
-                    <e p="BoomBoxWithAxes_roughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="Box" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Box.gltf" t="Include" />
-                    <e p="Box0.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="Box.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="Box.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="Box.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="BoxAnimated" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="BoxAnimated.gltf" t="Include" />
-                    <e p="BoxAnimated0.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="BoxAnimated.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="BoxAnimated.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.gif" t="Include" />
-                  </e>
-                </e>
-                <e p="BoxInterleaved" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="BoxInterleaved.bin" t="Include" />
-                    <e p="BoxInterleaved.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="BoxInterleaved.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="BoxInterleaved.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="BoxTextured" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="BoxTextured.gltf" t="Include" />
-                    <e p="BoxTextured0.bin" t="Include" />
-                    <e p="CesiumLogoFlat.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="BoxTextured.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="BoxTextured.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="BoxTexturedNonPowerOfTwo" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="BoxTextured0.bin" t="Include" />
-                    <e p="BoxTexturedNonPowerOfTwo.gltf" t="Include" />
-                    <e p="CesiumLogoFlat.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="BoxTexturedNonPowerOfTwo.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="BoxTexturedNonPowerOfTwo.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="BoxVertexColors" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="BoxVertexColors.gltf" t="Include" />
-                    <e p="buffer.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="BoxVertexColors.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="BoxVertexColors.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="BrainStem" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="BrainStem.gltf" t="Include" />
-                    <e p="BrainStem0.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="BrainStem.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="BrainStem.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="BrainStem.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.gif" t="Include" />
-                  </e>
-                </e>
-                <e p="Buggy" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Buggy.gltf" t="Include" />
-                    <e p="Buggy0.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="Buggy.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="Buggy.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="Buggy.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="Cameras" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Cameras.gltf" t="Include" />
-                    <e p="simpleSquare.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="Cameras.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                    <e p="simpleSquare.png" t="Include" />
-                  </e>
-                </e>
-                <e p="CesiumMan" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="CesiumMan.gltf" t="Include" />
-                    <e p="CesiumMan_data.bin" t="Include" />
-                    <e p="CesiumMan_img0.jpg" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="CesiumMan.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="CesiumMan.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.gif" t="Include" />
-                  </e>
-                </e>
-                <e p="CesiumMilkTruck" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="CesiumMilkTruck.gltf" t="Include" />
-                    <e p="CesiumMilkTruck.jpg" t="Include" />
-                    <e p="CesiumMilkTruck_data.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="CesiumMilkTruck.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="CesiumMilkTruck.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.gif" t="Include" />
-                  </e>
-                </e>
-                <e p="ClearCoatTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="ClearCoatLabels.png" t="Include" />
-                    <e p="ClearCoatTest.bin" t="Include" />
-                    <e p="ClearCoatTest.gltf" t="Include" />
-                    <e p="PartialCoating.png" t="Include" />
-                    <e p="PartialCoating_Alpha.png" t="Include" />
-                    <e p="PlasticWrap_normals.jpg" t="Include" />
-                    <e p="RibsNormal.png" t="Include" />
-                    <e p="RoughnessStripes.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="ClearCoatTest.glb" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="FirstRow.jpg" t="Include" />
-                    <e p="PartialCoat.jpg" t="Include" />
-                    <e p="screenshot.jpg" t="Include" />
-                    <e p="screenshot_large.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="Corset" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Corset.bin" t="Include" />
-                    <e p="Corset.gltf" t="Include" />
-                    <e p="Corset_baseColor.png" t="Include" />
-                    <e p="Corset_normal.png" t="Include" />
-                    <e p="Corset_occlusionRoughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="Corset.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="Corset.gltf" t="Include" />
-                    <e p="Corset_baseColor.png" t="Include" />
-                    <e p="Corset_normal.png" t="Include" />
-                    <e p="Corset_occlusionRoughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-pbrSpecularGlossiness" t="Include">
-                    <e p="Corset.bin" t="Include" />
-                    <e p="Corset.gltf" t="Include" />
-                    <e p="Corset_baseColor.png" t="Include" />
-                    <e p="Corset_diffuse.png" t="Include" />
-                    <e p="Corset_normal.png" t="Include" />
-                    <e p="Corset_occlusion.png" t="Include" />
-                    <e p="Corset_roughnessMetallic.png" t="Include" />
-                    <e p="Corset_specularGlossiness.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="Cube" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Cube.bin" t="Include" />
-                    <e p="Cube.gltf" t="Include" />
-                    <e p="Cube_BaseColor.png" t="Include" />
-                    <e p="Cube_MetallicRoughness.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="DamagedHelmet" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="DamagedHelmet.bin" t="Include" />
-                    <e p="DamagedHelmet.gltf" t="Include" />
-                    <e p="Default_AO.jpg" t="Include" />
-                    <e p="Default_albedo.jpg" t="Include" />
-                    <e p="Default_emissive.jpg" t="Include" />
-                    <e p="Default_metalRoughness.jpg" t="Include" />
-                    <e p="Default_normal.jpg" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="DamagedHelmet.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="DamagedHelmet.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="Duck" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Duck.gltf" t="Include" />
-                    <e p="Duck0.bin" t="Include" />
-                    <e p="DuckCM.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="Duck.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="Duck.gltf" t="Include" />
-                    <e p="DuckCM.png" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="Duck.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Quantized" t="Include">
-                    <e p="Duck.bin" t="Include" />
-                    <e p="Duck.gltf" t="Include" />
-                    <e p="DuckCM.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="EnvironmentTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="EnvironmentTest.gltf" t="Include" />
-                    <e p="EnvironmentTest_binary.bin" t="Include" />
-                    <e p="EnvironmentTest_images" t="Include">
-                      <e p="roughness_metallic_0.jpg" t="Include" />
-                      <e p="roughness_metallic_1.jpg" t="Include" />
-                    </e>
-                  </e>
-                  <e p="glTF-IBL" t="Include">
-                    <e p="EnvironmentTest.gltf" t="Include" />
-                    <e p="EnvironmentTest_binary.bin" t="Include" />
-                    <e p="EnvironmentTest_images" t="Include">
-                      <e p="roughness_metallic_0.jpg" t="Include" />
-                      <e p="roughness_metallic_1.jpg" t="Include" />
-                    </e>
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="FlightHelmet" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="FlightHelmet.bin" t="Include" />
-                    <e p="FlightHelmet.gltf" t="Include" />
-                    <e p="FlightHelmet_Materials_GlassPlasticMat_BaseColor.png" t="Include" />
-                    <e p="FlightHelmet_Materials_GlassPlasticMat_Normal.png" t="Include" />
-                    <e p="FlightHelmet_Materials_GlassPlasticMat_OcclusionRoughMetal.png" t="Include" />
-                    <e p="FlightHelmet_Materials_LeatherPartsMat_BaseColor.png" t="Include" />
-                    <e p="FlightHelmet_Materials_LeatherPartsMat_Normal.png" t="Include" />
-                    <e p="FlightHelmet_Materials_LeatherPartsMat_OcclusionRoughMetal.png" t="Include" />
-                    <e p="FlightHelmet_Materials_LensesMat_BaseColor.png" t="Include" />
-                    <e p="FlightHelmet_Materials_LensesMat_Normal.png" t="Include" />
-                    <e p="FlightHelmet_Materials_LensesMat_OcclusionRoughMetal.png" t="Include" />
-                    <e p="FlightHelmet_Materials_MetalPartsMat_BaseColor.png" t="Include" />
-                    <e p="FlightHelmet_Materials_MetalPartsMat_Normal.png" t="Include" />
-                    <e p="FlightHelmet_Materials_MetalPartsMat_OcclusionRoughMetal.png" t="Include" />
-                    <e p="FlightHelmet_Materials_RubberWoodMat_BaseColor.png" t="Include" />
-                    <e p="FlightHelmet_Materials_RubberWoodMat_Normal.png" t="Include" />
-                    <e p="FlightHelmet_Materials_RubberWoodMat_OcclusionRoughMetal.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="Fox" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Fox.bin" t="Include" />
-                    <e p="Fox.gltf" t="Include" />
-                    <e p="Texture.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="Fox.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="Fox.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="GearboxAssy" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="GearboxAssy.gltf" t="Include" />
-                    <e p="GearboxAssy0.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="GearboxAssy.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="GearboxAssy.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="GearboxAssy.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="InterpolationTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="InterpolationTest.gltf" t="Include" />
-                    <e p="interpolation.bin" t="Include" />
-                    <e p="l.jpg" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="InterpolationTest.glb" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.gif" t="Include" />
-                  </e>
-                </e>
-                <e p="Lantern" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Lantern.bin" t="Include" />
-                    <e p="Lantern.gltf" t="Include" />
-                    <e p="Lantern_baseColor.png" t="Include" />
-                    <e p="Lantern_emissive.png" t="Include" />
-                    <e p="Lantern_normal.png" t="Include" />
-                    <e p="Lantern_roughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="Lantern.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="Lantern.gltf" t="Include" />
-                    <e p="Lantern_baseColor.png" t="Include" />
-                    <e p="Lantern_emissive.png" t="Include" />
-                    <e p="Lantern_normal.png" t="Include" />
-                    <e p="Lantern_roughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-Quantized" t="Include">
-                    <e p="Lantern.bin" t="Include" />
-                    <e p="Lantern.gltf" t="Include" />
-                    <e p="Lantern_baseColor.png" t="Include" />
-                    <e p="Lantern_emissive.png" t="Include" />
-                    <e p="Lantern_normal.png" t="Include" />
-                    <e p="Lantern_roughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-pbrSpecularGlossiness" t="Include">
-                    <e p="Lantern.bin" t="Include" />
-                    <e p="Lantern.gltf" t="Include" />
-                    <e p="Lantern_baseColor.png" t="Include" />
-                    <e p="Lantern_diffuse.png" t="Include" />
-                    <e p="Lantern_emissive.png" t="Include" />
-                    <e p="Lantern_normal.png" t="Include" />
-                    <e p="Lantern_roughnessMetallic.png" t="Include" />
-                    <e p="Lantern_specularGlossiness.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="MetalRoughSpheres" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="MetalRoughSpheres.gltf" t="Include" />
-                    <e p="MetalRoughSpheres0.bin" t="Include" />
-                    <e p="Spheres_BaseColor.png" t="Include" />
-                    <e p="Spheres_MetalRough.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="MetalRoughSpheres.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="MetalRoughSpheres.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="MetalRoughSpheresNoTextures" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="MetalRoughSpheresNoTextures.bin" t="Include" />
-                    <e p="MetalRoughSpheresNoTextures.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="MetalRoughSpheresNoTextures.glb" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="MorphPrimitivesTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="MorphPrimitivesTest.bin" t="Include" />
-                    <e p="MorphPrimitivesTest.gltf" t="Include" />
-                    <e p="uv_texture.jpg" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="MorphPrimitivesTest.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="MorphPrimitivesTest.glb" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="MultiUVTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="MultiUVTest.bin" t="Include" />
-                    <e p="MultiUVTest.gltf" t="Include" />
-                    <e p="uv0.png" t="Include" />
-                    <e p="uv1.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="MultiUVTest.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="MultiUVTest.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="NormalTangentMirrorTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="NormalTangentMirrorTest.bin" t="Include" />
-                    <e p="NormalTangentMirrorTest.gltf" t="Include" />
-                    <e p="NormalTangentMirrorTest_BaseColor.png" t="Include" />
-                    <e p="NormalTangentMirrorTest_OcclusionRoughnessMetallic.png" t="Include" />
-                    <e p="NormalTangentTest_Normal.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="NormalTangentMirrorTest.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="NormalTangentMirrorTest.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="back-side.png" t="Include" />
-                    <e p="incorrect-flipped-y.png" t="Include" />
-                    <e p="screenshot-larger.png" t="Include" />
-                    <e p="screenshot.png" t="Include" />
-                    <e p="supplied-tangents-ignored.png" t="Include" />
-                    <e p="top-down.png" t="Include" />
-                  </e>
-                </e>
-                <e p="NormalTangentTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="NormalTangentTest.gltf" t="Include" />
-                    <e p="NormalTangentTest0.bin" t="Include" />
-                    <e p="NormalTangentTest_BaseColor.png" t="Include" />
-                    <e p="NormalTangentTest_Normal.png" t="Include" />
-                    <e p="NormalTangentTest_OcclusionRoughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="NormalTangentTest.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="NormalTangentTest.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="back-side.png" t="Include" />
-                    <e p="incorrect-flipped-y.png" t="Include" />
-                    <e p="screenshot-larger.png" t="Include" />
-                    <e p="screenshot.png" t="Include" />
-                    <e p="top-down.png" t="Include" />
-                  </e>
-                </e>
-                <e p="OrientationTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="OrientationTest.bin" t="Include" />
-                    <e p="OrientationTest.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="OrientationTest.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="OrientationTest.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="OrientationTestFail.png" t="Include" />
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="ReciprocatingSaw" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="ReciprocatingSaw.gltf" t="Include" />
-                    <e p="ReciprocatingSaw0.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="ReciprocatingSaw.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="ReciprocatingSaw.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="ReciprocatingSaw.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="RiggedFigure" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="RiggedFigure.gltf" t="Include" />
-                    <e p="RiggedFigure0.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="RiggedFigure.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="RiggedFigure.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.gif" t="Include" />
-                  </e>
-                </e>
-                <e p="RiggedSimple" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="RiggedSimple.gltf" t="Include" />
-                    <e p="RiggedSimple0.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="RiggedSimple.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="RiggedSimple.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.gif" t="Include" />
-                  </e>
-                </e>
-                <e p="SciFiHelmet" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="SciFiHelmet.bin" t="Include" />
-                    <e p="SciFiHelmet.gltf" t="Include" />
-                    <e p="SciFiHelmet_AmbientOcclusion.png" t="Include" />
-                    <e p="SciFiHelmet_BaseColor.png" t="Include" />
-                    <e p="SciFiHelmet_MetallicRoughness.png" t="Include" />
-                    <e p="SciFiHelmet_Normal.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="SimpleMeshes" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="SimpleMeshes.gltf" t="Include" />
-                    <e p="triangle.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="SimpleMeshes.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                    <e p="triangle.png" t="Include" />
-                  </e>
-                </e>
-                <e p="SimpleMorph" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="SimpleMorph.gltf" t="Include" />
-                    <e p="simpleMorphAnimation.bin" t="Include" />
-                    <e p="simpleMorphGeometry.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="SimpleMorph.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                    <e p="simpleMorphStructure.png" t="Include" />
-                  </e>
-                </e>
-                <e p="SimpleSparseAccessor" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="SimpleSparseAccessor.bin" t="Include" />
-                    <e p="SimpleSparseAccessor.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="SimpleSparseAccessor.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="SimpleSparseAccessorDescription.png" t="Include" />
-                    <e p="screenshot.png" t="Include" />
-                    <e p="simpleSparseAccessorStructure.png" t="Include" />
-                  </e>
-                </e>
-                <e p="SpecGlossVsMetalRough" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="SpecGlossVsMetalRough.gltf" t="Include" />
-                    <e p="SpecGlossVsMetalRough.png" t="Include" />
-                    <e p="SpecGlossVsMetalRoughLabel.bin" t="Include" />
-                    <e p="WaterBottle.bin" t="Include" />
-                    <e p="WaterBottle_baseColor.png" t="Include" />
-                    <e p="WaterBottle_diffuse.png" t="Include" />
-                    <e p="WaterBottle_emissive.png" t="Include" />
-                    <e p="WaterBottle_normal.png" t="Include" />
-                    <e p="WaterBottle_occlusion.png" t="Include" />
-                    <e p="WaterBottle_roughnessMetallic.png" t="Include" />
-                    <e p="WaterBottle_specularGlossiness.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="SpecGlossVsMetalRough.glb" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot-large.jpg" t="Include" />
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="Sponza" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="10381718147657362067.jpg" t="Include" />
-                    <e p="10388182081421875623.jpg" t="Include" />
-                    <e p="11474523244911310074.jpg" t="Include" />
-                    <e p="11490520546946913238.jpg" t="Include" />
-                    <e p="11872827283454512094.jpg" t="Include" />
-                    <e p="11968150294050148237.jpg" t="Include" />
-                    <e p="1219024358953944284.jpg" t="Include" />
-                    <e p="12501374198249454378.jpg" t="Include" />
-                    <e p="13196865903111448057.jpg" t="Include" />
-                    <e p="13824894030729245199.jpg" t="Include" />
-                    <e p="13982482287905699490.jpg" t="Include" />
-                    <e p="14118779221266351425.jpg" t="Include" />
-                    <e p="14170708867020035030.jpg" t="Include" />
-                    <e p="14267839433702832875.jpg" t="Include" />
-                    <e p="14650633544276105767.jpg" t="Include" />
-                    <e p="15295713303328085182.jpg" t="Include" />
-                    <e p="15722799267630235092.jpg" t="Include" />
-                    <e p="16275776544635328252.png" t="Include" />
-                    <e p="16299174074766089871.jpg" t="Include" />
-                    <e p="16885566240357350108.jpg" t="Include" />
-                    <e p="17556969131407844942.jpg" t="Include" />
-                    <e p="17876391417123941155.jpg" t="Include" />
-                    <e p="2051777328469649772.jpg" t="Include" />
-                    <e p="2185409758123873465.jpg" t="Include" />
-                    <e p="2299742237651021498.jpg" t="Include" />
-                    <e p="2374361008830720677.jpg" t="Include" />
-                    <e p="2411100444841994089.jpg" t="Include" />
-                    <e p="2775690330959970771.jpg" t="Include" />
-                    <e p="2969916736137545357.jpg" t="Include" />
-                    <e p="332936164838540657.jpg" t="Include" />
-                    <e p="3371964815757888145.jpg" t="Include" />
-                    <e p="3455394979645218238.jpg" t="Include" />
-                    <e p="3628158980083700836.jpg" t="Include" />
-                    <e p="3827035219084910048.jpg" t="Include" />
-                    <e p="4477655471536070370.jpg" t="Include" />
-                    <e p="4601176305987539675.jpg" t="Include" />
-                    <e p="466164707995436622.jpg" t="Include" />
-                    <e p="4675343432951571524.jpg" t="Include" />
-                    <e p="4871783166746854860.jpg" t="Include" />
-                    <e p="4910669866631290573.jpg" t="Include" />
-                    <e p="4975155472559461469.jpg" t="Include" />
-                    <e p="5061699253647017043.png" t="Include" />
-                    <e p="5792855332885324923.jpg" t="Include" />
-                    <e p="5823059166183034438.jpg" t="Include" />
-                    <e p="6047387724914829168.jpg" t="Include" />
-                    <e p="6151467286084645207.jpg" t="Include" />
-                    <e p="6593109234861095314.jpg" t="Include" />
-                    <e p="6667038893015345571.jpg" t="Include" />
-                    <e p="6772804448157695701.jpg" t="Include" />
-                    <e p="7056944414013900257.jpg" t="Include" />
-                    <e p="715093869573992647.jpg" t="Include" />
-                    <e p="7268504077753552595.jpg" t="Include" />
-                    <e p="7441062115984513793.jpg" t="Include" />
-                    <e p="755318871556304029.jpg" t="Include" />
-                    <e p="759203620573749278.jpg" t="Include" />
-                    <e p="7645212358685992005.jpg" t="Include" />
-                    <e p="7815564343179553343.jpg" t="Include" />
-                    <e p="8006627369776289000.png" t="Include" />
-                    <e p="8051790464816141987.jpg" t="Include" />
-                    <e p="8114461559286000061.jpg" t="Include" />
-                    <e p="8481240838833932244.jpg" t="Include" />
-                    <e p="8503262930880235456.jpg" t="Include" />
-                    <e p="8747919177698443163.jpg" t="Include" />
-                    <e p="8750083169368950601.jpg" t="Include" />
-                    <e p="8773302468495022225.jpg" t="Include" />
-                    <e p="8783994986360286082.jpg" t="Include" />
-                    <e p="9288698199695299068.jpg" t="Include" />
-                    <e p="9916269861720640319.jpg" t="Include" />
-                    <e p="Sponza.bin" t="Include" />
-                    <e p="Sponza.gltf" t="Include" />
-                    <e p="white.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="large.jpg" t="Include" />
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="Suzanne" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Suzanne.bin" t="Include" />
-                    <e p="Suzanne.gltf" t="Include" />
-                    <e p="Suzanne_BaseColor.png" t="Include" />
-                    <e p="Suzanne_MetallicRoughness.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="TextureCoordinateTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="TextureCoordinateTemplate.png" t="Include" />
-                    <e p="TextureCoordinateTest.bin" t="Include" />
-                    <e p="TextureCoordinateTest.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="TextureCoordinateTest.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="TextureCoordinateTest.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="TextureSettingsTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="CheckAndX.png" t="Include" />
-                    <e p="CheckAndX_V.png" t="Include" />
-                    <e p="TextureSettingsTest.gltf" t="Include" />
-                    <e p="TextureSettingsTest0.bin" t="Include" />
-                    <e p="TextureTestLabels.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="TextureSettingsTest.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="TextureSettingsTest.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="TextureTransformTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Arrow.png" t="Include" />
-                    <e p="Correct.png" t="Include" />
-                    <e p="Error.png" t="Include" />
-                    <e p="NotSupported.png" t="Include" />
-                    <e p="TextureTransformTest.bin" t="Include" />
-                    <e p="TextureTransformTest.gltf" t="Include" />
-                    <e p="UV.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="Triangle" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="Triangle.gltf" t="Include" />
-                    <e p="simpleTriangle.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="Triangle.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                    <e p="simpleTriangle.png" t="Include" />
-                  </e>
-                </e>
-                <e p="TriangleWithoutIndices" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="TriangleWithoutIndices.gltf" t="Include" />
-                    <e p="triangleWithoutIndices.bin" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="TriangleWithoutIndices.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                    <e p="triangleWithoutIndices.png" t="Include" />
-                  </e>
-                </e>
-                <e p="TwoSidedPlane" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="TwoSidedPlane.bin" t="Include" />
-                    <e p="TwoSidedPlane.gltf" t="Include" />
-                    <e p="TwoSidedPlane_BaseColor.png" t="Include" />
-                    <e p="TwoSidedPlane_MetallicRoughness.png" t="Include" />
-                    <e p="TwoSidedPlane_Normal.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="UnlitTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="UnlitTest.bin" t="Include" />
-                    <e p="UnlitTest.gltf" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="UnlitTest.glb" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                    <e p="screenshot_large.jpg" t="Include" />
-                    <e p="unlit_test_fail.jpg" t="Include" />
-                  </e>
-                </e>
-                <e p="VC" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="001.jpg" t="Include" />
-                    <e p="002.jpg" t="Include" />
-                    <e p="11.jpg" t="Include" />
-                    <e p="5.jpg" t="Include" />
-                    <e p="O21.jpg" t="Include" />
-                    <e p="VC.gltf" t="Include" />
-                    <e p="VC0.bin" t="Include" />
-                    <e p="cockpit-map.jpg" t="Include" />
-                    <e p="f22.jpg" t="Include" />
-                    <e p="heli.jpg" t="Include" />
-                    <e p="machine.jpg" t="Include" />
-                    <e p="prop128.png" t="Include" />
-                    <e p="s_01.jpg" t="Include" />
-                    <e p="s_02.jpg" t="Include" />
-                    <e p="s_03.jpg" t="Include" />
-                    <e p="s_04.jpg" t="Include" />
-                    <e p="s_05.jpg" t="Include" />
-                    <e p="s_06.jpg" t="Include" />
-                    <e p="s_07.jpg" t="Include" />
-                    <e p="s_08.jpg" t="Include" />
-                    <e p="scrapsurf03-red.jpg" t="Include" />
-                    <e p="surface01.jpg" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="VC.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="001.jpg" t="Include" />
-                    <e p="002.jpg" t="Include" />
-                    <e p="11.jpg" t="Include" />
-                    <e p="5.jpg" t="Include" />
-                    <e p="O21.jpg" t="Include" />
-                    <e p="VC.gltf" t="Include" />
-                    <e p="cockpit-map.jpg" t="Include" />
-                    <e p="f22.jpg" t="Include" />
-                    <e p="heli.jpg" t="Include" />
-                    <e p="machine.jpg" t="Include" />
-                    <e p="prop128.png" t="Include" />
-                    <e p="s_01.jpg" t="Include" />
-                    <e p="s_02.jpg" t="Include" />
-                    <e p="s_03.jpg" t="Include" />
-                    <e p="s_04.jpg" t="Include" />
-                    <e p="s_05.jpg" t="Include" />
-                    <e p="s_06.jpg" t="Include" />
-                    <e p="s_07.jpg" t="Include" />
-                    <e p="s_08.jpg" t="Include" />
-                    <e p="scrapsurf03-red.jpg" t="Include" />
-                    <e p="surface01.jpg" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="VC.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.gif" t="Include" />
-                  </e>
-                </e>
-                <e p="VertexColorTest" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="VertexColorChecks.png" t="Include" />
-                    <e p="VertexColorTest.bin" t="Include" />
-                    <e p="VertexColorTest.gltf" t="Include" />
-                    <e p="VertexColorTestLabels.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="VertexColorTest.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Embedded" t="Include">
-                    <e p="VertexColorTest.gltf" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.png" t="Include" />
-                  </e>
-                </e>
-                <e p="WaterBottle" t="Include">
-                  <e p="README.md" t="Include" />
-                  <e p="glTF" t="Include">
-                    <e p="WaterBottle.bin" t="Include" />
-                    <e p="WaterBottle.gltf" t="Include" />
-                    <e p="WaterBottle_baseColor.png" t="Include" />
-                    <e p="WaterBottle_emissive.png" t="Include" />
-                    <e p="WaterBottle_normal.png" t="Include" />
-                    <e p="WaterBottle_occlusionRoughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-Binary" t="Include">
-                    <e p="WaterBottle.glb" t="Include" />
-                  </e>
-                  <e p="glTF-Draco" t="Include">
-                    <e p="0.bin" t="Include" />
-                    <e p="WaterBottle.gltf" t="Include" />
-                    <e p="WaterBottle_baseColor.png" t="Include" />
-                    <e p="WaterBottle_emissive.png" t="Include" />
-                    <e p="WaterBottle_normal.png" t="Include" />
-                    <e p="WaterBottle_occlusionRoughnessMetallic.png" t="Include" />
-                  </e>
-                  <e p="glTF-pbrSpecularGlossiness" t="Include">
-                    <e p="WaterBottle.bin" t="Include" />
-                    <e p="WaterBottle.gltf" t="Include" />
-                    <e p="WaterBottle_baseColor.png" t="Include" />
-                    <e p="WaterBottle_diffuse.png" t="Include" />
-                    <e p="WaterBottle_emissive.png" t="Include" />
-                    <e p="WaterBottle_normal.png" t="Include" />
-                    <e p="WaterBottle_occlusion.png" t="Include" />
-                    <e p="WaterBottle_roughnessMetallic.png" t="Include" />
-                    <e p="WaterBottle_specularGlossiness.png" t="Include" />
-                  </e>
-                  <e p="screenshot" t="Include">
-                    <e p="screenshot.jpg" t="Include" />
-                  </e>
-                </e>
-              </e>
-              <e p="Textures" t="Include">
-                <e p="Player.png" t="Include" />
-              </e>
-            </e>
-          </e>
-          <e p="Sounds" t="Include" />
-        </e>
-        <e p="Characters" t="Include">
-          <e p="Player.cs" t="Include" />
-        </e>
-        <e p="Program.cs" t="Include" />
-        <e p="Reload.csproj" t="IncludeRecursive" />
-        <e p="ReloadGame.cs" t="Include" />
-        <e p="Scenes" t="Include">
-          <e p="Commands" t="Include">
-            <e p="Commands.cs" t="Include" />
-          </e>
-          <e p="IntroScene.cs" t="Include" />
-          <e p="MainMenuScene.cs" t="Include" />
-        </e>
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netcoreapp3.1" t="Include">
-              <e p="Reload.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Reload.Audio" t="IncludeRecursive">
+      <e p="Runtime/Reload.Audio" t="IncludeRecursive">
         <e p="AudioManager.cs" t="Include" />
         <e p="AudioSource.cs" t="Include" />
-        <e p="AudioThread.cs" t="Include" />
         <e p="Backend" t="Include">
           <e p="ALNative.cs" t="Include" />
           <e p="AudioBuffer.cs" t="Include" />
@@ -1630,77 +344,51 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
+            <e p="net5.0" t="Include">
               <e p="Reload.Audio.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
       </e>
-      <e p="Reload.Core" t="IncludeRecursive">
-        <e p="Actor.cs" t="Include" />
-        <e p="ActorState.cs" t="Include" />
-        <e p="Collections" t="Include">
-          <e p="FastList.cs" t="Include" />
-          <e p="FastListStruct.cs" t="Include" />
-          <e p="IObservableCollectionChanged.cs" t="Include" />
-          <e p="IReadOnlySet.cs" t="Include" />
-          <e p="NotifyCollectionChangedEventArgs.cs" t="Include" />
-          <e p="ObservableDictionary.cs" t="Include" />
-          <e p="PoolListStruct.cs" t="Include" />
-          <e p="ReadOnlySet.cs" t="Include" />
+      <e p="Runtime/Reload.Engine" t="IncludeRecursive">
+        <e p="Animations" t="Include" />
+        <e p="Engine" t="Include">
+          <e p="Design" t="Include" />
+          <e p="Events" t="Include" />
+          <e p="Game.cs" t="Include" />
+          <e p="GameThread.cs" t="Include" />
+          <e p="Processors" t="Include" />
         </e>
-        <e p="Commands" t="Include">
-          <e p="ActionCommand.cs" t="Include" />
-          <e p="Command.cs" t="Include" />
-          <e p="InputConstants.cs" t="Include" />
-          <e p="RangeCommand.cs" t="Include" />
-          <e p="StateCommand.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
         </e>
-        <e p="Reload.Core.csproj" t="IncludeRecursive" />
-        <e p="SubSystems.cs" t="Include" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netstandard2.0" t="Include">
-              <e p="Reload.Core.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Reload.DataAccess" t="IncludeRecursive">
-        <e p="FileDataAccess.cs" t="Include" />
-        <e p="InMemoryDb.cs" t="Include" />
-        <e p="Models" t="Include">
-          <e p="InputContext.cs" t="Include" />
-          <e p="Player.cs" t="Include" />
-        </e>
-        <e p="PersistentDb.cs" t="Include" />
-        <e p="Reload.DataAccess.csproj" t="IncludeRecursive" />
-        <e p="bin" t="ExcludeRecursive" />
-        <e p="obj" t="ExcludeRecursive">
-          <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Reload.DataAccess.AssemblyInfo.cs" t="Include" />
-            </e>
-          </e>
-        </e>
-      </e>
-      <e p="Reload.Engine" t="IncludeRecursive">
-        <e p="Game.cs" t="Include" />
         <e p="Reload.Engine.csproj" t="IncludeRecursive" />
+        <e p="Rendering" t="Include" />
+        <e p="SceneSystem" t="Include" />
+        <e p="ShadersCompiler" t="Include" />
+        <e p="StateSystem" t="Include">
+          <e p="IState.cs" t="Include" />
+          <e p="IStateMachine.cs" t="Include" />
+          <e p="StateMachine.cs" t="Include" />
+          <e p="States.cs" t="Include" />
+        </e>
+        <e p="Updater" t="Include" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
+            <e p="net5.0" t="Include">
               <e p="Reload.Engine.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
       </e>
-      <e p="Reload.Game" t="IncludeRecursive">
+      <e p="Runtime/Reload.Gameplay" t="IncludeRecursive">
+        <e p="Entities" t="Include">
+          <e p="Actor.cs" t="Include" />
+        </e>
         <e p="GameBase.cs" t="Include" />
         <e p="GameContext.cs" t="Include" />
-        <e p="GamePlatform.cs" t="Include" />
         <e p="GameSystemBase.cs" t="Include" />
         <e p="Graphics" t="Include">
           <e p="PixelFormat.cs" t="Include" />
@@ -1710,22 +398,21 @@
         <e p="IGame.cs" t="Include" />
         <e p="IGameSystemBase.cs" t="Include" />
         <e p="IUpdateable.cs" t="Include" />
-        <e p="Platforms" t="Include" />
         <e p="Properties" t="Include">
           <e p="Resources.Designer.cs" t="Include" />
           <e p="Resources.resx" t="Include" />
         </e>
-        <e p="Reload.Game.csproj" t="IncludeRecursive" />
+        <e p="Reload.Gameplay.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Reload.Game.AssemblyInfo.cs" t="Include" />
+            <e p="net5.0" t="Include">
+              <e p="Reload.Gameplay.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
       </e>
-      <e p="Reload.Graphics" t="IncludeRecursive">
+      <e p="Runtime/Reload.Graphics" t="IncludeRecursive">
         <e p="DisplayConfiguration.cs" t="Include" />
         <e p="GraphicsManager.cs" t="Include" />
         <e p="Properties" t="Include">
@@ -1733,27 +420,16 @@
           <e p="Resources.resx" t="Include" />
         </e>
         <e p="Reload.Graphics.csproj" t="IncludeRecursive" />
-        <e p="Shaders" t="Include">
-          <e p="Resources" t="Include">
-            <e p="main.frag.glsl" t="Include" />
-            <e p="main.geom.glsl" t="Include" />
-            <e p="main.vert.glsl" t="Include" />
-          </e>
-          <e p="ShaderProgram" t="Include">
-            <e p="GlShaderProgram.cs" t="Include" />
-            <e p="IShaderProgram.cs" t="Include" />
-          </e>
-        </e>
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
+            <e p="net5.0" t="Include">
               <e p="Reload.Graphics.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
       </e>
-      <e p="Reload.Input" t="IncludeRecursive">
+      <e p="Runtime/Reload.Input" t="IncludeRecursive">
         <e p="Configuration" t="Include">
           <e p="InputConfiguration.cs" t="Include" />
         </e>
@@ -1768,28 +444,214 @@
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
+            <e p="net5.0" t="Include">
               <e p="Reload.Input.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
       </e>
-      <e p="Reload.UI" t="IncludeRecursive">
-        <e p="Reload.UI.csproj" t="IncludeRecursive" />
-        <e p="UserInterfaceManager.cs" t="Include" />
+      <e p="Runtime/Reload.Physics" t="IncludeRecursive">
+        <e p="Class1.cs" t="Include" />
+        <e p="Reload.Physics.csproj" t="IncludeRecursive" />
         <e p="bin" t="ExcludeRecursive" />
         <e p="obj" t="ExcludeRecursive">
           <e p="Debug" t="Include">
-            <e p="netstandard2.1" t="Include">
-              <e p="Reload.UI.AssemblyInfo.cs" t="Include" />
+            <e p="net5.0" t="Include">
+              <e p="Reload.Physics.AssemblyInfo.cs" t="Include" />
             </e>
           </e>
         </e>
       </e>
-      <e p="Reload.sln" t="IncludeFlat" />
+      <e p="Runtime/Reload.Rendering" t="IncludeRecursive">
+        <e p="Camera" t="Include">
+          <e p="OrthographicCamera.cs" t="Include" />
+          <e p="OrthographicCameraController.cs" t="Include" />
+          <e p="PerspectiveCamera.cs" t="Include" />
+          <e p="PerspectiveCameraController.cs" t="Include" />
+        </e>
+        <e p="Material.cs" t="Include" />
+        <e p="Mesh.cs" t="Include" />
+        <e p="Properties" t="Include">
+          <e p="Resources.Designer.cs" t="Include" />
+          <e p="Resources.resx" t="Include" />
+        </e>
+        <e p="Reload.Rendering.csproj" t="IncludeRecursive" />
+        <e p="RenderCommand.cs" t="Include" />
+        <e p="RenderCommandQueue.cs" t="Include" />
+        <e p="RenderPass.cs" t="Include" />
+        <e p="Renderer.cs" t="Include" />
+        <e p="RendererApi.cs" t="Include" />
+        <e p="ShaderLibrary.cs" t="Include" />
+        <e p="ShaderProgram.cs" t="Include" />
+        <e p="Structures" t="Include">
+          <e p="BufferElement.cs" t="Include" />
+          <e p="BufferLayout.cs" t="Include" />
+          <e p="IndexBuffer.cs" t="Include" />
+          <e p="ShaderDataType.cs" t="Include" />
+          <e p="ShaderResourceDeclaration.cs" t="Include" />
+          <e p="ShaderStruct.cs" t="Include" />
+          <e p="ShaderUniformBufferDeclaration.cs" t="Include" />
+          <e p="ShaderUniformDeclaration.cs" t="Include" />
+          <e p="VertexArray.cs" t="Include" />
+          <e p="VertexBuffer.cs" t="Include" />
+        </e>
+        <e p="Texture.cs" t="Include" />
+        <e p="Texture2D.cs" t="Include" />
+        <e p="TextureCube.cs" t="Include" />
+        <e p="Utils.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Reload.Rendering.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Runtime/Reload.Scenes" t="IncludeRecursive">
+        <e p="Entity.cs" t="Include" />
+        <e p="Enumerations" t="Include">
+          <e p="SceneState.cs" t="Include" />
+        </e>
+        <e p="Layers" t="Include">
+          <e p="Layer.cs" t="Include" />
+          <e p="LayerStack.cs" t="Include" />
+        </e>
+        <e p="Reload.Scenes.csproj" t="IncludeRecursive" />
+        <e p="Scene.cs" t="Include" />
+        <e p="SceneMachine.cs" t="Include" />
+        <e p="SceneRenderer.cs" t="Include" />
+        <e p="bin" t="ExcludeRecursive" />
+        <e p="obj" t="ExcludeRecursive">
+          <e p="Debug" t="Include">
+            <e p="net5.0" t="Include">
+              <e p="Reload.Scenes.AssemblyInfo.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Runtime/Reload.UI" t="IncludeRecursive">
+        <e p="Reload.UI.csproj" t="IncludeRecursive" />
+      </e>
       <e p="Tests" t="Include">
-        <e p="Engine" t="Include">
-          <e p="System" t="Include" />
+        <e p="Core" t="Include">
+          <e p="Reload.Core.VFS.Tests" t="IncludeRecursive">
+            <e p="Assets" t="Include">
+              <e p="Player.png" t="Include" />
+            </e>
+            <e p="Reload.Core.VFS.Tests.csproj" t="IncludeRecursive" />
+            <e p="VirtualFileSystemTests.cs" t="Include" />
+            <e p="bin" t="ExcludeRecursive" />
+            <e p="obj" t="ExcludeRecursive">
+              <e p="Debug" t="Include">
+                <e p="net5.0" t="Include">
+                  <e p="Reload.Core.VFS.Tests.AssemblyInfo.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Runtime" t="Include">
+          <e p="Reload.Audio.Tests" t="IncludeRecursive">
+            <e p="Assets" t="Include">
+              <e p="Background.Original.ogg" t="Include" />
+              <e p="FormatTestSounds" t="Include">
+                <e p="Example.ogg" t="Include" />
+                <e p="Test.mp3" t="Include" />
+              </e>
+              <e p="Snare.ogg" t="Include" />
+            </e>
+            <e p="Reload.Audio.Tests.csproj" t="IncludeRecursive" />
+            <e p="ReloadAudioTests.cs" t="Include" />
+            <e p="bin" t="ExcludeRecursive" />
+            <e p="obj" t="ExcludeRecursive">
+              <e p="Debug" t="Include">
+                <e p="net5.0" t="Include">
+                  <e p="Reload.Audio.Tests.AssemblyInfo.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+          <e p="Reload.Graphics.Tests" t="IncludeRecursive">
+            <e p="GraphicsManagerTests.cs" t="Include" />
+            <e p="Reload.Graphics.Tests.csproj" t="IncludeRecursive" />
+            <e p="bin" t="ExcludeRecursive" />
+            <e p="obj" t="ExcludeRecursive">
+              <e p="Debug" t="Include">
+                <e p="net5.0" t="Include">
+                  <e p="Reload.Graphics.Tests.AssemblyInfo.cs" t="Include" />
+                </e>
+              </e>
+            </e>
+          </e>
+        </e>
+      </e>
+      <e p="Tools" t="Include">
+        <e p="Reload.Editor" t="IncludeRecursive">
+          <e p="Assets" t="Include">
+            <e p="Fonts" t="Include">
+              <e p="MajorMonoDisplay-Regular.ttf" t="Include" />
+            </e>
+            <e p="Models" t="Include">
+              <e p="RedCube.bin" t="Include" />
+              <e p="RedCube.gltf" t="Include" />
+            </e>
+            <e p="Shaders" t="Include">
+              <e p="grid.glsl" t="Include" />
+              <e p="main.glsl" t="Include" />
+            </e>
+            <e p="Textures" t="Include">
+              <e p="download.png" t="Include" />
+              <e p="test.png" t="Include" />
+            </e>
+          </e>
+          <e p="Factories" t="Include">
+            <e p="ItemFactory.cs" t="Include" />
+            <e p="StyleFactory.cs" t="Include" />
+          </e>
+          <e p="GUI" t="Include">
+            <e p="MainGuiLayer.cs" t="Include" />
+          </e>
+          <e p="GameEditor.cs" t="Include" />
+          <e p="Lib" t="Include">
+            <e p="SpaceVIL.dll" t="Include" />
+          </e>
+          <e p="MainWindow.cs" t="Include" />
+          <e p="OpenGlLayer.cs" t="Include" />
+          <e p="Program.cs" t="Include" />
+          <e p="Reload.Editor.csproj" t="IncludeRecursive" />
+          <e p="Scenes" t="Include">
+            <e p="MainViewport.cs" t="Include" />
+          </e>
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="net5.0" t="Include">
+                <e p="Reload.Editor.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
+        </e>
+        <e p="Reload.Tools.Common" t="IncludeRecursive">
+          <e p="GUI" t="Include">
+            <e p="GuiManager.cs" t="Include" />
+            <e p="GuiWindow.cs" t="Include" />
+            <e p="MainWindow.cs" t="Include" />
+            <e p="OpenGlLayer.cs" t="Include" />
+          </e>
+          <e p="Reload.Tools.Common.csproj" t="IncludeRecursive" />
+          <e p="Vendor" t="Include">
+            <e p="SpaceVIL.dll" t="Include" />
+            <e p="glfw3.dll" t="Include" />
+          </e>
+          <e p="bin" t="ExcludeRecursive" />
+          <e p="obj" t="ExcludeRecursive">
+            <e p="Debug" t="Include">
+              <e p="net5" t="Include">
+                <e p="Reload.Tools.Common.AssemblyInfo.cs" t="Include" />
+              </e>
+            </e>
+          </e>
         </e>
       </e>
       <e p="build" t="IncludeRecursive">

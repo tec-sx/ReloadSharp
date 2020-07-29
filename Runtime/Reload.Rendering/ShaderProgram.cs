@@ -10,16 +10,16 @@ namespace Reload.Rendering
     public abstract class ShaderProgram
     {
 
-        protected Dictionary<string, int> uniformLocationCache;
+        protected readonly Dictionary<string, int> UniformLocationCache;
 
         public string Name { get; protected set; }
 
         /// <summary>
         /// Default constructor.
         /// </summary>
-        public ShaderProgram()
+        protected ShaderProgram()
         {
-            uniformLocationCache = new Dictionary<string, int>();
+            UniformLocationCache = new Dictionary<string, int>();
         }
 
         /// <summary>
@@ -108,9 +108,6 @@ namespace Reload.Rendering
         /// Creates (Compiles, adds attributes and then links) a new shader program from
         /// the shader file and attribute list.
         /// </summary>
-        /// <param name="source"></param>
-        /// <param name="attributes"></param>
-        /// <returns cref="IShaderProgram"></returns>
         /// <exception cref="ApplicationException"></exception>
         //public static CreateShaderDelegate Create;
         public static Func<string, List<string>, ShaderProgram> Create;

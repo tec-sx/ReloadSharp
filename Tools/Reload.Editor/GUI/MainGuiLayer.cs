@@ -1,14 +1,13 @@
 ﻿namespace Reload.Editor.Scenes.Layers
 {
-    using Reload.Editor.Scenes.Layers.Components;
     using Reload.UI;
     using Silk.NET.Windowing.Common;
     using System.Drawing;
 
     public class MainGuiLayer
     {
-        private IWindow _window;
-        private UiManager _uiManager;
+        private readonly IWindow _window;
+        private readonly UiManager _uiManager;
 
         public MainGuiLayer(UiManager uiManager, IWindow window)
         {
@@ -16,9 +15,6 @@
             _window = window;
 
             _window.Resize += OnResize;
-
-            _uiManager.AddWindow(new MenuBarComponent());
-            _uiManager.AddWindow(new RightAsideComponent());
         }
 
         public void OnResize(Size size)

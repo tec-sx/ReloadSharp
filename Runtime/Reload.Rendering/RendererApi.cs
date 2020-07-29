@@ -10,5 +10,6 @@
         public abstract void Clear();
         public abstract void DrawIndexed(VertexArray vertexArray);
         public abstract void SetViewport(Size size);
+        public abstract void SetViewport(Point location, Size size);
     }
 }

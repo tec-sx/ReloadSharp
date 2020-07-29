@@ -5,8 +5,14 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  
   <ItemGroup>
+    <PackageReference Include="runtime.osx.10.10-x64.CoreCompat.System.Drawing" Version="5.8.64" />
     <PackageReference Include="ShaderGen" Version="1.2.0-beta3" />
+    <PackageReference Include="System.Drawing.Common" Version="5.0.0-preview.7.20364.11" />
   </ItemGroup>
 
   <ItemGroup>
@@ -32,6 +38,17 @@
     <None Update="Assets\Textures\test.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Update="Lib\SpaceVIL.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Lib" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Lib\SpaceVIL.dll" />
   </ItemGroup>
 
 </Project>

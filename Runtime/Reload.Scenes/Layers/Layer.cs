@@ -1,8 +1,8 @@
-namespace Reload.Engine.SceneSystem.Layers
+namespace Reload.Scenes.Layers
 {
     using System;
     using Reload.Gameplay;
-
+    
     /// <summary>
     /// Layer base abstract class. Every layer
     /// must inherit this class.

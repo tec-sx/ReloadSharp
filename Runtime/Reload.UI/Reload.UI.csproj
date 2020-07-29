@@ -2,9 +2,12 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ImGui.NET" Version="1.75.0" />
+    <PackageReference Include="ImGui.NET.Docking" Version="1.75.0" />
     <PackageReference Include="Svg" Version="3.1.1" />
     <PackageReference Include="Ultz.SilkExtensions.ImGui" Version="1.0.0" />
   </ItemGroup>
@@ -14,6 +17,10 @@
     <ProjectReference Include="..\Reload.Gameplay\Reload.Gameplay.csproj" />
     <ProjectReference Include="..\Reload.Graphics\Reload.Graphics.csproj" />
     <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Assets\Fonts\MajorMonoDisplay-Regular.ttf" />
   </ItemGroup>
 
 </Project>

@@ -1,7 +1,7 @@
 using System.Drawing;
 using SpaceVIL.Decorations;
 
-namespace Reload.Editor
+namespace Reload.Editor.Factories
 {
     internal static class StyleFactory
     {

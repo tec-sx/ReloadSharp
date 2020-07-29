@@ -21,7 +21,7 @@ namespace Reload.UI
             ImGui.End();
         }
 
-        public abstract void Draw();
+        public abstract void Draw(double deltaTime);
         public abstract void Show();
     }
 }

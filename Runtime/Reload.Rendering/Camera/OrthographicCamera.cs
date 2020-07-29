@@ -33,6 +33,12 @@
             _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, nearPane, farPane);
             _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
         }
+        public void SetProjection(float width, float height)
+        {
+            _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, 0.01f, 100.0f);
+            _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
+        }
+        
 
         public void RecalculateViewMatrix()
         {

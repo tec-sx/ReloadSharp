@@ -1,6 +1,4 @@
-﻿using ImGuiNET;
-
-namespace Reload.UI
+﻿namespace Reload.Tools.Common.GUI
 {
     public abstract class GuiWindow
     {
@@ -13,12 +11,13 @@ namespace Reload.UI
 
         protected virtual bool Begin(string name)
         {
-            return ImGui.Begin(name, ref show);
+            // return ImGui.Begin(name, ref show);
+            return true;
         }
 
         protected virtual void End()
         {
-            ImGui.End();
+            // ImGui.End();
         }
 
         public abstract void Draw(double deltaTime);

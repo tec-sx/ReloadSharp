@@ -1,4 +1,6 @@
-﻿namespace Reload.Rendering.Camera
+﻿using System;
+
+namespace Reload.Rendering.Camera
 {
     using Reload.Core.Commands;
     using System.Drawing;
@@ -54,7 +56,7 @@
 
         public void OnResize(Size size)
         {
-
+            Camera.SetProjection(size.Width, size.Height);
         }
 
         public void OnUpdate(double deltaTime)

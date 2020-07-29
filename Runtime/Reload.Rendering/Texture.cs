@@ -2,6 +2,21 @@
 {
     using System;
 
+    public enum TextureFormat
+    {
+        None = 0,
+        Rgb,
+        Rgba,
+        Float16
+    }
+
+    public enum TextureWrap
+    {
+        None = 0,
+        Clamp,
+        Repeat
+    }
+    
     public abstract class Texture: IDisposable
     {
         public uint Width { get; protected set; }

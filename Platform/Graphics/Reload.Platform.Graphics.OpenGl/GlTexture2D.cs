@@ -12,7 +12,7 @@
 
     public class GlTexture2D : Texture2D
     {
-        private GL _gl;
+        private readonly GL _gl;
         private InternalFormat _internalFormat;
         private PixelFormat _dataFormat;
         private PathStringFormat _path;
@@ -24,7 +24,7 @@
 
             Image<Rgba32> image = Image.Load<Rgba32>(filepath);
 
-            image.Mutate(image => image.Flip(FlipMode.Vertical));
+            image.Mutate(img => img.Flip(FlipMode.Vertical));
 
             if (!image.TryGetSinglePixelSpan(out var pixelSpan))
             {

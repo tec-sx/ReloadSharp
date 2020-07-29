@@ -20,7 +20,7 @@
             set => _materialFlags |= value;
         }
 
-        public Material(ShaderProgram shader)
+        protected Material(ShaderProgram shader)
         {
 
         }
@@ -39,5 +39,10 @@
         {
 
         }
+    }
+
+    public class MaterialInstance
+    {
+        
     }
 }

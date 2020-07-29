@@ -1,12 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Reload.Scenes;
+using Reload.Rendering.Camera;
+using SharpGLTF.Scenes;
+using SharpGLTF.Schema2;
 
-namespace Reload.Rendering
+namespace Reload.Scenes
 {
+    using Reload.Rendering;
+
     public struct SceneRendererOptions
     {
         public bool ShowGrid;
@@ -21,34 +21,81 @@ namespace Reload.Rendering
 
     public struct SceneRendererData
     {
-        
+        public Scene ActiveScene;
+        public SceneInfo SceneInfo;
+    }
+
+    public struct SceneInfo
+    {
+        public PerspectiveCamera Camera;
     }
     
     public static class SceneRenderer
     {
         public static void Init()
         {
-            
+            throw new NotImplementedException();
         }
 
         public static void SetViewportSize(uint width, uint height)
         {
-            
+            throw new NotImplementedException();
         }
 
         public static void BeginScene(Scene scene)
         {
-            
+            throw new NotImplementedException();
         }
 
         public static void EndScene()
         {
-            
+            throw new NotImplementedException();
         }
 
         public static void SubmitEntity(Entity entity)
         {
-            
+            throw new NotImplementedException();
         }
+
+        public static (TextureCube, TextureCube) CreateEnvironmentMap(string filepath)
+        {
+            throw new NotImplementedException();
+        }
+
+        public static RenderPass GetFinalRenderPass()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static Texture2D GetFinalColorBuffer()
+        {
+            throw new NotImplementedException();
+        }
+
+        private static void FlushDrawList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void GeometryPass()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static void CompositePass()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static uint GetFinalColorBufferRendererID()
+        {
+            throw new NotImplementedException();
+        }
+
+        public static SceneRendererOptions GetOptions()
+        {
+            throw new NotImplementedException();
+        }
+        
     }
 }

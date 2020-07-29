@@ -1,7 +1,8 @@
-﻿namespace Reload.Engine
+﻿using Reload.Scenes;
+
+namespace Reload.Engine
 {
     using Reload.Gameplay;
-    using Reload.Engine.SceneSystem;
     using Reload.UI;
     using Reload.Assets;
     using Reload.Assets.Audio;
@@ -174,7 +175,7 @@
 
             InputManager.Initialize(Window);
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
-            UiManager.Initilize(glContext.Api, Window, InputManager.Context);
+            UiManager.Initialize(glContext.Api, Window, InputManager.Context);
 
             OnInitialize();
             OnLoadContent();

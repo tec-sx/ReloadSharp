@@ -12,9 +12,7 @@ namespace Reload.Gameplay
         public bool IsMouseVisible { get; set; }
 
         protected GameBase(string[] args)
-        {
-
-        }
+        { }
 
         /// <summary>
         /// Run the game.

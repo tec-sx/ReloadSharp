@@ -9,6 +9,7 @@
     <Folder Include="Engine\Events\" />
     <Folder Include="Engine\Processors\" />
     <Folder Include="Animations\" />
+    <Folder Include="SceneSystem" />
     <Folder Include="Updater\" />
     <Folder Include="Rendering\" />
     <Folder Include="ShadersCompiler\" />
@@ -27,6 +28,7 @@
     <ProjectReference Include="..\Reload.Graphics\Reload.Graphics.csproj" />
     <ProjectReference Include="..\Reload.Input\Reload.Input.csproj" />
     <ProjectReference Include="..\Reload.Rendering\Reload.Rendering.csproj" />
+    <ProjectReference Include="..\Reload.Scenes\Reload.Scenes.csproj" />
     <ProjectReference Include="..\Reload.UI\Reload.UI.csproj" />
   </ItemGroup>
 
@@ -44,5 +46,4 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
-
 </Project>

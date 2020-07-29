@@ -1,15 +1,15 @@
-﻿namespace Reload.Platform.Graphics.OpenGl
-{
-    using Reload.Rendering;
-    using Reload.Rendering.Structures;
-    using Silk.NET.OpenGL;
-    using System;
-    using System.Drawing;
-    using System.Runtime.InteropServices;
+﻿using Reload.Rendering;
+using Reload.Rendering.Structures;
+using Silk.NET.OpenGL;
+using System;
+using System.Drawing;
+using System.Runtime.InteropServices;
 
+namespace Reload.Platform.Graphics.OpenGl
+{
     internal class GlRenderer : RendererApi
     {
-        private GL _gl;
+        private readonly GL _gl;
 
         public unsafe GlRenderer(GL api)
         {
@@ -31,6 +31,11 @@
         public override void SetViewport(Size size)
         {
             _gl.Viewport(size);
+        }
+        
+        public override void SetViewport(Point location, Size size)
+        {
+            _gl.Viewport(location, size);
         }
 
         public override void Clear()

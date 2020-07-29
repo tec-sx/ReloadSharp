@@ -1,4 +1,4 @@
-﻿namespace Reload.Engine.SceneSystem.Enumerations
+﻿namespace Reload.Scenes.Enumerations
 {
     public enum SceneState
     {

@@ -1,8 +1,8 @@
-namespace Reload.Engine.SceneSystem
+namespace Reload.Scenes
 {
-    using Reload.Engine.SceneSystem.Enumerations;
-    using Layers;
     using System;
+    using Reload.Scenes.Enumerations;
+    using Reload.Scenes.Layers;
 
     /// <summary>
     /// Scene base abstract class. every scene, be it gameplay,
@@ -10,7 +10,6 @@ namespace Reload.Engine.SceneSystem
     /// </summary>
     public abstract class Scene
     {
-        ///<inheritdoc/>
         public event Action<SceneState> SceneStateChange;
 
         /// <summary>

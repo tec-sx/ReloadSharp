@@ -1,12 +1,20 @@
 using System.Drawing;
 using SpaceVIL;
+using SpaceVIL.Common;
 using SpaceVIL.Core;
 using SpaceVIL.Decorations;
 
-namespace Reload.Editor
+namespace Reload.Editor.Factories
 {
     internal static class ItemFactory
     {
+        private static int _topMargin;
+        internal static int TopMargin
+        {
+            get => _topMargin;
+            set => _topMargin = value > 0 ? value : 0;
+        }
+
         internal static ButtonCore GetToolbarButton()
         {
             ButtonCore btn = new ButtonCore();
@@ -65,7 +73,7 @@ namespace Reload.Editor
             HorizontalStack toolbar = new HorizontalStack();
 
             toolbar.SetHeightPolicy(SizePolicy.Fixed);
-            toolbar.SetHeight(40);
+            toolbar.SetHeight(20);
             toolbar.SetBackground(55, 55, 55);
             toolbar.SetPadding(10, 0, 0, 0);
             toolbar.SetSpacing(5);
@@ -73,24 +81,33 @@ namespace Reload.Editor
             return toolbar;
         }
 
-        internal static VerticalStack GetStandardLayout(int topMargin)
+        internal static VerticalSplitArea CreateVerticalSplitArea()
+        {
+            VerticalSplitArea verticalSplit = new VerticalSplitArea();
+            verticalSplit.SetSplitPosition(300);
+            verticalSplit.SetSplitThickness(4);
+            
+            return verticalSplit;
+        }
+        
+        internal static VerticalStack GetStandardLayout()
         {
             VerticalStack layout = new VerticalStack();
 
-            layout.SetMargin(0, topMargin, 0, 0);
-            layout.SetBackground(60, 60, 60);
+            layout.SetMargin(0, _topMargin, 0, 0);
+            layout.SetBackground(30, 30, 30);
 
             return layout;
         }
 
-        internal static VerticalSplitArea GetSplitArea()
+        internal static VerticalStack CreateRightAside(int width)
         {
-            VerticalSplitArea splitArea = new VerticalSplitArea();
+            VerticalStack aside = new VerticalStack();
 
-            splitArea.SetSplitPosition(300);
-            splitArea.SetSplitThickness(4);
+            aside.SetMargin(DisplayService.GetDisplayWidth() - width, _topMargin, 0, 0);
+            aside.SetBackground(30, 30, 30);
 
-            return splitArea;
+            return aside;
         }
     }
 }
