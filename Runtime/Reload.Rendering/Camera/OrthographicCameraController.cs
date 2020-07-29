@@ -4,7 +4,7 @@
     using System.Drawing;
     using System.Numerics;
 
-    public class OrtographicCameraController
+    public class OrthographicCameraController
     {
         private float _aspectRatio;
         private float _zoomLevel;
@@ -17,7 +17,7 @@
         private float _cameraRotationSpeed;
         private float _cameraScrollZoom;
 
-        public OrtographicCamera Camera { get; }
+        public OrthographicCamera Camera { get; }
 
         public ZoomCommand Zoom;
         public MoveLeftCommand MoveLeft;
@@ -27,12 +27,12 @@
         public RotateLeftCommand RotateLeft;
         public RotateRightCommand RotateRight;
 
-        public OrtographicCameraController(float width, float height, bool rotationIsEnabled)
+        public OrthographicCameraController(float width, float height, bool rotationIsEnabled)
         {
             _zoomLevel = 1.0f;
             _aspectRatio = width / height;
 
-            Camera = new OrtographicCamera(width, height);
+            Camera = new OrthographicCamera(width, height);
 
             _rotationIsEnabled = rotationIsEnabled;
 
@@ -69,9 +69,9 @@
 
         public class ZoomCommand : RangeCommand
         {
-            private OrtographicCameraController _controller;
+            private OrthographicCameraController _controller;
 
-            public ZoomCommand(OrtographicCameraController controller)
+            public ZoomCommand(OrthographicCameraController controller)
             {
                 _controller = controller;
             }
@@ -89,9 +89,9 @@
 
         public class MoveLeftCommand : StateCommand
         {
-            private OrtographicCameraController _controller;
+            private OrthographicCameraController _controller;
 
-            public MoveLeftCommand(OrtographicCameraController controller)
+            public MoveLeftCommand(OrthographicCameraController controller)
             {
                 _controller = controller;
             }
@@ -107,9 +107,9 @@
 
         public class MoveRightCommand : StateCommand
         {
-            private OrtographicCameraController _controller;
+            private OrthographicCameraController _controller;
 
-            public MoveRightCommand(OrtographicCameraController controller)
+            public MoveRightCommand(OrthographicCameraController controller)
             {
                 _controller = controller;
             }
@@ -125,9 +125,9 @@
 
         public class MoveUpCommand : StateCommand
         {
-            private OrtographicCameraController _controller;
+            private OrthographicCameraController _controller;
 
-            public MoveUpCommand(OrtographicCameraController controller)
+            public MoveUpCommand(OrthographicCameraController controller)
             {
                 _controller = controller;
             }
@@ -143,9 +143,9 @@
 
         public class MoveDownCommand : StateCommand
         {
-            private OrtographicCameraController _controller;
+            private OrthographicCameraController _controller;
 
-            public MoveDownCommand(OrtographicCameraController controller)
+            public MoveDownCommand(OrthographicCameraController controller)
             {
                 _controller = controller;
             }
@@ -161,9 +161,9 @@
 
         public class RotateLeftCommand : StateCommand
         {
-            private OrtographicCameraController _controller;
+            private OrthographicCameraController _controller;
 
-            public RotateLeftCommand(OrtographicCameraController controller)
+            public RotateLeftCommand(OrthographicCameraController controller)
             {
                 _controller = controller;
             }
@@ -179,9 +179,9 @@
 
         public class RotateRightCommand : StateCommand
         {
-            private OrtographicCameraController _controller;
+            private OrthographicCameraController _controller;
 
-            public RotateRightCommand(OrtographicCameraController controller)
+            public RotateRightCommand(OrthographicCameraController controller)
             {
                 _controller = controller;
             }

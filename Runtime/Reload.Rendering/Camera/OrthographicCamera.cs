@@ -3,7 +3,7 @@
     using System.Numerics;
     using System;
 
-    public class OrtographicCamera
+    public class OrthographicCamera
     {
         private Matrix4x4 _projectionMatrix;
 
@@ -18,7 +18,7 @@
         public Vector3 Position;
         public float Rotation;
 
-        public OrtographicCamera(float width, float height)
+        public OrthographicCamera(float width, float height)
         {
             _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, 0.01f, 100.0f);
             _viewMatrix = Matrix4x4.Identity;
