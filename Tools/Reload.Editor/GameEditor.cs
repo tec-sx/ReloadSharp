@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Reload.Input;
 using Reload.Scenes;
 using SpaceVIL.Common;
 
@@ -21,8 +20,7 @@ namespace Reload.Editor
             collection
                 .AddSingleton<MainWindow>()
                 .AddSingleton<OpenGlViewport>()
-                .AddSingleton<SceneMachine>()
-                .AddSingleton<InputManager>();
+                .AddSingleton<SceneMachine>();
 
             _provider = collection.BuildServiceProvider();
         }
@@ -32,9 +30,6 @@ namespace Reload.Editor
             _window = _provider.GetService<MainWindow>();
             _viewport = _provider.GetService<OpenGlViewport>();
 
-            var inputManager = _provider.GetService<InputManager>();
-
-            inputManager.Initialize()
             _window.InitWindow();
         }
 
