@@ -108,8 +108,7 @@ namespace Reload.Rendering
         public static void SubmitMesh(Mesh mesh, Matrix4x4 transform, MaterialInstance material = null)
         {
             
-        }
-        
+        } 
     }
 
 }

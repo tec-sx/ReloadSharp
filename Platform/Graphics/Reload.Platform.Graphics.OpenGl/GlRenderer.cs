@@ -40,9 +40,7 @@ namespace Reload.Platform.Graphics.OpenGl
 
         public override void Clear()
         {
-            _gl.Clear((uint)(
-                ClearBufferMask.ColorBufferBit |
-                ClearBufferMask.DepthBufferBit));
+            _gl.Clear((uint)(ClearBufferMask.ColorBufferBit | ClearBufferMask.DepthBufferBit));
         }
 
         public override void SetClearColor(Color color)

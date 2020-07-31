@@ -89,6 +89,16 @@ namespace Reload.Editor.Factories
             
             return verticalSplit;
         }
+
+        internal static ResizableItem CreateResizeableFrame(Point location, System.Drawing.Size size)
+        {
+            ResizableItem frame = new ResizableItem();
+            frame.SetBorder(new Border(Color.Gray, new CornerRadius(), 2));
+            frame.SetSize(size.Width, size.Height);
+            frame.SetPosition(location.X, location.Y);
+
+            return frame;
+        }
         
         internal static VerticalStack GetStandardLayout()
         {

@@ -14,7 +14,7 @@ namespace Reload.Editor.Scenes
     using System.IO;
     using System.Numerics;
 
-    public class MainViewport : Scene
+    public class DefaultScene : Scene
     {
         private ShaderLibrary _shaderLibrary;
         private OrthographicCameraController _cameraController;
@@ -120,15 +120,12 @@ namespace Reload.Editor.Scenes
 
         public override void OnRender(double deltaTime)
         {
-            Renderer.Initialize();
-            RenderCommand.SetClearColor(Color.DodgerBlue);
-            RenderCommand.Clear();
-
             var squareShader = _shaderLibrary["main"];
             var gridShader = _shaderLibrary["grid"];
 
             Renderer.BeginScene(_cameraController.Camera);
             {
+                RenderCommand.SetClearColor(Color.Aquamarine);
                 Matrix4x4 transform = Matrix4x4.CreateScale(_squareScale)
                                       * Matrix4x4.CreateTranslation(_squarePosition)
                                       * Matrix4x4.CreateRotationX(ReloadMath.DegreesToRadiants(_squareRotation.X))
@@ -140,10 +137,9 @@ namespace Reload.Editor.Scenes
                 _squareTexture.Bind();
 
                 _cameraController.OnUpdate(deltaTime);
-                // Renderer.Submit(gridShader, _gridVA, gridTransform);
+                Renderer.Submit(gridShader, _gridVA, gridTransform);
                 Renderer.Submit(squareShader, _squareVA, transform);
             }
-            Renderer.EndScene();
         }
 
         public void OnResize(Size newSize)
@@ -183,8 +179,8 @@ namespace Reload.Editor.Scenes
                 {"main", mainContext}
             };
 
-            SceneMachine.Input.Handler.LoadContexts(contexts);
-            SceneMachine.Input.Handler.PushActiveContext("main");
+            //SceneMachine.Input.Handler.LoadContexts(contexts);
+            //SceneMachine.Input.Handler.PushActiveContext("main");
         }
     }
 }

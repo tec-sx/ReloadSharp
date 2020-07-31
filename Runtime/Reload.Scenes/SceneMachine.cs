@@ -1,12 +1,8 @@
+using Reload.Scenes.Enumerations;
+using System;
+
 namespace Reload.Scenes
-{
-    using Reload.Scenes.Enumerations;
-    using System;
-    using Reload.Assets;
-    using Reload.Gameplay;
-    using Reload.Graphics;
-    using Reload.Input;
-    
+{   
     /// <summary>
     /// The scene manager. Instantiated as singleton in the
     /// service manager.
@@ -19,38 +15,10 @@ namespace Reload.Scenes
         /// </summary>
         public event Action ExitProgram;
 
-        public GameBase Game { get; }
-        /// <summary>
-        /// Reference to the input manager.
-        /// </summary>
-        public InputManager Input { get; }
-
-        public GraphicsManager Graphics { get; }
-
-        /// <summary>
-        /// Reference to the asset manager.
-        /// </summary>
-        public IAssetsManager Assets { get; }
-
         /// <summary>
         /// Reference to the current active scene.
         /// </summary>
         public Scene ActiveScene { get; set; }
-
-        /// <summary>
-        /// Attach scene manager.
-        /// </summary>
-        /// <param name="game"></param>
-        /// <param name="assets"></param>
-        /// <param name="input"></param>
-        /// <param name="graphics"></param>
-        public SceneMachine(IGame game, IAssetsManager assets, InputManager input, GraphicsManager graphics)
-        {
-            Game = game as GameBase;
-            Assets = assets;
-            Input = input;
-            Graphics = graphics;
-        }
 
         /// <summary>
         /// Sets the next screen as the active screen.
@@ -100,7 +68,7 @@ namespace Reload.Scenes
         /// updates it or swithes between scenes.
         /// </summary>
         /// <param name="deltaTime"></param>
-        public void Update(double deltaTime)
+        public void UpdateActiveScene(double deltaTime)
         {
             ActiveScene?.Update(deltaTime);
         }
@@ -109,7 +77,7 @@ namespace Reload.Scenes
         /// Render the active scene.
         /// </summary>
         /// <param name="deltaTime"></param>
-        public void Render(double deltaTime)
+        public void RenderActiveScene(double deltaTime)
         {
             ActiveScene?.Render(deltaTime);
         }

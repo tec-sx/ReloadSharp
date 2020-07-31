@@ -1,51 +1,49 @@
-﻿namespace Reload.Editor
+﻿using Microsoft.Extensions.DependencyInjection;
+using Reload.Input;
+using Reload.Scenes;
+using SpaceVIL.Common;
+
+namespace Reload.Editor
 {
-    using Reload.Editor.Scenes;
-    using Reload.Editor.Scenes.Layers;
-    using Reload.Engine;
-    using Reload.Rendering;
-    using System.Drawing;
-
-    public class GameEditor : Game
+    public class GameEditor
     {
-        public int ViewportWidth { get; set; }
-        public int ViewportHeight { get; set; }
-        
-        public GameEditor(string[] args)
-            : base(args)
+
+        private ServiceProvider _provider;
+        private MainWindow _window;
+        private OpenGlViewport _viewport;
+
+        public GameEditor()
+        {
+            CommonService.InitSpaceVILComponents();
+
+            ServiceCollection collection = new ServiceCollection();
+
+            collection
+                .AddSingleton<MainWindow>()
+                .AddSingleton<OpenGlViewport>()
+                .AddSingleton<SceneMachine>()
+                .AddSingleton<InputManager>();
+
+            _provider = collection.BuildServiceProvider();
+        }
+
+        public void Initialize()
+        {
+            _window = _provider.GetService<MainWindow>();
+            _viewport = _provider.GetService<OpenGlViewport>();
+
+            var inputManager = _provider.GetService<InputManager>();
+
+            inputManager.Initialize()
+            _window.InitWindow();
+        }
+
+        public void Start()
+        {
+            _window.Show();
+        }
+
+        public void ShutDown()
         { }
-
-        public void Initialize(int viewportWidth, int viewportHeight)
-        {
-            ViewportWidth = viewportWidth;
-            ViewportHeight = viewportHeight;
-            OnInitialize();
-        }
-
-        protected override void OnInitialize()
-        {
-            SceneMachine.AddScene<MainViewport>();
-            Renderer.Initialize();
-            SceneMachine.Run();
-        }
-
-        protected override void OnLoadContent()
-        { }
-
-        public void Render(double deltaTime) => OnRender(deltaTime);
-        protected override void OnRender(double deltaTime)
-        {
-            SceneMachine.Render(deltaTime);
-        }
-
-        public void ShutDown() => OnShutDown();
-        protected override void OnShutDown()
-        { }
-
-        public void Update(double deltaTime) => OnUpdate(deltaTime);
-        protected override void OnUpdate(double deltaTime)
-        {
-            SceneMachine.Update(deltaTime);
-        }
     }
 }

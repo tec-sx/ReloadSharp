@@ -1,10 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Drawing;
-using System.Threading.Tasks;
-using Reload.Graphics;
-using Silk.NET.Windowing.Common;
-using SpaceVIL.Common;
+﻿using SpaceVIL.Common;
 
 namespace Reload.Editor
 {
@@ -12,9 +6,11 @@ namespace Reload.Editor
     {
         static void Main(string[] args)
         {
-            CommonService.InitSpaceVILComponents();
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
+            GameEditor gameEditor = new GameEditor();
+            
+            gameEditor.Initialize();
+            gameEditor.Start();
+            gameEditor.ShutDown();
         }
     }
 }
