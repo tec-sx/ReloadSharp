@@ -117,7 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="GlfwGetProcAdderssException" xml:space="preserve">
+  <data name="FrameBufferNotComplete" xml:space="preserve">
+    <value>Frame buffer object failure. Frame buffer not complete. </value>
+  </data>
+  <data name="GlfwGetProcAdderssError" xml:space="preserve">
     <value>Can't access Glfw getProcAddress method.</value>
   </data>
   <data name="Name" xml:space="preserve">

@@ -6,17 +6,17 @@ using SpaceVIL.Common;
 
 namespace Reload.Editor
 {
-    public class MainWindow : ActiveWindow
+    internal class MainWindow : ActiveWindow
     {
-        private OpenGlViewport _viewport;
+        public DefaultViewport _viewport;
 
-        internal ListBox ItemList = new ListBox();
-        internal TextArea ItemText = new TextArea();
-        internal ButtonCore BtnGenerate;
-        internal ButtonCore BtnSave;
-        internal SpinItem NumberCount;
+        public ListBox ItemList = new ListBox();
+        public TextArea ItemText = new TextArea();
+        public ButtonCore BtnGenerate;
+        public ButtonCore BtnSave;
+        public SpinItem NumberCount;
 
-        public MainWindow(OpenGlViewport viewport)
+        public MainWindow(DefaultViewport viewport)
         {
             _viewport = viewport;
             EventOnStart += OnStart;
@@ -49,6 +49,9 @@ namespace Reload.Editor
             layout.AddItems(verticalSplit);
 
             verticalSplit.AssignRightItem(_viewport);
+
+            _viewport.SetHeight(verticalSplit.GetHeight());
+            _viewport.SetWidth(verticalSplit.GetWidth());
         }
     }
 }

@@ -1,6 +1,7 @@
 namespace Reload.Scenes
 {
     using System;
+    using Reload.Rendering.Camera;
     using Reload.Scenes.Enumerations;
     using Reload.Scenes.Layers;
 
@@ -41,6 +42,11 @@ namespace Reload.Scenes
         /// The scene manager managing the current scene.
         /// </summary>
         public SceneMachine SceneMachine { get; set; }
+
+        /// <summary>
+        /// The scene ortographic camera.
+        /// </summary>
+        public OrthographicCameraController CameraController { get; protected set; }
 
         /// <summary>
         /// Scene base constructor.

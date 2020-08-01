@@ -14,9 +14,7 @@
 
         private Queue<ActionPressCommand> _actionPressCommandQueue;
         private Queue<ActionReleaseCommand> _actionReleaseCommandQueue;
-
         private List<StateCommand> _stateCommandList;
-
         private Queue<RangeCommand> _rangeCommandQueue;
 
         public InputHandler()
@@ -26,9 +24,7 @@
 
             _actionPressCommandQueue = new Queue<ActionPressCommand>(64);
             _actionReleaseCommandQueue = new Queue<ActionReleaseCommand>(64);
-
             _stateCommandList = new List<StateCommand>(64);
-
             _rangeCommandQueue = new Queue<RangeCommand>(64);
         }
 

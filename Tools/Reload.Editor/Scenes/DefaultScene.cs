@@ -1,23 +1,22 @@
 ﻿using Reload.Scenes;
+using Reload.Configuration;
+using Reload.Core.Utils;
+using Reload.Input;
+using Reload.Rendering;
+using Reload.Rendering.Camera;
+using Reload.Rendering.Structures;
+using Silk.NET.Input.Common;
+using SpaceVIL;
+using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Numerics;
 
 namespace Reload.Editor.Scenes
 {
-    using Reload.Configuration;
-    using Reload.Core.Utils;
-    using Reload.Input;
-    using Reload.Rendering;
-    using Reload.Rendering.Camera;
-    using Reload.Rendering.Structures;
-    using Silk.NET.Input.Common;
-    using System.Collections.Generic;
-    using System.Drawing;
-    using System.IO;
-    using System.Numerics;
-
-    public class DefaultScene : Scene
+    public class DefaultScene : Scene, IViewportAttachable
     {
         private ShaderLibrary _shaderLibrary;
-        private OrthographicCameraController _cameraController;
 
         private VertexBuffer _squareVB;
         private BufferLayout _squareBufferLayout;
@@ -37,6 +36,10 @@ namespace Reload.Editor.Scenes
         private float _squareScale;
         private Vector3 _squarePosition;
         private Vector3 _squareRotation;
+
+        private Size _projectionSize;
+
+        public Prototype ParentViewport { get; set; }
 
         public override void OnEnter()
         {
@@ -109,9 +112,15 @@ namespace Reload.Editor.Scenes
             // Map input contexts
             MapInput();
 
-            _squareScale = 5.0f;
+            _squareScale = 50.0f;
             _squarePosition = Vector3.Zero;
             _squareRotation = Vector3.Zero;
+
+            ParentViewport.EventResize += viewport =>
+            {
+                Size size = new Size(ParentViewport.GetWidth(), ParentViewport.GetHeight());
+                CameraController.OnResize(size);
+            };
         }
 
         public override void OnLeave()
@@ -123,7 +132,7 @@ namespace Reload.Editor.Scenes
             var squareShader = _shaderLibrary["main"];
             var gridShader = _shaderLibrary["grid"];
 
-            Renderer.BeginScene(_cameraController.Camera);
+            Renderer.BeginScene(CameraController.Camera);
             {
                 RenderCommand.SetClearColor(Color.Aquamarine);
                 Matrix4x4 transform = Matrix4x4.CreateScale(_squareScale)
@@ -136,16 +145,10 @@ namespace Reload.Editor.Scenes
 
                 _squareTexture.Bind();
 
-                _cameraController.OnUpdate(deltaTime);
+                CameraController.OnUpdate(deltaTime);
                 Renderer.Submit(gridShader, _gridVA, gridTransform);
                 Renderer.Submit(squareShader, _squareVA, transform);
             }
-        }
-
-        public void OnResize(Size newSize)
-        {
-            RenderCommand.SetViewportSize(newSize);
-            _cameraController.OnResize(newSize);
         }
 
         public override void OnUpdate(double deltaTime)
@@ -154,7 +157,10 @@ namespace Reload.Editor.Scenes
 
         public void CreateCameraController()
         {
-            _cameraController = new OrthographicCameraController(800, 600, true);
+            int width = ParentViewport.GetWidth();
+            int height = ParentViewport.GetHeight();
+
+            CameraController = new OrthographicCameraController(width, height, true);
 
             // var perspectiveFov = Matrix4x4.CreatePerspectiveFieldOfView(ReloadMath.DegreesToRadiants(45.0f), 16 / 9, 0.1f, 10000.0f);
             // _cameraController = new PerspectiveCameraController(perspectiveFov);
@@ -164,23 +170,20 @@ namespace Reload.Editor.Scenes
         {
             var mainContext = new InputMappingContext();
 
-            mainContext.MapKeyToState(0, Key.W, _cameraController.MoveUp);
-            mainContext.MapKeyToState(0, Key.S, _cameraController.MoveDown);
-            mainContext.MapKeyToState(0, Key.A, _cameraController.MoveLeft);
-            mainContext.MapKeyToState(0, Key.D, _cameraController.MoveRight);
+            mainContext.MapKeyToState(0, Key.W, CameraController.MoveUp);
+            mainContext.MapKeyToState(0, Key.S, CameraController.MoveDown);
+            mainContext.MapKeyToState(0, Key.A, CameraController.MoveLeft);
+            mainContext.MapKeyToState(0, Key.D, CameraController.MoveRight);
 
-            mainContext.MapKeyToState(0, Key.Q, _cameraController.RotateLeft);
-            mainContext.MapKeyToState(0, Key.E, _cameraController.RotateRight);
+            mainContext.MapKeyToState(0, Key.Q, CameraController.RotateLeft);
+            mainContext.MapKeyToState(0, Key.E, CameraController.RotateRight);
 
-            mainContext.MapMouseScrollToRange(0, _cameraController.Zoom);
+            mainContext.MapMouseScrollToRange(0, CameraController.Zoom);
 
             var contexts = new Dictionary<string, InputMappingContext>
             {
                 {"main", mainContext}
             };
-
-            //SceneMachine.Input.Handler.LoadContexts(contexts);
-            //SceneMachine.Input.Handler.PushActiveContext("main");
         }
     }
 }

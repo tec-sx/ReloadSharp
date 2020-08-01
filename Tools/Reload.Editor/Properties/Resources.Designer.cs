@@ -61,11 +61,20 @@ namespace Reload.Editor.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Frame buffer object failure. Frame buffer not complete. .
+        /// </summary>
+        internal static string FrameBufferNotComplete {
+            get {
+                return ResourceManager.GetString("FrameBufferNotComplete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Can&apos;t access Glfw getProcAddress method..
         /// </summary>
-        internal static string GlfwGetProcAdderssException {
+        internal static string GlfwGetProcAdderssError {
             get {
-                return ResourceManager.GetString("GlfwGetProcAdderssException", resourceCulture);
+                return ResourceManager.GetString("GlfwGetProcAdderssError", resourceCulture);
             }
         }
         

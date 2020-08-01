@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Reload.Editor.Input;
+using Reload.Editor.Platform;
 using Reload.Scenes;
 using SpaceVIL.Common;
 
@@ -9,7 +11,6 @@ namespace Reload.Editor
 
         private ServiceProvider _provider;
         private MainWindow _window;
-        private OpenGlViewport _viewport;
 
         public GameEditor()
         {
@@ -18,9 +19,11 @@ namespace Reload.Editor
             ServiceCollection collection = new ServiceCollection();
 
             collection
+                .AddSingleton<OpenGl>()
                 .AddSingleton<MainWindow>()
-                .AddSingleton<OpenGlViewport>()
-                .AddSingleton<SceneMachine>();
+                .AddSingleton<DefaultViewport>()
+                .AddSingleton<SceneMachine>()
+                .AddSingleton<InputManager>();
 
             _provider = collection.BuildServiceProvider();
         }
@@ -28,8 +31,6 @@ namespace Reload.Editor
         public void Initialize()
         {
             _window = _provider.GetService<MainWindow>();
-            _viewport = _provider.GetService<OpenGlViewport>();
-
             _window.InitWindow();
         }
 
