@@ -119,5 +119,13 @@ namespace Reload.Editor.Factories
 
             return aside;
         }
+
+        internal static HorizontalStack CreateViewportLayout()
+        {
+            HorizontalStack horizontalStack = new HorizontalStack();
+            horizontalStack.SetBackground(30, 30, 30);
+
+            return horizontalStack;
+        }
     }
 }

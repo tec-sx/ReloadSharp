@@ -10,6 +10,9 @@ using Reload.Editor.Platform;
 using Reload.Editor.Input;
 using Reload.Editor.Extensions;
 using Reload.Rendering.Camera;
+using Reload.Core.Utils;
+using System.Numerics;
+using System;
 
 namespace Reload.Editor
 {
@@ -20,7 +23,6 @@ namespace Reload.Editor
         private readonly OpenGl _openGl;
         private readonly SceneMachine _sceneMachine;
         private readonly InputManager _inputManager;
-        private OrthographicCameraController _activeCameraController;
 
         private readonly Stopwatch _renderStopwatch;
         private readonly Stopwatch _updateStopwatch;
@@ -34,6 +36,8 @@ namespace Reload.Editor
         private Queue<RangeCommand> _rangeCommandQueue;
 
         private bool _isInitialized;
+
+        public Scene ActiveScene { get; set; }
         
         public DefaultViewport(OpenGl openGl, SceneMachine sceneMachine, InputManager inputManager)
         {
@@ -71,7 +75,7 @@ namespace Reload.Editor
             _sceneMachine.AddSceneInViewport<DefaultScene>(this);
             _sceneMachine.Run();
 
-            _activeCameraController = _sceneMachine.ActiveScene.CameraController;
+            ActiveScene = _sceneMachine.ActiveScene;
 
             _isInitialized = true;
         }
@@ -133,8 +137,19 @@ namespace Reload.Editor
                 return;
             }
 
-            var size = new System.Drawing.Size(GetWidth(), GetHeight());
-            _activeCameraController.OnResize(size);
+            //var size = new System.Drawing.Size(GetWidth(), GetHeight());
+            
+            //if (_activeOrthoCameraController != null)
+            //{
+            //    _activeOrthoCameraController.OnResize(size);
+            //}
+            //if (_activePersprctiveCameraController != null)
+            //{
+            //    var aspectRatio = (size.Width / size.Height);
+            //    var perspectiveFov = Matrix4x4.CreatePerspectiveFieldOfView(ReloadMath.DegreesToRadiants(20.0f), aspectRatio, 0.1f, 10000.0f);
+
+            //    _activePersprctiveCameraController.Camera.RecalculateProjectionViewMatrix(perspectiveFov);
+            //}
         }
 
         public override void SetWidth(int width)
@@ -160,21 +175,97 @@ namespace Reload.Editor
 
         private void SetupViewportControls()
         {
-            var activeScene = (IViewportAttachable)_sceneMachine.ActiveScene;
+            EventKeyPress += StartTranslation;
+            EventKeyRelease += StopTranslation;
 
-            //EventScrollUp += (sender, args) =>
-            //{
-            //    var command = activeScene.CameraController.Zoom;
-            //    command.Value = 1;
-            //    _rangeCommandQueue.Enqueue(command);
-            //};
+            //    EventScrollUp += (sender, args) =>
+            //    {
+            //        var command = activeScene.;
+            //        command.Value = 1;
+            //        _rangeCommandQueue.Enqueue(command);
+            //    };
 
-            //EventScrollDown += (sender, args) =>
-            // {
-            //     var command = activeScene.CameraController.Zoom;
-            //     command.Value = -1;
-            //     _rangeCommandQueue.Enqueue(command);
-            // };
+            //    EventScrollDown += (sender, args) =>
+            //     {
+            //         var command = activeScene.CameraController.Zoom;
+            //         command.Value = -1;
+            //         _rangeCommandQueue.Enqueue(command);
+            //     };
+        }
+
+        public void StartTranslation(object sender, KeyArgs args)
+        {
+            var cameraController = _sceneMachine.ActiveScene.CameraController;
+
+            if (args.Key == KeyCode.W)
+            {
+                cameraController.TranslateForward(true);
+            }
+            if (args.Key == KeyCode.S)
+            {
+                cameraController.TranslateBackward(true);
+            }
+            if (args.Key == KeyCode.Q)
+            {
+                cameraController.TranslateUp(true);
+            }
+            if (args.Key == KeyCode.Z)
+            {
+                cameraController.TranslateDown(true);
+            }
+            if (args.Key == KeyCode.A)
+            {
+                cameraController.TranslateLeft(true);
+            }
+            if (args.Key == KeyCode.D)
+            {
+                cameraController.TranslateRight(true);
+            }
+            if (args.Key == KeyCode.LeftBracket)
+            {
+                cameraController.RollLeft(true);
+            }
+            if (args.Key == KeyCode.RightBracket)
+            {
+                cameraController.RollRight(true);
+            }
+        }
+
+        public void StopTranslation(object sender, KeyArgs args)
+        {
+            var cameraController = _sceneMachine.ActiveScene.CameraController;
+            if (args.Key == KeyCode.W)
+            {
+                cameraController.TranslateForward(false);
+            }
+            if (args.Key == KeyCode.S)
+            {
+                cameraController.TranslateBackward(false);
+            }
+            if (args.Key == KeyCode.Q)
+            {
+                cameraController.TranslateUp(false);
+            }
+            if (args.Key == KeyCode.Z)
+            {
+                cameraController.TranslateDown(false);
+            }
+            if (args.Key == KeyCode.A)
+            {
+                cameraController.TranslateLeft(false);
+            }
+            if (args.Key == KeyCode.D)
+            {
+                cameraController.TranslateRight(false);
+            }
+            if (args.Key == KeyCode.LeftBracket)
+            {
+                cameraController.RollLeft(false);
+            }
+            if (args.Key == KeyCode.RightBracket)
+            {
+                cameraController.RollRight(false);
+            }
         }
     }
 }

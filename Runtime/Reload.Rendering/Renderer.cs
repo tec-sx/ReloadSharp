@@ -27,6 +27,7 @@ namespace Reload.Rendering
 
         private static PerspectiveCamera _perspectiveCamera;
         private static OrthographicCamera _orthographicCamera;
+        private static Camera.Camera _camera; 
 
         public static void Initialize()
         {
@@ -55,7 +56,13 @@ namespace Reload.Rendering
             _perspectiveCamera = camera;
             _sceneData.ViewProjectionMatrix = _perspectiveCamera.ViewProjectionMatrix;
         }
-        
+
+        public static void BeginScene(Camera.Camera camera)
+        {
+            _camera = camera;
+            _sceneData.ViewProjectionMatrix = _camera.ViewMatrix;
+        }
+
         public static void EndScene()
         {
         

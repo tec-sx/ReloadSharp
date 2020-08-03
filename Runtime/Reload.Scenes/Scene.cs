@@ -44,9 +44,14 @@ namespace Reload.Scenes
         public SceneMachine SceneMachine { get; set; }
 
         /// <summary>
-        /// The scene ortographic camera.
+        /// Gets or sets the scene's camera.
         /// </summary>
-        public OrthographicCameraController CameraController { get; protected set; }
+        public Camera Camera { get; set; }
+
+        /// <summary>
+        /// Gets or sets the camera controller.
+        /// </summary>
+        public CameraController CameraController { get; set; }
 
         /// <summary>
         /// Scene base constructor.

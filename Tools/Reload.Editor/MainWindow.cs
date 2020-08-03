@@ -3,6 +3,9 @@ using Reload.Editor.Properties;
 using Reload.Editor.Factories;
 using SpaceVIL;
 using SpaceVIL.Common;
+using SpaceVIL.Core;
+using SpaceVIL.Decorations;
+using Reload.Editor.UiElements;
 
 namespace Reload.Editor
 {
@@ -43,10 +46,21 @@ namespace Reload.Editor
             ItemFactory.TopMargin = toolbar.GetHeight();
 
             VerticalStack layout = ItemFactory.GetStandardLayout();
+            HorizontalStack viewPortLayout = ItemFactory.CreateViewportLayout();
             VerticalSplitArea verticalSplit = ItemFactory.CreateVerticalSplitArea();
 
+            var rightAside = new RightAside();
+            //var slider = new HorizontalSlider();
+            //slider.SetWidth(200);
+            //rightAside.AddItem(slider);
+
+
             AddItems(toolbar, layout);
-            layout.AddItems(verticalSplit);
+            layout.AddItems(viewPortLayout);
+
+            viewPortLayout.AddItems(verticalSplit);
+
+            rightAside.SetParent(viewPortLayout);
 
             verticalSplit.AssignRightItem(_viewport);
 

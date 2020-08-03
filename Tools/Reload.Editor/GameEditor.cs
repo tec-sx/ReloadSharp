@@ -23,7 +23,7 @@ namespace Reload.Editor
                 .AddSingleton<MainWindow>()
                 .AddSingleton<DefaultViewport>()
                 .AddSingleton<SceneMachine>()
-                .AddSingleton<InputManager>();
+                .AddTransient<InputManager>();
 
             _provider = collection.BuildServiceProvider();
         }

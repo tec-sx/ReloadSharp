@@ -1,13 +1,10 @@
 ﻿using Reload.Scenes;
 using Reload.Configuration;
 using Reload.Core.Utils;
-using Reload.Input;
 using Reload.Rendering;
 using Reload.Rendering.Camera;
 using Reload.Rendering.Structures;
-using Silk.NET.Input.Common;
 using SpaceVIL;
-using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Numerics;
@@ -110,17 +107,10 @@ namespace Reload.Editor.Scenes
             CreateCameraController();
 
             // Map input contexts
-            MapInput();
 
-            _squareScale = 50.0f;
+            _squareScale = 1.0f;
             _squarePosition = Vector3.Zero;
             _squareRotation = Vector3.Zero;
-
-            ParentViewport.EventResize += viewport =>
-            {
-                Size size = new Size(ParentViewport.GetWidth(), ParentViewport.GetHeight());
-                CameraController.OnResize(size);
-            };
         }
 
         public override void OnLeave()
@@ -145,7 +135,8 @@ namespace Reload.Editor.Scenes
 
                 _squareTexture.Bind();
 
-                CameraController.OnUpdate(deltaTime);
+                CameraController.UpdateCamera(deltaTime);
+
                 Renderer.Submit(gridShader, _gridVA, gridTransform);
                 Renderer.Submit(squareShader, _squareVA, transform);
             }
@@ -157,33 +148,14 @@ namespace Reload.Editor.Scenes
 
         public void CreateCameraController()
         {
-            int width = ParentViewport.GetWidth();
-            int height = ParentViewport.GetHeight();
+            float aspectRatio = ParentViewport.GetWidth() / ParentViewport.GetHeight();
 
-            CameraController = new OrthographicCameraController(width, height, true);
+            Camera = new Camera(ReloadMath.DegreesToRadiants(45.0f), aspectRatio, 0.1f, 10000.0f);
+            Camera.InitLocalCoordinateSystem();
+            Camera.SetPosition(1.0f, 1.0f, 1.0f);
+            Camera.LookAt(0.0f, 0.0f, -1.0f);
 
-            // var perspectiveFov = Matrix4x4.CreatePerspectiveFieldOfView(ReloadMath.DegreesToRadiants(45.0f), 16 / 9, 0.1f, 10000.0f);
-            // _cameraController = new PerspectiveCameraController(perspectiveFov);
-        }
-
-        public void MapInput()
-        {
-            var mainContext = new InputMappingContext();
-
-            mainContext.MapKeyToState(0, Key.W, CameraController.MoveUp);
-            mainContext.MapKeyToState(0, Key.S, CameraController.MoveDown);
-            mainContext.MapKeyToState(0, Key.A, CameraController.MoveLeft);
-            mainContext.MapKeyToState(0, Key.D, CameraController.MoveRight);
-
-            mainContext.MapKeyToState(0, Key.Q, CameraController.RotateLeft);
-            mainContext.MapKeyToState(0, Key.E, CameraController.RotateRight);
-
-            mainContext.MapMouseScrollToRange(0, CameraController.Zoom);
-
-            var contexts = new Dictionary<string, InputMappingContext>
-            {
-                {"main", mainContext}
-            };
+            CameraController = new CameraController(Camera);
         }
     }
 }

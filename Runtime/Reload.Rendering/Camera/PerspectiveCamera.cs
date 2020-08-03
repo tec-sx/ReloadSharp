@@ -23,6 +23,11 @@
 
         public Size ViewportSize { get; set; }
 
+        public Vector3 RightDirection => Vector3.Transform(Vector3.UnitX, Orientation);
+        public Vector3 UpDirection => Vector3.Transform(Vector3.UnitY, Orientation);
+        public Vector3 ForwardDirection => Vector3.Transform(Vector3.UnitZ, Orientation);
+        private Vector3 Position => FocalPoint - ForwardDirection * Distance;
+
         public Vector3 FocalPoint { get; set; }
         public float Distance { get; set; }
 
@@ -34,11 +39,6 @@
         public float RotationSpeed { get; private set; }
 
         private Quaternion Orientation => Quaternion.CreateFromYawPitchRoll(_yaw, _pitch, _roll);
-
-        public Vector3 RightDirection => Vector3.Transform(Vector3.UnitX, Orientation);
-        public Vector3 UpDirection => Vector3.Transform(Vector3.UnitY, Orientation);
-        public Vector3 ForwardDirection => Vector3.Transform(Vector3.UnitZ, Orientation);
-        private Vector3 Position => FocalPoint - ForwardDirection * Distance;
         
         public PerspectiveCamera(Matrix4x4 projectionMatrix)
            : this()
@@ -54,6 +54,12 @@
             _pitch = MathF.PI / 4.0f;
             _roll = 0.0f;
 
+            UpdateCameraView();
+        }
+
+        public void RecalculateProjectionViewMatrix(Matrix4x4 projectionMatrix)
+        {
+            ProjectionMatrix = projectionMatrix;
             UpdateCameraView();
         }
 

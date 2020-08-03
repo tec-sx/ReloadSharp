@@ -91,7 +91,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Tools.Common", "Tool
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{4883AF02-E551-43CB-BBB9-25F61C6D3B34}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Editor.Tests", "Tests\Tools\Reload.Editor.Tests\Reload.Editor.Tests.csproj", "{2540384A-A60C-4874-AFFD-F93386AFCBD4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Editor.Tests", "Tests\Tools\Reload.Editor.Tests\Reload.Editor.Tests.csproj", "{2540384A-A60C-4874-AFFD-F93386AFCBD4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Core.3D", "Core\Reload.Core.3D\Reload.Core.3D.csproj", "{19000B55-A8CD-478E-8B8D-2E42DA22E383}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -229,6 +231,10 @@ Global
 		{2540384A-A60C-4874-AFFD-F93386AFCBD4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2540384A-A60C-4874-AFFD-F93386AFCBD4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2540384A-A60C-4874-AFFD-F93386AFCBD4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{19000B55-A8CD-478E-8B8D-2E42DA22E383}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{19000B55-A8CD-478E-8B8D-2E42DA22E383}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{19000B55-A8CD-478E-8B8D-2E42DA22E383}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{19000B55-A8CD-478E-8B8D-2E42DA22E383}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -273,6 +279,7 @@ Global
 		{5757C908-B8FD-42C6-9E16-232C1EDF4209} = {B2ACFD3D-8044-4494-A9A8-E0C13AB70BB3}
 		{4883AF02-E551-43CB-BBB9-25F61C6D3B34} = {1F3B1BD4-5C3A-4042-83A2-5F35DA8F4FBC}
 		{2540384A-A60C-4874-AFFD-F93386AFCBD4} = {4883AF02-E551-43CB-BBB9-25F61C6D3B34}
+		{19000B55-A8CD-478E-8B8D-2E42DA22E383} = {AF88642A-CD9E-4DDD-9663-AA2F6B14727F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A519BFB5-B378-4C0B-B29E-095A0C925278}
