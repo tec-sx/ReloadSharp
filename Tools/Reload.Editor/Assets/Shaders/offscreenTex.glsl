@@ -1,14 +1,14 @@
 ﻿#type vertex
 #version 330 core
 
-layout (location = 0) in vec3 a_position;
-layout (location = 1) in vec2 a_texCoord;
+layout (location = 0) in vec3 a_Position;
+layout (location = 1) in vec2 a_TexCoord;
 
 out vec2 fragTexCoord;
 
 void main() {
-   fragTexCoord = a_texCoord;
-   gl_Position = vec4(a_position, 1.0f);
+   fragTexCoord = a_TexCoord;
+   gl_Position = vec4(a_Position, 1.0f);
 }
 
 #type fragment

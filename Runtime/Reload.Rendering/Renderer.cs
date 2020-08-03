@@ -60,7 +60,7 @@ namespace Reload.Rendering
         public static void BeginScene(Camera.Camera camera)
         {
             _camera = camera;
-            _sceneData.ViewProjectionMatrix = _camera.ViewMatrix;
+            _sceneData.ViewProjectionMatrix = _camera.ViewProjetionMatrix;
         }
 
         public static void EndScene()
@@ -72,7 +72,7 @@ namespace Reload.Rendering
         {
             shader.Use();
             
-            shader.SetUniform("u_viewProjection", _sceneData.ViewProjectionMatrix);
+            shader.SetUniform("u_ViewProjection", _sceneData.ViewProjectionMatrix);
             shader.SetUniform("u_Transform", transform);
         
             vertexArray.Bind();

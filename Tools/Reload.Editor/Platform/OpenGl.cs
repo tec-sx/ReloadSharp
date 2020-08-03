@@ -122,8 +122,8 @@ namespace Reload.Editor.Platform
 
             var textureVertexLayout = new BufferLayout
             {
-                new BufferElement(ShaderDataType.Float3, "a_position"),
-                new BufferElement(ShaderDataType.Float2, "a_texCoord")
+                new BufferElement(ShaderDataType.Float3, "a_Position"),
+                new BufferElement(ShaderDataType.Float2, "a_TexCoord")
             };
 
             _offscreenVB = VertexBuffer.Create(new Span<float>(vboData));

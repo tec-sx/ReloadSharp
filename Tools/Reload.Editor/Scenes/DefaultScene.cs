@@ -77,8 +77,8 @@ namespace Reload.Editor.Scenes
 
             _squareBufferLayout = new BufferLayout
             {
-                new BufferElement(ShaderDataType.Float3, "a_position"),
-                new BufferElement(ShaderDataType.Float2, "a_texCoord")
+                new BufferElement(ShaderDataType.Float3, "a_Position"),
+                new BufferElement(ShaderDataType.Float2, "a_TexCoord")
             };
 
             _squareVB = VertexBuffer.Create(squareVertices);
@@ -98,10 +98,14 @@ namespace Reload.Editor.Scenes
             _squareTexture = Texture2D.CreateFromFile(Path.Combine(ContentPaths.Textures, "test.png"));
             // _mexicoTexture = Texture2D.CreateFromFile(Path.Combine(ContentPaths.Textures, "download.png"));
 
-            squareShader.SetUniform("u_texture", 0);
+            squareShader.SetUniform("u_Texture", 0);
+
+            float gridScale = 160.025f; 
+            float gridSize = 10.025f;
 
             gridShader.SetUniform("color", Vector3.Zero);
-
+            gridShader.SetUniform("u_Scale", gridScale);
+            gridShader.SetUniform("u_Res", gridSize);
 
             // Create Camera
             CreateCameraController();
@@ -127,11 +131,11 @@ namespace Reload.Editor.Scenes
                 RenderCommand.SetClearColor(Color.Aquamarine);
                 Matrix4x4 transform = Matrix4x4.CreateScale(_squareScale)
                                       * Matrix4x4.CreateTranslation(_squarePosition)
-                                      * Matrix4x4.CreateRotationX(ReloadMath.DegreesToRadiants(_squareRotation.X))
-                                      * Matrix4x4.CreateRotationY(ReloadMath.DegreesToRadiants(_squareRotation.Y))
-                                      * Matrix4x4.CreateRotationZ(ReloadMath.DegreesToRadiants(_squareRotation.Z));
+                                      * Matrix4x4.CreateRotationX(ReloadMath.DegreesToRadians(_squareRotation.X))
+                                      * Matrix4x4.CreateRotationY(ReloadMath.DegreesToRadians(_squareRotation.Y))
+                                      * Matrix4x4.CreateRotationZ(ReloadMath.DegreesToRadians(_squareRotation.Z));
 
-                Matrix4x4 gridTransform = Matrix4x4.CreateRotationX(ReloadMath.DegreesToRadiants(45.0f));
+                Matrix4x4 gridTransform = Matrix4x4.CreateRotationX(ReloadMath.DegreesToRadians(45.0f));
 
                 _squareTexture.Bind();
 
@@ -150,10 +154,10 @@ namespace Reload.Editor.Scenes
         {
             float aspectRatio = ParentViewport.GetWidth() / ParentViewport.GetHeight();
 
-            Camera = new Camera(ReloadMath.DegreesToRadiants(45.0f), aspectRatio, 0.1f, 10000.0f);
+            Camera = new Camera(45.0f, aspectRatio, 0.01f, 10000.0f);
             Camera.InitLocalCoordinateSystem();
-            Camera.SetPosition(1.0f, 1.0f, 1.0f);
-            Camera.LookAt(0.0f, 0.0f, -1.0f);
+            Camera.SetPosition(1.0f, 1.0f, 10.0f);
+            Camera.LookAt(0.0f, 0.0f, 0.0f);
 
             CameraController = new CameraController(Camera);
         }

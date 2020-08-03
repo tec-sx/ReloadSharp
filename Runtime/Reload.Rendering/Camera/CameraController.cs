@@ -65,6 +65,11 @@ namespace Reload.Rendering.Camera
         /// </summary>
         private const float DefaultUpDeltaScaleFactor = 1.0f;
 
+        /// <summary>
+        /// The default zoom delta scale factor.
+        /// </summary>
+        private const float DefaultZoomDeltaScaleFactor = 5.0f;
+
         #endregion
 
         #region Fields
@@ -124,6 +129,11 @@ namespace Reload.Rendering.Camera
         /// </summary>
         public float UpDeltaScaleFactor { get; set; }
 
+        /// <summary>
+        /// Gets or sets the zoom delta scale factor.
+        /// </summary>
+        public float ZoomDeltaScaleFactor { get; set; }
+
         #endregion
 
         #region Constructors
@@ -141,6 +151,7 @@ namespace Reload.Rendering.Camera
             ForwardDeltaScaleFactor = DefaultForwardDeltaScaleFactor;
             SideStrafeDeltaScaleFactor = DefaultSideStrafeDeltaScaleFactor;
             UpDeltaScaleFactor = DefaultUpDeltaScaleFactor;
+            ZoomDeltaScaleFactor = DefaultZoomDeltaScaleFactor;
         }
 
         /// <summary>
@@ -237,6 +248,18 @@ namespace Reload.Rendering.Camera
         /// <param name="state">The state of the action. Sets a flag whether to start or stop rolling</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public void RollRight(bool state) => _rollState.right = state;
+
+        /// <summary>
+        /// Zooms in or out the <see cref="Camera"/>.
+        /// </summary>
+        /// <param name="state">The state of the action. Sets a flag whether to start or stop rolling</param>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public void Zoom(bool state)
+        {
+            Camera.FieldOfView = state 
+                ? Camera.FieldOfView += ZoomDeltaScaleFactor 
+                : Camera.FieldOfView -= ZoomDeltaScaleFactor;
+        }
 
         /// <summary>
         /// Updates the <seealso cref="Rendering.Camera.Camera"/> translation.

@@ -3,13 +3,38 @@
     using System;
     using System.Numerics;
 
+    /// <summary>
+    /// Math helper class for methods not available
+    /// in System.Numerics.
+    /// </summary>
     public static class ReloadMath
     {
-        public static float DegreesToRadiants(float degrees)
+        /// <summary>
+        /// Converts angle in degrees to radians.
+        /// </summary>
+        /// <param name="degrees">The degrees.</param>
+        /// <returns>A float.</returns>
+        public static float DegreesToRadians(float degrees)
         {
-            return MathF.PI / 180 * degrees;
+            return (MathF.PI / 180) * degrees;
         }
 
+        /// <summary>
+        /// Converts angle in radians to degrees.
+        /// </summary>
+        /// <param name="radiants">The radiants.</param>
+        /// <returns>A float.</returns>
+        public static float RadiansToDegrees(float radians)
+        {
+            return 180.0f * (radians / MathF.PI);
+        }
+
+        /// <summary>
+        /// <see cref="Quaternion"/> extension method that converts quaternion value
+        /// to <see cref="Vector3"/> euler angles.
+        /// </summary>
+        /// <param name="q">The q.</param>
+        /// <returns>A Vector3.</returns>
         public static Vector3 ToEulerAngles(this Quaternion q)
         {
             // Store the Euler angles in radians

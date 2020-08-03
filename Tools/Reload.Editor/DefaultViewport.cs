@@ -177,6 +177,17 @@ namespace Reload.Editor
         {
             EventKeyPress += StartTranslation;
             EventKeyRelease += StopTranslation;
+            EventScrollUp += (sender, args) =>
+            {
+                var cameraController = _sceneMachine.ActiveScene.CameraController;
+                
+            };
+
+            EventScrollDown += (sender, args) =>
+            {
+                var cameraController = _sceneMachine.ActiveScene.CameraController;
+                cameraController.Zoom(false);
+            };
 
             //    EventScrollUp += (sender, args) =>
             //    {
@@ -228,6 +239,14 @@ namespace Reload.Editor
             if (args.Key == KeyCode.RightBracket)
             {
                 cameraController.RollRight(true);
+            }
+            if (args.Key == KeyCode.P)
+            {
+                cameraController.Zoom(true);
+            }
+            if (args.Key == KeyCode.O)
+            {
+                cameraController.Zoom(false);
             }
         }
 

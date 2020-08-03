@@ -95,6 +95,11 @@ namespace Reload.Rendering.Camera
             }
         }
 
+        /// <summary>
+        /// Gets the <see cref="Camera"/> view projetion matrix.
+        /// </summary>
+        public Matrix4x4 ViewProjetionMatrix => ViewMatrix * ProjectionMatrix;
+
         #endregion
 
         #region Constructors

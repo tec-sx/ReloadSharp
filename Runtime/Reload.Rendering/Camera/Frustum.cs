@@ -1,4 +1,5 @@
-﻿using System.Numerics;
+﻿using Reload.Core.Utils;
+using System.Numerics;
 
 namespace Reload.Rendering.Camera
 {
@@ -49,13 +50,13 @@ namespace Reload.Rendering.Camera
             get => fieldOfView;
             set
             {
-                if (fieldOfView < 0.0f)
+                if (value <= 0.0f)
                 {
-                    fieldOfView = 0.0f;
+                    fieldOfView = 0.01f;
                 }
-                else if (fieldOfView > 180.0f)
+                else if (value >= 180.0f)
                 {
-                    fieldOfView = 180.0f;
+                    fieldOfView = 179.9f;
                 }
                 else
                 {
@@ -114,7 +115,11 @@ namespace Reload.Rendering.Camera
             {
                 if (shouldRecalculatePerspectiveMatrix)
                 {
-                    projectionMatrix = Matrix4x4.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, nearPlaneZ, farPlaneZ);
+                    projectionMatrix = Matrix4x4.CreatePerspectiveFieldOfView(
+                        ReloadMath.DegreesToRadians(fieldOfView), 
+                        aspectRatio, 
+                        nearPlaneZ, 
+                        farPlaneZ);
                     shouldRecalculatePerspectiveMatrix = false;
                 }
 
@@ -174,7 +179,7 @@ namespace Reload.Rendering.Camera
             this.farPlaneZ = farPlaneZ;
             isPerspective = false;
             shouldRecalculatePerspectiveMatrix = false;
-            projectionMatrix = Matrix4x4.CreateOrthographicOffCenter(left, right, bottom, top, nearPlaneZ, farPlaneZ);
+            projectionMatrix = Matrix4x4.CreateOrthographicOffCenter(left, right, bottom, top, this.nearPlaneZ, this.farPlaneZ);
         }
 
 
@@ -196,13 +201,17 @@ namespace Reload.Rendering.Camera
         /// <param name="farPlaneZ">Distance to the far z clipping plane (always positive).</param>
         public Frustum(float fieldOfView, float aspectRatio, float nearPlaneZ, float farPlaneZ)
         {
-            this.fieldOfView = fieldOfView;
+            FieldOfView = fieldOfView;
             this.aspectRatio = aspectRatio;
             this.nearPlaneZ = nearPlaneZ;
             this.farPlaneZ = farPlaneZ;
             isPerspective = true;
             shouldRecalculatePerspectiveMatrix = true;
-            projectionMatrix = Matrix4x4.CreatePerspectiveFieldOfView(fieldOfView, aspectRatio, nearPlaneZ, farPlaneZ);
+            ProjectionMatrix = Matrix4x4.CreatePerspectiveFieldOfView(
+                ReloadMath.DegreesToRadians(FieldOfView), 
+                this.aspectRatio, 
+                this.nearPlaneZ, 
+                this.farPlaneZ);
         }
 
         #endregion
