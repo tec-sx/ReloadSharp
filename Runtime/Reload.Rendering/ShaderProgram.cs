@@ -1,21 +1,25 @@
+using Silk.NET.OpenGL;
+using System;
+using System.Collections.Generic;
+using System.Numerics;
+
 namespace Reload.Rendering
 {
-    using Silk.NET.OpenGL;
-    using System;
-    using System.Collections.Generic;
-    using System.Numerics;
-
-    //public delegate ShaderProgram CreateShaderDelegate(string source, List<string> attributes);
-
-    public abstract class ShaderProgram
+    /// <summary>
+    /// The shader program abstract class.
+    /// </summary>
+    public abstract class ShaderProgram: IDisposable
     {
 
         protected readonly Dictionary<string, int> UniformLocationCache;
 
+        /// <summary>
+        /// Gets or sets shader the name.
+        /// </summary>
         public string Name { get; protected set; }
 
         /// <summary>
-        /// Default constructor.
+        /// Initializes a new instance of the <see cref="ShaderProgram"/> class.
         /// </summary>
         protected ShaderProgram()
         {
@@ -23,9 +27,14 @@ namespace Reload.Rendering
         }
 
         /// <summary>
-        /// Split the shader string in corresponding shader types.
+        /// Pre-processes single file shader source. Add "#type [shader type]" above 
+        /// the source code for the specific shader. Available shader types are:
+        /// "vertex", "fragment", "geometry", "compute", "tess_control" and "tess_evaluation"
         /// </summary>
-        /// <param name="shaderString"></param>
+        /// <param name="source">The shader source.</param>
+        /// <returns>
+        /// A Dictionary with the shader type as Key, and the shader source as Value.
+        /// </returns>
         public abstract Dictionary<ShaderType, string> PreProcessShader(string shaderString);
 
         /// <summary>
@@ -95,14 +104,14 @@ namespace Reload.Rendering
         public abstract void SetUniform(string name, Vector3 value);
 
         /// <summary>
-        /// Use (Bind) the current program.
+        /// Binds the current program for using.
         /// </summary>
-        public abstract void Use();
+        public abstract void Bind();
 
         /// <summary>
         /// Clean up the resources.
         /// </summary>
-        public abstract void CleanUp();
+        public abstract void Dispose();
 
         /// <summary>
         /// Creates (Compiles, adds attributes and then links) a new shader program from

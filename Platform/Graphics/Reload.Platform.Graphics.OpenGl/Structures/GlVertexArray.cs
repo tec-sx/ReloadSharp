@@ -1,11 +1,11 @@
-﻿namespace Reload.Platform.Graphics.OpenGl.Structures
-{
-    using Reload.Rendering.Structures;
-    using Reload.Platform.Graphics.OpenGl.Properties;
-    using Silk.NET.OpenGL;
-    using System.Collections.Generic;
-    using System.Diagnostics;
+﻿using Reload.Rendering.Structures;
+using Reload.Platform.Graphics.OpenGl.Properties;
+using Silk.NET.OpenGL;
+using System.Collections.Generic;
+using System.Diagnostics;
 
+namespace Reload.Platform.Graphics.OpenGl.Structures
+{
     internal class GlVertexArray : VertexArray
     {
         private GL _gl;
@@ -31,10 +31,10 @@
             _gl.BindVertexArray(_handle);
             vertexBuffer.Bind();
 
-            Debug.Assert(vertexBuffer.GetLayout().Count > 0, Resources.VertexBufferHasNoLayout);
+            Debug.Assert(vertexBuffer.Layout.Count > 0, Resources.VertexBufferHasNoLayout);
 
             uint index = 0;
-            var layout = vertexBuffer.GetLayout();
+            var layout = vertexBuffer.Layout;
 
             foreach (var element in layout)
             {
@@ -42,7 +42,7 @@
                 _gl.VertexAttribPointer(
                     index,
                     element.GetComponentCount(),
-                    Utils.ShaderDataTypeToGlBaseType(element.Type),
+                    GlUtils.ShaderDataTypeToGlBaseType(element.Type),
                     element.Normalized,
                     layout.Stride,
                     (void *)element.Offset);

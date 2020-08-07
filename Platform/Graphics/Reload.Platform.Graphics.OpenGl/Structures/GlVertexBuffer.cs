@@ -1,56 +1,61 @@
-﻿namespace Reload.Platform.Graphics.OpenGl.Structures
+﻿using Reload.Rendering.Structures;
+using Silk.NET.OpenGL;
+using System;
+
+namespace Reload.Platform.Graphics.OpenGl.Structures
 {
-    using Reload.Rendering.Structures;
-    using Silk.NET.OpenGL;
-    using System;
-
-    public class GlVertexBuffer : VertexBuffer
+    /// <summary>
+    /// The OpenGL vertex buffer.
+    /// </summary>
+    public sealed class GlVertexBuffer : VertexBuffer
     {
-        private const BufferTargetARB _bufferType = BufferTargetARB.ArrayBuffer;
-        private BufferLayout _layout;
+        /// <summary>
+        /// The OpenGl buffer type constant set to array buffer.
+        /// </summary>
+        private const BufferTargetARB BufferType = BufferTargetARB.ArrayBuffer;
 
-        private GL _gl;
-        private uint _handle;
+        private readonly GL _gl;
 
-        public unsafe GlVertexBuffer(Span<float> data, GL api)
+        private readonly uint _handle;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GlVertexBuffer"/> class.
+        /// </summary>
+        /// <param name="data">The buffer data.</param>
+        /// <param name="api">The OpenGl api handle.</param>
+        public unsafe GlVertexBuffer(Span<float> data, BufferLayout layout, GL api)
+            : base(layout)
         {
             _gl = api;
             _handle = _gl.CreateBuffer();
-            _gl.BindBuffer(_bufferType, _handle);
+            _gl.BindBuffer(BufferType, _handle);
 
             fixed (void* dataPtr = data)
             {
                 _gl.BufferData(
-                    _bufferType,
+                    BufferType,
                     (UIntPtr)(data.Length * sizeof(float)),
                     dataPtr,
                     BufferUsageARB.StaticDraw);
             }
         }
 
+        /// <inheritdoc/>
         public override void Bind()
         {
-            _gl.BindBuffer(_bufferType, _handle);
+            _gl.BindBuffer(BufferType, _handle);
         }
 
+        /// <inheritdoc/>
         public override void Unbind()
         {
-            _gl.BindBuffer(_bufferType, 0);
+            _gl.BindBuffer(BufferType, 0);
         }
 
+        /// <inheritdoc/>
         public override void Dispose()
         {
             _gl.DeleteBuffer(_handle);
-        }
-
-        public override BufferLayout GetLayout()
-        {
-            return _layout;
-        }
-
-        public override void SetLayout(BufferLayout layout)
-        {
-            _layout = layout;
         }
     }
 }

@@ -77,6 +77,8 @@ namespace Reload.Editor
 
             ActiveScene = _sceneMachine.ActiveScene;
 
+            Renderer.Initialize();
+
             _isInitialized = true;
         }
 
@@ -126,8 +128,6 @@ namespace Reload.Editor
 
                 _renderStopwatch.Restart();
             }
-
-            Renderer.EndScene();
         }
 
         public void Resize()
@@ -180,13 +180,20 @@ namespace Reload.Editor
             EventScrollUp += (sender, args) =>
             {
                 var cameraController = _sceneMachine.ActiveScene.CameraController;
-                
+                cameraController.Zoom(true);
+
             };
 
             EventScrollDown += (sender, args) =>
             {
                 var cameraController = _sceneMachine.ActiveScene.CameraController;
                 cameraController.Zoom(false);
+            };
+
+            EventMouseDrag += (sender, args) =>
+            {
+                var cameraController = _sceneMachine.ActiveScene.CameraController;
+                cameraController.Zoom(true);
             };
 
             //    EventScrollUp += (sender, args) =>
@@ -239,14 +246,6 @@ namespace Reload.Editor
             if (args.Key == KeyCode.RightBracket)
             {
                 cameraController.RollRight(true);
-            }
-            if (args.Key == KeyCode.P)
-            {
-                cameraController.Zoom(true);
-            }
-            if (args.Key == KeyCode.O)
-            {
-                cameraController.Zoom(false);
             }
         }
 

@@ -9,22 +9,26 @@ using Reload.Editor.UiElements;
 
 namespace Reload.Editor
 {
+    /// <summary>
+    /// The main program window.
+    /// </summary>
     internal class MainWindow : ActiveWindow
     {
         public DefaultViewport _viewport;
 
-        public ListBox ItemList = new ListBox();
-        public TextArea ItemText = new TextArea();
-        public ButtonCore BtnGenerate;
-        public ButtonCore BtnSave;
-        public SpinItem NumberCount;
-
+        /// <summary>
+        /// Initializes a new instance of the program's <see cref="MainWindow"/> class.
+        /// </summary>
+        /// <param name="viewport">The viewport.</param>
         public MainWindow(DefaultViewport viewport)
         {
             _viewport = viewport;
             EventOnStart += OnStart;
         }
 
+        /// <summary>
+        /// Initializes the window.
+        /// </summary>
         public override void InitWindow()
         {
             string windowTitle = $"{Resources.Name} - v.{Resources.Version}";
@@ -40,7 +44,10 @@ namespace Reload.Editor
             IsTransparent = true;
         }
 
-        public void OnStart()
+        /// <summary>
+        /// Handles the EventOnStart event.
+        /// </summary>
+        private void OnStart()
         {
             HorizontalStack toolbar = ItemFactory.GetToolbar();
             ItemFactory.TopMargin = toolbar.GetHeight();

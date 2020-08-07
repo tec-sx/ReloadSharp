@@ -1,13 +1,20 @@
-﻿namespace Reload.Platform.Graphics.OpenGl
-{
-    using Reload.Platform.Graphics.OpenGl.Properties;
-    using Reload.Rendering.Structures;
-    using Silk.NET.OpenGL;
-    using System;
-    using System.Collections.Generic;
+﻿using Reload.Platform.Graphics.OpenGl.Properties;
+using Reload.Rendering.Structures;
+using Silk.NET.OpenGL;
+using System;
 
-    public static class Utils
+namespace Reload.Platform.Graphics.OpenGl
+{
+    /// <summary>
+    /// OpenGl renderer specific utilities class.
+    /// </summary>
+    public static class GlUtils
     {
+        /// <summary>
+        /// Converts the shader data type to OpenGl base type.
+        /// </summary>
+        /// <param name="type">The shader data type.</param>
+        /// <returns>The type as GLEnum.</returns>
         public static GLEnum ShaderDataTypeToGlBaseType(ShaderDataType type)
         {
             return type switch
@@ -28,6 +35,11 @@
             };
         }
 
+        /// <summary>
+        /// Converts the texture slot id to <see cref="TextureUnit"/> enum value.
+        /// </summary>
+        /// <param name="slot">The slot ID.</param>
+        /// <returns>The slot as TextureUnit value.</returns>
         public static TextureUnit TextureSlotIdToTextureUnit(uint slot)
         {
             return slot switch
@@ -67,15 +79,5 @@
                 _ => throw new ApplicationException(Resources.UnknownShaderDataType)
             };
         }
-
-        public static Dictionary<string, ShaderType> ShaderTypes = new Dictionary<string, ShaderType>
-        {
-            {"vertex", ShaderType.VertexShader},
-            {"fragment", ShaderType.FragmentShader },
-            {"geometry", ShaderType.GeometryShader },
-            {"compute", ShaderType.ComputeShader },
-            {"tess_control", ShaderType.TessControlShader },
-            {"tess_evaluation", ShaderType.TessEvaluationShader }
-        };
     }
 }

@@ -1,52 +1,24 @@
 ﻿namespace Reload.Rendering.Camera
 {
-    using System.Numerics;
-    using System;
-
-    public class OrthographicCamera
+    /// <summary>
+    /// Class for encapsulating a view frustum camera with orthographic projection
+    ///  Both view and projection matrices can be retrieved from a <see cref="OrthographicCamera"/> object at
+    /// any time, which reflect the current state of the <see cref="OrthographicCamera"/>.
+    /// Inherits from <seealso cref="Camera"/> class.
+    /// </summary>
+    public class OrthographicCamera : Camera
     {
-        private Matrix4x4 _projectionMatrix;
-
-        private Matrix4x4 _viewMatrix;
-
-        private Matrix4x4 _viewProjectionMatrix;
-
-        public Matrix4x4 ViewProjectionMatrix => _viewProjectionMatrix;
-        public Matrix4x4 ViewMatrix => _viewMatrix;
-        public Matrix4x4 ProjectionMatrix => _projectionMatrix;
-
-        public Vector3 Position;
-        public float Rotation;
-
-        public OrthographicCamera(float width, float height)
-        {
-            _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, 0.01f, 100.0f);
-            _viewMatrix = Matrix4x4.Identity;
-            _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
-
-            Position = Vector3.Zero;
-            Rotation = 0;
-        }
-
-        public void SetProjection(float width, float height, float nearPane, float farPane)
-        {
-            _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, nearPane, farPane);
-            _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
-        }
-        public void SetProjection(float width, float height)
-        {
-            _projectionMatrix = Matrix4x4.CreateOrthographic(width, height, 0.01f, 100.0f);
-            _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
-        }
-        
-
-        public void RecalculateViewMatrix()
-        {
-            var transform = Matrix4x4.CreateTranslation(Position) *
-                            Matrix4x4.CreateRotationZ((float)(Rotation * Math.PI));
-
-            Matrix4x4.Invert(transform, out _viewMatrix);
-            _viewProjectionMatrix = _projectionMatrix * _viewMatrix;
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OrthographicCamera"/> class.
+        /// </summary>
+        /// <param name="left">The left.</param>
+        /// <param name="right">The right.</param>
+        /// <param name="bottom">The bottom.</param>
+        /// <param name="top">The top.</param>
+        /// <param name="nearPlaneZ">The near plane z.</param>
+        /// <param name="farPlaneZ">The far plane z.</param>
+        public OrthographicCamera(float aspectRatio)
+            : base(aspectRatio)
+        { }
     }
 }

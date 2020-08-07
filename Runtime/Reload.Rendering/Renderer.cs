@@ -35,6 +35,7 @@ namespace Reload.Rendering
             _data.CommandQueue = new RenderCommandQueue();
             
             RenderCommand.Initialize();
+            Renderer2D.Initialize();
         }
 
         public static void ShutDown()
@@ -57,12 +58,6 @@ namespace Reload.Rendering
             _sceneData.ViewProjectionMatrix = _perspectiveCamera.ViewProjectionMatrix;
         }
 
-        public static void BeginScene(Camera.Camera camera)
-        {
-            _camera = camera;
-            _sceneData.ViewProjectionMatrix = _camera.ViewProjetionMatrix;
-        }
-
         public static void EndScene()
         {
         
@@ -70,7 +65,7 @@ namespace Reload.Rendering
         
         public static void Submit(ShaderProgram shader, VertexArray vertexArray, Matrix4x4 transform)
         {
-            shader.Use();
+            shader.Bind();
             
             shader.SetUniform("u_ViewProjection", _sceneData.ViewProjectionMatrix);
             shader.SetUniform("u_Transform", transform);

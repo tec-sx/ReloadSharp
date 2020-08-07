@@ -8,12 +8,18 @@ using SpaceVIL;
 using System.Drawing;
 using System.IO;
 using System.Numerics;
+using System.Linq;
+using Silk.NET.OpenAL;
 
 namespace Reload.Editor.Scenes
 {
+    using VERTEX = SharpGLTF.Geometry.VertexTypes.VertexPosition;
+
     public class DefaultScene : Scene, IViewportAttachable
     {
         private ShaderLibrary _shaderLibrary;
+
+        private OrthographicCamera _orthoCamera;
 
         private VertexBuffer _squareVB;
         private BufferLayout _squareBufferLayout;
@@ -40,6 +46,24 @@ namespace Reload.Editor.Scenes
 
         public override void OnEnter()
         {
+            string modelPath = Path.Combine(ContentPaths.Models, "RedCube.gltf");
+            var model = SharpGLTF.Schema2.ModelRoot.Load(modelPath);
+            var meshPrimitive = model.DefaultScene
+                .VisualChildren.FirstOrDefault()?
+                .Mesh.Primitives.FirstOrDefault();
+
+            var position = meshPrimitive.GetVertexAccessor("POSITION")?.AsVector3Array();
+            var normals = meshPrimitive.GetVertexAccessor("NORMAL")?.AsVector3Array();
+            var tangents = meshPrimitive.GetVertexAccessor("TANGENT")?.AsVector4Array();
+
+            var color0 = meshPrimitive.GetVertexAccessor("COLOR_0")?.AsColorArray();
+            var texCoords0 = meshPrimitive.GetVertexAccessor("TEXCOORD_0")?.AsVector2Array();
+
+            var triangleSource = meshPrimitive.GetTriangleIndices()?.ToArray();
+
+
+            //var vertexPosition = box?.GetVertices("POSITION").AsMatrix4x4Array();
+
             float[] squareVertices =
             {
                 -0.75f, -0.75f, 0.0f, /* Texture */ 0.0f, 0.0f,
@@ -65,8 +89,7 @@ namespace Reload.Editor.Scenes
                 new BufferElement(ShaderDataType.Float3, "aPosition")
             };
 
-            _gridVB = VertexBuffer.Create(gridVertices);
-            _gridVB.SetLayout(_gridBufferLayout);
+            _gridVB = VertexBuffer.Create(gridVertices, _gridBufferLayout);
             _gridIB = IndexBuffer.Create(squareIndices);
 
             _gridVA = VertexArray.Create();
@@ -81,8 +104,7 @@ namespace Reload.Editor.Scenes
                 new BufferElement(ShaderDataType.Float2, "a_TexCoord")
             };
 
-            _squareVB = VertexBuffer.Create(squareVertices);
-            _squareVB.SetLayout(_squareBufferLayout);
+            _squareVB = VertexBuffer.Create(squareVertices, _squareBufferLayout);
             _squareIB = IndexBuffer.Create(squareIndices);
 
             _squareVA = VertexArray.Create();
@@ -126,7 +148,7 @@ namespace Reload.Editor.Scenes
             var squareShader = _shaderLibrary["main"];
             var gridShader = _shaderLibrary["grid"];
 
-            Renderer.BeginScene(CameraController.Camera);
+            Renderer.BeginScene((PerspectiveCamera)CameraController.Camera);
             {
                 RenderCommand.SetClearColor(Color.Aquamarine);
                 Matrix4x4 transform = Matrix4x4.CreateScale(_squareScale)
@@ -144,6 +166,14 @@ namespace Reload.Editor.Scenes
                 Renderer.Submit(gridShader, _gridVA, gridTransform);
                 Renderer.Submit(squareShader, _squareVA, transform);
             }
+            Renderer.EndScene();
+
+            Renderer2D.BeginScene(_orthoCamera);
+            {
+                RenderCommand.SetClearColor(Color.DarkGray);
+                Renderer2D.DrawQuad(new Vector2(0.0f, 0.0f), new Vector2(2.5f, 2.5f), Color.Red);
+            }
+            Renderer2D.EndScene();
         }
 
         public override void OnUpdate(double deltaTime)
@@ -154,10 +184,12 @@ namespace Reload.Editor.Scenes
         {
             float aspectRatio = ParentViewport.GetWidth() / ParentViewport.GetHeight();
 
-            Camera = new Camera(45.0f, aspectRatio, 0.01f, 10000.0f);
+            Camera = new PerspectiveCamera(45.0f, aspectRatio, 0.01f, 10000.0f);
             Camera.InitLocalCoordinateSystem();
-            Camera.SetPosition(1.0f, 1.0f, 10.0f);
+            Camera.SetPosition(1.0f, 2.0f, 5.0f);
             Camera.LookAt(0.0f, 0.0f, 0.0f);
+
+            _orthoCamera = new OrthographicCamera(aspectRatio);
 
             CameraController = new CameraController(Camera);
         }

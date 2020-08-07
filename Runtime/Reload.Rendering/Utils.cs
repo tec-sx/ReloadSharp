@@ -1,11 +1,21 @@
-﻿namespace Reload.Rendering
-{
-    using Reload.Rendering.Structures;
-    using Reload.Rendering.Properties;
-    using System;
+﻿using Reload.Rendering.Structures;
+using Reload.Rendering.Properties;
+using System;
+using System.Collections.Generic;
+using Silk.NET.OpenGL;
 
+namespace Reload.Rendering
+{
+    /// <summary>
+    /// The renderer utilities class.
+    /// </summary>
     public static class Utils
     {
+        /// <summary>
+        /// Gets the shader data type size.
+        /// </summary>
+        /// <param name="type">The shader data type.</param>
+        /// <returns>A siz as uint value.</returns>
         public static uint GetShaderDatatypeSize(ShaderDataType type)
         {
             return type switch
@@ -25,5 +35,15 @@
                 _ => throw new ApplicationException(Resources.UnknownShaderDataType)
             };
         }
+
+        public static Dictionary<string, ShaderType> ShaderTypes = new Dictionary<string, ShaderType>
+        {
+            {"vertex", ShaderType.VertexShader},
+            {"fragment", ShaderType.FragmentShader },
+            {"geometry", ShaderType.GeometryShader },
+            {"compute", ShaderType.ComputeShader },
+            {"tess_control", ShaderType.TessControlShader },
+            {"tess_evaluation", ShaderType.TessEvaluationShader }
+        };
     }
 }

@@ -69,7 +69,7 @@
 
         public override void Bind(uint slot = 0)
         {
-            var slotUnit = Utils.TextureSlotIdToTextureUnit(slot);
+            var slotUnit = GlUtils.TextureSlotIdToTextureUnit(slot);
 
             _gl.ActiveTexture(slotUnit);
             _gl.BindTexture(TextureTarget.Texture2D, _handle);

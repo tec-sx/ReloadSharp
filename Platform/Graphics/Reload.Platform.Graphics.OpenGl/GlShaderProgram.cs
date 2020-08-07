@@ -1,49 +1,65 @@
+using Reload.Core.Utils;
+using Reload.Rendering;
+using Silk.NET.OpenGL;
+using System;
+using System.Collections.Generic;
+using System.Numerics;
+
 namespace Reload.Platform.Graphics.OpenGl
 {
-    using Reload.Core.Utils;
-    using Reload.Rendering;
-    using Silk.NET.OpenGL;
-    using System;
-    using System.Collections.Generic;
-    using System.Numerics;
-
-    /// <inheritdoc/>
+    /// <summary>
+    /// The Open Gl shader program used for working with glsl shader files.
+    /// </summary>
     public class GlShaderProgram : ShaderProgram
     {
 
         private readonly GL _gl;
 
-        /// <inheritdoc/>
         private readonly List<uint> _shadersTemp;
 
-        /// <inheritdoc/>
         private bool _linkingIsComplete;
 
-        /// <inheritdoc/>
         private uint _numberOfAttributes;
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the shader program handle.
+        /// </summary>
         public uint ProgramHandle { get; }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Initializes a new instance of the <see cref="GlShaderProgram"/> class.
+        /// </summary>
+        /// <param name="name">The shader name.</param>
+        /// <param name="api">The OpenGl api.</param>
         public GlShaderProgram(string name, GL api)
             :base()
         {
-            Name = name;
             _gl = api;
+            Name = name;
             ProgramHandle = _gl.CreateProgram();
             _shadersTemp = new List<uint>();
             _linkingIsComplete = false;
             _numberOfAttributes = 0;
         }
 
-        /// <inheritdoc/>
-        public override void CleanUp()
+        /// <summary>
+        /// Cleans up the resources.
+        /// </summary>
+        public override void Dispose()
         {
             _gl.UseProgram(0);
             _gl.DeleteProgram(ProgramHandle);
         }
 
+        /// <summary>
+        /// Pre-processes single file shader source. Add "#type [type of shader]" above 
+        /// the "#version [openGL version]" directive. For supported types
+        /// of shaders see <see cref="GlUtils.ShaderTypes"/>
+        /// </summary>
+        /// <param name="source">The shader source.</param>
+        /// <returns>
+        /// A Dictionary with the shader type as Key, and the shader source as Value.
+        /// </returns>
         public override Dictionary<ShaderType, string> PreProcessShader(string source)
         {
             if (string.IsNullOrWhiteSpace(source))
@@ -81,7 +97,11 @@ namespace Reload.Platform.Graphics.OpenGl
             return shaders;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Compiles the shader.
+        /// </summary>
+        /// <param name="type">The shader type.</param>
+        /// <param name="shaderSource">The shader source.</param>
         public override void CompileShader(ShaderType type, string shaderSource)
         {
             if (_linkingIsComplete)
@@ -106,7 +126,10 @@ namespace Reload.Platform.Graphics.OpenGl
             _shadersTemp.Add(handle);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Adds an attribute.
+        /// </summary>
+        /// <param name="attributeName">The attribute name.</param>
         public override void AddAttribute(string attributeName)
         {
             if (_linkingIsComplete)
@@ -118,7 +141,9 @@ namespace Reload.Platform.Graphics.OpenGl
             _gl.BindAttribLocation(ProgramHandle, _numberOfAttributes++, attributeName);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Links the shaders.
+        /// </summary>
         public override void LinkShaders()
         {
             if (_linkingIsComplete)
@@ -139,7 +164,7 @@ namespace Reload.Platform.Graphics.OpenGl
             if (!string.IsNullOrWhiteSpace(programInfoLog))
             {
                 _shadersTemp.ForEach(shader => _gl.DeleteShader(shader));
-                CleanUp();
+                Dispose();
 
                 throw new ApplicationException($"Program failed to link with error: {programInfoLog}");
             }
@@ -153,7 +178,11 @@ namespace Reload.Platform.Graphics.OpenGl
             _linkingIsComplete = true;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Gets the uniform location for the given uniform name.
+        /// </summary>
+        /// <param name="name">The name.</param>
+        /// <returns>The uniform location.</returns>
         public override int GetUniform(string name)
         {
             if (UniformLocationCache.TryGetValue(name, out var location))
@@ -175,60 +204,82 @@ namespace Reload.Platform.Graphics.OpenGl
             return location;
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Sets value to an <see cref="int"/> type uniform.
+        /// </summary>
+        /// <param name="name">The uniform name.</param>
+        /// <param name="value">The uniform value.</param>
         public override void SetUniform(string name, int value)
         {
             var location = GetUniform(name);
 
-            Use();
+            Bind();
 
             _gl.Uniform1(location, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Sets value to a <see cref="float"/> type uniform.
+        /// </summary>
+        /// <param name="name">The uniform name.</param>
+        /// <param name="value">The uniform value.</param>
         public override void SetUniform(string name, float value)
         {
             var location = GetUniform(name);
 
-            Use();
+            Bind();
 
             _gl.Uniform1(location, value);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Sets value to a <see cref="Matrix4x4"/> type uniform.
+        /// </summary>
+        /// <param name="name">The uniform name.</param>
+        /// <param name="value">The uniform value.</param>
         public unsafe override void SetUniform(string name, Matrix4x4 value)
         {
             var location = GetUniform(name);
 
-            Use();
+            Bind();
 
             _gl.UniformMatrix4(location, 1, false, (float*)&value);
         }
 
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Sets value to a <see cref="Vector3"/> type uniform.
+        /// </summary>
+        /// <param name="name">The uniform name.</param>
+        /// <param name="value">The uniform value.</param>
         public unsafe override void SetUniform(string name, Vector3 value)
         {
             var location = GetUniform(name);
 
-            Use();
+            Bind();
 
             _gl.Uniform3(location, value.X, value.Y, value.Z);
 
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// Sets value to a <see cref="Vector4"/> type uniform.
+        /// </summary>
+        /// <param name="name">The uniform name.</param>
+        /// <param name="value">The uniform value.</param>
         public unsafe override void SetUniform(string name, Vector4 value)
         {
             var location = GetUniform(name);
 
-            Use();
+            Bind();
 
             _gl.Uniform4(location, value.X, value.Y, value.Z, value.W);
         }
 
-        /// <inheritdoc/>
-        public override void Use()
+        /// <summary>
+        /// Uses the shader program.
+        /// </summary>
+        public override void Bind()
         {
             _gl.UseProgram(ProgramHandle);
         }

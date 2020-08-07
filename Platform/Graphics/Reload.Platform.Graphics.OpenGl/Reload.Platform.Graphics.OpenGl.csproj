@@ -10,28 +10,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Shaders\main.frag.glsl" />
-    <None Remove="Shaders\main.vert.glsl" />
-    <None Remove="Shaders\square.frag.glsl" />
-    <None Remove="Shaders\square.vert.glsl" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Shaders\square.frag.glsl">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Shaders\square.vert.glsl">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Shaders\main.frag.glsl">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Shaders\main.vert.glsl">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
     <PackageReference Include="Silk.NET.OpenGL" Version="2.0.0-preview" />
     <PackageReference Include="Silk.NET.Windowing.Common" Version="2.0.0-preview" />
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.0-rc0003" />
@@ -56,6 +34,15 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Assets\Shaders\Renderer2D.glsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Assets\Shaders\Renderer2D_Line.glsl">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

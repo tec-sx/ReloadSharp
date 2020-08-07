@@ -1,7 +1,4 @@
-﻿//
-//
-
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace Reload.Rendering.Camera
 {
@@ -11,7 +8,7 @@ namespace Reload.Rendering.Camera
     /// any time, which reflect the current state of the <see cref="Camera"/>.
     /// Inherits from <seealso cref="Frustum"/> class.
     /// </summary>
-    public class Camera: Frustum
+    public abstract class Camera: Frustum
     {
         #region Constants
 
@@ -98,7 +95,7 @@ namespace Reload.Rendering.Camera
         /// <summary>
         /// Gets the <see cref="Camera"/> view projetion matrix.
         /// </summary>
-        public Matrix4x4 ViewProjetionMatrix => ViewMatrix * ProjectionMatrix;
+        public Matrix4x4 ViewProjectionMatrix => ViewMatrix * ProjectionMatrix;
 
         #endregion
 
@@ -155,8 +152,8 @@ namespace Reload.Rendering.Camera
         /// <param name="top">Specify location of top clipping plane.</param>
         /// <param name="nearPlaneZ">Distance to the near z clipping plane.</param>
         /// <param name="farPlaneZ">Distance to the far z clipping plane.</param>
-        public Camera(float left, float right, float bottom, float top, float nearPlaneZ, float farPlaneZ) 
-            : base(left, right, bottom, top, nearPlaneZ, farPlaneZ)
+        public Camera(float aspectRatio) 
+            : base(aspectRatio)
         {
             _shouldRecalculateViewMatrix = true;
             _rotationHitCount = 0;

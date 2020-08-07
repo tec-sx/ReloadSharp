@@ -171,15 +171,21 @@ namespace Reload.Rendering.Camera
         /// <param name="top">Specify location of top clipping plane.</param>
         /// <param name="nearPlaneZ">Distance to the near z clipping plane.</param>
         /// <param name="farPlaneZ">Distance to the far z clipping plane.</param>
-        public Frustum(float left, float right, float bottom, float top, float nearPlaneZ, float farPlaneZ)
+        public Frustum(float aspectRatio)
         {
             fieldOfView = 0.0f;
-            aspectRatio = (left - right) / (top - bottom);
-            this.nearPlaneZ = nearPlaneZ;
-            this.farPlaneZ = farPlaneZ;
+            this.aspectRatio = aspectRatio;
+            nearPlaneZ = -1.0f;
+            farPlaneZ = 1.0f;
             isPerspective = false;
             shouldRecalculatePerspectiveMatrix = false;
-            projectionMatrix = Matrix4x4.CreateOrthographicOffCenter(left, right, bottom, top, this.nearPlaneZ, this.farPlaneZ);
+            projectionMatrix = Matrix4x4.CreateOrthographicOffCenter(
+                left: -aspectRatio, 
+                right: aspectRatio, 
+                bottom: -1.0f, 
+                top: 1.0f, 
+                zNearPlane: nearPlaneZ, 
+                zFarPlane: farPlaneZ);
         }
 
 
@@ -209,9 +215,9 @@ namespace Reload.Rendering.Camera
             shouldRecalculatePerspectiveMatrix = true;
             ProjectionMatrix = Matrix4x4.CreatePerspectiveFieldOfView(
                 ReloadMath.DegreesToRadians(FieldOfView), 
-                this.aspectRatio, 
-                this.nearPlaneZ, 
-                this.farPlaneZ);
+                aspectRatio, 
+                nearPlaneZ, 
+                farPlaneZ);
         }
 
         #endregion

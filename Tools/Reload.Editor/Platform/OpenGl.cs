@@ -126,9 +126,8 @@ namespace Reload.Editor.Platform
                 new BufferElement(ShaderDataType.Float2, "a_TexCoord")
             };
 
-            _offscreenVB = VertexBuffer.Create(new Span<float>(vboData));
+            _offscreenVB = VertexBuffer.Create(new Span<float>(vboData), textureVertexLayout);
             _offscreenIB = IndexBuffer.Create(new Span<uint>(iboData));
-            _offscreenVB.SetLayout(textureVertexLayout);
             _offscreenVA = VertexArray.Create();
             _offscreenVA.AddVertexBuffer(_offscreenVB);
             _offscreenVA.SetIndexBuffer(_offscreenIB);
@@ -146,7 +145,7 @@ namespace Reload.Editor.Platform
             // Draw to texture
             BindTexture();
 
-            _offscreenShader.Use();
+            _offscreenShader.Bind();
             _offscreenShader.SetUniform("tex", 0);
             _offscreenVA.Bind();
             RenderCommand.DrawIndexed(_offscreenVA);
