@@ -10,7 +10,7 @@ namespace Reload.Editor
             
             gameEditor.Initialize();
             gameEditor.Start();
-            gameEditor.ShutDown();
+            gameEditor.Dispose();
         }
     }
 }

@@ -76,32 +76,32 @@ namespace Reload.Rendering
         public abstract int GetUniform(string name);
 
         /// <summary>
-        /// Sets floating point value to an uniform location.
+        /// Sets floating point value to a gpu location.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public abstract void SetUniform(string name, float value);
+        public abstract void SetFloat(string name, float value);
 
         /// <summary>
-        /// Sets Matrix 4x4 value to an uniform location.
+        /// Sets Matrix 4x4 value to a gpu location.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public abstract void SetUniform(string name, Matrix4x4 value);
+        public abstract void SetMatrix4(string name, Matrix4x4 value);
 
         /// <summary>
-        /// Sets Vector 4 value to an uniform location.
+        /// Sets Vector 4 value to a gpu location.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public abstract void SetUniform(string name, Vector4 value);
+        public abstract void SetVector4(string name, Vector4 value);
 
         /// <summary>
-        /// Sets Vector 3 value to an uniform location.
+        /// Sets Vector 3 value to an gpu location.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
-        public abstract void SetUniform(string name, Vector3 value);
+        public abstract void SetVector3(string name, Vector3 value);
 
         /// <summary>
         /// Binds the current program for using.

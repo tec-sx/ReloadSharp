@@ -1,10 +1,19 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Numerics;
 
 namespace Reload.Core.Utils.Extensions
 {
+    /// <summary>
+    /// <see cref="System.Drawing"/> extension methods.
+    /// </summary>
     public static class SystemDrawingExtensions
     {
+        /// <summary>
+        /// Byte unit for converting to Normalized (0 - 1) value.
+        /// </summary>
+        public const float ByteUnit = 1.0f / 255.0f;
+
         /// <summary>
         /// Converts <see cref="Color"/> struct to <see cref="Vector4"/>
         /// to be used as a shader uniform value.
@@ -15,10 +24,10 @@ namespace Reload.Core.Utils.Extensions
         {
             Vector4 result;
 
-            result.X = color.R;
-            result.Y = color.G;
-            result.Z = color.B;
-            result.W = color.A;
+            result.X = ByteUnit * color.R;
+            result.Y = ByteUnit * color.G;
+            result.Z = ByteUnit * color.B;
+            result.W = ByteUnit * color.A;
 
             return result;
         }

@@ -223,7 +223,7 @@ namespace Reload.Platform.Graphics.OpenGl
         /// </summary>
         /// <param name="name">The uniform name.</param>
         /// <param name="value">The uniform value.</param>
-        public override void SetUniform(string name, float value)
+        public override void SetFloat(string name, float value)
         {
             var location = GetUniform(name);
 
@@ -237,7 +237,7 @@ namespace Reload.Platform.Graphics.OpenGl
         /// </summary>
         /// <param name="name">The uniform name.</param>
         /// <param name="value">The uniform value.</param>
-        public unsafe override void SetUniform(string name, Matrix4x4 value)
+        public unsafe override void SetMatrix4(string name, Matrix4x4 value)
         {
             var location = GetUniform(name);
 
@@ -252,7 +252,7 @@ namespace Reload.Platform.Graphics.OpenGl
         /// </summary>
         /// <param name="name">The uniform name.</param>
         /// <param name="value">The uniform value.</param>
-        public unsafe override void SetUniform(string name, Vector3 value)
+        public unsafe override void SetVector3(string name, Vector3 value)
         {
             var location = GetUniform(name);
 
@@ -267,7 +267,7 @@ namespace Reload.Platform.Graphics.OpenGl
         /// </summary>
         /// <param name="name">The uniform name.</param>
         /// <param name="value">The uniform value.</param>
-        public unsafe override void SetUniform(string name, Vector4 value)
+        public unsafe override void SetVector4(string name, Vector4 value)
         {
             var location = GetUniform(name);
 

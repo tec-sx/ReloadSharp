@@ -67,8 +67,8 @@ namespace Reload.Rendering
         {
             shader.Bind();
             
-            shader.SetUniform("u_ViewProjection", _sceneData.ViewProjectionMatrix);
-            shader.SetUniform("u_Transform", transform);
+            shader.SetMatrix4("u_ViewProjection", _sceneData.ViewProjectionMatrix);
+            shader.SetMatrix4("u_Transform", transform);
         
             vertexArray.Bind();
         

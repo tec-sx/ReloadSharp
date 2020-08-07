@@ -125,9 +125,9 @@ namespace Reload.Editor.Scenes
             float gridScale = 160.025f; 
             float gridSize = 10.025f;
 
-            gridShader.SetUniform("color", Vector3.Zero);
-            gridShader.SetUniform("u_Scale", gridScale);
-            gridShader.SetUniform("u_Res", gridSize);
+            gridShader.SetVector3("color", Vector3.Zero);
+            gridShader.SetFloat("u_Scale", gridScale);
+            gridShader.SetFloat("u_Res", gridSize);
 
             // Create Camera
             CreateCameraController();
@@ -150,7 +150,7 @@ namespace Reload.Editor.Scenes
 
             Renderer.BeginScene((PerspectiveCamera)CameraController.Camera);
             {
-                RenderCommand.SetClearColor(Color.Aquamarine);
+                RenderCommand.SetClearColor(Color.DarkGray);
                 Matrix4x4 transform = Matrix4x4.CreateScale(_squareScale)
                                       * Matrix4x4.CreateTranslation(_squarePosition)
                                       * Matrix4x4.CreateRotationX(ReloadMath.DegreesToRadians(_squareRotation.X))
@@ -170,8 +170,17 @@ namespace Reload.Editor.Scenes
 
             Renderer2D.BeginScene(_orthoCamera);
             {
-                RenderCommand.SetClearColor(Color.DarkGray);
-                Renderer2D.DrawQuad(new Vector2(0.0f, 0.0f), new Vector2(2.5f, 2.5f), Color.Red);
+                Renderer2D.DrawQuad(
+                    position: new Vector2(-0.5f, 0.0f), 
+                    size: new Vector2(0.3f, 0.5f), 
+                    rotation: 45.0f, 
+                    Color.DarkBlue);
+
+                Renderer2D.DrawQuad(
+                    position: new Vector2(0.5f, 0.5f), 
+                    size: new Vector2(0.5f, 0.3f), 
+                    rotation: 0.0f, 
+                    Color.DarkRed);
             }
             Renderer2D.EndScene();
         }

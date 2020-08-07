@@ -1,4 +1,5 @@
-﻿using Reload.Core.Utils.Extensions;
+﻿using Reload.Core.Utils;
+using Reload.Core.Utils.Extensions;
 using Reload.Rendering.Camera;
 using Reload.Rendering.Data;
 using Reload.Rendering.Structures;
@@ -62,8 +63,7 @@ namespace Reload.Rendering
         public static void BeginScene(Camera.Camera camera)
         {
             _data.TextureShader.Bind();
-            _data.TextureShader.SetUniform("u_ViewProjection", camera.ViewProjectionMatrix);
-            _data.TextureShader.SetUniform("u_Transform", Matrix4x4.Identity);
+            _data.TextureShader.SetMatrix4("u_ViewProjection", camera.ViewProjectionMatrix);
         }
 
         /// <summary>
@@ -79,9 +79,9 @@ namespace Reload.Rendering
         /// <param name="position">The position of the quad.</param>
         /// <param name="size">The size of the quad.</param>
         /// <param name="color">The color of the quad.</param>
-        public static void DrawQuad(Vector2 position, Vector2 size, Color color)
+        public static void DrawQuad(Vector2 position, Vector2 size, float rotation, Color color)
         {
-            DrawQuad(new Vector3(position.X, position.Y, 0.0f), size, color);
+            DrawQuad(new Vector3(position.X, position.Y, 0.0f), size, rotation, color);
         }
 
         /// <summary>
@@ -95,10 +95,15 @@ namespace Reload.Rendering
         /// <param name="position">The position of the quad.</param>
         /// <param name="size">The size of the quad.</param>
         /// <param name="color">The color of the quad.</param>
-        public static void DrawQuad(Vector3 position, Vector2 size, Color color)
+        public static void DrawQuad(Vector3 position, Vector2 size, float rotation, Color color)
         {
+            Matrix4x4 transform = Matrix4x4.CreateTranslation(position)
+                                * Matrix4x4.CreateRotationZ(ReloadMath.DegreesToRadians(rotation))
+                                * Matrix4x4.CreateScale(size.X, size.Y, 1.0f);
+
             _data.TextureShader.Bind();
-            _data.TextureShader.SetUniform("u_Color", color.ToVector4());
+            _data.TextureShader.SetVector4("u_Color", color.ToVector4());
+            _data.TextureShader.SetMatrix4("u_Transform", transform);
             _data.QuadVertexArray.Bind();
 
             RenderCommand.DrawIndexed(_data.QuadVertexArray);
