@@ -118,14 +118,14 @@ namespace Reload.Editor.Scenes
             var gridShader = _shaderLibrary.Load("grid");
 
             _squareTexture = Texture2D.CreateFromFile(Path.Combine(ContentPaths.Textures, "test.png"));
-            // _mexicoTexture = Texture2D.CreateFromFile(Path.Combine(ContentPaths.Textures, "download.png"));
+            _mexicoTexture = Texture2D.CreateFromFile(Path.Combine(ContentPaths.Textures, "download.png"));
 
-            squareShader.SetUniform("u_Texture", 0);
+            squareShader.SetInt("u_Texture", 0);
 
             float gridScale = 160.025f; 
             float gridSize = 10.025f;
 
-            gridShader.SetVector3("color", Vector3.Zero);
+            gridShader.SetVector3("Color", Vector3.Zero);
             gridShader.SetFloat("u_Scale", gridScale);
             gridShader.SetFloat("u_Res", gridSize);
 
@@ -171,15 +171,15 @@ namespace Reload.Editor.Scenes
             Renderer2D.BeginScene(_orthoCamera);
             {
                 Renderer2D.DrawQuad(
-                    position: new Vector2(-0.5f, 0.0f), 
-                    size: new Vector2(0.3f, 0.5f), 
-                    rotation: 45.0f, 
-                    Color.DarkBlue);
+                    position: new Vector2(-0.5f, 0.0f),
+                    size: new Vector2(0.5f, 0.5f),
+                    rotation: 0.0f,
+                    _mexicoTexture);
 
                 Renderer2D.DrawQuad(
-                    position: new Vector2(0.5f, 0.5f), 
-                    size: new Vector2(0.5f, 0.3f), 
-                    rotation: 0.0f, 
+                    position: new Vector2(0.5f, 0.5f),
+                    size: new Vector2(0.5f, 0.3f),
+                    rotation: 45.0f,
                     Color.DarkRed);
             }
             Renderer2D.EndScene();

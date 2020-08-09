@@ -61,6 +61,24 @@ namespace Reload.Rendering.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The renderer api capabilities have already been set..
+        /// </summary>
+        internal static string RendererApiCapabilitiesAlreadySet {
+            get {
+                return ResourceManager.GetString("RendererApiCapabilitiesAlreadySet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The renderer api capabilities have not yet been set..
+        /// </summary>
+        internal static string RendererApiCapabilitiesNotSet {
+            get {
+                return ResourceManager.GetString("RendererApiCapabilitiesNotSet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Unknownshader data type..
         /// </summary>
         internal static string UnknownShaderDataType {

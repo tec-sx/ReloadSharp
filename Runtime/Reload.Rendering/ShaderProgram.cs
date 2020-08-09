@@ -28,8 +28,8 @@ namespace Reload.Rendering
 
         /// <summary>
         /// Pre-processes single file shader source. Add "#type [shader type]" above 
-        /// the source code for the specific shader. Available shader types are:
-        /// "vertex", "fragment", "geometry", "compute", "tess_control" and "tess_evaluation"
+        /// the source code for the specific shader. For available shader types see
+        /// <see cref="Utils.ShaderTypes"/>
         /// </summary>
         /// <param name="source">The shader source.</param>
         /// <returns>
@@ -47,11 +47,10 @@ namespace Reload.Rendering
         public abstract void CompileShader(ShaderType type, string shaderString);
 
         /// <summary>
-        /// Adds an attribute to our shader. Should be called between compiling and linking.
-        /// If linking is already complete for current program it logs a warning and continues
-        /// without execution.
+        /// Binds the user defined vertex attribute variable to the next index.
+        /// The attribute index is auto incremented with each binding internaly.
         /// </summary>
-        /// <param name="attributeName"></param>
+        /// <param name="attributeName">The name of the vertex shader attribute variabl to be bounde</param>
         public abstract void AddAttribute(string attributeName);
 
         /// <summary>
@@ -62,13 +61,6 @@ namespace Reload.Rendering
         public abstract void LinkShaders();
 
         /// <summary>
-        /// Sets integer value to an uniform location.
-        /// </summary>
-        /// <param name="name"></param>
-        /// <param name="value"></param>
-        public abstract void SetUniform(string name, int value);
-
-        /// <summary>
         /// Gets uniform location.
         /// </summary>
         /// <param name="name"></param>
@@ -76,28 +68,35 @@ namespace Reload.Rendering
         public abstract int GetUniform(string name);
 
         /// <summary>
-        /// Sets floating point value to a gpu location.
+        /// Sets <see cref="int"/> value to an gpu location.
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="value"></param>
+        public abstract void SetInt(string name, int value);
+
+        /// <summary>
+        /// Sets <see cref="float"/> value to a gpu location.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
         public abstract void SetFloat(string name, float value);
 
         /// <summary>
-        /// Sets Matrix 4x4 value to a gpu location.
+        /// Sets <see cref="Matrix4x4"/> value to a gpu location.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
         public abstract void SetMatrix4(string name, Matrix4x4 value);
 
         /// <summary>
-        /// Sets Vector 4 value to a gpu location.
+        /// Sets <see cref="Vector4"/> value to a gpu location.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
         public abstract void SetVector4(string name, Vector4 value);
 
         /// <summary>
-        /// Sets Vector 3 value to an gpu location.
+        /// Sets <see cref="Vector3"/> value to an gpu location.
         /// </summary>
         /// <param name="name"></param>
         /// <param name="value"></param>
@@ -108,9 +107,7 @@ namespace Reload.Rendering
         /// </summary>
         public abstract void Bind();
 
-        /// <summary>
-        /// Clean up the resources.
-        /// </summary>
+        /// <inheritdoc/>
         public abstract void Dispose();
 
         /// <summary>

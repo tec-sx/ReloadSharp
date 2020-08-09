@@ -146,7 +146,7 @@ namespace Reload.Editor.Platform
             BindTexture();
 
             _offscreenShader.Bind();
-            _offscreenShader.SetUniform("tex", 0);
+            _offscreenShader.SetInt("tex", 0);
             _offscreenVA.Bind();
             RenderCommand.DrawIndexed(_offscreenVA);
         }

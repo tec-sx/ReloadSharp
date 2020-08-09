@@ -16,15 +16,46 @@
         Clamp,
         Repeat
     }
-    
-    public abstract class Texture: IDisposable
-    {
-        public uint Width { get; protected set; }
-        public uint Height { get; protected set; }
 
-        public abstract void SetData(object data);
+    /// <summary>
+    /// The texture base class.
+    /// </summary>
+    public abstract class Texture : IDisposable
+    {
+        /// <summary>
+        /// Gets the width of the texture.
+        /// </summary>
+        public uint Width { get; init; }
+
+        /// <summary>
+        /// Gets the height of the texture.
+        /// </summary>
+        public uint Height { get; init; }
+
+        /// <summary>
+        /// Uploads given texture data to the gpu.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        public abstract void SetData(Span<byte> data);
+
+        /// <summary>
+        /// Binds the texture to a texture target.
+        /// Default slot is 0.
+        /// </summary>
+        /// <param name="slot">The texture slot.</param>
         public abstract void Bind(uint slot = 0);
 
-        public abstract void Dispose();
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Dispose method implementation
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected abstract void Dispose(bool disposing);
     }
 }

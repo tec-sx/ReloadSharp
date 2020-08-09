@@ -2,15 +2,19 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Ara3D.Math3D" Version="1.0.0" />
-    <PackageReference Include="MathSharp" Version="2.0.0-pre" />
+    <PackageReference Include="Microsoft.CodeAnalysis.FxCopAnalyzers" Version="2.9.6">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="SharpGLTF.Core" Version="1.0.0-alpha0018" />
     <PackageReference Include="SharpGLTF.Toolkit" Version="1.0.0-alpha0018" />
     <PackageReference Include="Silk.NET.OpenGL" Version="2.0.0-preview" />
@@ -20,8 +24,10 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Reload.Core.IO\Reload.Core.IO.csproj" />
+    <ProjectReference Include="..\..\Core\Reload.Core.Math3D\Reload.Core.Math3D.csproj" />
     <ProjectReference Include="..\..\Core\Reload.Core.Utils\Reload.Core.Utils.csproj" />
     <ProjectReference Include="..\..\Core\Reload.Core\Reload.Core.csproj" />
+    <ProjectReference Include="..\..\Reload.Configuration\Reload.Configuration.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -79,11 +79,11 @@ namespace Reload.Platform.Graphics.OpenGl.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to |{0}| {1}/{2}: {3}..
+        ///   Looks up a localized string similar to [{0}/{1}]::{2}..
         /// </summary>
-        internal static string GraphicsManager_OnDebug {
+        internal static string GlDebugFormat {
             get {
-                return ResourceManager.GetString("GraphicsManager_OnDebug", resourceCulture);
+                return ResourceManager.GetString("GlDebugFormat", resourceCulture);
             }
         }
         

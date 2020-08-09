@@ -123,8 +123,8 @@
   <data name="EmptyShaderSource" xml:space="preserve">
     <value>Empty shader source string passed</value>
   </data>
-  <data name="GraphicsManager_OnDebug" xml:space="preserve">
-    <value>|{0}| {1}/{2}: {3}.</value>
+  <data name="GlDebugFormat" xml:space="preserve">
+    <value>[{0}/{1}]::{2}.</value>
   </data>
   <data name="OpenGlApiIsNull" xml:space="preserve">
     <value>OpenGL native api binding is null.</value>

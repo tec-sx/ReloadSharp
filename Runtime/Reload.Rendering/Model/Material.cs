@@ -1,8 +1,7 @@
-﻿namespace Reload.Rendering
-{
-    using System;
-    using System.Numerics;
+﻿using System;
 
+namespace Reload.Rendering.Model
+{
     [Flags]
     public enum MaterialFlag
     {
@@ -39,10 +38,5 @@
         {
 
         }
-    }
-
-    public class MaterialInstance
-    {
-        
     }
 }

@@ -42,24 +42,14 @@ namespace Reload.Platform.Graphics.OpenGl
             _numberOfAttributes = 0;
         }
 
-        /// <summary>
-        /// Cleans up the resources.
-        /// </summary>
+        /// <inheritdoc/>
         public override void Dispose()
         {
             _gl.UseProgram(0);
             _gl.DeleteProgram(ProgramHandle);
         }
 
-        /// <summary>
-        /// Pre-processes single file shader source. Add "#type [type of shader]" above 
-        /// the "#version [openGL version]" directive. For supported types
-        /// of shaders see <see cref="GlUtils.ShaderTypes"/>
-        /// </summary>
-        /// <param name="source">The shader source.</param>
-        /// <returns>
-        /// A Dictionary with the shader type as Key, and the shader source as Value.
-        /// </returns>
+        /// <inheritdoc/>
         public override Dictionary<ShaderType, string> PreProcessShader(string source)
         {
             if (string.IsNullOrWhiteSpace(source))
@@ -97,11 +87,7 @@ namespace Reload.Platform.Graphics.OpenGl
             return shaders;
         }
 
-        /// <summary>
-        /// Compiles the shader.
-        /// </summary>
-        /// <param name="type">The shader type.</param>
-        /// <param name="shaderSource">The shader source.</param>
+        /// <inheritdoc/>
         public override void CompileShader(ShaderType type, string shaderSource)
         {
             if (_linkingIsComplete)
@@ -126,10 +112,7 @@ namespace Reload.Platform.Graphics.OpenGl
             _shadersTemp.Add(handle);
         }
 
-        /// <summary>
-        /// Adds an attribute.
-        /// </summary>
-        /// <param name="attributeName">The attribute name.</param>
+        /// <inheritdoc/>
         public override void AddAttribute(string attributeName)
         {
             if (_linkingIsComplete)
@@ -141,9 +124,7 @@ namespace Reload.Platform.Graphics.OpenGl
             _gl.BindAttribLocation(ProgramHandle, _numberOfAttributes++, attributeName);
         }
 
-        /// <summary>
-        /// Links the shaders.
-        /// </summary>
+        /// <inheritdoc/>
         public override void LinkShaders()
         {
             if (_linkingIsComplete)
@@ -178,11 +159,7 @@ namespace Reload.Platform.Graphics.OpenGl
             _linkingIsComplete = true;
         }
 
-        /// <summary>
-        /// Gets the uniform location for the given uniform name.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        /// <returns>The uniform location.</returns>
+        /// <inheritdoc/>
         public override int GetUniform(string name)
         {
             if (UniformLocationCache.TryGetValue(name, out var location))
@@ -204,12 +181,8 @@ namespace Reload.Platform.Graphics.OpenGl
             return location;
         }
 
-        /// <summary>
-        /// Sets value to an <see cref="int"/> type uniform.
-        /// </summary>
-        /// <param name="name">The uniform name.</param>
-        /// <param name="value">The uniform value.</param>
-        public override void SetUniform(string name, int value)
+        /// <inheritdoc/>
+        public override void SetInt(string name, int value)
         {
             var location = GetUniform(name);
 
@@ -218,11 +191,7 @@ namespace Reload.Platform.Graphics.OpenGl
             _gl.Uniform1(location, value);
         }
 
-        /// <summary>
-        /// Sets value to a <see cref="float"/> type uniform.
-        /// </summary>
-        /// <param name="name">The uniform name.</param>
-        /// <param name="value">The uniform value.</param>
+        /// <inheritdoc/>
         public override void SetFloat(string name, float value)
         {
             var location = GetUniform(name);
@@ -232,11 +201,7 @@ namespace Reload.Platform.Graphics.OpenGl
             _gl.Uniform1(location, value);
         }
 
-        /// <summary>
-        /// Sets value to a <see cref="Matrix4x4"/> type uniform.
-        /// </summary>
-        /// <param name="name">The uniform name.</param>
-        /// <param name="value">The uniform value.</param>
+        /// <inheritdoc/>
         public unsafe override void SetMatrix4(string name, Matrix4x4 value)
         {
             var location = GetUniform(name);
@@ -247,11 +212,7 @@ namespace Reload.Platform.Graphics.OpenGl
         }
 
 
-        /// <summary>
-        /// Sets value to a <see cref="Vector3"/> type uniform.
-        /// </summary>
-        /// <param name="name">The uniform name.</param>
-        /// <param name="value">The uniform value.</param>
+        /// <inheritdoc/>
         public unsafe override void SetVector3(string name, Vector3 value)
         {
             var location = GetUniform(name);
@@ -262,11 +223,7 @@ namespace Reload.Platform.Graphics.OpenGl
 
         }
 
-        /// <summary>
-        /// Sets value to a <see cref="Vector4"/> type uniform.
-        /// </summary>
-        /// <param name="name">The uniform name.</param>
-        /// <param name="value">The uniform value.</param>
+        /// <inheritdoc/>
         public unsafe override void SetVector4(string name, Vector4 value)
         {
             var location = GetUniform(name);
@@ -276,9 +233,7 @@ namespace Reload.Platform.Graphics.OpenGl
             _gl.Uniform4(location, value.X, value.Y, value.Z, value.W);
         }
 
-        /// <summary>
-        /// Uses the shader program.
-        /// </summary>
+        /// <inheritdoc/>
         public override void Bind()
         {
             _gl.UseProgram(ProgramHandle);

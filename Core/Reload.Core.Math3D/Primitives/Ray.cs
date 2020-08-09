@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Reload.Core._3D
+namespace Reload.Core.Math3D
 {
     /// <summary>
     /// Ray struct.

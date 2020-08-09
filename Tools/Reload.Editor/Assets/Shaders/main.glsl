@@ -7,12 +7,12 @@ layout (location = 1) in vec2 a_TexCoord;
 uniform mat4 u_ViewProjection;
 uniform mat4 u_Transform;
 
-out vec3 v_position;
-out vec2 v_texCoord;
+out vec3 v_Position;
+out vec2 v_TexCoord;
 
 void main() {
-    v_position = a_Position;
-    v_texCoord = a_TexCoord;
+    v_Position = a_Position;
+    v_TexCoord = a_TexCoord;
 
     gl_Position = u_ViewProjection * u_Transform * vec4(a_Position, 1.0);
 }
@@ -22,12 +22,12 @@ void main() {
 
 layout(location = 0) out vec4 color;
 
-in vec3 v_position;
-in vec2 v_texCoord;
+in vec3 v_Position;
+in vec2 v_TexCoord;
 
-uniform sampler2D u_texture;
+uniform sampler2D u_Texture;
 
 void main()
 {
-   color = texture(u_texture, v_texCoord);
+   color = texture(u_Texture, v_TexCoord);
 }

@@ -1,19 +1,28 @@
+using System;
+using System.Collections.Generic;
+
 namespace Reload.Rendering
 {
-    using System;
-    using System.Collections.Generic;
-    
-    public class RenderCommandQueue : Queue<Action>
+    /// <summary>
+    /// Class for syncronizing render commands.
+    /// </summary>
+    internal class RenderCommandQueue : Queue<Action>
     {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RenderCommandQueue"/> class.
+        /// </summary>
         public RenderCommandQueue()
             : base(10 * 1024 * 1024) // 10mb buffer
         { }
 
+        /// <summary>
+        /// Executes the every command present in the queue.
+        /// </summary>
         public void Execute()
         {
             while (TryDequeue(out var command))
             {
-                command.Invoke();
+                command?.Invoke();
             }
         }
     }

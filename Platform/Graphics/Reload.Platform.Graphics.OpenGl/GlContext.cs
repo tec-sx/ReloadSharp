@@ -64,8 +64,6 @@ namespace Reload.Platform.Graphics.OpenGl
 
             Texture2D.CreateBlank += (width, height) => new GlTexture2D(width, height, Api);
             Texture2D.CreateFromFile += (filePath) => new GlTexture2D(filePath, Api);
-            TextureCube.CreateBlank += (format, width, height) => new GlTextureCube(format, width, height, Api);
-            TextureCube.CreateFromFile += (filepath) => new GlTextureCube(filepath, Api);
 
             #endregion
         }
