@@ -1,4 +1,4 @@
-﻿namespace Reload.Core.Models.Rendering.Buffers
+﻿namespace Reload.Core.Graphics.Rendering.Buffers
 {
     using System;
 

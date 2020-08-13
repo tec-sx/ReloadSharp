@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using System;
+﻿using System;
 
 namespace Reload.Core.Game
 {
@@ -7,7 +6,7 @@ namespace Reload.Core.Game
     /// The base game system class.
     /// Can be instantiated through <see cref="GameBuilder"/>
     /// </summary>
-    public abstract class GameSystem
+    public abstract class GameSystem : ISubSystem
     {
         /// <summary>
         /// Gets the name.
@@ -34,5 +33,16 @@ namespace Reload.Core.Game
         /// </summary>
         public GameSystem()
         { }
+
+        /// <inheritdoc/>
+        public abstract void Initialize();
+
+        /// <inheritdoc/>
+        public abstract void ShutDown();
+
+        /// <summary>
+        /// Begins the game loop.
+        /// </summary>
+        public abstract void Run();
     }
 }

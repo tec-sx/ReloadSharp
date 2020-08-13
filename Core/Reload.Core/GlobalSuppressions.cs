@@ -20,4 +20,5 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Is a singleton class.", Scope = "member", Target = "~M:Reload.Core.Utilities.Logger.Fatal(System.String)")]
 [assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Is a singleton class.", Scope = "member", Target = "~M:Reload.Core.Utilities.Logger.Fatal(System.String,System.Object[])")]
 [assembly: SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "Is a singleton class.", Scope = "member", Target = "~M:Reload.Core.Utilities.Logger.Fatal(System.Exception,System.String,System.Object[])")]
-[assembly: SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "<Pending>", Scope = "type", Target = "~T:Reload.Core.Models.Rendering.Buffers.BufferLayout")]
+[assembly: SuppressMessage("Naming", "CA1710:Identifiers should have correct suffix", Justification = "<Pending>", Scope = "type", Target = "~T:Reload.Core.Graphics.Rendering.Buffers.BufferLayout")]
+[assembly: SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>", Scope = "type", Target = "~T:Reload.Core.Graphics.Rendering.Shaders.ShaderDataType")]

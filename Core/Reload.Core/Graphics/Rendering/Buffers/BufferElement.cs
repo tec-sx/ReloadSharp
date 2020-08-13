@@ -1,8 +1,8 @@
 ﻿using System;
-using Reload.Core.Rendering.Shaders;
+using Reload.Core.Graphics.Rendering.Shaders;
 using Reload.Core.Properties;
 
-namespace Reload.Core.Models.Rendering.Buffers
+namespace Reload.Core.Graphics.Rendering.Buffers
 {
     public record BufferElement : IEquatable<BufferElement>
     {

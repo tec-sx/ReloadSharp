@@ -1,4 +1,4 @@
-﻿namespace Reload.Core.Models.Rendering
+﻿namespace Reload.Core.Graphics.Rendering
 {
     public interface IBuffer
     {

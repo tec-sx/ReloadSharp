@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Runtime.CompilerServices;
 
-namespace Reload.Core.Models.Rendering.Buffers
+namespace Reload.Core.Graphics.Rendering.Buffers
 {
     public enum VertexBufferUsage
     {

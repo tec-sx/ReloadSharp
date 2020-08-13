@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
+using Reload.Core.Properties;
 
-namespace Reload.Core.Rendering.Shaders
+namespace Reload.Core.Graphics.Rendering.Shaders
 {
-    using Reload.Core.Properties;
 
     /// <summary>
     /// The renderer utilities class.

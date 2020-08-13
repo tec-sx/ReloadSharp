@@ -86,5 +86,14 @@ namespace Reload.Core.Properties {
                 return ResourceManager.GetString("InvalidShaderDataType", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Vertex has more than four bones/weights affecting it, extra data will be discarded (BoneID={0}, Weight={1}).
+        /// </summary>
+        internal static string VertexHasMoreThanFourBones {
+            get {
+                return ResourceManager.GetString("VertexHasMoreThanFourBones", resourceCulture);
+            }
+        }
     }
 }

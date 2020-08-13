@@ -126,4 +126,7 @@
   <data name="InvalidShaderDataType" xml:space="preserve">
     <value>Invalid shader data type.</value>
   </data>
+  <data name="VertexHasMoreThanFourBones" xml:space="preserve">
+    <value>Vertex has more than four bones/weights affecting it, extra data will be discarded (BoneID={0}, Weight={1})</value>
+  </data>
 </root>

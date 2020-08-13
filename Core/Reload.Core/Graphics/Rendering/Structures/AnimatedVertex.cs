@@ -1,11 +1,11 @@
-﻿using Reload.Core.Utils;
+﻿using Reload.Core.Utilities;
 using Reload.Core.Properties;
 using System;
 using System.Globalization;
 using System.Numerics;
 using System.Collections.Generic;
 
-namespace Reload.Core.Structures
+namespace Reload.Core.Graphics.Rendering.Structures
 {
     public readonly struct AnimatedVertex : IEquatable<AnimatedVertex>
     {
@@ -18,15 +18,30 @@ namespace Reload.Core.Structures
         
         private readonly float[] _boneWeights;
 
-        public readonly Vector3 Position;
+        /// <summary>
+        /// Gets the vartex position.
+        /// </summary>
+        public Vector3 Position { get; }
 
-        public readonly Vector3 Normal;
+        /// <summary>
+        /// Gets the vartex normal.
+        /// </summary>
+        public Vector3 Normal { get; }
 
-        public readonly Vector3 Tangent;
+        /// <summary>
+        /// Gets the vartex tangent.
+        /// </summary>
+        public Vector3 Tangent { get; }
 
-        public readonly Vector3 BiNormal;
+        /// <summary>
+        /// Gets the vartex bi-normal.
+        /// </summary>
+        public Vector3 BiNormal { get; }
 
-        public readonly Vector2 TexCoord;
+        /// <summary>
+        /// Gets the vartex texture coordinate.
+        /// </summary>
+        public Vector2 TexCoord { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="AnimatedVertex"/> struct.
@@ -71,7 +86,7 @@ namespace Reload.Core.Structures
                 }
 
                 string message = string.Format(CultureInfo.InvariantCulture, Resources.VertexHasMoreThanFourBones, boneID, boneWeight);
-                Logger.PrintWarning(message);
+                Logger.Log().Warning(message);
             }
         }
 

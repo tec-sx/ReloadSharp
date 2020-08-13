@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Reload.Core.Models.Rendering.Buffers
+namespace Reload.Core.Graphics.Rendering.Buffers
 {
     public delegate VertexArray CreateVertexArrayDelegate();
 

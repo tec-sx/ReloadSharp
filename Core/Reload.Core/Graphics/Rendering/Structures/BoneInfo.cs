@@ -1,13 +1,30 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Reload.Core.Math3D.Vertices
+namespace Reload.Core.Graphics.Rendering.Structures
 {
-    public struct BoneInfo : IEquatable<BoneInfo>
+    public readonly struct BoneInfo : IEquatable<BoneInfo>
     {
-        public Matrix4x4 BoneOffset;
+        /// <summary>
+        /// Gets the bone offset.
+        /// </summary>
+        public Matrix4x4 BoneOffset { get; }
 
-        public Matrix4x4 FinalTransformation;
+        /// <summary>
+        /// Gets the final transformation.
+        /// </summary>
+        public Matrix4x4 FinalTransformation { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="BoneInfo"/> struct.
+        /// </summary>
+        /// <param name="boneOffset">The bone offset.</param>
+        /// <param name="finalTransformation">The final transformation.</param>
+        public BoneInfo(Matrix4x4 boneOffset, Matrix4x4 finalTransformation)
+        {
+            BoneOffset = boneOffset;
+            FinalTransformation = finalTransformation;
+        }
 
         /// <inheritdoc/>
         public override bool Equals(object obj)

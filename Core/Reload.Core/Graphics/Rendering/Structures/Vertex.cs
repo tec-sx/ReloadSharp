@@ -1,19 +1,34 @@
 ﻿using System;
 using System.Numerics;
 
-namespace Reload.Core.Structures
+namespace Reload.Core.Graphics.Rendering.Structures
 {
     public readonly struct Vertex : IEquatable<Vertex>
     {
-        public readonly Vector3 Position;
+        /// <summary>
+        /// Gets the vertex position.
+        /// </summary>
+        public Vector3 Position { get; }
 
-        public readonly Vector3 Normal;
+        /// <summary>
+        /// Gets the vertex normal.
+        /// </summary>
+        public Vector3 Normal { get; }
 
-        public readonly Vector3 Tangent;
+        /// <summary>
+        /// Gets the vertex tangent.
+        /// </summary>
+        public Vector3 Tangent { get; }
 
-        public readonly Vector3 BiNormal;
+        /// <summary>
+        /// Gets the vertex bi-normal.
+        /// </summary>
+        public Vector3 BiNormal { get; }
 
-        public readonly Vector2 TexCoord;
+        /// <summary>
+        /// Gets the vertex texture coordinate.
+        /// </summary>
+        public Vector2 TexCoord { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Vertex"/> struct.

@@ -2,7 +2,7 @@
 using Reload.Core.Properties;
 using System.Collections.ObjectModel;
 
-namespace Reload.Core.Models.Rendering.Buffers
+namespace Reload.Core.Graphics.Rendering.Buffers
 {
     /// <summary>
     /// The buffer layout is a <see cref="Collection{T}"/> of type <see cref="BufferElement"/>.

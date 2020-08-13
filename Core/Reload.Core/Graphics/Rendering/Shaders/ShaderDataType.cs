@@ -1,4 +1,4 @@
-﻿namespace Reload.Core.Rendering.Shaders
+﻿namespace Reload.Core.Graphics.Rendering.Shaders
 {
     public enum ShaderDataType
     {

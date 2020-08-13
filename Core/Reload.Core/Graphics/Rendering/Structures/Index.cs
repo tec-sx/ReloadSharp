@@ -1,14 +1,23 @@
 ﻿using System;
 
-namespace Reload.Core.Structures
+namespace Reload.Core.Graphics.Rendering.Structures
 {
     public readonly struct Index : IEquatable<Index>
     {
-        public readonly uint V1;
+        /// <summary>
+        /// Gets the first point.
+        /// </summary>
+        public uint V1 { get; }
 
-        public readonly uint V2;
+        /// <summary>
+        /// Gets the second point.
+        /// </summary>
+        public uint V2 { get; }
 
-        public readonly uint V3;
+        /// <summary>
+        /// Gets the third point.
+        /// </summary>
+        public uint V3 { get; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Index"/> struct.
