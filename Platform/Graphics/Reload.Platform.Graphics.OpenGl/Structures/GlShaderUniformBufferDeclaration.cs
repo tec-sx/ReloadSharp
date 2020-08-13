@@ -1,8 +1,7 @@
-﻿namespace Reload.Platform.Graphics.OpenGl.Structures
-{
-    using Reload.Rendering.Structures;
-    using System.Collections.Generic;
+﻿using Reload.Rendering.Shaders;
 
+namespace Reload.Platform.Graphics.OpenGl.Structures
+{
     public class GlShaderUniformBufferDeclaration : ShaderUniformBufferDeclaration
     {
         public ShaderDomain Domain { get; }

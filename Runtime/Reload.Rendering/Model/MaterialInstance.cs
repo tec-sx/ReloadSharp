@@ -1,4 +1,4 @@
-﻿namespace Reload.Rendering.Model
+﻿namespace Reload.Resources.Model
 {
     public class MaterialInstance
     {

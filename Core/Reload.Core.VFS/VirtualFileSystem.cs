@@ -7,6 +7,10 @@
     using K4os.Compression.LZ4.Streams;
     using System.Text;
     using K4os.Compression.LZ4;
+    using System;
+    using Reload.Core.VFS.Properties;
+    using System.Diagnostics.CodeAnalysis;
+    using Reload.Core.VFS.Extensions;
 
     /// <summary>
     /// Virtual file system.
@@ -14,30 +18,30 @@
     public class VirtualFileSystem
     {
         private Header _header;
-        private GroupIndex _groupIndex;
-        private Dictionary<int, AssetIndex> _assetIndexes;
-        private Dictionary<AssetEntry, Stream> _assetsData;
+        
+        private AssetEntryGroupCollection _groupCollection;
+        
+        private List<AssetEntryCollection> _assetCollectionIndexes;
+        
+        private Dictionary<Guid, Stream> _assetsData;
 
         private int _activeGroupIndex;
+        
         private bool _isInReadMode;
-        private AssetIndex _readAsset;
+
+        private AssetEntryCollection _readAsset;
+        
         private BinaryReader _streamReader;
 
-        public List<string> Groups => _groupIndex.Select(entry => entry.Name).ToList();
-        public List<AssetEntry> Assets
-        {
-            get
-            {
-                if (_isInReadMode)
-                {
-                    return _readAsset.Select(asset => asset).ToList();
-                }
-                else
-                {
-                    return _assetIndexes[_activeGroupIndex].Select(asset => asset).ToList();
-                }
-            }
-        }
+        /// <summary>
+        /// Gets the asset entry groups.
+        /// </summary>
+        public IReadOnlyList<Guid> Groups => _groupCollection.Select(group => group.Id).ToList();
+
+        /// <summary>
+        /// Gets the asset entries.
+        /// </summary>
+        public IReadOnlyList<AssetEntry> Assets => _isInReadMode ? _readAsset : _assetCollectionIndexes[_activeGroupIndex];
 
         /// <summary>
         /// Virtual file system constructor.
@@ -45,153 +49,146 @@
         public VirtualFileSystem()
         {
             _header = new Header();
-            _groupIndex = new GroupIndex();
-            _assetIndexes = new Dictionary<int, AssetIndex>();
-            _assetsData = new Dictionary<AssetEntry, Stream>();
+            _groupCollection = new AssetEntryGroupCollection();
+            _assetCollectionIndexes = new List<AssetEntryCollection>();
+            _assetsData = new Dictionary<Guid, Stream>();
             _activeGroupIndex = 0;
             _isInReadMode = false;
         }
 
         /// <summary>
-        /// Scope an assetgroup.
+        /// Scope the filesystem to work with specific asset group.
         /// </summary>
-        /// <param name="name"></param>
-        public void ScopeGroup(string name)
+        /// <param name="id"></param>
+        public void ScopetoGroup(Guid id)
         {
             if (_isInReadMode)
             {
-                _readAsset = new AssetIndex();
+                _readAsset = new AssetEntryCollection();
 
-                var groupIndex = _groupIndex.First(entry => entry.Name == name);
+                AssetEntryGroup groupIndex = _groupCollection.First(entry => entry.Id == id);
 
                 _streamReader.BaseStream.Position = (long)groupIndex.Offset;
                 _readAsset.Read(_streamReader);
             }
 
-            if (_groupIndex.Count == 0)
+            if (_groupCollection.Count == 0)
             {
-                _groupIndex.Add(new GroupEntry
+                _groupCollection.Add(new AssetEntryGroup
                 {
                     Count = 0,
                     Flags = GroupFlags.Compressed,
-                    Name = name,
+                    Id = id,
                     Offset = 0
                 });
 
-                _assetIndexes.Add(0, new AssetIndex());
+                _assetCollectionIndexes.Add(new AssetEntryCollection());
                 _activeGroupIndex = 0;
             }
             else
             {
-                if (_groupIndex.All(entry => entry.Name != name))
+                if (_groupCollection.All(entry => entry.Id != id))
                 {
-                    _groupIndex.Add(new GroupEntry
+                    _groupCollection.Add(new AssetEntryGroup
                     {
                         Count = 0,
                         Flags = GroupFlags.Compressed,
-                        Name = name,
+                        Id = id,
                         Offset = 0
                     });
                 }
 
-                _activeGroupIndex = _groupIndex.IndexOf(_groupIndex.First(entry => entry.Name == name));
-                _assetIndexes.Add(_activeGroupIndex, new AssetIndex());
+                _activeGroupIndex = _groupCollection.IndexOf(_groupCollection.First(entry => entry.Id == id));
+                _assetCollectionIndexes.Add(_activeGroupIndex, new AssetEntryCollection());
             }
         }
 
         /// <summary>
-        /// Add new asset.
+        /// Add new asset and it's data to the collection.
         /// </summary>
-        /// <param name="entry"></param>
+        /// <param name="assetEntry"></param>
         /// <param name="data"></param>
-        public void AddAsset(AssetEntry entry, Stream data)
+        public void AddNewAsset(Stream stream)
         {
-            var index = _assetIndexes[_activeGroupIndex];
+            if (stream == null)
+            {
+                throw new ArgumentNullException(Resources.StreamNullArgument);
+            }
 
-            index.Add(entry);
-            _assetsData.Add(entry, data);
+            AssetEntry asset = new AssetEntry
+
+            _assetCollectionIndexes[_activeGroupIndex].Add(assetEntry);
+            _assetsData.Add(assetEntry.Id, data);
         }
 
         /// <summary>
         /// Read all entry bytes as string instead of opening a stream.
         /// </summary>
-        /// <param name="entry"></param>
+        /// <param name="asset"></param>
         /// <returns></returns>
-        public string ReadAllText(AssetEntry entry)
+        public string ReadAllText(AssetEntry asset)
         {
-            if (_groupIndex[_activeGroupIndex].Flags.HasFlag(GroupFlags.Compressed))
+            if (asset is null)
             {
-                _streamReader.BaseStream.Position = (long)entry.Offset;
+                throw new ArgumentNullException(Resources.AssetEntryNullArgument);
+            }
 
-                using (var stream = new MemoryStream())
-                using (var decoder = LZ4Stream.Decode(_streamReader.BaseStream, null, true))
-                {
-                    decoder.CopyTo(stream, (int)entry.Size);
+            if (_groupCollection[_activeGroupIndex].Flags.HasFlag(GroupFlags.Compressed))
+            {
+                _streamReader.BaseStream.Position = (long)asset.Offset;
 
-                    return Encoding.ASCII.GetString(stream.ToArray());
-                }
+                using MemoryStream stream = new MemoryStream();
+                using LZ4DecoderStream decoder = LZ4Stream.Decode(_streamReader.BaseStream, null, true);
+                
+                decoder.CopyTo(stream, (int)asset.Size);
+
+                return Encoding.ASCII.GetString(stream.ToArray());
             }
             else
             {
-                _streamReader.BaseStream.Position = (long)entry.Offset;
+                _streamReader.BaseStream.Position = (long)asset.Offset;
 
-                using (var stream = new MemoryStream((int)entry.Size))
-                {
-                    _streamReader.BaseStream.CopyTo(stream, (int)entry.Size);
+                using MemoryStream stream = new MemoryStream((int)asset.Size);
 
-                    return Encoding.ASCII.GetString(stream.ToArray());
-                }
+                _streamReader.BaseStream.CopyTo(stream, (int)asset.Size);
+
+                return Encoding.ASCII.GetString(stream.ToArray());
             }
         }
 
         /// <summary>
-        /// Open the read stream. Remember to dispose the
-        /// stream after usage.
+        /// Open the read stream.
         /// </summary>
-        /// <param name="entry"></param>
-        /// <returns>New stream</returns>
-        public Stream OpenRead(AssetEntry entry)
+        /// <param name="asset"></param>
+        /// <returns>
+        /// New stream. Remember to dispose it after usage.
+        /// </returns>
+        public Stream OpenRead(AssetEntry asset)
         {
-            if (_groupIndex[_activeGroupIndex].Flags.HasFlag(GroupFlags.Compressed))
+            if (asset is null)
             {
-                _streamReader.BaseStream.Position = (long)entry.Offset;
+                throw new ArgumentNullException(Resources.AssetEntryNullArgument);
+            }
 
-                var stream = new MemoryStream();
-                using (var decoder = LZ4Stream.Decode(_streamReader.BaseStream, null, true))
-                {
-                    ulong bytesPerCycle = 8192;
-                    ulong numberOfCycles = entry.Size / bytesPerCycle;
+            MemoryStream memory = new MemoryStream();
 
-                    void ReadChunk(ulong size)
-                    {
-                        byte[] buffer = new byte[size];
-
-                        decoder.Read(buffer);
-                        stream.Write(buffer);
-                    }
-
-                    for (ulong i = 0; i < numberOfCycles; i++)
-                    {
-                        ReadChunk(bytesPerCycle);
-                    }
-
-                    ulong remainder = entry.Size - (numberOfCycles * bytesPerCycle);
-                    ReadChunk(remainder);
-
-                    stream.Position = 0;
-                    return stream;
-                }
+            if (_groupCollection[_activeGroupIndex].Flags.HasFlag(GroupFlags.Compressed))
+            {
+                _streamReader.BaseStream.Position = (long)asset.Offset;
+                using LZ4DecoderStream decoder = LZ4Stream.Decode(_streamReader.BaseStream, null, true);
+                decoder.BlockCopyTo(memory, asset.Size);
+                memory.Position = 0;
             }
             else
             {
-                _streamReader.BaseStream.Position = (long)entry.Offset;
-                var stream = new MemoryStream((int)entry.Size);
+                memory.Capacity = (int)asset.Size;
+                _streamReader.BaseStream.Position = (long)asset.Offset;
+                _streamReader.BaseStream.CopyTo(memory, (int)asset.Size);
 
-                _streamReader.BaseStream.CopyTo(stream, (int)entry.Size);
-
-                stream.Position = 0;
-                return stream;
+                memory.Position = 0;
             }
+
+            return memory;
         }
 
         /// <summary>
@@ -200,64 +197,83 @@
         /// <param name="stream"></param>
         public void Read(Stream stream)
         {
-            var reader = new BinaryReader(stream);
+            if (stream is null)
+            {
+                throw new ArgumentNullException(Resources.StreamNullArgument);
+            }
+
+            BinaryReader reader = new BinaryReader(stream);
 
             _streamReader = reader;
             _isInReadMode = true;
 
-            _header.Read(reader);
+            _header = reader.ReadHeader();
+
             stream.Position = _header.GroupIndexOffset;
-            _groupIndex.Read(reader);
+            _groupCollection.Read(reader);
         }
 
-        public void Write(Stream stream)
+        /// <summary>
+        /// Writes the assets to a stream.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        public void Write([DisallowNull]Stream stream)
         {
-            using (var writer = new BinaryWriter(stream, Encoding.Default, true))
+            if (stream is null)
             {
-                _header.Write(writer);
+                throw new ArgumentNullException(Resources.StreamNullArgument);
+            }
 
-                foreach (var(i, assetIndex) in _assetIndexes)
+            using BinaryWriter writer = new BinaryWriter(stream, Encoding.Default, true);
+
+            writer.WriteHeader(_header);
+
+            for (int i = 0; i < _assetCollectionIndexes.Count; i++)
+            {
+                foreach (AssetEntry asset in _assetCollectionIndexes[i])
                 {
-                    foreach (var asset in assetIndex)
+                    Stream data = _assetsData[asset.Id];
+
+                    if (_groupCollection[_activeGroupIndex].Flags.HasFlag(GroupFlags.Compressed))
                     {
-                        var data = _assetsData[asset];
+                        asset.Offset = (ulong)stream.Position;
 
-                        if (_groupIndex[_activeGroupIndex].Flags.HasFlag(GroupFlags.Compressed))
+                        LZ4EncoderSettings encoderSettings = new LZ4EncoderSettings
                         {
-                            asset.Offset = (ulong)stream.Position;
+                            CompressionLevel = LZ4Level.L00_FAST
+                        };
 
-                            var encoderSettings = new LZ4EncoderSettings
-                            {
-                                CompressionLevel = LZ4Level.L00_FAST
-                            };
-
-                            using (var encoder = LZ4Stream.Encode(stream, encoderSettings, true))
-                            {
-                                data.CopyTo(encoder);
-                            }
-
-                            asset.Size = (ulong)data.Length;
-                        }
-                        else
+                        using (LZ4EncoderStream encoder = LZ4Stream.Encode(stream, encoderSettings, true))
                         {
-                            asset.Offset = (ulong)stream.Position;
-                            asset.Size = (ulong)data.Length;
-                            data.CopyTo(stream);
+                            data.CopyTo(encoder);
                         }
+
+                        asset.Size = (ulong)data.Length;
                     }
-
-                    _groupIndex[i].Offset = (ulong)stream.Position;
-                    assetIndex.Write(writer);
+                    else
+                    {
+                        asset.Offset = (ulong)stream.Position;
+                        asset.Size = (ulong)data.Length;
+                        data.CopyTo(stream);
+                    }
                 }
 
-                _header.GroupIndexOffset = (uint)stream.Position;
-                stream.Position = 0;
-                _header.Write(writer);
-
-                stream.Position = _header.GroupIndexOffset;
-
-                _groupIndex.Write(writer);
+                _groupCollection[i].Offset = (ulong)stream.Position;
+                _groupCollection[i].Write(writer);
             }
+
+            Header header = new Header
+            {
+                GroupIndexOffset = (uint)stream.Position
+            };
+
+            stream.Position = 0;
+
+            writer.WriteHeader(header);
+
+            stream.Position = header.GroupIndexOffset;
+
+            _groupCollection.Write(writer);
         }
     }
 }

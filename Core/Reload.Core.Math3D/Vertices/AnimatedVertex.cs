@@ -84,7 +84,7 @@ namespace Reload.Core.Math3D.Vertices
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            return obj is AnimatedVertex && Equals((AnimatedVertex)obj);
+            return obj is AnimatedVertex other && Equals(other);
         }
 
         /// <inheritdoc/>

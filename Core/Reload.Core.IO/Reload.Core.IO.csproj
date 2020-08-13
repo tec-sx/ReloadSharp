@@ -5,4 +5,9 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Folder Include="Mappers\" />
+    <Folder Include="Models\" />
+  </ItemGroup>
+
 </Project>

@@ -117,7 +117,25 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AssetEntryNullArgument" xml:space="preserve">
+    <value>the AssetEntry argument is null.</value>
+  </data>
+  <data name="BinaryReaderNullArgument" xml:space="preserve">
+    <value>Binary reader argument is null.</value>
+  </data>
+  <data name="BinaryWriterNullArgument" xml:space="preserve">
+    <value>Binary writer argument is null.</value>
+  </data>
+  <data name="HeaderNullArgument" xml:space="preserve">
+    <value>The header argument passed is null.</value>
+  </data>
   <data name="MagicNumberInvalidMessage" xml:space="preserve">
     <value>The file's magic number is invalid.</value>
+  </data>
+  <data name="NullOrEmptyFilename" xml:space="preserve">
+    <value>File name is null or is empty.</value>
+  </data>
+  <data name="StreamNullArgument" xml:space="preserve">
+    <value>The Stream argument is null.</value>
   </data>
 </root>

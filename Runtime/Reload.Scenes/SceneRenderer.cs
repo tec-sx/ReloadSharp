@@ -1,11 +1,11 @@
 ﻿using System;
 using Reload.Rendering.Camera;
-using SharpGLTF.Scenes;
-using SharpGLTF.Schema2;
+using Reload.Rendering;
+using Reload.Rendering.Model;
+
 
 namespace Reload.Scenes
 {
-    using Reload.Rendering;
 
     public struct SceneRendererOptions
     {

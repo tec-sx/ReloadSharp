@@ -58,7 +58,9 @@ namespace Reload.Rendering
             GC.SuppressFinalize(this);
         }
 
-        /// <inheritdoc/>
+        /// Dispose method overload with disposing parameter that indicates 
+        /// whether the method call comes from a Dispose method 
+        /// (its value is true) or from a finalizer
         protected abstract void Dispose(bool disposing);
     }
 }

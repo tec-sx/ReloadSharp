@@ -1,37 +1,60 @@
-﻿namespace Reload.Core.VFS.Structures
+﻿using System;
+using System.IO;
+
+namespace Reload.Core.VFS.Structures
 {
-    using System;
-    using System.IO;
-
-    public class AssetEntry : IFsStructure
+    /// <summary>
+    /// The asset entry.
+    /// </summary>
+    public class AssetEntry : Entry
     {
-        public string Name { get; set; }
-        public uint Processor { get; set; }
-        public ulong Offset { get; set; }
-        public ulong Size { get; set; }
+        /// <summary>
+        /// Gets the asset processor.
+        /// </summary>
+        public uint Processor { get; }
 
-        public AssetEntry()
+        /// <summary>
+        /// Gets the asset offset.
+        /// </summary>
+        public ulong Offset { get; }
+
+        /// <summary>
+        /// Gets the asset size.
+        /// </summary>
+        public ulong Size { get; }
+
+        /// <summary>
+        /// Prevents a default instance of the <see cref="AssetEntry"/> class from being created.
+        /// </summary>
+        private AssetEntry()
         { }
 
-        public AssetEntry(string name)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssetEntry"/> class.
+        /// </summary>
+        /// <param name="id">The asset id.</param>
+        /// <param name="processor">The asset processor.</param>
+        /// <param name="offset">The asset offset.</param>
+        /// <param name="size">The asset size.</param>
+        public AssetEntry(Guid id, uint processor, ulong offset, ulong size)
+            : this()
         {
-            Name = name;
+            Id = id;
+            Processor = processor;
+            Offset = offset;
+            Size = size;
         }
 
-        public void Read(BinaryReader reader)
-        {
-            Name = reader.ReadString();
-            Processor = reader.ReadUInt32();
-            Offset = reader.ReadUInt64();
-            Size = reader.ReadUInt64();
-        }
-
-        public void Write(BinaryWriter writer)
-        {
-            writer.Write(Name);
-            writer.Write(Processor);
-            writer.Write(Offset);
-            writer.Write(Size);
-        }
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AssetEntry"/> class
+        /// with auto generated unique identifier.
+        /// </summary>
+        /// <param name="id">The asset id.</param>
+        /// <param name="processor">The asset processor.</param>
+        /// <param name="offset">The asset offset.</param>
+        /// <param name="size">The asset size.</param>
+        public AssetEntry(uint processor, ulong offset, ulong size)
+           : this(new Guid(), processor, offset, size)
+        { }
     }
 }

@@ -53,7 +53,7 @@ namespace Reload.Core.VFS.Tests
 
             foreach (var group in vfs.Groups)
             {
-                vfs.ScopeGroup(group);
+                vfs.ScopetoGroup(group);
 
                 foreach (var asset in vfs.Assets)
                 {

@@ -1,7 +1,7 @@
 ﻿using Reload.Core.Utils;
 using System.Numerics;
 
-namespace Reload.Rendering.Camera
+namespace Reload.Resources.Camera
 {
     /// <summary>
     /// Abstract class that defines a frustum volume. Inherited by the

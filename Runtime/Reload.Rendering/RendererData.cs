@@ -1,4 +1,5 @@
-﻿using Reload.Rendering.Structures;
+﻿using Reload.Rendering.Buffers;
+using Reload.Rendering.Shaders;
 
 namespace Reload.Rendering
 {
@@ -6,7 +7,7 @@ namespace Reload.Rendering
     {
         public RenderPass ActiveRenderPass { get; set; }
 
-        public RenderCommandQueue CommandQueue { get; set; }
+        internal RenderCommandQueue CommandQueue { get; set; }
         
         public ShaderLibrary ShaderLibrary { get; set; }
         

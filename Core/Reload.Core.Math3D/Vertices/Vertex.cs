@@ -46,7 +46,7 @@ namespace Reload.Core.Math3D.Vertices
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            return obj is Vertex && Equals((Vertex)obj);
+            return obj is Vertex other && Equals(other);
         }
 
         /// <inheritdoc/>

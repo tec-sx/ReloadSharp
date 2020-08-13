@@ -1,12 +1,11 @@
-﻿using Reload.Rendering;
-using Silk.NET.OpenGL;
+﻿using Silk.NET.OpenGL;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 using SixLabors.ImageSharp.Processing;
 using System.Runtime.InteropServices;
 using Reload.Core.Utils;
 using System;
-using System.Diagnostics;
+using Reload.Rendering.Model;
 
 namespace Reload.Platform.Graphics.OpenGl
 {
@@ -142,6 +141,31 @@ namespace Reload.Platform.Graphics.OpenGl
             }
 
             _isDisposed = true;
+        }
+
+        public override void IsLoaded()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Lock()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Unlock()
+        {
+            throw new NotImplementedException();
+        }
+
+        public override void Resize(uint width, uint height)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string GetPath()
+        {
+            throw new NotImplementedException();
         }
     }
 }

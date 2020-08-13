@@ -1,7 +1,7 @@
 ﻿using Reload.Editor.Properties;
 using Reload.Platform.Graphics.OpenGl;
 using Reload.Rendering;
-using Reload.Rendering.Structures;
+using Reload.Rendering.Buffers;
 using Silk.NET.OpenGL;
 using SpaceVIL;
 using SpaceVIL.Common;
@@ -120,7 +120,7 @@ namespace Reload.Editor.Platform
                 2, 3, 0,
             };
 
-            var textureVertexLayout = new BufferLayout
+            var textureVertexLayout = new BufferLayoutCollection
             {
                 new BufferElement(ShaderDataType.Float3, "a_Position"),
                 new BufferElement(ShaderDataType.Float2, "a_TexCoord")

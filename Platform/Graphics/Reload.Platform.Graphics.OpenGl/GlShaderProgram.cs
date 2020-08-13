@@ -1,5 +1,5 @@
 using Reload.Core.Utils;
-using Reload.Rendering;
+using Reload.Rendering.Shaders;
 using Silk.NET.OpenGL;
 using System;
 using System.Collections.Generic;
@@ -58,7 +58,7 @@ namespace Reload.Platform.Graphics.OpenGl
                 throw new ApplicationException(Properties.Resources.EmptyShaderSource);
             }
 
-            var shaders = new Dictionary<ShaderType, string>(Utils.ShaderTypes.Count);
+            var shaders = new Dictionary<ShaderType, string>(ShaderUtils.ShaderTypes.Count);
             var rawSplitShaders = source.Split("#type", StringSplitOptions.RemoveEmptyEntries);
             
             foreach (string rawShaderString in rawSplitShaders)
@@ -78,7 +78,7 @@ namespace Reload.Platform.Graphics.OpenGl
                     throw new ApplicationException(Properties.Resources.EmptyShaderSource);
                 }
 
-                if (Utils.ShaderTypes.TryGetValue(line.Trim(), out var shaderType))
+                if (ShaderUtils.ShaderTypes.TryGetValue(line.Trim(), out var shaderType))
                 {
                     shaders.Add(shaderType, rawShaderString.Substring(newLineIndex + 1));
                 }

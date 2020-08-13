@@ -1,21 +1,27 @@
 ﻿namespace Reload.Rendering.Platform.Vulkan
 {
-    using Reload.Rendering.Structures;
+    using Reload.Rendering.Buffers;
+    using Silk.NET.OpenGL;
     using Silk.NET.Windowing.Common;
     using System.Drawing;
 
+    /// <summary>
+    /// The vulkan renderer.
+    /// </summary>
     public class VulkanRenderer : RendererBackend
     {
         public VulkanRenderer(IWindow window)
         {
 
         }
-        public override void Clear()
+
+        public override void Clear(Color color)
         {
             throw new System.NotImplementedException();
         }
 
-        public override void DrawIndexed(VertexArray vertexArray)
+       
+        public override void DrawIndexed(uint count, PrimitiveType type, bool depthTest = true)
         {
             throw new System.NotImplementedException();
         }
@@ -25,17 +31,12 @@
             throw new System.NotImplementedException();
         }
 
-        public override void SetClearColor(Color color)
+        public override void SetLineThickness(float thickness)
         {
             throw new System.NotImplementedException();
         }
 
-        public override void SetViewport(Size size)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public override void SetViewport(Point location, Size size)
+        protected override void Dispose(bool disposing)
         {
             throw new System.NotImplementedException();
         }

@@ -61,11 +61,65 @@ namespace Reload.Core.VFS.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to the AssetEntry argument is null..
+        /// </summary>
+        internal static string AssetEntryNullArgument {
+            get {
+                return ResourceManager.GetString("AssetEntryNullArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Binary reader argument is null..
+        /// </summary>
+        internal static string BinaryReaderNullArgument {
+            get {
+                return ResourceManager.GetString("BinaryReaderNullArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Binary writer argument is null..
+        /// </summary>
+        internal static string BinaryWriterNullArgument {
+            get {
+                return ResourceManager.GetString("BinaryWriterNullArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The header argument passed is null..
+        /// </summary>
+        internal static string HeaderNullArgument {
+            get {
+                return ResourceManager.GetString("HeaderNullArgument", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The file&apos;s magic number is invalid..
         /// </summary>
         internal static string MagicNumberInvalidMessage {
             get {
                 return ResourceManager.GetString("MagicNumberInvalidMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to File name is null or is empty..
+        /// </summary>
+        internal static string NullOrEmptyFilename {
+            get {
+                return ResourceManager.GetString("NullOrEmptyFilename", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The Stream argument is null..
+        /// </summary>
+        internal static string StreamNullArgument {
+            get {
+                return ResourceManager.GetString("StreamNullArgument", resourceCulture);
             }
         }
     }

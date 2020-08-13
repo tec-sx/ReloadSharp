@@ -1,4 +1,6 @@
-﻿using Silk.NET.OpenGL;
+﻿using Reload.Resources;
+using Reload.RenderingShaders;
+using Silk.NET.OpenGL;
 using System;
 using System.Drawing;
 using System.Numerics;

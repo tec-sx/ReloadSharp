@@ -3,18 +3,19 @@ using Reload.Configuration;
 using Reload.Core.Utils;
 using Reload.Rendering;
 using Reload.Rendering.Camera;
-using Reload.Rendering.Structures;
+using Reload.Rendering.Buffers;
 using SpaceVIL;
 using System.Drawing;
 using System.IO;
 using System.Numerics;
 using System.Linq;
 using Silk.NET.OpenAL;
+using Reload.Rendering.Model;
+using Reload.Rendering.Shaders;
+using Reload.AssetSystem.Loaders;
 
 namespace Reload.Editor.Scenes
 {
-    using VERTEX = SharpGLTF.Geometry.VertexTypes.VertexPosition;
-
     public class DefaultScene : Scene, IViewportAttachable
     {
         private ShaderLibrary _shaderLibrary;
@@ -22,14 +23,14 @@ namespace Reload.Editor.Scenes
         private OrthographicCamera _orthoCamera;
 
         private VertexBuffer _squareVB;
-        private BufferLayout _squareBufferLayout;
+        private BufferLayoutCollection _squareBufferLayout;
         private IndexBuffer _squareIB;
 
         private VertexArray _squareVA;
         //private ShaderProgram _squareShader;
 
         private VertexBuffer _gridVB;
-        private BufferLayout _gridBufferLayout;
+        private BufferLayoutCollection _gridBufferLayout;
         private IndexBuffer _gridIB;
         private VertexArray _gridVA;
 
@@ -46,20 +47,17 @@ namespace Reload.Editor.Scenes
 
         public override void OnEnter()
         {
-            string modelPath = Path.Combine(ContentPaths.Models, "RedCube.gltf");
-            var model = SharpGLTF.Schema2.ModelRoot.Load(modelPath);
-            var meshPrimitive = model.DefaultScene
-                .VisualChildren.FirstOrDefault()?
-                .Mesh.Primitives.FirstOrDefault();
+            Mesh mesh = MeshLoader.LoadFromFile("RedCube.gltf");
+        
 
-            var position = meshPrimitive.GetVertexAccessor("POSITION")?.AsVector3Array();
-            var normals = meshPrimitive.GetVertexAccessor("NORMAL")?.AsVector3Array();
-            var tangents = meshPrimitive.GetVertexAccessor("TANGENT")?.AsVector4Array();
+            //var position = meshPrimitive.GetVertexAccessor("POSITION")?.AsVector3Array();
+            //var normals = meshPrimitive.GetVertexAccessor("NORMAL")?.AsVector3Array();
+            //var tangents = meshPrimitive.GetVertexAccessor("TANGENT")?.AsVector4Array();
 
-            var color0 = meshPrimitive.GetVertexAccessor("COLOR_0")?.AsColorArray();
-            var texCoords0 = meshPrimitive.GetVertexAccessor("TEXCOORD_0")?.AsVector2Array();
+            //var color0 = meshPrimitive.GetVertexAccessor("COLOR_0")?.AsColorArray();
+            //var texCoords0 = meshPrimitive.GetVertexAccessor("TEXCOORD_0")?.AsVector2Array();
 
-            var triangleSource = meshPrimitive.GetTriangleIndices()?.ToArray();
+            //var triangleSource = meshPrimitive.GetTriangleIndices()?.ToArray();
 
 
             //var vertexPosition = box?.GetVertices("POSITION").AsMatrix4x4Array();
@@ -84,7 +82,7 @@ namespace Reload.Editor.Scenes
 
             // Grid
 
-            _gridBufferLayout = new BufferLayout
+            _gridBufferLayout = new BufferLayoutCollection
             {
                 new BufferElement(ShaderDataType.Float3, "aPosition")
             };
@@ -98,7 +96,7 @@ namespace Reload.Editor.Scenes
 
             //Square
 
-            _squareBufferLayout = new BufferLayout
+            _squareBufferLayout = new BufferLayoutCollection
             {
                 new BufferElement(ShaderDataType.Float3, "a_Position"),
                 new BufferElement(ShaderDataType.Float2, "a_TexCoord")

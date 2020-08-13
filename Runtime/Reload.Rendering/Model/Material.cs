@@ -1,6 +1,7 @@
-﻿using System;
+﻿using Reload.Shaders;
+using System;
 
-namespace Reload.Rendering.Model
+namespace Reload.Resources.Model
 {
     [Flags]
     public enum MaterialFlag
@@ -10,7 +11,7 @@ namespace Reload.Rendering.Model
         Blend = 1 << 2
     }
 
-    public abstract class Material
+    public class Material
     {
         private MaterialFlag _materialFlags;
         public MaterialFlag MaterialFlags
@@ -19,7 +20,7 @@ namespace Reload.Rendering.Model
             set => _materialFlags |= value;
         }
 
-        protected Material(ShaderProgram shader)
+        public Material(ShaderProgram shader)
         {
 
         }

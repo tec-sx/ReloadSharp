@@ -1,24 +1,24 @@
-﻿using Silk.NET.Vulkan;
+﻿using Reload.Core.Math3D.Collision;
 using System.Numerics;
 
-namespace Reload.Rendering.Model
+namespace Reload.Resources.Model
 {
     /// <summary>
     /// The sub mesh.
     /// </summary>
     public sealed class SubMesh
     {
-        public uint BaseVertex;
+        public int BaseVertex;
 
-        public uint BaseIndex;
+        public int BaseIndex;
 
-        public uint MaterialIndex;
+        public int MaterialIndex;
 
-        public uint IndexCount;
+        public int IndexCount;
 
         public Matrix4x4 Transform;
 
-        public GeometryAABBNV BoundingBox;
+        public AABB BoundingBox;
 
         /// <summary>
         /// Gets or sets the node name.

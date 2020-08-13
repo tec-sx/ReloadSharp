@@ -9,19 +9,19 @@
         {
             Action = action;
             Item = item;
-            this.OldItem = oldItem;
+            OldItem = oldItem;
             Index = index;
-            this.CollectionChanged = collectionChanged;
+            CollectionChanged = collectionChanged;
         }
 
         public NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction action, object key, object item, object oldItem, bool collectionChanged)
         {
             Action = action;
             Item = item;
-            this.OldItem = oldItem;
+            OldItem = oldItem;
             Key = key;
             Index = -1;
-            this.CollectionChanged = collectionChanged;
+            CollectionChanged = collectionChanged;
         }
 
         /// <summary>

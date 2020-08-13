@@ -16,7 +16,7 @@ namespace Reload.Core.Math3D.Vertices
         /// <param name="v1">First point.</param>
         /// <param name="v2">Second point.</param>
         /// <param name="v3">Third point.</param>
-        public Index(uint v1, uint v2, uint v3)
+        public Index(uint v1, uint v2, uint v3) : this()
         {
             V1 = v1;
             V2 = v2;
@@ -32,7 +32,7 @@ namespace Reload.Core.Math3D.Vertices
         /// <inheritdoc/>
         public override bool Equals(object obj)
         {
-            return obj is Index && Equals((Index)obj);
+            return obj is Index other && Equals(other);
         }
 
         /// <inheritdoc/>

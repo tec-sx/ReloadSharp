@@ -12,7 +12,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Reload.Core.Utils\Reload.Core.Utils.csproj" />
-    <ProjectReference Include="..\..\Core\Reload.Core\Reload.Core.csproj" />
   </ItemGroup>
 
 </Project>

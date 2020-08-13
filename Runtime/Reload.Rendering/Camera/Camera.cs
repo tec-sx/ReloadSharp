@@ -1,6 +1,6 @@
 ﻿using System.Numerics;
 
-namespace Reload.Rendering.Camera
+namespace Reload.Resources.Camera
 {
     /// <summary>
     /// Class for encapsulating a view frustum camera, capable of either orthographic or perspective

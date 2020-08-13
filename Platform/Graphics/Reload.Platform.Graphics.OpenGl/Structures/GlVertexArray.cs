@@ -1,4 +1,4 @@
-﻿using Reload.Rendering.Structures;
+﻿using Reload.Rendering.Buffers;
 using Reload.Platform.Graphics.OpenGl.Properties;
 using Silk.NET.OpenGL;
 using System.Collections.Generic;

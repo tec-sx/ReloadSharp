@@ -1,7 +1,7 @@
-﻿namespace Reload.Platform.Graphics.OpenGl.Structures
-{
-    using Reload.Rendering.Structures;
+﻿using Reload.Rendering.Shaders;
 
+namespace Reload.Platform.Graphics.OpenGl.Structures
+{
     public class GlShaderResourceDeclaration : ShaderResourceDeclaration
     {
         public enum ResourceType

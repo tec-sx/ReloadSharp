@@ -3,11 +3,10 @@ using Silk.NET.Core.Contexts;
 using Silk.NET.Windowing.Common;
 using Reload.Configuration;
 using Reload.Platform.Graphics.OpenGl.Structures;
-using Reload.Rendering;
-using Reload.Rendering.Structures;
 using Silk.NET.OpenGL;
 using System.Collections.Generic;
 using System.IO;
+using Reload.Core.Models.Rendering.Buffers;
 
 namespace Reload.Platform.Graphics.OpenGl
 {
@@ -37,11 +36,6 @@ namespace Reload.Platform.Graphics.OpenGl
             #region Render commands
 
             RenderCommand.Initialize += glRenderer.Initialize;
-            RenderCommand.Clear += glRenderer.Clear;
-            RenderCommand.SetClearColor += glRenderer.SetClearColor;
-            RenderCommand.SetViewportSize += glRenderer.SetViewport;
-            RenderCommand.SetViewportSizeAndLocation += glRenderer.SetViewport;
-            RenderCommand.DrawIndexed += glRenderer.DrawIndexed;
 
             #endregion
 

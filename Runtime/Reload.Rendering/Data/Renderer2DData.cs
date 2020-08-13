@@ -1,4 +1,6 @@
-﻿using Reload.Rendering.Structures;
+﻿using Reload.Rendering.Buffers;
+using Reload.Rendering.Model;
+using Reload.Rendering.Shaders;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
