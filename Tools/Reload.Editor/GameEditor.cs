@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Reload.Core.Game;
 using Reload.Editor.Input;
 using Reload.Editor.Platform;
 using Reload.Scenes;
@@ -10,7 +11,7 @@ namespace Reload.Editor
     /// <summary>
     /// The game editor startup class.
     /// </summary>
-    public sealed class GameEditor: IDisposable
+    public sealed class GameEditor: GameSystem, IDisposable
     {
         private readonly ServiceProvider _provider;
         private readonly MainWindow _window;
@@ -38,20 +39,22 @@ namespace Reload.Editor
             _window = _provider.GetService<MainWindow>();
         }
 
-        /// <summary>
-        /// Initializes the services needed to run the program.
-        /// </summary>
-        public void Initialize()
+        /// <inheritdoc/>
+        public override void Initialize()
         {
             _window.InitWindow();
         }
 
-        /// <summary>
-        /// Starts the main window loop.
-        /// </summary>
-        public void Start()
+        /// <inheritdoc/>
+        public override void Run()
         {
             _window.Show();
+        }
+
+        /// <inheritdoc/>
+        public override void ShutDown()
+        {
+            
         }
 
         ///<inheritdoc/>

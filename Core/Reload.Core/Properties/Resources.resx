@@ -120,13 +120,28 @@
   <data name="BufferElementNullArgumentMessage" xml:space="preserve">
     <value>Argument of type BufferElement is null</value>
   </data>
+  <data name="BuildStartingMessage" xml:space="preserve">
+    <value>Starting to build the game system...</value>
+  </data>
   <data name="DefaultNullArgumentMessage" xml:space="preserve">
     <value>Argument of unspecified type passed.</value>
+  </data>
+  <data name="DefaultOSPlatfromNotSupportedMessage" xml:space="preserve">
+    <value>{0} platform is not supported.</value>
   </data>
   <data name="InvalidShaderDataType" xml:space="preserve">
     <value>Invalid shader data type.</value>
   </data>
   <data name="VertexHasMoreThanFourBones" xml:space="preserve">
     <value>Vertex has more than four bones/weights affecting it, extra data will be discarded (BoneID={0}, Weight={1})</value>
+  </data>
+  <data name="WithAudioBackendMessage" xml:space="preserve">
+    <value>With audio backend: {AudioBackend}</value>
+  </data>
+  <data name="WithGraphicsBackendMessage" xml:space="preserve">
+    <value>With graphics backend: {GraphicsBackend}</value>
+  </data>
+  <data name="WithWindowMessage" xml:space="preserve">
+    <value>With window: {WindowPlatform}</value>
   </data>
 </root>

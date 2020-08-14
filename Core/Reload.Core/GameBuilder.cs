@@ -3,6 +3,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Reload.Core.Audio;
 using Reload.Core.Game;
 using Reload.Core.Graphics;
+using Reload.Core.Properties;
 using Reload.Core.Utilities;
 
 namespace Reload.Core
@@ -13,7 +14,6 @@ namespace Reload.Core
     /// </summary>
     public class GameBuilder<T> where T : GameSystem, new()
     {
-        private readonly string _gamName;
 
         private readonly IServiceCollection _subSystemsCollection;
 
@@ -21,19 +21,9 @@ namespace Reload.Core
         /// Initializes a new instance of the <see cref="GameBuilder"/> class.
         /// </summary>
         public GameBuilder()
-            : this("Default game.")
-        { }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="GameBuilder"/> class.
-        /// </summary>
-        /// <param name="gameName">The game name.</param>
-        public GameBuilder(string gameName)
         {
-            _gamName = gameName;
             _subSystemsCollection = new ServiceCollection();
-
-            Logger.Log().Information($"Starting to build {gameName}...");
+            Logger.Log().Information(Resources.BuildStartingMessage);
         }
 
         /// <summary>
@@ -44,7 +34,6 @@ namespace Reload.Core
         {
             return new T()
             {
-                Name = _gamName,
                 SubSystems = _subSystemsCollection.BuildServiceProvider()
             };
         }
@@ -57,7 +46,7 @@ namespace Reload.Core
         public GameBuilder<T> WithWindow(IGameWindow window)
         {
             _subSystemsCollection.TryAddSingleton(window);
-            Logger.Log().Information($"With window system: {window?.Name}");
+            Logger.Log().Information(Resources.WithWindowMessage ,window?.Name);
 
             return this;
         }
@@ -70,7 +59,7 @@ namespace Reload.Core
         public GameBuilder<T> WithGraphicsBackend(IGraphicsBackend graphicsBackend)
         {
             _subSystemsCollection.TryAddSingleton(graphicsBackend);
-            Logger.Log().Information($"With graphics backend: {graphicsBackend?.Name}");
+            Logger.Log().Information(Resources.WithGraphicsBackendMessage, graphicsBackend?.Name);
 
             return this;
         }
@@ -83,7 +72,7 @@ namespace Reload.Core
         public GameBuilder<T> WithAudioBackend(IAudioBackend audioBackend)
         {
             _subSystemsCollection.TryAddSingleton(audioBackend);
-            Logger.Log().Information($"With audio backend: {audioBackend?.Name}");
+            Logger.Log().Information(Resources.WithAudioBackendMessage ,audioBackend?.Name);
 
             return this;
         }

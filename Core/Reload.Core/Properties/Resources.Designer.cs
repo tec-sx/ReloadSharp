@@ -70,11 +70,29 @@ namespace Reload.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Starting to build the game system....
+        /// </summary>
+        internal static string BuildStartingMessage {
+            get {
+                return ResourceManager.GetString("BuildStartingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Argument of unspecified type passed..
         /// </summary>
         internal static string DefaultNullArgumentMessage {
             get {
                 return ResourceManager.GetString("DefaultNullArgumentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to {0} platform is not supported..
+        /// </summary>
+        internal static string DefaultOSPlatfromNotSupportedMessage {
+            get {
+                return ResourceManager.GetString("DefaultOSPlatfromNotSupportedMessage", resourceCulture);
             }
         }
         
@@ -93,6 +111,33 @@ namespace Reload.Core.Properties {
         internal static string VertexHasMoreThanFourBones {
             get {
                 return ResourceManager.GetString("VertexHasMoreThanFourBones", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With audio backend: {AudioBackend}.
+        /// </summary>
+        internal static string WithAudioBackendMessage {
+            get {
+                return ResourceManager.GetString("WithAudioBackendMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With graphics backend: {GraphicsBackend}.
+        /// </summary>
+        internal static string WithGraphicsBackendMessage {
+            get {
+                return ResourceManager.GetString("WithGraphicsBackendMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With window: {WindowPlatform}.
+        /// </summary>
+        internal static string WithWindowMessage {
+            get {
+                return ResourceManager.GetString("WithWindowMessage", resourceCulture);
             }
         }
     }

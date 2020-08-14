@@ -18,9 +18,11 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<ProjectReference Include="..\..\Core\Reload.Core\Reload.Core.csproj" />
 		<ProjectReference Include="..\..\Platform\Graphics\Reload.Platform.Graphics.OpenGl\Reload.Platform.Graphics.OpenGl.csproj" />
+		<ProjectReference Include="..\..\Platform\OS\Reload.Platform.OS.Linux\Reload.Platform.OS.Linux.csproj" />
+		<ProjectReference Include="..\..\Platform\OS\Reload.Platform.OS.Windows\Reload.Platform.OS.Windows.csproj" />
 		<ProjectReference Include="..\..\Runtime\Reload.AssetSystem\Reload.AssetSystem.csproj" />
-		<ProjectReference Include="..\..\Runtime\Reload.Rendering\Reload.Rendering.csproj" />
 		<ProjectReference Include="..\..\Runtime\Reload.Scenes\Reload.Scenes.csproj" />
 	</ItemGroup>
 

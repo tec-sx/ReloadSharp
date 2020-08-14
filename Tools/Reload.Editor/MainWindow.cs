@@ -1,18 +1,17 @@
-using System.Drawing;
-using Reload.Editor.Properties;
 using Reload.Editor.Factories;
 using SpaceVIL;
 using SpaceVIL.Common;
-using SpaceVIL.Core;
-using SpaceVIL.Decorations;
 using Reload.Editor.UiElements;
+using Reload.Core.Graphics;
 
 namespace Reload.Editor
 {
+    using Reload.Editor.Properties;
+
     /// <summary>
     /// The main program window.
     /// </summary>
-    internal class MainWindow : ActiveWindow
+    internal class MainWindow : ActiveWindow, IGameWindow
     {
         public DefaultViewport _viewport;
 
@@ -24,6 +23,25 @@ namespace Reload.Editor
         {
             _viewport = viewport;
             EventOnStart += OnStart;
+        }
+
+        public int Width { get => GetWidth(); set => SetWidth(value); }
+        
+        public int Height { get => GetHeight(); set => SetHeight(value); }
+
+        public int PositionX { get => GetX(); set => SetX(value); }
+
+        public int PositionY { get => GetY(); set => SetY(value); }
+
+        public bool IsFullScreen { get; set; }
+
+        public bool IsVsyncOn { get; set; }
+        
+        public string Name { get; init; }
+
+        public void Initialize()
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
@@ -42,6 +60,31 @@ namespace Reload.Editor
             IsMaximized = true;
             IsCentered = true;
             IsTransparent = true;
+        }
+
+        public void OnClose()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnRender(double deltaTime)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnStarting()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnUpdate(double deltaTime)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ShutDown()
+        {
+            throw new System.NotImplementedException();
         }
 
         /// <summary>
