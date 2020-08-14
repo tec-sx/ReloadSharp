@@ -7,9 +7,29 @@ using System.Runtime.InteropServices;
 
 namespace Reload.Editor
 {
+    /// <summary>
+    /// The main program.
+    /// </summary>
     class Program
     {
+        /// <summary>
+        /// The main entry point.
+        /// </summary>
+        /// <param name="args">The args.</param>
         static void Main(string[] args)
+        {
+
+            GameSystem game = BuildGameForRuntimeOS();
+
+            game.Run();
+            game.ShutDown();
+        }
+
+        /// <summary>
+        /// Builds the game for the the operating system currently running.
+        /// </summary>
+        /// <returns>A GameSystem.</returns>
+        public static GameSystem BuildGameForRuntimeOS()
         {
             IPlatformOS platform;
 
@@ -26,10 +46,7 @@ namespace Reload.Editor
                 throw new ReloadUnsupporedOSPlatformException();
             }
 
-            GameSystem game = platform.BuildForPlatform<GameEditor>();
-
-            game.Run();
-            game.ShutDown();
+            return platform.BuildForPlatform<GameEditor>();
         }
     }
 }

@@ -5,6 +5,11 @@ namespace Reload.Core.Graphics
     public interface IGameWindow : ISubSystem
     {
         /// <summary>
+        /// Gets the windowing backend type.
+        /// </summary>
+        WindowBackendType BackendType { get; init; }
+
+        /// <summary>
         /// Gets or sets the window width.
         /// </summary>
         int Width { get; set; }

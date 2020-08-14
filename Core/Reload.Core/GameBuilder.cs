@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Reload.Core.Audio;
+using Reload.Core.Extensions;
 using Reload.Core.Game;
 using Reload.Core.Graphics;
 using Reload.Core.Properties;
@@ -46,7 +47,7 @@ namespace Reload.Core
         public GameBuilder<T> WithWindow(IGameWindow window)
         {
             _subSystemsCollection.TryAddSingleton(window);
-            Logger.Log().Information(Resources.WithWindowMessage ,window?.Name);
+            Logger.Log().Information(Resources.WithWindowMessage ,window?.BackendType.GetDescription());
 
             return this;
         }
@@ -59,7 +60,7 @@ namespace Reload.Core
         public GameBuilder<T> WithGraphicsBackend(IGraphicsBackend graphicsBackend)
         {
             _subSystemsCollection.TryAddSingleton(graphicsBackend);
-            Logger.Log().Information(Resources.WithGraphicsBackendMessage, graphicsBackend?.Name);
+            Logger.Log().Information(Resources.WithGraphicsBackendMessage, graphicsBackend?.Type.GetDescription());
 
             return this;
         }
@@ -72,7 +73,7 @@ namespace Reload.Core
         public GameBuilder<T> WithAudioBackend(IAudioBackend audioBackend)
         {
             _subSystemsCollection.TryAddSingleton(audioBackend);
-            Logger.Log().Information(Resources.WithAudioBackendMessage ,audioBackend?.Name);
+            Logger.Log().Information(Resources.WithAudioBackendMessage ,audioBackend?.Type.GetDescription());
 
             return this;
         }
