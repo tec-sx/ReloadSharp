@@ -171,7 +171,7 @@ namespace Reload.Engine
         {
             Window.Load -= OnWindowLoad;
 
-            var glContext = new GlContext(Window);
+            var glContext = new OpenGLBackend(Window);
 
             InputManager.Initialize(Window);
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());

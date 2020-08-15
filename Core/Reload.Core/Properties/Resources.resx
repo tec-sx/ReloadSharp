@@ -124,13 +124,16 @@
     <value>Starting to build the game system...</value>
   </data>
   <data name="DefaultNullArgumentMessage" xml:space="preserve">
-    <value>Argument of unspecified type passed.</value>
+    <value>A null reference is passed to a method that does not accept it as a valid argument</value>
   </data>
   <data name="DefaultOSPlatfromNotSupportedMessage" xml:space="preserve">
-    <value>{0} platform is not supported.</value>
+    <value>{Parameter} platform is not supported.</value>
   </data>
   <data name="InvalidShaderDataType" xml:space="preserve">
     <value>Invalid shader data type.</value>
+  </data>
+  <data name="NullArgumentMessage" xml:space="preserve">
+    <value>A null reference is passed to a method that does not accept it as a valid argument. Parameter: {ParamName}</value>
   </data>
   <data name="VertexHasMoreThanFourBones" xml:space="preserve">
     <value>Vertex has more than four bones/weights affecting it, extra data will be discarded (BoneID={0}, Weight={1})</value>

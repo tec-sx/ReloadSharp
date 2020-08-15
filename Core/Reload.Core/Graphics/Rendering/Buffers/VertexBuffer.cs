@@ -82,9 +82,9 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         public abstract void Unbind();
 
         /// <summary>
-        /// Dispose method overload with disposing parameter that indicates 
-        /// whether the method call comes from a Dispose method 
-        /// (its value is true) or from a finalizer
+        /// Protected dispose method overload with disposing parameter that indicates 
+        /// whether the method call comes from a Dispose method (value is true) or
+        /// from a finalizer (value is false)
         /// </summary>
         /// <param name="disposing"></param>
         protected abstract void Dispose(bool disposing);

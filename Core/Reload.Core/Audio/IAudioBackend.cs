@@ -7,6 +7,6 @@ namespace Reload.Core.Audio
         /// <summary>
         /// Gets the audio backend type.
         /// </summary>
-        AudioBackendType Type { get; init; }
+        AudioBackendType Type { get; }
     }
 }

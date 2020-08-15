@@ -79,7 +79,7 @@ namespace Reload.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Argument of unspecified type passed..
+        ///   Looks up a localized string similar to A null reference is passed to a method that does not accept it as a valid argument.
         /// </summary>
         internal static string DefaultNullArgumentMessage {
             get {
@@ -88,7 +88,7 @@ namespace Reload.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to {0} platform is not supported..
+        ///   Looks up a localized string similar to {Parameter} platform is not supported..
         /// </summary>
         internal static string DefaultOSPlatfromNotSupportedMessage {
             get {
@@ -102,6 +102,15 @@ namespace Reload.Core.Properties {
         internal static string InvalidShaderDataType {
             get {
                 return ResourceManager.GetString("InvalidShaderDataType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to A null reference is passed to a method that does not accept it as a valid argument. Parameter: {ParamName}.
+        /// </summary>
+        internal static string NullArgumentMessage {
+            get {
+                return ResourceManager.GetString("NullArgumentMessage", resourceCulture);
             }
         }
         

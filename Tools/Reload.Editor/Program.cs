@@ -1,6 +1,9 @@
 ﻿using Reload.Core;
 using Reload.Core.Exceptions;
 using Reload.Core.Game;
+using Reload.Editor.Platform;
+using Reload.Platform.Audio.OpenAl;
+using Reload.Platform.Graphics.OpenGl;
 using Reload.Platform.OS.Linux;
 using Reload.Platform.OS.Windows;
 using System.Runtime.InteropServices;
@@ -18,9 +21,9 @@ namespace Reload.Editor
         /// <param name="args">The args.</param>
         static void Main(string[] args)
         {
-
             GameSystem game = BuildGameForRuntimeOS();
 
+            game.Initilize();
             game.Run();
             game.ShutDown();
         }
@@ -31,22 +34,31 @@ namespace Reload.Editor
         /// <returns>A GameSystem.</returns>
         public static GameSystem BuildGameForRuntimeOS()
         {
-            IPlatformOS platform;
+            GameBuilder<GameEditor> gameBuilder;
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                platform = new PlatformLinux();
+                gameBuilder = new GameBuilder<GameEditor>(new PlatformLinux());
+                gameBuilder = gameBuilder
+                    .WithGraphicsBackend<OpenGLBackend>()
+                    .WithAudioBackend<OpenAlBackend>();
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                platform = new PlatformWindows();
+                gameBuilder = new GameBuilder<GameEditor>(new PlatformWindows());
+                gameBuilder = gameBuilder
+                    .WithGraphicsBackend<OpenGLBackend>()
+                    .WithAudioBackend<OpenAlBackend>();
             }
             else
             {
                 throw new ReloadUnsupporedOSPlatformException();
             }
 
-            return platform.BuildForPlatform<GameEditor>();
+            return gameBuilder
+                    .WithWindow<MainWindow>()
+                    .BuildForPlatform();
+
         }
     }
 }

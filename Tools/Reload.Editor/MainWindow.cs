@@ -3,10 +3,10 @@ using SpaceVIL;
 using SpaceVIL.Common;
 using Reload.Editor.UiElements;
 using Reload.Core.Graphics;
+using System;
 
 namespace Reload.Editor
 {
-    using Reload.Editor.Properties;
 
     /// <summary>
     /// The main program window.
@@ -39,6 +39,10 @@ namespace Reload.Editor
         
         public string Name { get; init; }
 
+        public WindowBackendType BackendType => WindowBackendType.Glfw;
+
+        public IntPtr Handle => throw new NotImplementedException();
+
         public void Initialize()
         {
             throw new System.NotImplementedException();
@@ -49,7 +53,7 @@ namespace Reload.Editor
         /// </summary>
         public override void InitWindow()
         {
-            string windowTitle = $"{Resources.Name} - v.{Resources.Version}";
+            string windowTitle = $"{Properties.Resources.Name} - v.{Properties.Resources.Version}";
             
             int displayWidth = DisplayService.GetDisplayWidth();
             int displayHeight = DisplayService.GetDisplayHeight();

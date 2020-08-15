@@ -2,7 +2,7 @@
 
 namespace Reload.Core.Exceptions
 {
-    class ReloadGraphicsBackendNotSupportedException : Exception
+    class ReloadInputNotSupportedException : Exception
     {
     }
 }

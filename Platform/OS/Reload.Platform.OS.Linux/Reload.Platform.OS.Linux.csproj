@@ -6,6 +6,9 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Reload.Core\Reload.Core.csproj" />
+    <ProjectReference Include="..\..\Audio\Reload.Platform.Audio.OpenAl\Reload.Platform.Audio.OpenAl.csproj" />
+    <ProjectReference Include="..\..\Graphics\Reload.Platform.Graphics.OpenGl\Reload.Platform.Graphics.OpenGl.csproj" />
+    <ProjectReference Include="..\..\Graphics\Reload.Platform.Graphics.Vulkan\Reload.Platform.Graphics.Vulkan.csproj" />
   </ItemGroup>
 
 </Project>

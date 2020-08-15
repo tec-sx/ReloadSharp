@@ -5,4 +5,8 @@
     <LangVersion>preview</LangVersion>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Reload.Core\Reload.Core.csproj" />
+  </ItemGroup>
+
 </Project>

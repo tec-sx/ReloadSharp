@@ -13,11 +13,8 @@ namespace Reload.Core.Graphics
         [Description("Vulkan")]
         Vulkan,
 
-        [Description("DirectX 11")]
-        DirectX11,
-
-        [Description("DirectX 12")]
-        DirectX12,
+        [Description("DirectX")]
+        DirectX,
 
         [Description("Metal")]
         Metal,

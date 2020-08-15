@@ -19,7 +19,7 @@ namespace Reload.Editor
         /// <summary>
         /// Initializes a new instance of the <see cref="GameEditor"/> class
         /// and sets up the DI provider and services.
-        /// Should call <seealso cref="Initialize"/> and <seealso cref="Start"/>
+        /// Should call <seealso cref="OnInitialize"/> and <seealso cref="Start"/>
         /// after initialization.
         /// </summary>
         public GameEditor()
@@ -40,7 +40,7 @@ namespace Reload.Editor
         }
 
         /// <inheritdoc/>
-        public override void Initialize()
+        public override void OnInitialize()
         {
             _window.InitWindow();
         }
@@ -52,7 +52,7 @@ namespace Reload.Editor
         }
 
         /// <inheritdoc/>
-        public override void ShutDown()
+        public override void OnShutDown()
         {
             
         }
