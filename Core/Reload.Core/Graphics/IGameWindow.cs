@@ -8,12 +8,12 @@ namespace Reload.Core.Graphics
         /// <summary>
         /// Gets the windowing backend type.
         /// </summary>
-        WindowBackendType BackendType { get; init; }
+        WindowBackendType BackendType { get; }
 
         /// <summary>
         /// Gets the native window handle.
         /// </summary>
-        IntPtr Handle { get; init; }
+        IntPtr Handle { get; }
 
         /// <summary>
         /// Gets or sets the window width.

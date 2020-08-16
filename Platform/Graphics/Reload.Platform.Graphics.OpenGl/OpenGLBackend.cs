@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using System.IO;
 using Reload.Core.Graphics.Rendering.Buffers;
 using Reload.Core.Graphics;
+using Reload.Rendering.Shaders;
+using Reload.Rendering;
+using Reload.Resources.Model;
 
 namespace Reload.Platform.Graphics.OpenGl
 {
@@ -15,9 +18,13 @@ namespace Reload.Platform.Graphics.OpenGl
     {
         public GraphicsBackendType Type { get; init; } = GraphicsBackendType.OpenGL;
 
-        public GL Api { get; }
+        public GL Api { get; init; }
 
-        private 
+        public GraphicsAPIVersion Version => throw new NotImplementedException();
+
+        public OpenGLBackend()
+        { }
+        
         public OpenGLBackend(IWindow window)
             : this(window.GLContext)
         { }
@@ -73,7 +80,7 @@ namespace Reload.Platform.Graphics.OpenGl
 
             #region Buffers
 
-            VertexBuffer.Create += (vertices, layout, usage) => new GlVertexBuffer(vertices, layout, Api);
+            VertexBuffer.Create += (vertices, layout, usage) => new OpenGlVertexBuffer(vertices, layout, Api);
             IndexBuffer.Create += (indices) => new GlIndexBuffer(indices, Api);
             VertexArray.Create += () => new GlVertexArray(Api);
 

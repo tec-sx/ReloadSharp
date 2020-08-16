@@ -41,14 +41,14 @@ namespace Reload.Editor
                 gameBuilder = new GameBuilder<GameEditor>(new PlatformLinux());
                 gameBuilder = gameBuilder
                     .WithGraphicsBackend<OpenGLBackend>()
-                    .WithAudioBackend<OpenAlBackend>();
+                    .WithAudioBackend<OpenAl>();
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 gameBuilder = new GameBuilder<GameEditor>(new PlatformWindows());
                 gameBuilder = gameBuilder
                     .WithGraphicsBackend<OpenGLBackend>()
-                    .WithAudioBackend<OpenAlBackend>();
+                    .WithAudioBackend<OpenAl>();
             }
             else
             {

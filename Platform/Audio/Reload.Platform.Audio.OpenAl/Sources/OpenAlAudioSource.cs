@@ -1,15 +1,14 @@
-﻿namespace Reload.Audio
-{
-    using Codec;
-    using Silk.NET.OpenAL;
-    using System;
-    using System.Diagnostics;
-    using System.IO;
-    using System.Numerics;
-    using System.Threading;
-    using System.Threading.Tasks;
+﻿using Reload.Core.Audio;
+using Silk.NET.OpenAL;
+using System;
+using System.IO;
+using System.Numerics;
+using System.Threading;
+using System.Threading.Tasks;
 
-    public sealed class AudioSource : IDisposable
+namespace Reload.Platform.Audio.OpenAl
+{
+    public class OpenAlAudioSource : AudioSource
     {
         private readonly uint _source;
         private readonly Decoder _decoder;
@@ -86,9 +85,9 @@
             ALNative.DeleteSource(_source);
         }
 
-        public void Play(bool loop)
+        public void Play(bool loopPlayback)
         {
-            Looping = loop;
+            Looping = loopPlayback;
             ALNative.SourcePlay(_source);
             _timer.Start();
 

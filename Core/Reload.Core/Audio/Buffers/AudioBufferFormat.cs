@@ -1,19 +1,19 @@
 ﻿using System.ComponentModel;
 
-namespace Reload.Core.Audio
+namespace Reload.Core.Audio.Buffers
 {
-    public enum BufferFormat
+    public enum AudioBufferFormat
     {
         [Description("1 Channel, 8 bits per sample.")]  
-        Mono8 = 4352,
+        Mono8,
         
         [Description("1 Channel, 16 bits per sample.")]
-        Mono16 = 4353,
+        Mono16,
 
         [Description("2 Channels, 8 bits per sample each.")]
-        Stereo8 = 4354,
+        Stereo8,
         
         [Description("2 Channels, 16 bits per sample each.")] 
-        Stereo16 = 4355
+        Stereo16
     }
 }

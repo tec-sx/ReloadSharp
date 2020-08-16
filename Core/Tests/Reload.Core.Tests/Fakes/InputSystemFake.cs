@@ -4,7 +4,7 @@ namespace Reload.Core.Tests.Fakes
 {
     internal class InputSystemFake : IInputSystem
     {
-        public InputSourceType Source { get; init; } = InputSourceType.None;
+        public InputSourceType Source => InputSourceType.None;
 
         public void Initialize()
         { }

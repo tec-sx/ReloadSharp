@@ -10,32 +10,28 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         Dynamic
     }
 
-    public delegate VertexBuffer CreateVertexBufferDelegate(
-        Span<float> data, 
-        BufferLayout layout, 
-        VertexBufferUsage usage);
-
-    public delegate VertexBuffer CreateEmptyVertexBufferDelegate(
-        uint size, 
-        BufferLayout layout, 
-        VertexBufferUsage usage = VertexBufferUsage.Dynamic);
-
     /// <summary>
     /// The vertex buffer.
     /// </summary>
     public abstract class VertexBuffer : IBuffer, IDisposable
     {
-        protected static CreateVertexBufferDelegate _createVertexBuffer;
-
-        protected static CreateEmptyVertexBufferDelegate _createEmptyVertexBuffer;
-
         /// <summary>
         /// Gets the vertex shader data input layout.
         /// </summary>
         public BufferLayout Layout { get; }
 
         /// <summary>
-        /// Factory method delegate for creating a new vertex buffer with predefined data.
+        /// Initializes a new instance of the <see cref="VertexBuffer"/> class
+        /// with shader layout defined by the layout parameter.
+        /// </summary>
+        public VertexBuffer(BufferLayout layout)
+        {
+            Layout = layout;
+        }
+
+
+        /// <summary>
+        /// Factory method for creating a new vertex buffer with predefined data.
         /// </summary>
         /// <param name="data">The data.</param>
         /// <param name="layout">The buffer layout.</param>
@@ -47,11 +43,11 @@ namespace Reload.Core.Graphics.Rendering.Buffers
             BufferLayout layout,
             VertexBufferUsage usage = VertexBufferUsage.Static)
         {
-            return _createVertexBuffer?.Invoke(data, layout, usage);
+            return BufferFactory.Create().VertexBuffer(data, layout, usage);
         }
 
         /// <summary>
-        /// Factory method delegate for creating a new empty vertex buffer.
+        /// Factory method for creating a new empty vertex buffer.
         /// </summary>
         /// <param name="size">The buffer size.</param>
         /// <param name="layout">The buffer layout.</param>
@@ -63,16 +59,7 @@ namespace Reload.Core.Graphics.Rendering.Buffers
             BufferLayout layout,
             VertexBufferUsage usage = VertexBufferUsage.Dynamic)
         {
-            return _createEmptyVertexBuffer?.Invoke(size, layout, usage);
-        }
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="VertexBuffer"/> class
-        /// with shader layout defined by the layout parameter.
-        /// </summary>
-        public VertexBuffer(BufferLayout layout)
-        {
-            Layout = layout;
+            return BufferFactory.Create().VertexBuffer(size, layout, usage);
         }
 
         /// <inheritdoc/>

@@ -5,9 +5,9 @@ namespace Reload.Core.Tests.Fakes
 {
     internal class GameWindowFake : IGameWindow
     {
-        public WindowBackendType BackendType { get; init; } = WindowBackendType.None;
+        public WindowBackendType BackendType => WindowBackendType.None;
 
-        public IntPtr Handle { get; init; } = IntPtr.Zero;
+        public IntPtr Handle => IntPtr.Zero;
 
         public int Width { get; set; }
         public int Height { get; set; }

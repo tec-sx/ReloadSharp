@@ -4,9 +4,9 @@ namespace Reload.Core.Tests.Fakes
 {
     internal class AudioBackendFake : IAudioBackend
     {
-        public AudioBackendType Type { get; init; } = AudioBackendType.None;
+        public AudioBackendType Type => AudioBackendType.None;
 
-        public void BufferData<T>(uint buffer, BufferFormat bufferFormat, T[] data, int sampleRate) where T : unmanaged
+        public void BufferData<T>(uint buffer, AudioBufferFormat bufferFormat, T[] data, int sampleRate) where T : unmanaged
         { }
 
         public void DeleteBuffer(uint buffer)

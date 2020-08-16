@@ -7,6 +7,6 @@ namespace Reload.Core.Input
         /// <summary>
         /// Gets the input source the system is listening to.
         /// </summary>
-        InputSourceType Source { get; init; }
+        InputSourceType Source { get; }
     }
 }

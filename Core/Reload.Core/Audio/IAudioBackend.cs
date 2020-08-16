@@ -7,22 +7,6 @@ namespace Reload.Core.Audio
         /// <summary>
         /// Gets the audio backend type.
         /// </summary>
-        AudioBackendType Type { get; init; }
-
-        bool IsExtensionPresent(string ext);
-
-        #region Generators
-
-        uint GenerateBuffer();
-
-        void DeleteBuffer(uint buffer);
-
-        void BufferData<T>(uint buffer, BufferFormat bufferFormat, T[] data, int sampleRate)
-            where T : unmanaged;
-
-        uint GenerateSource();
-
-        void DeleteSource(uint source);
-        #endregion
+        AudioBackendType Type { get; }
     }
 }

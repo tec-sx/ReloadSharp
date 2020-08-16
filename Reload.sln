@@ -120,9 +120,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Core.Tests", "Core\T
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OS", "OS", "{676D1EA1-4D41-4F50-A34A-5DAD5743DB75}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Platform.OS.Windows", "Platform\OS\Reload.Platform.OS.Windows\Reload.Platform.OS.Windows.csproj", "{E7FAC3AE-9B03-4455-B132-9AB3A3F6CA45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Platform.OS.Windows", "Platform\OS\Reload.Platform.OS.Windows\Reload.Platform.OS.Windows.csproj", "{E7FAC3AE-9B03-4455-B132-9AB3A3F6CA45}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Platform.OS.Linux", "Platform\OS\Reload.Platform.OS.Linux\Reload.Platform.OS.Linux.csproj", "{9ABD8CF2-3754-437D-BE29-3F4B74D426A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reload.Platform.OS.Linux", "Platform\OS\Reload.Platform.OS.Linux\Reload.Platform.OS.Linux.csproj", "{9ABD8CF2-3754-437D-BE29-3F4B74D426A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Reload.Platform.Audio.XAudio2", "Platform\Audio\Reload.Platform.Audio.XAudio2\Reload.Platform.Audio.XAudio2.csproj", "{C3E31A3B-F585-430F-A47D-BFFDCBD2553A}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -288,6 +290,10 @@ Global
 		{9ABD8CF2-3754-437D-BE29-3F4B74D426A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9ABD8CF2-3754-437D-BE29-3F4B74D426A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9ABD8CF2-3754-437D-BE29-3F4B74D426A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3E31A3B-F585-430F-A47D-BFFDCBD2553A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3E31A3B-F585-430F-A47D-BFFDCBD2553A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3E31A3B-F585-430F-A47D-BFFDCBD2553A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3E31A3B-F585-430F-A47D-BFFDCBD2553A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -344,6 +350,7 @@ Global
 		{676D1EA1-4D41-4F50-A34A-5DAD5743DB75} = {B65F8FCC-F76B-4272-B274-090695792D22}
 		{E7FAC3AE-9B03-4455-B132-9AB3A3F6CA45} = {676D1EA1-4D41-4F50-A34A-5DAD5743DB75}
 		{9ABD8CF2-3754-437D-BE29-3F4B74D426A1} = {676D1EA1-4D41-4F50-A34A-5DAD5743DB75}
+		{C3E31A3B-F585-430F-A47D-BFFDCBD2553A} = {B14F5E64-B32F-4D73-8F1C-04CE788EB27F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A519BFB5-B378-4C0B-B29E-095A0C925278}

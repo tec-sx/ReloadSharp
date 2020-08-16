@@ -1,5 +1,4 @@
-﻿using Reload.Core.Audio;
-using Reload.Platform.Audio.OpenAl.Exceptions;
+﻿using Reload.Platform.Audio.OpenAl.Exceptions;
 using Silk.NET.OpenAL;
 using System.Numerics;
 
@@ -8,23 +7,13 @@ namespace Reload.Platform.Audio.OpenAl
     /// <summary>
     /// The OpenAL audio backend.
     /// </summary>
-    public class OpenAlBackend : IAudioBackend
+    public static class OpenAl
     {
-        /// <inheritdoc/>
-        public AudioBackendType Type => AudioBackendType.OpenAL;
-
-        /// <inheritdoc/>
-        public void Initialize()
-        {
-        }
-
-        /// <inheritdoc/>
-        public void ShutDown()
-        {
-        }
-
         private static readonly AL api = AL.GetApi();
 
+        /// <summary>
+        /// Checks the for OpenAL error codes and throw corresponding exceptions.
+        /// </summary>
         private static void CheckForErrors()
         {
             switch (api.GetError())
@@ -39,14 +28,23 @@ namespace Reload.Platform.Audio.OpenAl
             };
         }
 
-        public bool IsExtensionPresent(string ext)
+        /// <summary>
+        /// Checks whether an extension is present on the current api.
+        /// </summary>
+        /// <param name="extension">The extension to be checked.</param>
+        /// <returns>A bool.</returns>
+        public static bool IsExtensionPresent(string extension)
         {
-            return api.IsExtensionPresent(ext);
+            return api.IsExtensionPresent(extension);
         }
 
         #region Generators
 
-        public uint GenerateBuffer()
+        /// <summary>
+        /// Generates audio buffer.
+        /// </summary>
+        /// <returns>An audio buffer handle as uint.</returns>
+        public static uint GenerateBuffer()
         {
             var buffer = api.GenBuffer();
             CheckForErrors();
@@ -54,20 +52,35 @@ namespace Reload.Platform.Audio.OpenAl
             return buffer;
         }
 
-        public void DeleteBuffer(uint buffer)
+        /// <summary>
+        /// Deletes the passed audio buffer.
+        /// </summary>
+        /// <param name="buffer">The audio buffer handle.</param>
+        public static void DeleteBuffer(uint buffer)
         {
             api.DeleteBuffer(buffer);
             CheckForErrors();
         }
 
-        public void BufferData<T>(uint buffer, BufferFormat bufferFormat, T[] data, int sampleRate)
+        /// <summary>
+        /// Sets the data to the specified buffer.
+        /// </summary>
+        /// <param name="buffer">The buffer to set the data to.</param>
+        /// <param name="bufferFormat">The buffer format.</param>
+        /// <param name="data">The data to be set.</param>
+        /// <param name="sampleRate">The sample rate of the data.</param>
+        public static void BufferData<T>(uint buffer, BufferFormat bufferFormat, T[] data, int sampleRate)
             where T : unmanaged
         {
             api.BufferData(buffer, bufferFormat, data, sampleRate);
             CheckForErrors();
         }
 
-        public uint GenerateSource()
+        /// <summary>
+        /// Generates an audio source.
+        /// </summary>
+        /// <returns>An audio source handle as an uint.</returns>
+        public static uint GenerateSource()
         {
             var source = api.GenSource();
             CheckForErrors();
@@ -75,7 +88,11 @@ namespace Reload.Platform.Audio.OpenAl
             return source;
         }
 
-        public void DeleteSource(uint source)
+        /// <summary>
+        /// Deletes the source.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        public static void DeleteSource(uint source)
         {
             api.DeleteSource(source);
             CheckForErrors();
@@ -85,7 +102,7 @@ namespace Reload.Platform.Audio.OpenAl
 
         #region Source setup
 
-        public void SetDistanceModel(DistanceModel model)
+        public static void SetDistanceModel(DistanceModel model)
         {
             api.DistanceModel(model);
             CheckForErrors();
@@ -95,7 +112,7 @@ namespace Reload.Platform.Audio.OpenAl
 
         #region Get source properties
 
-        public int GetSourceProperty(uint source, GetSourceInteger param)
+        public static int GetSourceProperty(uint source, GetSourceInteger param)
         {
             api.GetSourceProperty(source, param, out int value);
             CheckForErrors();
@@ -103,7 +120,7 @@ namespace Reload.Platform.Audio.OpenAl
             return value;
         }
 
-        public float GetSourceProperty(uint source, SourceFloat param)
+        public  static float GetSourceProperty(uint source, SourceFloat param)
         {
             api.GetSourceProperty(source, param, out float value);
             CheckForErrors();
@@ -111,7 +128,7 @@ namespace Reload.Platform.Audio.OpenAl
             return value;
         }
 
-        public bool GetSourceProperty(uint source, SourceBoolean param)
+        public static bool GetSourceProperty(uint source, SourceBoolean param)
         {
             api.GetSourceProperty(source, param, out bool value);
             CheckForErrors();
@@ -119,7 +136,7 @@ namespace Reload.Platform.Audio.OpenAl
             return value;
         }
 
-        public Vector3 GetSourceProperty(uint source, SourceVector3 param)
+        public static Vector3 GetSourceProperty(uint source, SourceVector3 param)
         {
             api.GetSourceProperty(source, param, out Vector3 value);
             CheckForErrors();

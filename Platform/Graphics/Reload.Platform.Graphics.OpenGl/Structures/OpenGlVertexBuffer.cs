@@ -1,4 +1,4 @@
-﻿using Reload.Rendering.Buffers;
+﻿using Reload.Core.Graphics.Rendering.Buffers;
 using Silk.NET.OpenGL;
 using System;
 
@@ -7,7 +7,7 @@ namespace Reload.Platform.Graphics.OpenGl.Structures
     /// <summary>
     /// The OpenGL vertex buffer.
     /// </summary>
-    public sealed class GlVertexBuffer : VertexBuffer
+    public sealed class OpenGlVertexBuffer : VertexBuffer
     {
         /// <summary>
         /// The OpenGl buffer type constant set to array buffer.
@@ -18,12 +18,14 @@ namespace Reload.Platform.Graphics.OpenGl.Structures
 
         private readonly uint _handle;
 
+        private bool _isDisposed;
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="GlVertexBuffer"/> class.
+        /// Initializes a new instance of the <see cref="OpenGlVertexBuffer"/> class.
         /// </summary>
         /// <param name="data">The buffer data.</param>
         /// <param name="api">The OpenGl api handle.</param>
-        public unsafe GlVertexBuffer(Span<float> data, BufferLayout layout, GL api)
+        public unsafe OpenGlVertexBuffer(Span<float> data, BufferLayout layout, GL api)
             : base(layout)
         {
             _gl = api;
@@ -53,9 +55,19 @@ namespace Reload.Platform.Graphics.OpenGl.Structures
         }
 
         /// <inheritdoc/>
-        public override void Dispose()
+        protected override void Dispose(bool isDisposing)
         {
-            _gl.DeleteBuffer(_handle);
+            if (_isDisposed)
+            {
+                return;
+            }
+
+            if (isDisposing)
+            {
+                _gl.DeleteBuffer(_handle);
+            }
+
+            _isDisposed = true;
         }
     }
 }
