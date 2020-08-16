@@ -21,9 +21,7 @@ namespace Reload.Graphics
         {
             var options = CreateWindowOptionsFromConfiguration(displayConfiguration);
             var window = Window.Create(options);
-            window.API.API;
-            window.API.Version;
-            window.Handle
+
             return Window.Create(options);
         }
 

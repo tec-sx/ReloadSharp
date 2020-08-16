@@ -8,7 +8,7 @@
 
     public class ReloadAudioTests : IDisposable
     {
-        private readonly AudioManager _audioManager = new AudioManager();
+        private readonly AudioSystem _audioManager = new AudioSystem();
 
         public void Dispose() => _audioManager.ShutDown();
 

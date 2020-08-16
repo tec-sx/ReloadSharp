@@ -140,15 +140,12 @@ namespace Reload.Core
                 SubSystemLifetime.Singleton => Reuse.Singleton,
                 SubSystemLifetime.Transient => Reuse.Transient,
                 SubSystemLifetime.Scoped => Reuse.Scoped,
-                _ => null
+                _ => throw new ReloadInvalidEnumValueException()
             };
 
-            if (reuse != null)
-            {
-                _subSystems.Register<ISubSystem, T>(reuse);
-                _subSystems.RegisterInitializer<ISubSystem>((subSystem, resolver) =>
-                    Logger.Log().Information(Resources.WithAudioBackendMessage, subSystem.ToString()));
-            }
+            _subSystems.Register<ISubSystem, T>(reuse);
+            _subSystems.RegisterInitializer<ISubSystem>((subSystem, resolver) =>
+                Logger.Log().Information(Resources.WithAudioBackendMessage, subSystem.ToString()));
 
             return this;
         }

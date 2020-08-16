@@ -2,7 +2,7 @@
 
 namespace Reload.Core.Exceptions
 {
-    public class ReloadInputNotSupportedException : Exception
+    public class ReloadInvalidEnumValueException : Exception
     {
     }
 }

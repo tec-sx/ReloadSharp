@@ -2,7 +2,7 @@
 
 namespace Reload.Core.Exceptions
 {
-    class ReloadWindowBackendNotSupportedException : Exception
+    public class ReloadWindowBackendNotSupportedException : Exception
     {
     }
 }

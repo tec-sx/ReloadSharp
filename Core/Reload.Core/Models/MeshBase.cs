@@ -1,5 +1,5 @@
-﻿using Reload.Core.Rendering.Buffers;
-using Reload.Core.Structures;
+﻿using Reload.Core.Graphics.Rendering.Buffers;
+using Reload.Core.Graphics.Rendering.Structures;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -20,8 +20,6 @@ namespace Reload.Core.Models
         private Dictionary<string, uint> _boneMappings;
 
         private List<Matrix4x4> _boneTransforms;
-
-        private Gltf::Scene _scene;
 
         private bool _isAnimated;
 

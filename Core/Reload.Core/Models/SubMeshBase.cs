@@ -1,4 +1,4 @@
-﻿using Reload.Core.Physics.Collision;
+﻿using Reload.Core.Models.Physics.Collision;
 using System.Numerics;
 
 namespace Reload.Core.Models

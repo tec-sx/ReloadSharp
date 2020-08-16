@@ -7,7 +7,7 @@ namespace Reload.Core.Graphics
         /// <summary>
         /// Gets the graphics backend type.
         /// </summary>
-        GraphicsBackendType Type { get; }
+        GraphicsBackendType Type { get; init; }
 
         /// <summary>
         /// Gets the backend API version.

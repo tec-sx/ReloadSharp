@@ -53,7 +53,7 @@ namespace Reload.Engine
         /// <summary>
         /// Audio manager.
         /// </summary>
-        public AudioManager AudioManager { get; }
+        public AudioSystem AudioManager { get; }
 
         /// <summary>
         /// Assets manager.
@@ -85,7 +85,7 @@ namespace Reload.Engine
                 .AddSingleton<ConfigurationManager>()
                 .AddSingleton<GraphicsManager>()
                 .AddSingleton<InputManager>()
-                .AddSingleton<AudioManager>()
+                .AddSingleton<AudioSystem>()
 
             #endregion
 
@@ -106,7 +106,7 @@ namespace Reload.Engine
             ConfigurationManager = SubSystems.GetService<ConfigurationManager>();
             GraphicsManager = SubSystems.GetService<GraphicsManager>();
             InputManager = SubSystems.GetService<InputManager>();
-            AudioManager = SubSystems.GetService<AudioManager>();
+            AudioManager = SubSystems.GetService<AudioSystem>();
 
             AssetsManager = SubSystems.GetService<IAssetsManager>();
             SceneMachine = SubSystems.GetService<SceneMachine>();

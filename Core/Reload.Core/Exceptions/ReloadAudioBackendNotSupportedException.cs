@@ -2,7 +2,7 @@
 
 namespace Reload.Core.Exceptions
 {
-    class ReloadAudioBackendNotSupportedException : Exception
+    public class ReloadAudioBackendNotSupportedException : Exception
     {
     }
 }

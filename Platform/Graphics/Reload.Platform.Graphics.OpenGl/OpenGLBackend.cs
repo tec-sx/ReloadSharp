@@ -13,10 +13,11 @@ namespace Reload.Platform.Graphics.OpenGl
 {
     public class OpenGLBackend : IGraphicsBackend
     {
-        public GraphicsBackendType Type { get; } = GraphicsBackendType.OpenGL;
+        public GraphicsBackendType Type { get; init; } = GraphicsBackendType.OpenGL;
 
         public GL Api { get; }
 
+        private 
         public OpenGLBackend(IWindow window)
             : this(window.GLContext)
         { }
