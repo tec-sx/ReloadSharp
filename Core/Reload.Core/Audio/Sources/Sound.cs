@@ -1,7 +1,6 @@
-using Reload.Core.Audio;
 using System.Numerics;
 
-namespace Reload.Audio
+namespace Reload.Core.Audio
 {
     public class Sound
     {

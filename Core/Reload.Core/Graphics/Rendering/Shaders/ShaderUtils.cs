@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Reload.Core.Properties;
 
 namespace Reload.Core.Graphics.Rendering.Shaders
@@ -9,6 +10,19 @@ namespace Reload.Core.Graphics.Rendering.Shaders
     /// </summary>
     public static class ShaderUtils
     {
+        /// <summary>
+        /// Gets the shader types.
+        /// </summary>
+        public static Dictionary<string, ShaderType> ShaderTypes { get; } = new Dictionary<string, ShaderType>
+        {
+            {"vertex", ShaderType.VertexShader},
+            {"fragment", ShaderType.FragmentShader },
+            {"geometry", ShaderType.GeometryShader },
+            {"compute", ShaderType.ComputeShader },
+            {"tess_control", ShaderType.TessControlShader },
+            {"tess_evaluation", ShaderType.TessEvaluationShader }
+        };
+
         /// <summary>
         /// Gets the shader data type size.
         /// </summary>

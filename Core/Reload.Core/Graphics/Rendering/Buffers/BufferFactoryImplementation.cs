@@ -32,5 +32,11 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         /// <param name="indices">The indices.</param>
         /// <returns>An IndexBuffer.</returns>
         public abstract IndexBuffer IndexBuffer(Span<uint> indices);
+
+        /// <summary>
+        /// Creates a new vertex array.
+        /// </summary>
+        /// <returns>A VertexArray.</returns>
+        public abstract VertexArray VertexArray();
     }
 }

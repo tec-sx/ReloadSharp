@@ -16,6 +16,7 @@ namespace Reload.Platform.Graphics.OpenGl
 {
     public class OpenGLBackend : IGraphicsBackend
     {
+        /// <inheritdoc/>
         public GraphicsBackendType Type { get; init; } = GraphicsBackendType.OpenGL;
 
         public GL Api { get; init; }
@@ -39,30 +40,6 @@ namespace Reload.Platform.Graphics.OpenGl
             Api = GL.GetApi(getProcAddress);
         }
 
-        public ShaderProgram CreateShader(string fileName, List<string> attributes)
-        {
-            string shaderFile = Path.Combine(ContentPaths.Shaders, $"{fileName}.glsl");
-            string shaderString = File.ReadAllText(shaderFile);
-
-            ShaderProgram shaderProgram = new GlShaderProgram(fileName, Api);
-
-            var shaderSources = shaderProgram.PreProcessShader(shaderString);
-
-            foreach (var (shaderType, shaderSource) in shaderSources)
-            {
-                shaderProgram.CompileShader(shaderType, shaderSource);
-            }
-
-            if (attributes != null && attributes.Count > 0)
-            {
-                attributes.ForEach(attribute => shaderProgram.AddAttribute(attribute));
-            }
-
-            shaderProgram.LinkShaders();
-
-            return shaderProgram;
-        }
-
         public void Initialize()
         {
             #region Render commands
@@ -82,7 +59,7 @@ namespace Reload.Platform.Graphics.OpenGl
 
             VertexBuffer.Create += (vertices, layout, usage) => new OpenGlVertexBuffer(vertices, layout, Api);
             IndexBuffer.Create += (indices) => new GlIndexBuffer(indices, Api);
-            VertexArray.Create += () => new GlVertexArray(Api);
+            VertexArray.Create += () => new OpenGlVertexArray(Api);
 
             #endregion
 

@@ -30,13 +30,6 @@ namespace Reload.Core.Audio.Buffers
         /// <returns>An AudioBuffer.</returns>
         public static AudioBuffer Create() => AudioFactory.Create().AudioBuffer();
 
-        /// <inheritdoc/>
-        public void Dispose()
-        {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
         /// <summary>
         /// Protected dispose method overload with disposing parameter that indicates 
         /// whether the method call comes from a Dispose method (value is true) or
@@ -44,5 +37,12 @@ namespace Reload.Core.Audio.Buffers
         /// </summary>
         /// <param name="disposing"></param>
         protected abstract void Dispose(bool disposing);
+
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
     }
 }

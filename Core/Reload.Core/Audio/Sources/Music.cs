@@ -1,7 +1,6 @@
-using Reload.Core.Audio;
 using System;
 
-namespace Reload.Audio
+namespace Reload.Core.Audio
 {
     public class Music
     {

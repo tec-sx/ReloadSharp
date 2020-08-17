@@ -1,11 +1,9 @@
-﻿namespace Reload.Input
-{
-    using Reload.Core.Commands;
-    using Reload.Core.Utils;
-    using Silk.NET.Input.Common;
-    using Silk.NET.OpenAL;
-    using System.Collections.Generic;
+﻿using Reload.Core.Commands;
+using Silk.NET.Input.Common;
+using System.Collections.Generic;
 
+namespace Reload.Input
+{
     public class InputHandler
     {
         private Dictionary<string, InputMappingContext> _bindingContexts;

@@ -2,19 +2,19 @@
 using Reload.Core.Audio.Buffers;
 using Silk.NET.OpenAL;
 
-namespace Reload.Platform.Audio.OpenAl
+namespace Reload.Platform.Audio.OpenAl.Buffers
 {
     /// <summary>
     /// The openAL implementation of audio buffer.
     /// </summary>
-    public sealed class OpenALBuffer : AudioBuffer
+    public sealed class OpenAlBuffer : AudioBuffer
     {
         private bool _isDisposed;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="OpenALBuffer"/> class.
+        /// Initializes a new instance of the <see cref="OpenAlBuffer"/> class.
         /// </summary>
-        public OpenALBuffer()
+        public OpenAlBuffer()
         {
             Buffer = OpenAl.GenerateBuffer();
         }

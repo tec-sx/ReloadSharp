@@ -6,14 +6,29 @@ namespace Reload.Core.Graphics.Rendering.Buffers
 {
     public record BufferElement : IEquatable<BufferElement>
     {
+        /// <summary>
+        /// Gets the name of the buffer layout element.
+        /// </summary>
         public string Name { get; init; }
 
+        /// <summary>
+        /// Gets the shader data type.
+        /// </summary>
         public ShaderDataType Type { get; init; }
-        
+
+        /// <summary>
+        /// Gets the element size.
+        /// </summary>
         public uint Size { get; init; }
-        
+
+        /// <summary>
+        /// Gets a value indicating whether the element is normalized.
+        /// </summary>
         public bool Normalized { get; init; }
 
+        /// <summary>
+        /// Gets the offset of the element.
+        /// </summary>
         public uint Offset { get; init; }
 
         /// <summary>

@@ -1,11 +1,11 @@
 namespace Reload.Assets
 {
     using Assets.Audio;
-    using Assets.Audio.Models;
     using Assets.GameObjects;
     using Assets.GameObjects.Models;
     using Assets.Textures;
     using Assets.Textures.Models;
+    using Reload.Core.Audio;
     using System.IO;
 
     public class AssetsManager : IAssetsManager
@@ -50,13 +50,13 @@ namespace Reload.Assets
             return _gameObjectCache.GetGameObject(fullPath);
         }
 
-        public IMusic LoadMusic(string file)
+        public Music LoadMusic(string file)
         {
             string fullPath = Path.Combine(_assetsConfiguration.MusicPath, $"{file}.{_assetsConfiguration.SoundFormat}");
             return _audioCache.LoadMusic(fullPath);
         }
 
-        public ISound LoadSound(string file)
+        public Sound LoadSound(string file)
         {
             var fullPath = Path.Combine(_assetsConfiguration.SoundsPath, $"{file}.{_assetsConfiguration.SoundFormat}");
             return _audioCache.LoadSound(fullPath);

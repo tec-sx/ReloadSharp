@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Reload.Core.Audio.Buffers;
+using System;
+using System.IO;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 
 namespace Reload.Core.Audio
 {
@@ -63,6 +66,17 @@ namespace Reload.Core.Audio
         /// Stops playing the audio source.
         /// </summary>
         public abstract void Stop();
+
+        /// <summary>
+        /// Factory method for creating a new audio source from a stream.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <returns>An AudioSource.</returns>
+        [MethodImpl(MethodImplOptions.AggressiveInlining)]
+        public static AudioSource Create(Stream stream)
+        {
+            return AudioFactory.Create().AudioSource(stream);
+        }
 
         /// <inheritdoc/>
         public void Dispose()

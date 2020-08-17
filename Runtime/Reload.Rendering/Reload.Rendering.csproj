@@ -34,6 +34,7 @@
     <ProjectReference Include="..\..\Core\Reload.Core.IO\Reload.Core.IO.csproj" />
     <ProjectReference Include="..\..\Core\Reload.Core.Math3D\Reload.Core.Math3D.csproj" />
     <ProjectReference Include="..\..\Core\Reload.Core.Utils\Reload.Core.Utils.csproj" />
+    <ProjectReference Include="..\..\Core\Reload.Core\Reload.Core.csproj" />
     <ProjectReference Include="..\..\Reload.Configuration\Reload.Configuration.csproj" />
     <ProjectReference Include="..\Reload.Resources\Reload.Resources.csproj" />
   </ItemGroup>

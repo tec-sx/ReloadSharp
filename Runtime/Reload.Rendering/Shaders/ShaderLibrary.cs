@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Reload.Core.Graphics.Rendering.Shaders;
+using System.Collections.Generic;
 
 namespace Reload.Rendering.Shaders
 {

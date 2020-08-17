@@ -1,66 +1,42 @@
-﻿namespace Reload.Audio
+﻿using System;
+
+namespace Reload.Core.Audio.Buffers
 {
-    using Backend;
-    using Silk.NET.OpenAL;
-    using System;
-    using System.Collections.Generic;
-
-    internal sealed class BufferChain : IDisposable
+    /// <summary>
+    /// An audio buffer chain.
+    /// </summary>
+    public abstract class BufferChain : IDisposable
     {
-        private readonly uint _source;
-        private readonly List<AudioBuffer> _buffers;
+        /// <summary>
+        /// Gets the number of buffers that are currently queued.
+        /// </summary>
+        public abstract int BuffersQueued { get; }
 
-        private readonly int _numBuffers = 3;
-        private int _currentBuffer;
+        /// <summary>
+        /// Queues data in the current buffer chain.
+        /// </summary>
+        /// <param name="data">The data.</param>
+        /// <param name="format">The format.</param>
+        public abstract void QueueData<T>(T[] data, AudioFormat format) where T : unmanaged;
 
-        public int BuffersQueued
-        {
-            get
-            {
-                RemoveProcessed();
-                return ALNative.GetSourceProperty(_source, GetSourceInteger.BuffersQueued);
-            }
-        }
+        /// <summary>
+        /// Removes the processed.
+        /// </summary>
+        protected abstract void RemoveProcessed();
 
-        public BufferChain(uint source)
-        {
-            _source = source;
-            _buffers = new List<AudioBuffer>();
+        /// <summary>
+        /// Protected dispose method overload with disposing parameter that indicates 
+        /// whether the method call comes from a Dispose method (value is true) or
+        /// from a finalizer (value is false)
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected abstract void Dispose(bool disposing);
 
-            for (var i = 0; i < _numBuffers; i++)
-            {
-                _buffers.Add(new AudioBuffer());
-            }
-        }
-
+        /// <inheritdoc/>
         public void Dispose()
         {
-            _buffers?.ForEach(buffer => buffer.Dispose());
-            _buffers?.Clear();
-        }
-
-        public void QueueData<T>(T[] data, AudioFormat format) where T : unmanaged
-        {
-            RemoveProcessed();
-
-            var buffer = _buffers[_currentBuffer].Buffer;
-
-            _buffers[_currentBuffer].BufferData(data, format);
-            _currentBuffer++;
-            _currentBuffer %= 3;
-
-            ALNative.SourceQueueBuffers(_source, new [] { buffer });
-        }
-
-        private void RemoveProcessed()
-        {
-            var processed = ALNative.GetSourceProperty(_source, GetSourceInteger.BuffersProcessed);
-
-            while (processed > 0)
-            {
-                ALNative.SourceUnqueueBuffers(_source, new uint[] { 1 });
-                processed--;
-            }
+            Dispose(true);
+            GC.SuppressFinalize(this);
         }
     }
 }

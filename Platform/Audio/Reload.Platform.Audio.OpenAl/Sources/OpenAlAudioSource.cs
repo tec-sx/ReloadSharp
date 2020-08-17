@@ -1,6 +1,10 @@
 ﻿using Reload.Core.Audio;
+using Reload.Core.Audio.Buffers;
+using Reload.Platform.Audio.OpenAl.Buffers;
+using Reload.Platform.Audio.OpenAl.Codec;
 using Silk.NET.OpenAL;
 using System;
+using System.Diagnostics;
 using System.IO;
 using System.Numerics;
 using System.Threading;
@@ -8,69 +12,92 @@ using System.Threading.Tasks;
 
 namespace Reload.Platform.Audio.OpenAl
 {
+    /// <summary>
+    /// An OpenAl implementation of the audio source.
+    /// </summary>
     public class OpenAlAudioSource : AudioSource
     {
         private readonly uint _source;
+        
         private readonly Decoder _decoder;
+        
         private readonly BufferChain _bufferChain;
+        
         private readonly Stopwatch _timer;
+        
         private byte[] _data;
 
-        public float Gain
+        private bool _isDisposed;
+
+        /// <inheritdoc/>
+        public override float Gain
         {
-            get => ALNative.GetSourceProperty(_source, SourceFloat.Gain);
+            get => OpenAl.GetSourceProperty(_source, SourceFloat.Gain);
             set
             {
                 var normalValue = value > 1.0f ? 1.0f : value <= 0 ? 0.001f : value;
-                ALNative.SetSourceProperty(_source, SourceFloat.Gain, normalValue);
+                OpenAl.SetSourceProperty(_source, SourceFloat.Gain, normalValue);
             }
         }
 
-        public bool IsPlaying =>
-            (SourceState)ALNative.GetSourceProperty(_source, GetSourceInteger.SourceState) == SourceState.Playing;
+        /// <inheritdoc/>
+        public override bool IsPlaying =>
+            (SourceState)OpenAl.GetSourceProperty(_source, GetSourceInteger.SourceState) == SourceState.Playing;
 
-        public bool Looping
+        /// <inheritdoc/>
+        public override bool Looping
         {
-            get => ALNative.GetSourceProperty(_source, SourceBoolean.Looping);
-            set => ALNative.SetSourceProperty(_source, SourceBoolean.Looping, value);
+            get => OpenAl.GetSourceProperty(_source, SourceBoolean.Looping);
+            set => OpenAl.SetSourceProperty(_source, SourceBoolean.Looping, value);
         }
 
-        public float Pitch
+        /// <inheritdoc/>
+        public override float Pitch
         {
-            get => ALNative.GetSourceProperty(_source, SourceFloat.Pitch);
-            set => ALNative.SetSourceProperty(_source, SourceFloat.Pitch, value);
+            get => OpenAl.GetSourceProperty(_source, SourceFloat.Pitch);
+            set => OpenAl.SetSourceProperty(_source, SourceFloat.Pitch, value);
         }
 
-        public Vector3 Position
+        /// <inheritdoc/>
+        public override Vector3 Position
         {
-            get => ALNative.GetSourceProperty(_source, SourceVector3.Position);
-            set => ALNative.SetSourceProperty(_source, SourceVector3.Position, value);
+            get => OpenAl.GetSourceProperty(_source, SourceVector3.Position);
+            set => OpenAl.SetSourceProperty(_source, SourceVector3.Position, value);
         }
 
-        public Vector3 Direction
+        /// <inheritdoc/>
+        public override Vector3 Direction
         {
-            get => ALNative.GetSourceProperty(_source, SourceVector3.Direction);
-            set => ALNative.SetSourceProperty(_source, SourceVector3.Direction, value);
+            get => OpenAl.GetSourceProperty(_source, SourceVector3.Direction);
+            set => OpenAl.SetSourceProperty(_source, SourceVector3.Direction, value);
         }
 
-        public Vector3 Velocity
+        /// <inheritdoc/>
+        public override Vector3 Velocity
         {
-            get => ALNative.GetSourceProperty(_source, SourceVector3.Velocity);
-            set => ALNative.SetSourceProperty(_source, SourceVector3.Velocity, value);
+            get => OpenAl.GetSourceProperty(_source, SourceVector3.Velocity);
+            set => OpenAl.SetSourceProperty(_source, SourceVector3.Velocity, value);
         }
 
-        public TimeSpan Duration => _decoder.Duration;
-        public TimeSpan Elapsed => _timer.Elapsed;
+        /// <inheritdoc/>
+        public override TimeSpan Duration => _decoder.Duration;
 
-        public AudioSource(Stream stream)
+        /// <inheritdoc/>
+        public override TimeSpan Elapsed => _timer.Elapsed;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OpenAlAudioSource"/> class.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        public OpenAlAudioSource(Stream stream)
         {
             if (stream == null)
             {
                 throw new ArgumentNullException("Stream cannot be null!");
             }
 
-            _source = ALNative.GenerateSource();
-            _bufferChain = new BufferChain(_source);
+            _source = OpenAl.GenerateSource();
+            _bufferChain = new OpenAlBufferChain(_source);
             _decoder = DecoderFactory.CreateDecoder(stream);
 
             _data = _decoder.ReadSamples(TimeSpan.FromSeconds(1));
@@ -79,16 +106,11 @@ namespace Reload.Platform.Audio.OpenAl
             _timer = new Stopwatch();
         }
 
-        public void Dispose()
+        /// <inheritdoc/>
+        public override void Play(bool loop)
         {
-            _bufferChain.Dispose();
-            ALNative.DeleteSource(_source);
-        }
-
-        public void Play(bool loopPlayback)
-        {
-            Looping = loopPlayback;
-            ALNative.SourcePlay(_source);
+            Looping = loop;
+            OpenAl.SourcePlay(_source);
             _timer.Start();
 
             Task.Run(() =>
@@ -108,10 +130,31 @@ namespace Reload.Platform.Audio.OpenAl
             });
         }
 
-        public void Stop()
+        /// <inheritdoc/>
+        public override void Stop()
         {
-            ALNative.SourceStop(_source);
+            OpenAl.SourceStop(_source);
             _timer?.Stop();
         }
+
+
+        /// <inheritdoc/>
+        protected override void Dispose(bool disposing)
+        {
+            if (_isDisposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                _bufferChain.Dispose();
+            }
+
+            OpenAl.DeleteSource(_source);
+
+            _isDisposed = true;
+        }
+
     }
 }

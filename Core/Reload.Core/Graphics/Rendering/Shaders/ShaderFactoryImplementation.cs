@@ -14,6 +14,6 @@ namespace Reload.Core.Graphics.Rendering.Shaders
         /// <param name="fileName">The file name.</param>
         /// <param name="attributes">The attributes.</param>
         /// <returns>A ShaderProgram.</returns>
-        public abstract ShaderProgram CreateShader(string fileName, List<string> attributes);
+        public abstract ShaderProgram ShaderProgram(string fileName, List<string> attributes);
     }
 }
