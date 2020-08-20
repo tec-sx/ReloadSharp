@@ -24,5 +24,29 @@ namespace Reload.Core.Tests.Fakes
             BufferFactory = null;
             return this;
         }
+
+        public GraphicsAPIFake WithShaderFactoryImplementation()
+        {
+            ShaderFactory = new ShaderFactoryFake();
+            return this;
+        }
+
+        public GraphicsAPIFake WithoutShaderFactoryImplementation()
+        {
+            ShaderFactory = null;
+            return this;
+        }
+
+        public GraphicsAPIFake WithTextureFactoryImplementation()
+        {
+            TextureFactory = new TextureFactoryFake();
+            return this;
+        }
+
+        public GraphicsAPIFake WithoutTextureFactoryImplementation()
+        {
+            TextureFactory = null;
+            return this;
+        }
     }
 }

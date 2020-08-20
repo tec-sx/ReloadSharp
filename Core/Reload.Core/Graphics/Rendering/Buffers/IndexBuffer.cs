@@ -1,4 +1,5 @@
-﻿using Reload.Core.Exceptions;
+﻿using Reload.Core.Common;
+using Reload.Core.Exceptions;
 using System;
 
 namespace Reload.Core.Graphics.Rendering.Buffers
@@ -6,7 +7,7 @@ namespace Reload.Core.Graphics.Rendering.Buffers
     /// <summary>
     /// The index buffer.
     /// </summary>
-    public abstract class IndexBuffer : IBuffer, IDisposable
+    public abstract class IndexBuffer : IBindable, IDisposable
     {
         /// <summary>
         /// Gets or sets the indices count.

@@ -1,6 +1,6 @@
-﻿using Reload.Core.Exceptions;
+﻿using Reload.Core.Common;
+using Reload.Core.Exceptions;
 using System;
-using System.Runtime.CompilerServices;
 
 namespace Reload.Core.Graphics.Rendering.Buffers
 {
@@ -14,7 +14,7 @@ namespace Reload.Core.Graphics.Rendering.Buffers
     /// <summary>
     /// The vertex buffer.
     /// </summary>
-    public abstract class VertexBuffer : IBuffer, IDisposable
+    public abstract class VertexBuffer : IBindable, IDisposable
     {
         /// <summary>
         /// Gets the vertex shader data input layout.
@@ -60,7 +60,7 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         /// <param name="layout">The buffer layout.</param>
         /// <param name="usage">The buffer usage.</param>
         /// <returns>Empty VertexBuffer.</returns>
-        public static VertexBuffer Create(
+        public static VertexBuffer CreateEmpty(
             uint size,
             BufferLayout layout,
             VertexBufferUsage usage = VertexBufferUsage.Dynamic)

@@ -1,4 +1,5 @@
-﻿using Reload.Core.Exceptions;
+﻿using Reload.Core.Common;
+using Reload.Core.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Numerics;
@@ -8,7 +9,7 @@ namespace Reload.Core.Graphics.Rendering.Shaders
     /// <summary>
     /// The shader program abstract class.
     /// </summary>
-    public abstract class ShaderProgram : IDisposable
+    public abstract class ShaderProgram : IBindable, IDisposable
     {
         /// <summary>
         /// Gets the uniform location cache.
@@ -108,6 +109,11 @@ namespace Reload.Core.Graphics.Rendering.Shaders
         /// Binds the current program for using.
         /// </summary>
         public abstract void Bind();
+
+        /// <summary>
+        /// Unbinds the current program.
+        /// </summary>
+        public abstract void Unbind();
 
         /// <summary>
         /// Creates (Compiles, adds attributes and then links) a new shader program from

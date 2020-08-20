@@ -19,8 +19,7 @@ namespace Reload.Platform.Graphics.OpenGl
 
         private bool _disposed;
 
-        public OpenGlAPI()
-            : base(GraphicsAPIType.OpenGL, new GraphicsAPIVersion())
+        private OpenGlAPI()
         { }
         
         public OpenGlAPI(IWindow window)

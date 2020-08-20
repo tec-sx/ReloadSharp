@@ -1,4 +1,5 @@
-﻿using Reload.Core.Exceptions;
+﻿using Reload.Core.Common;
+using Reload.Core.Exceptions;
 using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -8,7 +9,7 @@ namespace Reload.Core.Graphics.Rendering.Buffers
     /// <summary>
     /// The vertex array.
     /// </summary>
-    public abstract class VertexArray : IBuffer, IDisposable
+    public abstract class VertexArray : IBindable, IDisposable
     {
         /// <summary>
         /// Gets or sets the index buffer.

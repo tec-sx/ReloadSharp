@@ -114,12 +114,18 @@ namespace Reload.Platform.Graphics.OpenGl.Textures
         }
 
         /// <inheritdoc/>
-        public override void Bind(uint slot = 0)
+        public override void Bind(uint slot)
         {
             var slotUnit = OpenGlUtilities.TextureSlotIdToTextureUnit(slot);
 
             _gl.ActiveTexture(slotUnit);
             _gl.BindTexture(TextureTarget.Texture2D, _handle);
+        }
+
+        /// <inheritdoc/>
+        public override void Unbind()
+        {
+
         }
 
         /// <inheritdoc/>
