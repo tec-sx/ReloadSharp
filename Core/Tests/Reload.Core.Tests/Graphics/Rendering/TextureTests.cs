@@ -19,7 +19,8 @@ namespace Reload.Core.Tests.Graphics.Rendering
                 .Should().BeAbstract()
                 .And.Implement<ITexture>()
                 .And.Implement<IBindable>()
-                .And.Implement<IDisposable>();
+                .And.Implement<IDisposable>()
+                .And.HaveDefaultConstructor();
         }
 
         [Fact]
@@ -31,7 +32,8 @@ namespace Reload.Core.Tests.Graphics.Rendering
                 .Should().BeAbstract()
                 .And.Implement<ITexture>()
                 .And.Implement<IBindable>()
-                .And.Implement<IDisposable>();
+                .And.Implement<IDisposable>()
+                .And.HaveDefaultConstructor();
         }
 
         [Fact]

@@ -14,6 +14,12 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         /// </summary>
         public uint Count { get; protected set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IndexBuffer"/> class.
+        /// </summary>
+        public IndexBuffer()
+        { }
+
         /// <inheritdoc/>
         public abstract void Bind();
 

@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Reload.Core.Common;
 using Reload.Core.Exceptions;
 using Reload.Core.Graphics.Rendering.Shaders;
 using Reload.Core.Tests.Fakes;
@@ -16,6 +17,7 @@ namespace Reload.Core.Tests.Graphics.Rendering
 
             shaderProgram
                 .Should().BeAbstract()
+                .And.Implement<IBindable>()
                 .And.Implement<IDisposable>()
                 .And.HaveDefaultConstructor();
         }

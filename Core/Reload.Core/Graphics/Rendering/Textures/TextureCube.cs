@@ -15,6 +15,12 @@ namespace Reload.Core.Graphics.Rendering.Textures
         /// <inheritdoc/>
         public uint Height { get; protected set; }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="TextureCube"/> class.
+        /// </summary>
+        protected TextureCube()
+        { }
+
         /// <inheritdoc/>
         public abstract void SetData(Span<byte> data);
 

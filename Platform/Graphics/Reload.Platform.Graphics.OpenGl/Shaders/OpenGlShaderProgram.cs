@@ -95,7 +95,7 @@ namespace Reload.Platform.Graphics.OpenGl.Shaders
                 return;
             }
 
-            OpenGlShaderType openGlShaderType = OpenGlShaderUtilities.ShaderTypeToOpenGl(type);
+            OpenGlShaderType openGlShaderType = OpenGlUtilities.ShaderTypeToOpenGl(type);
             uint handle = _gl.CreateShader(openGlShaderType);
 
             _gl.ShaderSource(handle, shaderSource);
@@ -238,6 +238,9 @@ namespace Reload.Platform.Graphics.OpenGl.Shaders
         {
             _gl.UseProgram(ProgramHandle);
         }
+
+        public override void Unbind()
+        { }
 
         /// <inheritdoc/>
         protected override void Dispose(bool disposing)

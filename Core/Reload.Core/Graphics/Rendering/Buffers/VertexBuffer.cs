@@ -22,10 +22,12 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         public BufferLayout Layout { get; }
 
         /// <summary>
-        /// Prevents a default instance of the <see cref="VertexBuffer"/> class from being created.
+        /// Initializes a new instance of the <see cref="VertexBuffer"/> class.
         /// </summary>
-        private VertexBuffer()
-        { }
+        protected VertexBuffer()
+        {
+            Layout = new BufferLayout();
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="VertexBuffer"/> class

@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using Reload.Core.Common;
 using Reload.Core.Exceptions;
 using Reload.Core.Graphics.Rendering.Buffers;
 using Reload.Core.Tests.Fakes;
@@ -9,6 +10,42 @@ namespace Reload.Core.Tests.Graphics.Rendering
 {
     public class BufferTests
     {
+        [Fact]
+        public void VertexBuffer_Contraints()
+        {
+            Type vertexBuffer = typeof(VertexBuffer);
+
+            vertexBuffer
+                .Should().BeAbstract()
+                .And.Implement<IBindable>()
+                .And.Implement<IDisposable>()
+                .And.HaveDefaultConstructor();
+        }
+
+        [Fact]
+        public void IndexBuffer_Contraints()
+        {
+            Type indexBuffer = typeof(IndexBuffer);
+
+            indexBuffer
+                .Should().BeAbstract()
+                .And.Implement<IBindable>()
+                .And.Implement<IDisposable>()
+                .And.HaveDefaultConstructor();
+        }
+
+        [Fact]
+        public void VertexArray_Contraints()
+        {
+            Type vertexArray = typeof(VertexArray);
+
+            vertexArray
+                .Should().BeAbstract()
+                .And.Implement<IBindable>()
+                .And.Implement<IDisposable>()
+                .And.HaveDefaultConstructor();
+        }
+
         [Fact]
         public void CreateVertexBuffer_FactoryNotImplemented_ThrowsFactoryNotImplementedException()
         {
@@ -76,7 +113,7 @@ namespace Reload.Core.Tests.Graphics.Rendering
         }
 
         [Fact]
-        public void CreateVertexArrayr_FactoryNotImplemented_ThrowsFactoryNotImplementedException()
+        public void CreateVertexArray_FactoryNotImplemented_ThrowsFactoryNotImplementedException()
         {
             // Arrange
             GraphicsAPIFake graphicsApi = new GraphicsAPIFake().WithoutBufferFactoryImplementation();

@@ -20,6 +20,14 @@ namespace Reload.Core.Graphics.Rendering.Textures.NullTextures
         }
 
         /// <inheritdoc/>
+        public override void Unbind()
+        {
+#if DEBUG
+            Logger.Log().Warning(Resources.AccessingNullTextureMessage, _type);
+#endif
+        }
+
+        /// <inheritdoc/>
         public override string GetPath()
         {
 #if DEBUG

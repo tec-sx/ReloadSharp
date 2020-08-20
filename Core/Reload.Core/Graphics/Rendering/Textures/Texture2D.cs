@@ -23,6 +23,12 @@ namespace Reload.Core.Graphics.Rendering.Textures
         public uint Height { get; protected set; }
 
         /// <summary>
+        /// Initializes a new instance of the <see cref="Texture2D"/> class.
+        /// </summary>
+        protected Texture2D()
+        { }
+
+        /// <summary>
         /// Is The texture loaded.
         /// </summary>
         public abstract void IsLoaded();

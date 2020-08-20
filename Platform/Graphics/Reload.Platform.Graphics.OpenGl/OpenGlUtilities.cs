@@ -5,7 +5,7 @@ using Reload.Core.Graphics.Rendering.Shaders;
 using ReloadShaderType = Reload.Core.Graphics.Rendering.Shaders.ShaderType;
 using OpenGlShaderType = Silk.NET.OpenGL.ShaderType;
 
-namespace Reload.Platform.Graphics.OpenGl.Buffers
+namespace Reload.Platform.Graphics.OpenGl
 {
     /// <summary>
     /// The OpenGl utilities.
