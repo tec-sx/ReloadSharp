@@ -61,6 +61,33 @@ namespace Reload.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Accesing a null buffer of type: {Type }.
+        /// </summary>
+        internal static string AccessingNullBufferMessage {
+            get {
+                return ResourceManager.GetString("AccessingNullBufferMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accesing a null shader of type: {Type }.
+        /// </summary>
+        internal static string AccessingNullShaderMessage {
+            get {
+                return ResourceManager.GetString("AccessingNullShaderMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Accesing a null texture of type: {Type }.
+        /// </summary>
+        internal static string AccessingNullTextureMessage {
+            get {
+                return ResourceManager.GetString("AccessingNullTextureMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Argument of type BufferElement is null.
         /// </summary>
         internal static string BufferElementNullArgumentMessage {
@@ -75,6 +102,24 @@ namespace Reload.Core.Properties {
         internal static string BuildStartingMessage {
             get {
                 return ResourceManager.GetString("BuildStartingMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The factory class you are trying to access is not implemented and null reference is returned.
+        /// </summary>
+        internal static string DefaultFactoryNotImplementedMessage {
+            get {
+                return ResourceManager.GetString("DefaultFactoryNotImplementedMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid enumeration argument is passed to a method or a property..
+        /// </summary>
+        internal static string DefaultInvalidEnumArgumentMessage {
+            get {
+                return ResourceManager.GetString("DefaultInvalidEnumArgumentMessage", resourceCulture);
             }
         }
         
@@ -97,11 +142,38 @@ namespace Reload.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to {FactoryName} factory class you are trying to access is not implemented and null reference is returned.
+        /// </summary>
+        internal static string FactoryNotImplementedException {
+            get {
+                return ResourceManager.GetString("FactoryNotImplementedException", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid enumeration argument is passed to a method or a property. Enum: {EnumName}.
+        /// </summary>
+        internal static string InvalidEnumArgumentMessage {
+            get {
+                return ResourceManager.GetString("InvalidEnumArgumentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Invalid shader data type..
         /// </summary>
         internal static string InvalidShaderDataType {
             get {
                 return ResourceManager.GetString("InvalidShaderDataType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invalid shader type..
+        /// </summary>
+        internal static string InvalidShaderType {
+            get {
+                return ResourceManager.GetString("InvalidShaderType", resourceCulture);
             }
         }
         

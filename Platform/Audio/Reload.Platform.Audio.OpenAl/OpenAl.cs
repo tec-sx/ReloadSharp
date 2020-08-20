@@ -1,4 +1,5 @@
-﻿using Reload.Platform.Audio.OpenAl.Exceptions;
+﻿using Reload.Core.Audio;
+using Reload.Platform.Audio.OpenAl.Exceptions;
 using Silk.NET.OpenAL;
 using System.Numerics;
 
@@ -7,9 +8,11 @@ namespace Reload.Platform.Audio.OpenAl
     /// <summary>
     /// The OpenAL audio backend.
     /// </summary>
-    public static class OpenAl
+    public class OpenAl : AudioAPI
     {
         private static readonly AL api = AL.GetApi();
+
+        public AudioAPIType Type => AudioAPIType.OpenAL;
 
         /// <summary>
         /// Checks the for OpenAL error codes and throw corresponding exceptions.
@@ -246,6 +249,16 @@ namespace Reload.Platform.Audio.OpenAl
         {
             api.SourceStop(source);
             CheckForErrors();
+        }
+
+        public void Initialize()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ShutDown()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reload.Core.Exceptions;
+using System;
 
 namespace Reload.Core.Graphics.Rendering.Buffers
 {
@@ -25,7 +26,8 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         /// <returns>An IndexBuffer.</returns>
         public static IndexBuffer Create(Span<uint> indices)
         {
-            return BufferFactory.Create().IndexBuffer(indices);
+            return GraphicsAPI.BufferFactory?.CreateIndexBuffer(indices) 
+                ?? throw new ReloadFactoryNotImplementedException(typeof(BufferFactory).ToString());
         }
 
         /// <summary>

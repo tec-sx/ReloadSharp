@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reload.Core.Exceptions;
+using System;
 using System.Runtime.CompilerServices;
 
 namespace Reload.Core.Graphics.Rendering.Buffers
@@ -21,10 +22,16 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         public BufferLayout Layout { get; }
 
         /// <summary>
+        /// Prevents a default instance of the <see cref="VertexBuffer"/> class from being created.
+        /// </summary>
+        private VertexBuffer()
+        { }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="VertexBuffer"/> class
         /// with shader layout defined by the layout parameter.
         /// </summary>
-        public VertexBuffer(BufferLayout layout)
+        protected VertexBuffer(BufferLayout layout)
         {
             Layout = layout;
         }
@@ -37,13 +44,13 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         /// <param name="layout">The buffer layout.</param>
         /// <param name="usage">The buffer usage.</param>
         /// <returns>VertexBuffer filled with the data passed.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static VertexBuffer Create(
             Span<float> data,
             BufferLayout layout,
             VertexBufferUsage usage = VertexBufferUsage.Static)
         {
-            return BufferFactory.Create().VertexBuffer(data, layout, usage);
+            return GraphicsAPI.BufferFactory?.CreateVertexBuffer(data, layout, usage)
+                ?? throw new ReloadFactoryNotImplementedException(typeof(BufferFactory).ToString());
         }
 
         /// <summary>
@@ -53,13 +60,13 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         /// <param name="layout">The buffer layout.</param>
         /// <param name="usage">The buffer usage.</param>
         /// <returns>Empty VertexBuffer.</returns>
-        [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static VertexBuffer Create(
             uint size,
             BufferLayout layout,
             VertexBufferUsage usage = VertexBufferUsage.Dynamic)
         {
-            return BufferFactory.Create().VertexBuffer(size, layout, usage);
+            return GraphicsAPI.BufferFactory?.CreateVertexBuffer(size, layout, usage)
+                ?? throw new ReloadFactoryNotImplementedException(typeof(BufferFactory).ToString());
         }
 
         /// <inheritdoc/>

@@ -8,7 +8,6 @@ namespace Reload.Engine
     using Reload.Assets.Audio;
     using Reload.Assets.GameObjects;
     using Reload.Assets.Textures;
-    using Reload.Audio;
     using Reload.Configuration;
     using Reload.Graphics;
     using System;
@@ -51,11 +50,6 @@ namespace Reload.Engine
         public InputManager InputManager { get; }
 
         /// <summary>
-        /// Audio manager.
-        /// </summary>
-        public AudioSystem AudioManager { get; }
-
-        /// <summary>
         /// Assets manager.
         /// </summary>
         public IAssetsManager AssetsManager { get; }
@@ -85,7 +79,6 @@ namespace Reload.Engine
                 .AddSingleton<ConfigurationManager>()
                 .AddSingleton<GraphicsManager>()
                 .AddSingleton<InputManager>()
-                .AddSingleton<AudioSystem>()
 
             #endregion
 
@@ -106,7 +99,6 @@ namespace Reload.Engine
             ConfigurationManager = SubSystems.GetService<ConfigurationManager>();
             GraphicsManager = SubSystems.GetService<GraphicsManager>();
             InputManager = SubSystems.GetService<InputManager>();
-            AudioManager = SubSystems.GetService<AudioSystem>();
 
             AssetsManager = SubSystems.GetService<IAssetsManager>();
             SceneMachine = SubSystems.GetService<SceneMachine>();
@@ -171,11 +163,10 @@ namespace Reload.Engine
         {
             Window.Load -= OnWindowLoad;
 
-            var glContext = new OpenGLBackend(Window);
+            var glContext = new OpenGlAPI(Window);
 
             InputManager.Initialize(Window);
             AssetsManager.Initialize(ConfigurationManager.CreateAssetsConfiguration());
-            UiManager.Initialize(glContext.Api, Window, InputManager.Context);
 
             OnInitialize();
             OnLoadContent();
@@ -185,7 +176,7 @@ namespace Reload.Engine
 
         private void OnWindowResize(Size size)
         {
-            Renderer.OnWindowResize(size);
+            
         }
 
         private void OnWindowUpdate(double deltaTime)
@@ -205,7 +196,6 @@ namespace Reload.Engine
             OnShutDown();
 
             AssetsManager.ShutDown();
-            AudioManager.ShutDown();
 
             //UiManager.Dispose();
             InputManager.Dispose();

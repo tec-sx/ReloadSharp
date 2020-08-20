@@ -14,7 +14,7 @@ namespace Reload.Editor.Platform
 {
     public class OpenGl
     {
-        private OpenGLBackend _glContext;
+        private Reload.Platform.Graphics.OpenGl.OpenGlAPI _glContext;
         private Viewport _viewport;
 
         private uint _frameBuffer;
@@ -47,7 +47,7 @@ namespace Reload.Editor.Platform
             var getProcAddress =
                 (Func<string, IntPtr>)Delegate.CreateDelegate(typeof(Func<string, IntPtr>), getProcMethod);
 
-            _glContext = new OpenGLBackend(getProcAddress);
+            _glContext = new Reload.Platform.Graphics.OpenGl.OpenGlAPI(getProcAddress);
             _viewport = viewport;
             _offscreenShader = ShaderProgram.Create("offscreenTex", null);
 

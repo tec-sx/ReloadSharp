@@ -1,19 +1,23 @@
-﻿using Reload.Core.Exceptions;
+﻿using System.IO;
 
 namespace Reload.Core.Audio.Buffers
 {
     /// <summary>
-    /// An audio buffer factory used to abstract the creation of buffers
-    /// from their implementation.
+    /// The audio factory implementation.
     /// </summary>
-    public abstract class AudioFactory : BridgeFactory<AudioFactoryImplementation>
+    public abstract class AudioFactory
     {
         /// <summary>
-        /// Initializes a new instance of the <see cref="AudioFactory"/> class.
+        /// Creates new audio buffer.
         /// </summary>
-        /// <param name="factoryImplementation">The factory implementation.</param>
-        protected AudioFactory(AudioFactoryImplementation factoryImplementation) 
-            : base(factoryImplementation)
-        { }
+        /// <returns>An AudioBuffer.</returns>
+        protected internal abstract AudioBuffer CreateAudioBuffer();
+
+        /// <summary>
+        /// Creates new audio source from a stream.
+        /// </summary>
+        /// <param name="stream">The stream.</param>
+        /// <returns>An AudioSource.</returns>
+        protected internal abstract AudioSource CreateAudioSource(Stream stream);
     }
 }

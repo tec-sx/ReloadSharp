@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reload.Core.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 
@@ -17,7 +18,15 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         /// <summary>
         /// Gets or sets the vertex buffers.
         /// </summary>
-        public List<VertexBuffer> VertexBuffers { get; protected set; }
+        public List<VertexBuffer> VertexBuffers { get; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="VertexArray"/> class.
+        /// </summary>
+        public VertexArray()
+        {
+            VertexBuffers = new List<VertexBuffer>();
+        }
 
         /// <inheritdoc/>
         public abstract void Bind();
@@ -44,7 +53,8 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static VertexArray Create()
         {
-            return BufferFactory.Create().VertexArray();
+            return GraphicsAPI.BufferFactory?.CreateVertexArray()
+                ?? throw new ReloadFactoryNotImplementedException(typeof(BufferFactory).ToString());
         }
 
         /// <summary>

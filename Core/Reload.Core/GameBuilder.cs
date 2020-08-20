@@ -76,15 +76,15 @@ namespace Reload.Core
         /// </summary>
         /// <param name="graphicsBackend">The graphics backend.</param>
         /// <returns>A GameBuilder.</returns>
-        public GameBuilder<TGame> WithGraphicsBackend<T>() where T : class, IGraphicsBackend
+        public GameBuilder<TGame> WithGraphicsAPI<T>() where T : GraphicsAPI
         {
             if (!_platform.CheckGraphicsBackendCompatability<T>())
             {
                 throw new ReloadGraphicsBackendNotSupportedException();
             }
 
-            _subSystems.Register<IGraphicsBackend, T>(Reuse.Singleton);
-            _subSystems.RegisterInitializer<IGraphicsBackend>((graphicsBackend, resolver) =>
+            _subSystems.Register<GraphicsAPI, T>(Reuse.Singleton);
+            _subSystems.RegisterInitializer<GraphicsAPI>((graphicsBackend, resolver) =>
                 Logger.Log().Information(Resources.WithGraphicsBackendMessage, graphicsBackend?.Type.GetDescription()));
 
             return this;
@@ -95,15 +95,15 @@ namespace Reload.Core
         /// </summary>
         /// <param name="audioBackend">The audio backend.</param>
         /// <returns>A GameBuilder.</returns>
-        public GameBuilder<TGame> WithAudioBackend<T>() where T : class, IAudioBackend
+        public GameBuilder<TGame> WithAudioAPI<T>() where T : AudioAPI
         {
             if (!_platform.CheckAudioBackendCompatability<T>())
             {
                 throw new ReloadAudioBackendNotSupportedException();
             }
 
-            _subSystems.Register<IAudioBackend, T>(Reuse.Singleton);
-            _subSystems.RegisterInitializer<IAudioBackend>((audioBackend, resolver) =>
+            _subSystems.Register<AudioAPI, T>(Reuse.Singleton);
+            _subSystems.RegisterInitializer<AudioAPI>((audioBackend, resolver) =>
                 Logger.Log().Information(Resources.WithAudioBackendMessage ,audioBackend?.Type.GetDescription()));
 
             return this;
@@ -133,14 +133,14 @@ namespace Reload.Core
         /// </summary>
         /// <param name="audioBackend">The audio backend.</param>
         /// <returns>A GameBuilder.</returns>
-        public GameBuilder<TGame> WithSubSystem<T>(SubSystemLifetime lifetime) where T : class, ISubSystem
+        public GameBuilder<TGame> WithSubSystem<T>(Lifetime lifetime) where T : class, ISubSystem
         {
             IReuse reuse = lifetime switch
             {
-                SubSystemLifetime.Singleton => Reuse.Singleton,
-                SubSystemLifetime.Transient => Reuse.Transient,
-                SubSystemLifetime.Scoped => Reuse.Scoped,
-                _ => throw new ReloadInvalidEnumValueException()
+                Lifetime.Singleton => Reuse.Singleton,
+                Lifetime.Transient => Reuse.Transient,
+                Lifetime.Scoped => Reuse.Scoped,
+                _ => throw new ReloadInvalidEnumArgumentException()
             };
 
             _subSystems.Register<ISubSystem, T>(reuse);

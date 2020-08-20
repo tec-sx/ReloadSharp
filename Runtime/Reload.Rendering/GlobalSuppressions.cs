@@ -18,3 +18,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Design", "CA1051:Do not declare visible instance fields", Justification = "<Pending>", Scope = "member", Target = "~F:Reload.Rendering.Buffers.BufferElement.Normalized")]
 [assembly: SuppressMessage("Design", "CA1051:Do not declare visible instance fields", Justification = "<Pending>", Scope = "member", Target = "~F:Reload.Rendering.Data.LineVertex.Position")]
 [assembly: SuppressMessage("Design", "CA1051:Do not declare visible instance fields", Justification = "<Pending>", Scope = "member", Target = "~F:Reload.Rendering.Data.LineVertex.Color")]
+[assembly: SuppressMessage("Design", "CA1010:Collections should implement generic interface", Justification = "<Pending>", Scope = "type", Target = "~T:Reload.Rendering.RenderCommandQueue")]

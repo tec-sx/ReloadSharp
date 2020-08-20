@@ -75,7 +75,7 @@ namespace Reload.Core.Audio
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static AudioSource Create(Stream stream)
         {
-            return AudioFactory.Create().AudioSource(stream);
+            return AudioAPI.AudioFactory.CreateAudioSource(stream);
         }
 
         /// <inheritdoc/>

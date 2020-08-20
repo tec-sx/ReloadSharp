@@ -117,11 +117,26 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccessingNullBufferMessage" xml:space="preserve">
+    <value>Accesing a null buffer of type: {Type }</value>
+  </data>
+  <data name="AccessingNullShaderMessage" xml:space="preserve">
+    <value>Accesing a null shader of type: {Type }</value>
+  </data>
+  <data name="AccessingNullTextureMessage" xml:space="preserve">
+    <value>Accesing a null texture of type: {Type }</value>
+  </data>
   <data name="BufferElementNullArgumentMessage" xml:space="preserve">
     <value>Argument of type BufferElement is null</value>
   </data>
   <data name="BuildStartingMessage" xml:space="preserve">
     <value>Starting to build the game system...</value>
+  </data>
+  <data name="DefaultFactoryNotImplementedMessage" xml:space="preserve">
+    <value>The factory class you are trying to access is not implemented and null reference is returned</value>
+  </data>
+  <data name="DefaultInvalidEnumArgumentMessage" xml:space="preserve">
+    <value>Invalid enumeration argument is passed to a method or a property.</value>
   </data>
   <data name="DefaultNullArgumentMessage" xml:space="preserve">
     <value>A null reference is passed to a method that does not accept it as a valid argument</value>
@@ -129,8 +144,17 @@
   <data name="DefaultOSPlatfromNotSupportedMessage" xml:space="preserve">
     <value>{Parameter} platform is not supported.</value>
   </data>
+  <data name="FactoryNotImplementedException" xml:space="preserve">
+    <value>{FactoryName} factory class you are trying to access is not implemented and null reference is returned</value>
+  </data>
+  <data name="InvalidEnumArgumentMessage" xml:space="preserve">
+    <value>Invalid enumeration argument is passed to a method or a property. Enum: {EnumName}</value>
+  </data>
   <data name="InvalidShaderDataType" xml:space="preserve">
     <value>Invalid shader data type.</value>
+  </data>
+  <data name="InvalidShaderType" xml:space="preserve">
+    <value>Invalid shader type.</value>
   </data>
   <data name="NullArgumentMessage" xml:space="preserve">
     <value>A null reference is passed to a method that does not accept it as a valid argument. Parameter: {ParamName}</value>

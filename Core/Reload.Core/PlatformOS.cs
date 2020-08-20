@@ -21,13 +21,13 @@ namespace Reload.Core
         /// Checks if the garphics backend is compatible with the running operating system.
         /// </summary>
         /// <returns>A bool.</returns>
-        public abstract bool CheckGraphicsBackendCompatability<T>() where T : IGraphicsBackend;
+        public abstract bool CheckGraphicsBackendCompatability<T>() where T : GraphicsAPI;
 
         /// <summary>
         /// Checks if the audio backend is compatible with the running operating system.
         /// </summary>
         /// <returns>A bool.</returns>
-        public abstract bool CheckAudioBackendCompatability<T>() where T : IAudioBackend;
+        public abstract bool CheckAudioBackendCompatability<T>() where T : AudioAPI;
 
         /// <summary>
         /// Checks if the input is compatible with the running operating system.

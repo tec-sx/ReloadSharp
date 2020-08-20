@@ -8,7 +8,7 @@
     /// <summary>
     /// The vulkan renderer.
     /// </summary>
-    public class VulkanRenderer : RendererBackend
+    public class VulkanRenderer : RendererAPI
     {
         public VulkanRenderer(IWindow window)
         {

@@ -1,7 +1,7 @@
 ﻿namespace Reload.Rendering
 {
     using System.Drawing;
-    using Reload.Rendering.Buffers;
+    using Reload.Core.Graphics.Rendering.Buffers;
 
     public delegate void ParameterlessDelegate();
     public delegate void VertexArrayDrawDelegate(VertexArray vertexArray);

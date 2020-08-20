@@ -1,16 +1,19 @@
-﻿namespace Reload.Core.Graphics.Rendering.Shaders
+﻿using System.Collections.Generic;
+
+namespace Reload.Core.Graphics.Rendering.Shaders
 {
     /// <summary>
-    /// The shader factory.
+    /// The shader factory implementation.
     /// </summary>
-    public class ShaderFactory : BridgeFactory<ShaderFactoryImplementation>
+    public abstract class ShaderFactory
     {
+
         /// <summary>
-        /// Initializes a new instance of the <see cref="ShaderFactory"/> class.
+        /// Creates a new shader from the passed file.
         /// </summary>
-        /// <param name="factoryImplementation">The factory implementation.</param>
-        public ShaderFactory(ShaderFactoryImplementation factoryImplementation) 
-            : base(factoryImplementation)
-        { }
+        /// <param name="fileName">The file name.</param>
+        /// <param name="attributes">The attributes.</param>
+        /// <returns>A ShaderProgram.</returns>
+        protected internal abstract ShaderProgram CreateShaderProgram(string fileName, List<string> attributes);
     }
 }

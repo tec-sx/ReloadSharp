@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reload.Core.Graphics.Rendering.Textures;
+using System;
 
 namespace Reload.Resources.Model
 {

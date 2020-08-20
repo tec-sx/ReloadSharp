@@ -1,11 +1,11 @@
 ﻿using Reload.Core;
 using Reload.Core.Exceptions;
 using Reload.Core.Game;
-using Reload.Editor.Platform;
 using Reload.Platform.Audio.OpenAl;
 using Reload.Platform.Graphics.OpenGl;
 using Reload.Platform.OS.Linux;
 using Reload.Platform.OS.Windows;
+using Reload.Rendering;
 using System.Runtime.InteropServices;
 
 namespace Reload.Editor
@@ -39,16 +39,16 @@ namespace Reload.Editor
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
                 gameBuilder = new GameBuilder<GameEditor>(new PlatformLinux());
-                gameBuilder = gameBuilder
-                    .WithGraphicsBackend<OpenGLBackend>()
-                    .WithAudioBackend<OpenAl>();
+                gameBuilder
+                    .WithGraphicsAPI<OpenGlAPI>()
+                    .WithAudioAPI<OpenAl>();
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
                 gameBuilder = new GameBuilder<GameEditor>(new PlatformWindows());
-                gameBuilder = gameBuilder
-                    .WithGraphicsBackend<OpenGLBackend>()
-                    .WithAudioBackend<OpenAl>();
+                gameBuilder
+                    .WithGraphicsAPI<OpenGlAPI>()
+                    .WithAudioAPI<OpenAl>();
             }
             else
             {
@@ -57,8 +57,8 @@ namespace Reload.Editor
 
             return gameBuilder
                     .WithWindow<MainWindow>()
+                    .WithSubSystem<Renderer>(Lifetime.Singleton)
                     .BuildForPlatform();
-
         }
     }
 }

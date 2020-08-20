@@ -1,9 +1,14 @@
-﻿using Reload.Resources;
-using Reload.RenderingShaders;
-using Silk.NET.OpenGL;
-using System;
+﻿using System;
 using System.Drawing;
 using System.Numerics;
+using Reload.Core.Models.Physics.Collision;
+using Reload.Core.Models;
+using Reload.Core.Graphics.Rendering.Primitives;
+using Reload.Core.Game;
+using Reload.Rendering.Shaders;
+using Reload.Resources.Model;
+using Reload.Core.Graphics.Rendering.Buffers;
+using Reload.Core.Graphics.Rendering;
 
 namespace Reload.Rendering
 {
@@ -12,104 +17,119 @@ namespace Reload.Rendering
         public Matrix4x4 ViewProjectionMatrix;
     }
 
-    public static class Renderer
+    /// <summary>
+    /// The main 3D renderer.
+    /// </summary>
+    public class Renderer : ISubSystem
     {
-        private static SceneData _sceneData;
-        private static RendererData _data;
+        /// <summary>
+        /// Gets the render command queue.
+        /// </summary>
+        public RenderCommandQueue CommandQueue { get; init; }
 
-        //public static void Initialize()
-        //{
-        //    _data.ShaderLibrary = new ShaderLibrary();
-        //    _data.CommandQueue = new RenderCommandQueue();
+        /// <summary>
+        /// Gets the shader library.
+        /// </summary>
+        public ShaderLibrary ShaderLibrary { get; init; }
 
-        //    RenderCommand.Initialize();
-        //    Renderer2D.Initialize();
-        //}
+        /// <summary>
+        /// Gets the active render pass.
+        /// </summary>
+        public RenderPass ActiveRenderPass { get; private set; }
 
-        //public static void OnWindowResize(Size size)
-        //{
-        //    RenderCommand.SetViewportSize(size);
-        //}
+        /// <summary>
+        /// Gets the full screen quad vertex array.
+        /// </summary>
+        public VertexArray FullScreenQuadVertexArray { get; init; }
 
-        //public static void BeginScene(OrthographicCamera camera)
-        //{
-        //    _orthographicCamera = camera;
-        //    _sceneData.ViewProjectionMatrix = _orthographicCamera.ViewProjectionMatrix;
-        //}
-
-        //public static void BeginScene(PerspectiveCamera camera)
-        //{
-        //    _perspectiveCamera = camera;
-        //    _sceneData.ViewProjectionMatrix = _perspectiveCamera.ViewProjectionMatrix;
-        //}
-
-        //public static void EndScene()
-        //{
-
-        //}
-
-        //public static void Submit(ShaderProgram shader, VertexArray vertexArray, Matrix4x4 transform)
-        //{
-        //    shader.Bind();
-
-        //    shader.SetMatrix4("u_ViewProjection", _sceneData.ViewProjectionMatrix);
-        //    shader.SetMatrix4("u_Transform", transform);
-
-        //    vertexArray.Bind();
-
-        //    RenderCommand.DrawIndexed(vertexArray);
-        //}
-
-        //public static void Submit(ShaderProgram shader, VertexArray vertexArray)
-        //{
-        //    Submit(shader, vertexArray, Matrix4x4.Identity);
-        //}
-
-        private static RenderCommandQueue _renderCommandQueue;
-
-        public static ShaderLibrary ShaderLibrary { get; }
-
-        public static void Clear(Color color)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Renderer"/> class.
+        /// </summary>
+        public Renderer()
         {
-
+            CommandQueue = new RenderCommandQueue();
+            ShaderLibrary = new ShaderLibrary();
         }
 
-        public static void DrawIndexed(uint count, PrimitiveType type, bool dephTest = true)
-        {
-
-        }
-
-        public static void Submit(Action action) => _data.CommandQueue.Enqueue(action);
-
-        public static void WaitAndRender()
+        /// <inheritdoc/>
+        public void Initialize()
         {
             
         }
 
-        public static void BeginRenderPass(RenderPass renderPass, bool clear = true)
+        /// <inheritdoc/>
+        public void ShutDown()
         {
-            
+            throw new NotImplementedException();
         }
 
-        public static void EndRenderPass()
+        /// <summary>
+        /// Begins the render pass.
+        /// </summary>
+        /// <param name="renderPass">The render pass.</param>
+        /// <param name="clear">If true, clear.</param>
+        public void BeginRenderPass(RenderPass renderPass, bool clear = true)
         {
-            
+            ActiveRenderPass = renderPass;
+
         }
 
-        public static void SubmitQuad(MaterialInstance material, Matrix4x4 transform)
+        /// <summary>
+        /// Submits the action passed.
+        /// </summary>
+        /// <param name="action">The action.</param>
+        public void Submit(Action action)
         {
-            
+            throw new NotImplementedException();
         }
 
-        public static void SubmitFullScreenQuad(MaterialInstance material)
+        /// <summary>
+        /// Waits the and render.
+        /// </summary>
+        public void WaitAndRender()
         {
-            
+            CommandQueue.Execute();
         }
 
-        public static void SubmitMesh(Mesh mesh, Matrix4x4 transform, MaterialInstance material = null)
+        public void EndRenderPass()
         {
-            
-        } 
+            throw new NotImplementedException();
+        }
+
+        public void Clear(Color color)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DrawAABB(in AABB aabb, Matrix4x4 transform, Color color = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DrawAABB(MeshBase mesh, Matrix4x4 transform, Color color = default)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DrawIndexed(uint count, PrimitiveType type, bool dephTest = true)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SubmitFullScreenQuad(MaterialInstance material)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SubmitMesh(MeshBase mesh, Matrix4x4 transform, MaterialInstance material = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SubmitQuad(MaterialInstance material, Matrix4x4 transform)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

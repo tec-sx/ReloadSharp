@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Reload.Core.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 
@@ -9,8 +10,10 @@ namespace Reload.Core.Graphics.Rendering.Shaders
     /// </summary>
     public abstract class ShaderProgram : IDisposable
     {
-
-        protected readonly Dictionary<string, int> UniformLocationCache;
+        /// <summary>
+        /// Gets the uniform location cache.
+        /// </summary>
+        protected Dictionary<string, int> UniformLocationCache { get; }
 
         /// <summary>
         /// Gets or sets shader the name.
@@ -113,7 +116,8 @@ namespace Reload.Core.Graphics.Rendering.Shaders
         /// <exception cref="ApplicationException"></exception>
         public static ShaderProgram Create(string fileName, List<string> attributes)
         {
-            return ShaderFactory.Create().ShaderProgram(fileName, attributes);
+            return GraphicsAPI.ShaderFactory?.CreateShaderProgram(fileName, attributes)
+                ?? throw new ReloadFactoryNotImplementedException(typeof(ShaderFactory).ToString());
         }
 
         /// <summary>

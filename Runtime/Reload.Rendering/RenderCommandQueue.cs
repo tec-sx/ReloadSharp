@@ -6,7 +6,7 @@ namespace Reload.Rendering
     /// <summary>
     /// Class for syncronizing render commands.
     /// </summary>
-    internal class RenderCommandQueue : Queue<Action>
+    public class RenderCommandQueue : Queue<Action>
     {
         /// <summary>
         /// Initializes a new instance of the <see cref="RenderCommandQueue"/> class.
@@ -16,7 +16,7 @@ namespace Reload.Rendering
         { }
 
         /// <summary>
-        /// Executes the every command present in the queue.
+        /// Executes every command present in the queue.
         /// </summary>
         public void Execute()
         {

@@ -28,7 +28,7 @@ namespace Reload.Core.Audio.Buffers
         /// Creates a new audio buffer.
         /// </summary>
         /// <returns>An AudioBuffer.</returns>
-        public static AudioBuffer Create() => AudioFactory.Create().AudioBuffer();
+        public static AudioBuffer Create() => AudioAPI.AudioFactory.CreateAudioBuffer();
 
         /// <summary>
         /// Protected dispose method overload with disposing parameter that indicates 
