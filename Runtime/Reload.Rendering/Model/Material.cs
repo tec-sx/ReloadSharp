@@ -1,7 +1,7 @@
-﻿using Reload.Shaders;
+﻿using Reload.Core.Graphics.Rendering.Shaders;
 using System;
 
-namespace Reload.Resources.Model
+namespace Reload.Rendering.Model
 {
     [Flags]
     public enum MaterialFlag

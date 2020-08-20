@@ -1,7 +1,7 @@
-﻿using Reload.Core.Math3D.Collision;
+﻿using Reload.Core.Models.Physics.Collision;
 using System.Numerics;
 
-namespace Reload.Resources.Model
+namespace Reload.Rendering.Model
 {
     /// <summary>
     /// The sub mesh.

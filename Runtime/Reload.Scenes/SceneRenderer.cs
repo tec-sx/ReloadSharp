@@ -1,7 +1,7 @@
 ﻿using System;
+using Reload.Core.Graphics.Rendering;
+using Reload.Core.Graphics.Rendering.Textures;
 using Reload.Rendering.Camera;
-using Reload.Rendering;
-using Reload.Rendering.Model;
 
 
 namespace Reload.Scenes

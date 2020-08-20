@@ -1,4 +1,6 @@
-﻿using Reload.Rendering.Buffers;
+﻿using Reload.Core.Graphics.Rendering.Buffers;
+using Reload.Core.Graphics.Rendering.Shaders;
+using Reload.Core.Graphics.Rendering.Textures;
 using Reload.Rendering.Model;
 using Reload.Rendering.Shaders;
 using System;

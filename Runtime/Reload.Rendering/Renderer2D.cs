@@ -1,11 +1,11 @@
-﻿using Reload.Core.Utils;
+﻿using Reload.Core.Graphics.Rendering.Buffers;
+using Reload.Core.Graphics.Rendering.Shaders;
+using Reload.Core.Graphics.Rendering.Textures;
+using Reload.Core.Utils;
 using Reload.Core.Utils.Extensions;
 using Reload.Rendering.Data;
-using Reload.Rendering.Buffers;
 using System.Drawing;
 using System.Numerics;
-using Reload.Rendering.Model;
-using Reload.Rendering.Shaders;
 
 namespace Reload.Rendering
 {
@@ -36,7 +36,7 @@ namespace Reload.Rendering
 
             uint[] squareIndices = { 0, 1, 2, 2, 3, 0 };
 
-            BufferLayoutCollection squareBufferLayout = new BufferLayoutCollection
+            BufferLayout squareBufferLayout = new BufferLayout
             {
                 new BufferElement(ShaderDataType.Float3, "a_Position"),
                 new BufferElement(ShaderDataType.Float2, "a_TexCoord"),

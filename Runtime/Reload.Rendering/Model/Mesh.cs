@@ -1,11 +1,10 @@
-using Reload.Configuration;
+using Reload.Core.Graphics.Rendering.Buffers;
+using Reload.Core.Graphics.Rendering.Shaders;
+using Reload.Core.Graphics.Rendering.Textures;
 using Reload.Core.Math3D.Primitives;
 using Reload.Core.Math3D.Vertices;
-using Reload.Rendering.Buffers;
-using Reload.Rendering.Shaders;
 using SharpGLTF.Schema2;
 using System.Collections.Generic;
-using System.IO;
 using System.Numerics;
 
 using Gltf = SharpGLTF.Schema2;

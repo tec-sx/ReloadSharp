@@ -251,14 +251,10 @@ namespace Reload.Platform.Audio.OpenAl
             CheckForErrors();
         }
 
-        public void Initialize()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override void Initialize()
+        {}
 
-        public void ShutDown()
-        {
-            throw new System.NotImplementedException();
-        }
+        public override void ShutDown()
+        { }
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace Reload.Resources.Camera
+﻿namespace Reload.Rendering.Camera
 {
     /// <summary>
     /// Class for encapsulating a view frustum camera with perspective projection

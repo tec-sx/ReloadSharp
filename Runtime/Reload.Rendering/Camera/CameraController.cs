@@ -3,7 +3,7 @@ using System.Numerics;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 
-namespace Reload.Resources.Camera
+namespace Reload.Rendering.Camera
 {
     public struct TranslationState
     {

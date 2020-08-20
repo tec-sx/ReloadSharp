@@ -6,9 +6,9 @@ using Reload.Core.Models;
 using Reload.Core.Graphics.Rendering.Primitives;
 using Reload.Core.Game;
 using Reload.Rendering.Shaders;
-using Reload.Resources.Model;
 using Reload.Core.Graphics.Rendering.Buffers;
 using Reload.Core.Graphics.Rendering;
+using Reload.Rendering.Model;
 
 namespace Reload.Rendering
 {
@@ -30,7 +30,7 @@ namespace Reload.Rendering
         /// <summary>
         /// Gets the shader library.
         /// </summary>
-        public ShaderLibrary ShaderLibrary { get; init; }
+        public static ShaderLibrary ShaderLibrary { get; set; }
 
         /// <summary>
         /// Gets the active render pass.
