@@ -2,7 +2,7 @@
 
 namespace Reload.Core.Graphics
 {
-    public enum WindowBackendType
+    public enum WindowingAPIType
     {
         [Description("No window")]
         None = 0,

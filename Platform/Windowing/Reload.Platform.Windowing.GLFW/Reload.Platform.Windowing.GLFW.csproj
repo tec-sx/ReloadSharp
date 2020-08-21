@@ -1,0 +1,16 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Silk.NET.GLFW" Version="2.0.0-preview" />
+    <PackageReference Include="Silk.NET.Windowing.Desktop" Version="2.0.0-preview" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\..\Core\Reload.Core\Reload.Core.csproj" />
+  </ItemGroup>
+
+</Project>

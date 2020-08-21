@@ -15,27 +15,24 @@ namespace Reload.Platform.Graphics.OpenGl
     /// </summary>
     public class OpenGlAPI : Core.Graphics.GraphicsAPI
     {
-        private GL _api { get; init; }
+        private readonly GL _api;
 
         private bool _disposed;
 
+        /// <summary>
+        /// Prevents a default instance of the <see cref="OpenGlAPI"/> class from being created.
+        /// </summary>
         private OpenGlAPI()
         { }
-        
-        public OpenGlAPI(IWindow window)
-            : this(window.GLContext)
-        { }
-        
-        public OpenGlAPI(INativeContext context)
-            : base(GraphicsAPIType.OpenGL, new GraphicsAPIVersion())
-        {
-            _api = GL.GetApi(context);
-        }
 
-        public OpenGlAPI(Func<string, IntPtr> getProcAddress)
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OpenGlAPI"/> class.
+        /// </summary>
+        /// <param name="window">The window to bind to.</param>
+        public OpenGlAPI(ProgramWindow window)
             : base(GraphicsAPIType.OpenGL, new GraphicsAPIVersion())
         {
-            _api = GL.GetApi(getProcAddress);
+            _api = GL.GetApi(window.GetProcAddress);
         }
 
         /// <inheritdoc/>
@@ -49,13 +46,22 @@ namespace Reload.Platform.Graphics.OpenGl
 
         /// <inheritdoc/>
         public override void ShutDown()
-        {
-            throw new NotImplementedException();
-        }
+        { }
 
+        /// <inheritdoc/>
         protected override void Dispose(bool disposing)
         {
-            throw new NotImplementedException();
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                _api.Dispose();
+            }
+
+            _disposed = true;
         }
     }
 }

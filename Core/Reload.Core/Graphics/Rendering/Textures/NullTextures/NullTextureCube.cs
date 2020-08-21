@@ -15,7 +15,7 @@ namespace Reload.Core.Graphics.Rendering.Textures.NullTextures
         public override void Bind(uint slot = 0)
         {
 #if DEBUG
-            Logger.Log().Warning(Resources.AccessingNullTextureMessage, _type);
+            Logger.Log().Warning(Resources.AccessingNullInstanceMessage, _type);
 #endif
         }
 
@@ -23,7 +23,7 @@ namespace Reload.Core.Graphics.Rendering.Textures.NullTextures
         public override void Unbind()
         {
 #if DEBUG
-            Logger.Log().Warning(Resources.AccessingNullTextureMessage, _type);
+            Logger.Log().Warning(Resources.AccessingNullInstanceMessage, _type);
 #endif
         }
 
@@ -31,7 +31,7 @@ namespace Reload.Core.Graphics.Rendering.Textures.NullTextures
         public override string GetPath()
         {
 #if DEBUG
-            Logger.Log().Warning(Resources.AccessingNullTextureMessage, _type);
+            Logger.Log().Warning(Resources.AccessingNullInstanceMessage, _type);
 #endif
             return string.Empty;
         }
@@ -40,7 +40,7 @@ namespace Reload.Core.Graphics.Rendering.Textures.NullTextures
         public override void SetData(Span<byte> data)
         {
 #if DEBUG
-            Logger.Log().Warning(Resources.AccessingNullTextureMessage, _type);
+            Logger.Log().Warning(Resources.AccessingNullInstanceMessage, _type);
 #endif
         }
 
@@ -48,7 +48,7 @@ namespace Reload.Core.Graphics.Rendering.Textures.NullTextures
         protected override void Dispose(bool disposing)
         {
 #if DEBUG
-            Logger.Log().Warning(Resources.AccessingNullTextureMessage, _type);
+            Logger.Log().Warning(Resources.AccessingNullInstanceMessage, _type);
 #endif
         }
     }

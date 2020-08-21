@@ -79,6 +79,7 @@ namespace Reload.Core.Tests.Graphics.Rendering
             //Assert
             createEmptyVertexBufferAct.Should().NotThrow();
             createWithDataVertexBufferAct.Should().NotThrow();
+
             emptyVertexBuffer.Should().NotBeNull();
             vertexBufferWithData.Should().NotBeNull();
         }

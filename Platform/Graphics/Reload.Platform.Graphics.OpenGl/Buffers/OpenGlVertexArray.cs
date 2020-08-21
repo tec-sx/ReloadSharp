@@ -8,7 +8,7 @@ namespace Reload.Platform.Graphics.OpenGl.Buffers
     /// <summary>
     /// The OpenGL vertex array implementation.
     /// </summary>
-    internal class OpenGlVertexArray : VertexArray
+    internal sealed class OpenGlVertexArray : VertexArray
     {
         private GL _gl;
 
@@ -24,7 +24,6 @@ namespace Reload.Platform.Graphics.OpenGl.Buffers
         {
             _gl = api;
             _handle = _gl.CreateVertexArray();
-            VertexBuffers = new List<VertexBuffer>();
         }
 
         /// <inheritdoc/>
@@ -53,7 +52,7 @@ namespace Reload.Platform.Graphics.OpenGl.Buffers
                 _gl.VertexAttribPointer(
                     index,
                     element.GetComponentCount(),
-                    GlUtils.ShaderDataTypeToGlBaseType(element.Type),
+                    OpenGlUtilities.ShaderDataTypeToGlBaseType(element.Type),
                     element.Normalized,
                     layout.Stride,
                     (void *)element.Offset);

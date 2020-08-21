@@ -7,7 +7,7 @@ namespace Reload.Platform.Graphics.OpenGl.Buffers
     /// <summary>
     /// The open gl buffer factory.
     /// </summary>
-    internal class OpenGlBufferFactory : BufferFactory
+    internal sealed class OpenGlBufferFactory : BufferFactory
     {
         private readonly GL _api;
 

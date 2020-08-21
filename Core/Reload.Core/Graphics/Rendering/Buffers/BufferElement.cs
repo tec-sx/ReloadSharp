@@ -41,7 +41,7 @@ namespace Reload.Core.Graphics.Rendering.Buffers
         {
             Name = name;
             Type = type;
-            Size = ShaderUtils.GetShaderDatatypeSize(type);
+            Size = ShaderUtilities.GetShaderDatatypeSize(type);
             Offset = 0;
             Normalized = normalized;
         }

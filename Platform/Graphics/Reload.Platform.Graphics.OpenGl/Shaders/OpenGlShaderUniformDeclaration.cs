@@ -2,47 +2,75 @@
 
 namespace Reload.Platform.Graphics.OpenGl.Shaders
 {
-    public enum UniformType
+    /// <summary>
+    /// The OpenGl shader uniform declaration implementation.
+    /// </summary>
+    internal sealed record OpenGlShaderUniformDeclaration : ShaderUniformDeclaration
     {
-        None,
-        Float32,
-        Vec2,
-        Vec3,
-        Vec4,
-        Mat3,
-        Mat4,
-        Int32,
-        Struct
-    }
+        private uint _offset;
 
-    public class OpenGlShaderUniformDeclaration : ShaderUniformDeclaration
-    {
+        /// <summary>
+        /// Gets the uniform location.
+        /// </summary>
         public int Location { get; }
 
+        /// <summary>
+        /// Gets or sets the offset.
+        /// </summary>
         public override uint Offset
         {
-            get => offset;
-            set
+            get => _offset;
+            init
             {
                 if (Type == UniformType.Struct)
                 {
                     Struct.Offset = value;
                 }
 
-                offset = value;
+                _offset = value;
             }
         }
+
+        /// <summary>
+        /// Gets the uniform type.
+        /// </summary>
         public UniformType Type { get; }
+
+        /// <summary>
+        /// Gets the shader struct.
+        /// </summary>
         public ShaderStruct Struct { get; }
+
+        /// <summary>
+        /// Gets the absolute offset.
+        /// </summary>
         public uint AbsoluteOffset => Struct != null ? Struct.Offset + Offset : Offset;
+
+        /// <summary>
+        /// Gets a value indicating whether the uniform is array.
+        /// </summary>
         public bool IsArray => Count > 1;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OpenGlShaderUniformDeclaration"/> class.
+        /// </summary>
+        /// <param name="domain">The domain.</param>
+        /// <param name="type">The type.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="count">The count.</param>
         public OpenGlShaderUniformDeclaration(ShaderDomain domain, UniformType type, string name, uint count)
             : base(name, SizeOfUniformType(type), count, domain)
         {
             Type = type;
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OpenGlShaderUniformDeclaration"/> class.
+        /// </summary>
+        /// <param name="domain">The domain.</param>
+        /// <param name="uniformStruct">The uniform struct.</param>
+        /// <param name="name">The name.</param>
+        /// <param name="count">The count.</param>
         public OpenGlShaderUniformDeclaration(ShaderDomain domain, ShaderStruct uniformStruct, string name, uint count)
             : base(name, uniformStruct.Size * count, count, domain)
         {
@@ -50,6 +78,11 @@ namespace Reload.Platform.Graphics.OpenGl.Shaders
             Struct = uniformStruct;
         }
 
+        /// <summary>
+        /// Gets the size of the uniform type.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        /// <returns>An uint.</returns>
         public static uint SizeOfUniformType(UniformType type)
         {
             return type switch
@@ -65,6 +98,11 @@ namespace Reload.Platform.Graphics.OpenGl.Shaders
             };
         }
 
+        /// <summary>
+        /// Converts the uniform type string the to uniform type enum value.
+        /// </summary>
+        /// <param name="type">The string uniform type.</param>
+        /// <returns>An UniformType.</returns>
         public static UniformType StringToType(string type)
         {
             return type switch
@@ -80,6 +118,11 @@ namespace Reload.Platform.Graphics.OpenGl.Shaders
             };
         }
 
+        /// <summary>
+        /// Converts an uniform type enum value to string.
+        /// </summary>
+        /// <param name="type">The uniform type enum value.</param>
+        /// <returns>A string.</returns>
         public static string TypeToString(UniformType type)
         {
             return type switch

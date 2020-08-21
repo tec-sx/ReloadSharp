@@ -1,6 +1,5 @@
 ﻿namespace Reload.Rendering.Platform.Vulkan
 {
-    using Reload.Rendering.Buffers;
     using Silk.NET.OpenGL;
     using Silk.NET.Windowing.Common;
     using System.Drawing;

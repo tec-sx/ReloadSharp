@@ -7,7 +7,7 @@ namespace Reload.Platform.Graphics.OpenGl.Buffers
     /// <summary>
     /// The OpenGL vertex buffer.
     /// </summary>
-    public sealed class OpenGlVertexBuffer : VertexBuffer
+    internal sealed class OpenGlVertexBuffer : VertexBuffer
     {
         /// <summary>
         /// The OpenGl buffer type constant set to array buffer.
@@ -18,7 +18,7 @@ namespace Reload.Platform.Graphics.OpenGl.Buffers
 
         private readonly uint _handle;
 
-        private bool _isDisposed;
+        private bool _disposed;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGlVertexBuffer"/> class.
@@ -57,7 +57,7 @@ namespace Reload.Platform.Graphics.OpenGl.Buffers
         /// <inheritdoc/>
         protected override void Dispose(bool isDisposing)
         {
-            if (_isDisposed)
+            if (_disposed)
             {
                 return;
             }
@@ -67,7 +67,7 @@ namespace Reload.Platform.Graphics.OpenGl.Buffers
                 _gl.DeleteBuffer(_handle);
             }
 
-            _isDisposed = true;
+            _disposed = true;
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Reload.Platform.Graphics.OpenGl.Shaders
     /// <summary>
     /// The OpenGL shader factory implementation.
     /// </summary>
-    public class OpenGlShaderFactory : ShaderFactory
+    internal sealed class OpenGlShaderFactory : ShaderFactory
     {
         private readonly GL _api;
 
@@ -23,7 +23,7 @@ namespace Reload.Platform.Graphics.OpenGl.Shaders
         }
 
         /// <inheritdoc/>
-        public override ShaderProgram CreateShaderProgram(string fileName, List<string> attributes)
+        protected override ShaderProgram CreateShaderProgram(string fileName, List<string> attributes)
         {
             string shaderFile = Path.Combine(ContentPaths.Shaders, $"{fileName}.glsl");
             string shaderString = File.ReadAllText(shaderFile);

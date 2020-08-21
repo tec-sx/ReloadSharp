@@ -7,7 +7,7 @@ namespace Reload.Platform.Graphics.OpenGl.Textures
     /// <summary>
     /// The open gl texture factory implementation.
     /// </summary>
-    public class OpenGlTextureFactory : TextureFactory
+    public sealed class OpenGlTextureFactory : TextureFactory
     {
         private GL _api;
 
@@ -21,15 +21,15 @@ namespace Reload.Platform.Graphics.OpenGl.Textures
         }
 
         /// <inheritdoc/>
-        public override Texture2D CreateBlankTexture2D(uint width, uint height) => new OpenGlTexture2D(width, height, _api);
+        protected override Texture2D CreateBlankTexture2D(uint width, uint height) => new OpenGlTexture2D(width, height, _api);
 
         /// <inheritdoc/>
-        public override Texture2D CreateTexture2DFromFile(string path) => new OpenGlTexture2D(path, _api);
+        protected override Texture2D CreateTexture2DFromFile(string path) => new OpenGlTexture2D(path, _api);
 
         /// <inheritdoc/>
-        public override TextureCube CreateBlankTextureCube(TextureFormat format, uint width, uint height) => new NullTextureCube();
+        protected override TextureCube CreateBlankTextureCube(TextureFormat format, uint width, uint height) => new NullTextureCube();
 
         /// <inheritdoc/>
-        public override TextureCube CreateTextureCubeFromFile(string path) => new NullTextureCube();
+        protected override TextureCube CreateTextureCubeFromFile(string path) => new NullTextureCube();
     }
 }

@@ -61,29 +61,11 @@ namespace Reload.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Accesing a null buffer of type: {Type }.
+        ///   Looks up a localized string similar to Accesing a null instance of type: {Type }.
         /// </summary>
-        internal static string AccessingNullBufferMessage {
+        internal static string AccessingNullInstanceMessage {
             get {
-                return ResourceManager.GetString("AccessingNullBufferMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Accesing a null shader of type: {Type }.
-        /// </summary>
-        internal static string AccessingNullShaderMessage {
-            get {
-                return ResourceManager.GetString("AccessingNullShaderMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Accesing a null texture of type: {Type }.
-        /// </summary>
-        internal static string AccessingNullTextureMessage {
-            get {
-                return ResourceManager.GetString("AccessingNullTextureMessage", resourceCulture);
+                return ResourceManager.GetString("AccessingNullInstanceMessage", resourceCulture);
             }
         }
         
@@ -129,6 +111,15 @@ namespace Reload.Core.Properties {
         internal static string DefaultNullArgumentMessage {
             get {
                 return ResourceManager.GetString("DefaultNullArgumentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have tried to access a member on a type whose value is null..
+        /// </summary>
+        internal static string DefaultNullReferenceExceptionMessage {
+            get {
+                return ResourceManager.GetString("DefaultNullReferenceExceptionMessage", resourceCulture);
             }
         }
         
@@ -183,6 +174,15 @@ namespace Reload.Core.Properties {
         internal static string NullArgumentMessage {
             get {
                 return ResourceManager.GetString("NullArgumentMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You have tried to access a member on a type: {Type} whose value is null..
+        /// </summary>
+        internal static string NullReferenceExceptionMessage {
+            get {
+                return ResourceManager.GetString("NullReferenceExceptionMessage", resourceCulture);
             }
         }
         

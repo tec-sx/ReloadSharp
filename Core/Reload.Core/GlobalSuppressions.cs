@@ -24,3 +24,4 @@ using System.Diagnostics.CodeAnalysis;
 [assembly: SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>", Scope = "type", Target = "~T:Reload.Core.Graphics.Rendering.Shaders.ShaderDataType")]
 [assembly: SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>", Scope = "member", Target = "~M:Reload.Core.Audio.AudioSource.Stop")]
 [assembly: SuppressMessage("Naming", "CA1716:Identifiers should not match keywords", Justification = "<Pending>", Scope = "member", Target = "~M:Reload.Core.Audio.AudioSource.Play(System.Boolean)")]
+[assembly: SuppressMessage("Naming", "CA1720:Identifier contains type name", Justification = "<Pending>", Scope = "type", Target = "~T:Reload.Core.Graphics.Rendering.Shaders.UniformType")]

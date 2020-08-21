@@ -1,11 +1,9 @@
-﻿using Reload.Editor.Properties;
-using Reload.Platform.Graphics.OpenGl;
+﻿using Reload.Core.Graphics.Rendering.Buffers;
+using Reload.Core.Graphics.Rendering.Shaders;
+using Reload.Editor.Properties;
 using Reload.Rendering;
-using Reload.Rendering.Buffers;
 using Silk.NET.OpenGL;
-using SpaceVIL;
 using SpaceVIL.Common;
-using SpaceVIL.Core;
 using System;
 using System.IO;
 using System.Reflection;

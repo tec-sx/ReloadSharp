@@ -20,7 +20,19 @@ namespace Reload.Core
     {
         private readonly PlatformOS _platform;
 
-        private readonly IContainer _subSystems;
+        private readonly string _name;
+
+        #region Core Systems
+
+        private ProgramWindow _window;
+
+        private GraphicsAPI _graphics;
+
+        private AudioAPI _audio;
+        
+        private IInputSystem _input;
+
+        #endregion
 
         /// <summary>
         /// Prevents a default instance of the <see cref="GameBuilder"/> class 
@@ -32,11 +44,10 @@ namespace Reload.Core
         /// <summary>
         /// Initializes a new instance of the <see cref="GameBuilder"/> class.
         /// </summary>
-        public GameBuilder(PlatformOS platform)
+        public GameBuilder(string name, PlatformOS platform)
         {
+            _name = name;
             _platform = platform;
-            _subSystems = new Container();
-
             Logger.Log().Information(Resources.BuildStartingMessage);
         }
 
@@ -46,9 +57,21 @@ namespace Reload.Core
         /// <returns>A T.</returns>
         public TGame BuildForPlatform()
         {
+            if (_window == null) throw new ReloadArgumentNullException(typeof(ProgramWindow).ToString());
+
+            if (_graphics == null) throw new ReloadArgumentNullException(typeof(GraphicsAPI).ToString());
+
+            if (_input == null) throw new ReloadArgumentNullException(typeof(IInputSystem).ToString());
+
+            if (_audio == null) _audio = new NullAudioAPI();
+
             return new TGame()
             {
-                SubSystems = _subSystems
+                Name = _name,
+                Window = _window,
+                Graphics = _graphics,
+                Input = _input,
+                Audio = _audio
             };
         }
 
@@ -57,16 +80,14 @@ namespace Reload.Core
         /// </summary>
         /// <param name="window">The window.</param>
         /// <returns>A GameBuilder.</returns>
-        public GameBuilder<TGame> WithWindow<T>() where T : class, IGameWindow
+        public GameBuilder<TGame> WithWindow<T>() where T : ProgramWindow, new()
         {
             if (!_platform.CheckWindowCompatability<T>())
             {
                 throw new ReloadWindowBackendNotSupportedException();
             }
 
-            _subSystems.Register<IGameWindow, T>(Reuse.Singleton);
-            _subSystems.RegisterInitializer<IGameWindow>((window, resolver) => 
-                Logger.Log().Information(Resources.WithWindowMessage, window?.BackendType.GetDescription()));
+            _window = new T();
 
             return this;
         }
@@ -83,8 +104,8 @@ namespace Reload.Core
                 throw new ReloadGraphicsBackendNotSupportedException();
             }
 
-            _subSystems.Register<GraphicsAPI, T>(Reuse.Singleton);
-            _subSystems.RegisterInitializer<GraphicsAPI>((graphicsBackend, resolver) =>
+            _coreSystems.Register<GraphicsAPI, T>(Reuse.Singleton);
+            _coreSystems.RegisterInitializer<GraphicsAPI>((graphicsBackend, resolver) =>
                 Logger.Log().Information(Resources.WithGraphicsBackendMessage, graphicsBackend?.Type.GetDescription()));
 
             return this;
@@ -102,8 +123,8 @@ namespace Reload.Core
                 throw new ReloadAudioBackendNotSupportedException();
             }
 
-            _subSystems.Register<AudioAPI, T>(Reuse.Singleton);
-            _subSystems.RegisterInitializer<AudioAPI>((audioBackend, resolver) =>
+            _coreSystems.Register<AudioAPI, T>(Reuse.Singleton);
+            _coreSystems.RegisterInitializer<AudioAPI>((audioBackend, resolver) =>
                 Logger.Log().Information(Resources.WithAudioBackendMessage ,audioBackend?.Type.GetDescription()));
 
             return this;
@@ -121,8 +142,8 @@ namespace Reload.Core
                 throw new ReloadInputNotSupportedException();
             }
 
-            _subSystems.Register<IInputSystem, T>(Reuse.Singleton);
-            _subSystems.RegisterInitializer<IInputSystem>((inputSystem, resolver) =>
+            _coreSystems.Register<IInputSystem, T>(Reuse.Singleton);
+            _coreSystems.RegisterInitializer<IInputSystem>((inputSystem, resolver) =>
                 Logger.Log().Information(Resources.WithAudioBackendMessage, inputSystem?.Source.GetDescription()));
 
             return this;
@@ -133,7 +154,7 @@ namespace Reload.Core
         /// </summary>
         /// <param name="audioBackend">The audio backend.</param>
         /// <returns>A GameBuilder.</returns>
-        public GameBuilder<TGame> WithSubSystem<T>(Lifetime lifetime) where T : class, ISubSystem
+        public GameBuilder<TGame> WithSubSystem<T>(Lifetime lifetime) where T : class, ICoreSystem
         {
             IReuse reuse = lifetime switch
             {
@@ -143,8 +164,8 @@ namespace Reload.Core
                 _ => throw new ReloadInvalidEnumArgumentException()
             };
 
-            _subSystems.Register<ISubSystem, T>(reuse);
-            _subSystems.RegisterInitializer<ISubSystem>((subSystem, resolver) =>
+            _coreSystems.Register<ICoreSystem, T>(reuse);
+            _coreSystems.RegisterInitializer<ICoreSystem>((subSystem, resolver) =>
                 Logger.Log().Information(Resources.WithAudioBackendMessage, subSystem.ToString()));
 
             return this;
@@ -153,7 +174,7 @@ namespace Reload.Core
         /// <inheritdoc/>
         public void Dispose()
         {
-            _subSystems.Dispose();
+            _coreSystems.Dispose();
         }
     }
 }

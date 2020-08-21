@@ -10,7 +10,7 @@ namespace Reload.Core.Graphics
     /// <summary>
     /// The graphics API base.
     /// </summary>
-    public abstract class GraphicsAPI : ISubSystem, IDisposable
+    public abstract class GraphicsAPI : ICoreSystem, IDisposable
     {
         #region Core factories
 

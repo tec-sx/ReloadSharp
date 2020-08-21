@@ -15,7 +15,7 @@ namespace Reload.Core
         /// Checks if the window is compatible with the running operating system.
         /// </summary>
         /// <returns>A bool.</returns>
-        public abstract bool CheckWindowCompatability<T>() where T : IGameWindow;
+        public abstract bool CheckWindowCompatability<T>() where T : ProgramWindow;
 
         /// <summary>
         /// Checks if the garphics backend is compatible with the running operating system.

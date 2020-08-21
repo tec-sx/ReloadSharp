@@ -32,7 +32,7 @@ namespace Reload.Core.Graphics.Rendering.Shaders
         /// <summary>
         /// Pre-processes single file shader source. Add "#type [shader type]" above 
         /// the source code for the specific shader. For available shader types see
-        /// <see cref="ShaderUtils.ShaderTypes"/>
+        /// <see cref="ShaderUtilities.ShaderTypes"/>
         /// </summary>
         /// <param name="source">The shader source.</param>
         /// <returns>

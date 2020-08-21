@@ -9,14 +9,12 @@ using Reload.Core.Commands;
 using Reload.Editor.Platform;
 using Reload.Editor.Input;
 using Reload.Editor.Extensions;
-using Reload.Rendering.Camera;
-using Reload.Core.Utils;
-using System.Numerics;
+using Reload.Core.Graphics;
 using System;
 
 namespace Reload.Editor
 {
-    internal class DefaultViewport : Viewport
+    internal class DefaultViewport : Viewport, ProgramWindow
     {
         private const double FramesPerSecond = 60.0f;
 
@@ -36,6 +34,24 @@ namespace Reload.Editor
         private Queue<RangeCommand> _rangeCommandQueue;
 
         private bool _isInitialized;
+
+        public int Width { get => GetWidth(); set => SetWidth(value); }
+
+        public int Height { get => GetHeight(); set => SetHeight(value); }
+
+        public int PositionX { get => GetX(); set => SetX(value); }
+
+        public int PositionY { get => GetY(); set => SetY(value); }
+
+        public bool IsFullScreen { get; set; }
+
+        public bool IsVsyncOn { get; set; }
+
+        public string Name { get; init; }
+
+        public WindowingAPIType BackendType => WindowingAPIType.Glfw;
+
+        public IntPtr Handle => throw new NotImplementedException();
 
         public Scene ActiveScene { get; set; }
         
@@ -284,6 +300,31 @@ namespace Reload.Editor
             {
                 cameraController.RollRight(false);
             }
+        }
+
+        public void OnClose()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnRender(double deltaTime)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnStarting()
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void OnUpdate(double deltaTime)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void ShutDown()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

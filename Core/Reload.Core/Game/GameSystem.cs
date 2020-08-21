@@ -1,5 +1,8 @@
-﻿using DryIoc;
+﻿using Reload.Core.Audio;
+using Reload.Core.Graphics;
+using Reload.Core.Input;
 using System;
+using System.ComponentModel;
 
 namespace Reload.Core.Game
 {
@@ -7,7 +10,7 @@ namespace Reload.Core.Game
     /// The base game system class.
     /// Can be instantiated through <see cref="GameBuilder"/>
     /// </summary>
-    public abstract class GameSystem : IDisposable
+    public abstract class GameSystem : ICoreSystem, IDisposable
     {
         private bool _isDisposed;
 
@@ -16,10 +19,29 @@ namespace Reload.Core.Game
         /// </summary>
         public string Name { get; init; }
 
+        #region Core Systems
+
         /// <summary>
-        /// Gets the sub systems provider.
+        /// Gets the game window.
         /// </summary>
-        internal IContainer SubSystems { get; init; }
+        public ProgramWindow Window { get; init; }
+
+        /// <summary>
+        /// Gets the graphics API used.
+        /// </summary>
+        public GraphicsAPI Graphics { get; init; }
+
+        /// <summary>
+        /// Gets or sets the audio system.
+        /// </summary>
+        public AudioAPI Audio { get; set; }
+
+        /// <summary>
+        /// Gets the input system.
+        /// </summary>
+        public IInputSystem Input { get; init; }
+
+        #endregion
 
         /// <summary>
         /// Static event that will be fired when a game is initialized
@@ -36,16 +58,16 @@ namespace Reload.Core.Game
         /// </summary>
         public GameSystem()
         {
-            SubSystems.RegisterInitializer<ISubSystem>((subSystem, resolver) => subSystem.Initialize());
-            SubSystems.RegisterDisposer<ISubSystem>(subSystem => subSystem.ShutDown());
+            SubSystems.RegisterInitializer<ICoreSystem>((subSystem, resolver) => subSystem.Initialize());
+            SubSystems.RegisterDisposer<ICoreSystem>(subSystem => subSystem.ShutDown());
         }
 
         /// <summary>
-        /// Itterates throug all included sub-systems and calls the <see cref="ISubSystem.Initialize"/>
+        /// Itterates throug all included sub-systems and calls the <see cref="ICoreSystem.Initialize"/>
         /// for each of them. afterwards it calls the <see cref="OnInitialize"/> method.
         /// </summary>
-        public void Initilize()
-        { 
+        public void Initialize()
+        {
             OnInitialize();
         }
 

@@ -3,9 +3,9 @@ using System;
 
 namespace Reload.Core.Tests.Fakes
 {
-    internal class GameWindowFake : IGameWindow
+    internal class GameWindowFake : ProgramWindow
     {
-        public WindowBackendType BackendType => WindowBackendType.None;
+        public WindowingAPIType BackendType => WindowingAPIType.None;
 
         public IntPtr Handle => IntPtr.Zero;
 

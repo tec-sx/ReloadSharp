@@ -20,7 +20,7 @@ namespace Reload.Rendering
     /// <summary>
     /// The main 3D renderer.
     /// </summary>
-    public class Renderer : ISubSystem
+    public class Renderer : ICoreSystem
     {
         /// <summary>
         /// Gets the render command queue.

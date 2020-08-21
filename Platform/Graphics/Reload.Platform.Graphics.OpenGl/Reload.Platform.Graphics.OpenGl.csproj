@@ -49,6 +49,7 @@
 
   <ItemGroup>
     <Folder Include="Exceptions\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
 
 </Project>

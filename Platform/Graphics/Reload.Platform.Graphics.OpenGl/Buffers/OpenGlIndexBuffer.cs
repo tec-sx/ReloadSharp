@@ -7,7 +7,7 @@ namespace Reload.Platform.Graphics.OpenGl.Buffers
     /// <summary>
     /// The OpenGl index buffer.
     /// </summary>
-    public class OpenGlIndexBuffer : IndexBuffer
+    internal sealed class OpenGlIndexBuffer : IndexBuffer
     {
         /// <summary>
         /// The buffer type.

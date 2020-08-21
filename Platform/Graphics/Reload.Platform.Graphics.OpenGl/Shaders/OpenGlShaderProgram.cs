@@ -11,9 +11,9 @@ using OpenGlShaderType = Silk.NET.OpenGL.ShaderType;
 namespace Reload.Platform.Graphics.OpenGl.Shaders
 {
     /// <summary>
-    /// The Open Gl shader program used for working with glsl shader files.
+    /// The Open Gl shader program implementation.
     /// </summary>
-    public class OpenGlShaderProgram : ShaderProgram
+    internal sealed class OpenGlShaderProgram : ShaderProgram
     {
 
         private readonly GL _gl;
@@ -56,7 +56,7 @@ namespace Reload.Platform.Graphics.OpenGl.Shaders
                 throw new ApplicationException(Properties.Resources.EmptyShaderSource);
             }
 
-            var shaders = new Dictionary<ReloadShaderType, string>(ShaderUtils.ShaderTypes.Count);
+            var shaders = new Dictionary<ReloadShaderType, string>(ShaderUtilities.ShaderTypes.Count);
             var rawSplitShaders = source.Split("#type", StringSplitOptions.RemoveEmptyEntries);
             
             foreach (string rawShaderString in rawSplitShaders)
@@ -76,7 +76,7 @@ namespace Reload.Platform.Graphics.OpenGl.Shaders
                     throw new ApplicationException(Properties.Resources.EmptyShaderSource);
                 }
 
-                if (ShaderUtils.ShaderTypes.TryGetValue(line.Trim(), out var shaderType))
+                if (ShaderUtilities.ShaderTypes.TryGetValue(line.Trim(), out var shaderType))
                 {
                     shaders.Add(shaderType, rawShaderString.Substring(newLineIndex + 1));
                 }

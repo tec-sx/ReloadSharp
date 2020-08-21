@@ -8,7 +8,7 @@ namespace Reload.Core.Graphics.Rendering.Shaders
     /// <summary>
     /// The renderer utilities class.
     /// </summary>
-    public static class ShaderUtils
+    public static class ShaderUtilities
     {
         /// <summary>
         /// Gets the shader types.
