@@ -4,7 +4,7 @@ namespace Reload.Core.Tests.Fakes
 {
     internal class SubSystemFake : ICoreSystem
     {
-        public void Initialize()
+        public void StartUp()
         { }
 
         public void ShutDown()

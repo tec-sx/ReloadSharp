@@ -10,6 +10,13 @@
     <Copyright>Copyright 2020 Ivan Trajchev</Copyright>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DefineConstants></DefineConstants>
+    <Optimize>true</Optimize>
+    <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
+    <DocumentationFile>C:\Users\karak\source\repos\reloadsharp\Core\Reload.Core\Reload.Core.xml</DocumentationFile>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="DryIoc" Version="4.3.1" />
     <PackageReference Include="ErrorProne.NET.CoreAnalyzers" Version="0.3.0-beta.0">

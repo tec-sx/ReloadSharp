@@ -1,22 +1,14 @@
-﻿namespace Reload.Configuration
+﻿namespace Reload.Core.Configuration
 {
-    using Silk.NET.Input.Common;
+    using Reload.Graphics;
     using System;
-    using System.Drawing;
 
     [Serializable]
-    public class UserConfiguration
+    public record SystemConfiguration
     {
-        public int UserId { get; } = 0;
+        public int UserId { get; init; } = 0;
 
-        #region Display
-
-        public Point DisplayResolution { get; set; } = new Point(1280, 720);
-        public int DisplayRefreshRate { get; set; } = 60;
-        public bool DisplayInFullScreen { get; set; } = false;
-        public bool DisplayEnableVsync { get; set; } = true;
-        public bool DisplayEnableVulkan { get; set; } = false;
-        #endregion
+        public DisplayConfiguration Display { get; set; }
 
         #region Audio
 

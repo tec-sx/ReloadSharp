@@ -3,9 +3,9 @@ using System;
 
 namespace Reload.Core.Tests.Fakes
 {
-    internal class GameWindowFake : ProgramWindow
+    internal class GameWindowFake : IProgramWindow
     {
-        public WindowingAPIType BackendType => WindowingAPIType.None;
+        public WindowingAPIType Api => WindowingAPIType.None;
 
         public IntPtr Handle => IntPtr.Zero;
 
@@ -16,7 +16,7 @@ namespace Reload.Core.Tests.Fakes
         public bool IsFullScreen { get; set; }
         public bool IsVsyncOn { get; set; }
 
-        public void Initialize()
+        public void StartUp()
         { }
 
         public void OnClose()

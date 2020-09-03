@@ -1,43 +1,81 @@
-﻿using Reload.Core.Graphics;
-using Reload.Core.Windowing;
+﻿using Reload.Core.Windowing;
 using Silk.NET.Windowing.Common;
 using System.Drawing;
 using Reload.Platform.Windowing.GLFW.Extensions;
 using Silk.NET.Windowing;
+using System;
+using Reload.Core.Configuration;
 
 namespace Reload.Platform.Windowing.GLFW
 {
     /// <summary>
     /// The Glfw window implementation.
     /// </summary>
-    public class GlfwWindow : ProgramWindow
+    public class GlfwWindow : IProgramWindow
     {
-        private readonly IWindow _nativeWindow;
+        private IWindow _nativeWindow;
 
         private WindowOptions _windowOptions;
 
         private bool _disposed;
 
-        /// <summary>
-        /// Prevents a default instance of the <see cref="GlfwWindow"/> class from being created.
-        /// </summary>
-        private GlfwWindow()
-        { }
+        /// <inheritdoc/>
+        public WindowingAPIType Api { get; private set; }
+
+        /// <inheritdoc/>
+        public Size Size => _nativeWindow.Size;
+
+        /// <inheritdoc/>
+        public Point Position => _nativeWindow.Position;
+
+        /// <inheritdoc/>
+        public bool IsFullScreen { get; set; }
+
+        /// <inheritdoc/>
+        public bool IsVsyncOn { get; set; }
+
+        /// <inheritdoc/>
+        public Func<string, IntPtr> GetProcAddress { get; private set; }
+        
+        /// <inheritdoc/>
+        public Action Load { get; set; }
+
+        /// <inheritdoc/>
+        public Action<double> Update { get; set; }
+
+        /// <inheritdoc/>
+        public Action<double> Render { get; set; }
+
+        /// <inheritdoc/>
+        public Action<Point> Move { get; set; }
+
+        /// <inheritdoc/>
+        public Action<Size> Resize { get; set; }
+
+        /// <inheritdoc/>
+        public Action<bool> FocusChanged { get; set; }
+
+        /// <inheritdoc/>
+        public Action Closing { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="GlfwWindow"/> class.
         /// </summary>
-        /// <param name="displayConfiguration">The display configuration.</param>
-        public GlfwWindow(DisplayConfiguration displayConfiguration)
+        public GlfwWindow()
+        { }
+
+        /// <inheritdoc/>
+        public void Configure(DisplayConfiguration configuration)
         {
-            _windowOptions = CreateWindowOptionsFromConfiguration(displayConfiguration);
+            _windowOptions = CreateWindowOptionsFromConfiguration(configuration);
             _nativeWindow = Window.Create(_windowOptions);
 
-            GetProcAddress = _nativeWindow.GLContext.GetProcAddress;        
+            GetProcAddress = _nativeWindow.GLContext.GetProcAddress;
+            Api = WindowingAPIType.Glfw;
         }
 
         /// <inheritdoc/>
-        public override void Initialize()
+        public void StartUp()
         {
             _nativeWindow.Load += Load;
             _nativeWindow.Update += Update;
@@ -49,13 +87,52 @@ namespace Reload.Platform.Windowing.GLFW
         }
 
         /// <inheritdoc/>
-        public override void ShutDown()
+        public void ShutDown()
         {
             _nativeWindow.Close();
         }
 
+        /// <summary>
+        /// Creates WindowOptions used by Silk.NET Window.Create static method
+        ///  from a user defined display configuration.
+        /// </summary>
+        /// <param name="displayConfiguration"></param>
+        /// <returns cref="WindowOptions"></returns>
+        private static WindowOptions CreateWindowOptionsFromConfiguration(DisplayConfiguration displayConfiguration)
+        {
+            var options = WindowOptions.Default;
+
+            options.Title = displayConfiguration.WindowTitle;
+            options.Size = new Size(displayConfiguration.Resolution.Width, displayConfiguration.Resolution.Height);
+            options.WindowState = displayConfiguration.InFullScreen ? WindowState.Fullscreen : WindowState.Normal;
+            options.UpdatesPerSecond = displayConfiguration.TargetFps;
+            options.FramesPerSecond = displayConfiguration.TargetFps;
+            options.VSync = displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Off;
+            options.RunningSlowTolerance = 5;
+            options.UseSingleThreadedWindow = true;
+            options.IsEventDriven = false;
+            options.WindowBorder = displayConfiguration.WindowBorder.ToSilkNetWindowBorder();
+            options.ShouldSwapAutomatically = false;
+            options.Position = displayConfiguration.Position;
+
+            return options;
+        }
+
         /// <inheritdoc/>
-        protected override void Dispose(bool disposing)
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+
+        /// <summary>
+        /// Protected dispose method overload with disposing parameter that indicates 
+        /// whether the method call comes from a Dispose method (value is true) or
+        /// from a finalizer (value is false)
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
         {
             if (_disposed)
             {
@@ -70,30 +147,5 @@ namespace Reload.Platform.Windowing.GLFW
             _disposed = true;
         }
 
-        /// <summary>
-        /// Creates WindowOptions used by Silk.NET Window.Create static method
-        ///  from a user defined display configuration.
-        /// </summary>
-        /// <param name="displayConfiguration"></param>
-        /// <returns cref="WindowOptions"></returns>
-        private static WindowOptions CreateWindowOptionsFromConfiguration(DisplayConfiguration displayConfiguration)
-        {
-            var options = displayConfiguration.EnableVulkan ? WindowOptions.DefaultVulkan : WindowOptions.Default;
-
-            options.Title = displayConfiguration.WindowTitle;
-            options.Size = new Size(displayConfiguration.Resolution.X, displayConfiguration.Resolution.Y);
-            options.WindowState = displayConfiguration.InFullScreen ? WindowState.Fullscreen : WindowState.Normal;
-            options.UpdatesPerSecond = displayConfiguration.TargetFps;
-            options.FramesPerSecond = displayConfiguration.TargetFps;
-            options.VSync = displayConfiguration.EnableVSync ? VSyncMode.On : VSyncMode.Off;
-            options.RunningSlowTolerance = 5;
-            options.UseSingleThreadedWindow = true;
-            options.IsEventDriven = false;
-            options.WindowBorder = displayConfiguration.WindowBorder.ToSilkNetWindowBorder();
-            options.ShouldSwapAutomatically = false;
-            options.Position = displayConfiguration.Position;
-
-            return options;
-        }
     }
 }

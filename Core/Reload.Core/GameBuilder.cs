@@ -1,5 +1,31 @@
-﻿using DryIoc;
+﻿#region copyright
+/*
+-----------------------------------------------------------------------------
+Copyright (c) 2020 Ivan Trajchev
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-----------------------------------------------------------------------------
+*/
+#endregion
+using DryIoc;
 using Reload.Core.Audio;
+using Reload.Core.Configuration;
 using Reload.Core.Exceptions;
 using Reload.Core.Extensions;
 using Reload.Core.Game;
@@ -7,6 +33,7 @@ using Reload.Core.Graphics;
 using Reload.Core.Input;
 using Reload.Core.Properties;
 using Reload.Core.Utilities;
+using Reload.Core.Windowing;
 using System;
 
 namespace Reload.Core
@@ -16,7 +43,7 @@ namespace Reload.Core
     /// the game system with all subsystems.
     /// </summary>
     public sealed class GameBuilder<TGame> : IDisposable 
-        where TGame : GameSystem, new()
+        where TGame : Game.GameSystem, new()
     {
         private readonly PlatformOS _platform;
 
@@ -24,7 +51,7 @@ namespace Reload.Core
 
         #region Core Systems
 
-        private ProgramWindow _window;
+        private IProgramWindow _window;
 
         private GraphicsAPI _graphics;
 
@@ -57,7 +84,7 @@ namespace Reload.Core
         /// <returns>A T.</returns>
         public TGame BuildForPlatform()
         {
-            if (_window == null) throw new ReloadArgumentNullException(typeof(ProgramWindow).ToString());
+            if (_window == null) throw new ReloadArgumentNullException(typeof(IProgramWindow).ToString());
 
             if (_graphics == null) throw new ReloadArgumentNullException(typeof(GraphicsAPI).ToString());
 
@@ -78,9 +105,9 @@ namespace Reload.Core
         /// <summary>
         /// Adds the window sub-system.
         /// </summary>
-        /// <param name="window">The window.</param>
+        /// <param name="configuration"></param>
         /// <returns>A GameBuilder.</returns>
-        public GameBuilder<TGame> WithWindow<T>() where T : ProgramWindow, new()
+        public GameBuilder<TGame> WithWindow<T>(DisplayConfiguration configuration) where T : IProgramWindow, new()
         {
             if (!_platform.CheckWindowCompatability<T>())
             {
@@ -88,6 +115,9 @@ namespace Reload.Core
             }
 
             _window = new T();
+            _window.Configure(configuration);
+
+            Logger.Log().Information(Resources.WithWindowMessage, _window.ToString());
 
             return this;
         }
@@ -95,18 +125,18 @@ namespace Reload.Core
         /// <summary>
         /// Adds the graphics backend sub-system.
         /// </summary>
-        /// <param name="graphicsBackend">The graphics backend.</param>
         /// <returns>A GameBuilder.</returns>
-        public GameBuilder<TGame> WithGraphicsAPI<T>() where T : GraphicsAPI
+        public GameBuilder<TGame> WithGraphicsAPI<T>() where T : GraphicsAPI, new()
         {
             if (!_platform.CheckGraphicsBackendCompatability<T>())
             {
                 throw new ReloadGraphicsBackendNotSupportedException();
             }
 
-            _coreSystems.Register<GraphicsAPI, T>(Reuse.Singleton);
-            _coreSystems.RegisterInitializer<GraphicsAPI>((graphicsBackend, resolver) =>
-                Logger.Log().Information(Resources.WithGraphicsBackendMessage, graphicsBackend?.Type.GetDescription()));
+            _graphics = new T();
+            _graphics.Configure(_window);
+            
+            Logger.Log().Information(Resources.WithGraphicsBackendMessage, _graphics.ToString());
 
             return this;
         }

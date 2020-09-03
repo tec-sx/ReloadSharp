@@ -5,9 +5,9 @@ namespace Reload.Platform.Windowing.SDL2
     /// <summary>
     /// The SDL2 window implementation.
     /// </summary>
-    public class Sdl2Window : ProgramWindow
+    public class Sdl2Window : IProgramWindow
     {
-        public override void Initialize()
+        public override void StartUp()
         {
             throw new System.NotImplementedException();
         }

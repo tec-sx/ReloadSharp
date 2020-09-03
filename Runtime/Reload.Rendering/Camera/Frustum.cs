@@ -1,4 +1,5 @@
 ﻿using Reload.Core.Utils;
+using System;
 using System.Numerics;
 
 namespace Reload.Rendering.Camera
@@ -50,18 +51,11 @@ namespace Reload.Rendering.Camera
             get => fieldOfView;
             set
             {
-                if (value <= 0.0f)
-                {
-                    fieldOfView = 0.01f;
-                }
-                else if (value >= 180.0f)
-                {
-                    fieldOfView = 179.9f;
-                }
-                else
-                {
-                    fieldOfView = value;
-                }
+                fieldOfView = value <= 0.0f
+                            ? 0.01f
+                            : value >= 180.0f
+                            ? 179.9f
+                            : value;
 
                 shouldRecalculatePerspectiveMatrix = true;
             }
@@ -148,7 +142,7 @@ namespace Reload.Rendering.Camera
         /// </param>
         public Frustum(Frustum copyFrustum)
         {
-            fieldOfView = copyFrustum.fieldOfView;
+            fieldOfView = copyFrustum?.fieldOfView ?? throw new ArgumentNullException();
             aspectRatio = copyFrustum.aspectRatio;
             NearPlaneZ = copyFrustum.NearPlaneZ;
             FarPlaneZ = copyFrustum.FarPlaneZ;

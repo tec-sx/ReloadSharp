@@ -11,6 +11,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\Core\Reload.Core\Reload.Core.csproj" />
+    <ProjectReference Include="..\..\..\Runtime\Reload.Configuration\Reload.Configuration.csproj" />
   </ItemGroup>
 
 </Project>

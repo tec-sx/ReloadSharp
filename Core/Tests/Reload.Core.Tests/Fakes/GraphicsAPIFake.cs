@@ -4,7 +4,7 @@ namespace Reload.Core.Tests.Fakes
 {
     internal class GraphicsAPIFake : GraphicsAPI
     {
-        public override void Initialize()
+        public override void StartUp()
         { }
 
         public override void ShutDown()

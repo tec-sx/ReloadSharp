@@ -2,9 +2,6 @@ using Reload.Editor.Factories;
 using SpaceVIL;
 using SpaceVIL.Common;
 using Reload.Editor.UiElements;
-using Reload.Core.Graphics;
-using System;
-using Silk.NET.Core.Contexts;
 
 namespace Reload.Editor
 {

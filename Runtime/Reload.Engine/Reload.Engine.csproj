@@ -22,7 +22,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Platform\Graphics\Reload.Platform.Graphics.OpenGl\Reload.Platform.Graphics.OpenGl.csproj" />
-    <ProjectReference Include="..\..\Reload.Configuration\Reload.Configuration.csproj" />
     <ProjectReference Include="..\Reload.Assets\Reload.Assets.csproj" />
     <ProjectReference Include="..\Reload.Audio\Reload.Audio.csproj" />
     <ProjectReference Include="..\Reload.Gameplay\Reload.Gameplay.csproj" />

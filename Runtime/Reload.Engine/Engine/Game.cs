@@ -37,7 +37,7 @@ namespace Reload.Engine
         /// <summary>
         /// Configuration manager.
         /// </summary>
-        public ConfigurationManager ConfigurationManager { get; }
+        public ConfigurationFactory ConfigurationManager { get; }
 
         /// <summary>
         /// Graphics manager.
@@ -76,7 +76,7 @@ namespace Reload.Engine
             #region Core sub-systems
 
                 .AddSingleton(this as IGame)
-                .AddSingleton<ConfigurationManager>()
+                .AddSingleton<ConfigurationFactory>()
                 .AddSingleton<GraphicsManager>()
                 .AddSingleton<InputManager>()
 
@@ -96,7 +96,7 @@ namespace Reload.Engine
                 .BuildServiceProvider();
 
 
-            ConfigurationManager = SubSystems.GetService<ConfigurationManager>();
+            ConfigurationManager = SubSystems.GetService<ConfigurationFactory>();
             GraphicsManager = SubSystems.GetService<GraphicsManager>();
             InputManager = SubSystems.GetService<InputManager>();
 

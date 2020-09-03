@@ -1,10 +1,10 @@
-namespace Reload.Configuration
+namespace Reload.Core.Configuration
 {
     internal static class SystemConfiguration
     {
         #region Info
         public const string ProgramName = "Reload";
-        public const string ProgramVersion = "0.2";
+        public const string ProgramVersion = "0.1";
         #endregion
 
         #region Graphics

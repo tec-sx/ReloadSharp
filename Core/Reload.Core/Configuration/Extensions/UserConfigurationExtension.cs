@@ -1,4 +1,4 @@
-﻿namespace Reload.Configuration.Extensions
+﻿namespace Reload.Core.Configuration.Extensions
 {
     using Reload.Configuration;
     using System;
@@ -6,22 +6,20 @@
     using System.Runtime.Serialization.Formatters.Binary;
     using System.Text;
 
+    /// <summary>
+    /// Encapsulationg user configuration extension methods.
+    /// </summary>
     public static class UserConfigurationExtension
     {
-        private static readonly string ConfigurationFilePath = Path.Combine(ContentPaths.Configuration, "settings.recfg");
+        private static readonly string ConfigurationFilePath = Path.Combine(ContentPaths.MasterConfiguration, "settings.recfg");
         private static readonly byte[] Header = Encoding.UTF8.GetBytes("YOUDIDNTSAYTHEMAGICWORD");
 
-        public static string GetConfigurationFilePath(this UserConfiguration configuration)
-        {
-            if (configuration is null)
-            {
-                throw new ArgumentNullException(nameof(configuration));
-            }
-
-            return ConfigurationFilePath;
-        }
-
-        public static void Load(this UserConfiguration destination)
+        /// <summary>
+        /// Loads the configuration from a binary file.
+        /// </summary>
+        /// <param name="destination">The destination.</param>
+        /// <returns>An UserConfiguration.</returns>
+        public static SystemConfiguration Load(this SystemConfiguration destination)
         {
 #if DEBUG
             if (File.Exists(ConfigurationFilePath))
@@ -37,7 +35,7 @@
             if (!File.Exists(ConfigurationFilePath))
             {
                 destination.Save();
-                return;
+                return destination;
             }
 
             var formatter = new BinaryFormatter();
@@ -45,7 +43,7 @@
 
             try
             {
-                var source = formatter.Deserialize(stream) as UserConfiguration;
+                var source = formatter.Deserialize(stream) as SystemConfiguration;
                 var properties = source.GetType().GetProperties();
 
                 foreach (var property in properties)
@@ -57,9 +55,15 @@
             {
                 stream.Close();
             }
+
+            return destination;
         }
 
-        public static void Save(this UserConfiguration source)
+        /// <summary>
+        /// Saves the configuration to a binary file.
+        /// </summary>
+        /// <param name="source">The source.</param>
+        public static void Save(this SystemConfiguration source)
         {
             var formatter = new BinaryFormatter();
             var stream = new FileStream(ConfigurationFilePath, FileMode.OpenOrCreate);
@@ -74,7 +78,11 @@
             }
         }
 
-        public static void SetOptimalConfiguration(this UserConfiguration destination)
+        /// <summary>
+        /// Sets the optimal configuration for the machine that the game is running on.
+        /// </summary>
+        /// <param name="destination">The destination.</param>
+        public static void SetOptimalConfiguration(this SystemConfiguration destination)
         {
             // TODO: Implement logic to set optimal configuration on first run.
             throw new NotImplementedException();

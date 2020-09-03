@@ -1,8 +1,33 @@
-﻿using Reload.Core.Audio;
+﻿#region copyright
+/*
+-----------------------------------------------------------------------------
+Copyright (c) 2020 Ivan Trajchev
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+-----------------------------------------------------------------------------
+*/
+#endregion
+using Reload.Core.Audio;
+using Reload.Core.Configuration;
 using Reload.Core.Graphics;
 using Reload.Core.Input;
 using System;
-using System.ComponentModel;
 
 namespace Reload.Core.Game
 {
@@ -20,26 +45,26 @@ namespace Reload.Core.Game
         public string Name { get; init; }
 
         #region Core Systems
-
+            
         /// <summary>
         /// Gets the game window.
         /// </summary>
-        public ProgramWindow Window { get; init; }
+        public IProgramWindow Window { get; internal init; }
 
         /// <summary>
         /// Gets the graphics API used.
         /// </summary>
-        public GraphicsAPI Graphics { get; init; }
+        public GraphicsAPI Graphics { get; internal init; }
 
         /// <summary>
         /// Gets or sets the audio system.
         /// </summary>
-        public AudioAPI Audio { get; set; }
+        public AudioAPI Audio { get; internal set; }
 
         /// <summary>
         /// Gets the input system.
         /// </summary>
-        public IInputSystem Input { get; init; }
+        public IInputSystem Input { get; internal init; }
 
         #endregion
 
@@ -57,16 +82,13 @@ namespace Reload.Core.Game
         /// Initializes a new instance of the <see cref="GameSystem"/> class.
         /// </summary>
         public GameSystem()
-        {
-            SubSystems.RegisterInitializer<ICoreSystem>((subSystem, resolver) => subSystem.Initialize());
-            SubSystems.RegisterDisposer<ICoreSystem>(subSystem => subSystem.ShutDown());
-        }
+        { }
 
         /// <summary>
-        /// Itterates throug all included sub-systems and calls the <see cref="ICoreSystem.Initialize"/>
+        /// Itterates throug all included sub-systems and calls the <see cref="ICoreSystem.StartUp"/>
         /// for each of them. afterwards it calls the <see cref="OnInitialize"/> method.
         /// </summary>
-        public void Initialize()
+        public void StartUp()
         {
             OnInitialize();
         }
@@ -122,7 +144,10 @@ namespace Reload.Core.Game
 
             if (disposing)
             {
-                SubSystems.Dispose();
+                Input.Dispose();
+                Audio.Dispose();
+                Graphics.Dispose();
+                Window.Dispose();
             }
 
             _isDisposed = true;

@@ -3,51 +3,48 @@
     using Silk.NET.Windowing.Common;
     using System.Drawing;
 
-    public struct DisplayConfiguration
+    public record DisplayConfiguration
     {
         /// <summary>
         /// User set window/screen resolution.
         /// </summary>
-        public Point Resolution { get; set; }
-
-        /// <summary>
-        /// User set screen refresh rate.
-        /// </summary>
-        public int RefreshRate { get; set; }
-
-        /// <summary>
-        /// System set maximum frames per second.
-        /// </summary>
-        public int TargetFps { get; set; }
-
-        /// <summary>
-        /// User set full screen or windowed mode.
-        /// </summary>
-        public bool InFullScreen { get; set; }
-
-        /// <summary>
-        /// User set VSync enable.
-        /// </summary>
-        public bool EnableVSync { get; set; }
-
-        /// <summary>
-        /// User set enable Vulkan backend.
-        /// </summary>
-        public bool EnableVulkan { get; set; }
-
-        /// <summary>
-        /// System set window title.
-        /// </summary>
-        public string WindowTitle { get; set; }
-
-        /// <summary>
-        /// Hide window borders.
-        /// </summary>
-        public WindowBorder WindowBorder { get; set; }
+        public Size Resolution { get; init; }
 
         /// <summary>
         /// Window position.
         /// </summary>
-        public Point Position { get; set; }
+        public Point Position { get; init; }
+
+        /// <summary>
+        /// User set screen refresh rate.
+        /// </summary>
+        public int RefreshRate { get; init; }
+
+        /// <summary>
+        /// System set maximum frames per second.
+        /// </summary>
+        public int TargetFps { get; init; }
+
+        /// <summary>
+        /// User set full screen or windowed mode.
+        /// </summary>
+        public bool InFullScreen { get; init; }
+
+        /// <summary>
+        /// User set VSync enable.
+        /// </summary>
+        public bool EnableVSync { get; init; }
+
+        /// <summary>
+        /// System set window title.
+        /// </summary>
+        public string WindowTitle { get; init; }
+
+        /// <summary>
+        /// Hide window borders.
+        /// </summary>
+        public WindowBorder WindowBorder { get; init; }
+
+
     }
 }

@@ -6,7 +6,7 @@ namespace Reload.Core.Tests.Fakes
     {
         public InputSourceType Source => InputSourceType.None;
 
-        public void Initialize()
+        public void StartUp()
         { }
 
         public void ShutDown()

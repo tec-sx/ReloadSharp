@@ -2,7 +2,7 @@
 
 namespace Reload.Core.Tests.Fakes
 {
-    internal class GameSystemFake : GameSystem
+    internal class GameSystemFake : Game.GameSystem
     {
         public override void Run()
         { }

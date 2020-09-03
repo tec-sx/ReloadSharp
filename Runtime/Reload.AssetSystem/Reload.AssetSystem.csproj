@@ -6,7 +6,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\Core\Reload.Core.Math3D\Reload.Core.Math3D.csproj" />
-    <ProjectReference Include="..\..\Reload.Configuration\Reload.Configuration.csproj" />
     <ProjectReference Include="..\Reload.Audio\Reload.Audio.csproj" />
     <ProjectReference Include="..\Reload.Rendering\Reload.Rendering.csproj" />
   </ItemGroup>

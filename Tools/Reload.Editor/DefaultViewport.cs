@@ -11,10 +11,13 @@ using Reload.Editor.Input;
 using Reload.Editor.Extensions;
 using Reload.Core.Graphics;
 using System;
+using System.Drawing;
+using Reload.Core.Game;
+using Size = System.Drawing.Size;
 
 namespace Reload.Editor
 {
-    internal class DefaultViewport : Viewport, ProgramWindow
+    internal class DefaultViewport : Viewport, IProgramWindow
     {
         private const double FramesPerSecond = 60.0f;
 
@@ -35,14 +38,6 @@ namespace Reload.Editor
 
         private bool _isInitialized;
 
-        public int Width { get => GetWidth(); set => SetWidth(value); }
-
-        public int Height { get => GetHeight(); set => SetHeight(value); }
-
-        public int PositionX { get => GetX(); set => SetX(value); }
-
-        public int PositionY { get => GetY(); set => SetY(value); }
-
         public bool IsFullScreen { get; set; }
 
         public bool IsVsyncOn { get; set; }
@@ -54,7 +49,18 @@ namespace Reload.Editor
         public IntPtr Handle => throw new NotImplementedException();
 
         public Scene ActiveScene { get; set; }
-        
+
+        WindowingAPIType IProgramWindow.Api { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
+
+        public Func<string, IntPtr> GetProcAddress { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
+        public Action Load { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Action<double> Update { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Action<double> Render { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Action<Point> Move { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Action<Size> Resize { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Action<bool> FocusChanged { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public Action Closing { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
         public DefaultViewport(OpenGl openGl, SceneMachine sceneMachine, InputManager inputManager)
         {
             _openGl = openGl;
@@ -146,7 +152,7 @@ namespace Reload.Editor
             }
         }
 
-        public void Resize()
+        public void OnResize()
         {
             if (!_isInitialized)
             {
@@ -171,13 +177,15 @@ namespace Reload.Editor
         public override void SetWidth(int width)
         {
             base.SetWidth(width);
-            Resize();
+            Size size = new Size(GetWidth(), GetHeight());
+            Resize?.Invoke(size);
         }
 
         public override void SetHeight(int height)
         {
             base.SetHeight(height);
-            Resize();
+            Size size = new Size(GetWidth(), GetHeight());
+            Resize(size);
         }
 
         public override void Free()
@@ -325,6 +333,21 @@ namespace Reload.Editor
         public void ShutDown()
         {
             throw new System.NotImplementedException();
+        }
+
+        void ICoreSystem.StartUp()
+        {
+            throw new NotImplementedException();
+        }
+
+        void ICoreSystem.ShutDown()
+        {
+            throw new NotImplementedException();
+        }
+
+        void IDisposable.Dispose()
+        {
+            throw new NotImplementedException();
         }
     }
 }

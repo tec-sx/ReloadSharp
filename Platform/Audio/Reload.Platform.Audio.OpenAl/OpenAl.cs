@@ -251,7 +251,7 @@ namespace Reload.Platform.Audio.OpenAl
             CheckForErrors();
         }
 
-        public override void Initialize()
+        public override void StartUp()
         {}
 
         public override void ShutDown()

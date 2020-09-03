@@ -26,7 +26,7 @@ namespace Reload.Core.Tests.Fakes
             return 0;
         }
 
-        public override void Initialize()
+        public override void StartUp()
         { }
 
         public bool IsExtensionPresent(string ext)
