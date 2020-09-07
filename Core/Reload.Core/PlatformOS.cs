@@ -42,7 +42,7 @@ namespace Reload.Core
     /// The OS platform base class. Every opering system implementation
     /// must inherit from this class.
     /// </summary>
-    public abstract class PlatformOS<TProgram> : IDisposable where TProgram : GameSystem
+    public abstract class PlatformOS : IDisposable
     {
         private bool _isDisposed;
 
@@ -62,24 +62,25 @@ namespace Reload.Core
         public PlatformOS()
         {
             SystemsContainer = new Container();
-            RegisterMainProgram();
         }
 
         /// <summary>
         /// Registers the main program.
         /// </summary>
-        private void RegisterMainProgram()
+        public PlatformOS RegisterMainProgram<TProgram>() where TProgram : GameSystem
         {
             SystemsContainer.Register<GameSystem, TProgram>();
             SystemsContainer.RegisterInitializer<GameSystem>((program, resolver) =>
                 Logger.Log().Information(Resources.BuildStartingMessage, program.Name));
+
+            return this;
         }
 
         /// <summary>
         /// Adds a configuration.
         /// </summary>
         /// <returns>A PlatformOS.</returns>
-        public PlatformOS<TProgram> WithConfiguration<TConfig>() where TConfig : SystemConfiguration, ICoreSystem
+        public PlatformOS WithConfiguration<TConfig>() where TConfig : SystemConfiguration
         {
             SystemsContainer.Register<SystemConfiguration, TConfig>();
             SystemsContainer.RegisterInitializer<SystemConfiguration>((configuration, resolver) =>
@@ -92,7 +93,7 @@ namespace Reload.Core
         /// Adds the window sub-system.
         /// </summary>
         /// <returns>A GameBuilder.</returns>
-        public PlatformOS<TProgram> WithWindow<TWindow>() where TWindow : class, IProgramWindow, ICoreSystem
+        public PlatformOS WithWindow<TWindow>() where TWindow : class, IProgramWindow, ICoreSystem
         {
             if (!CheckWindowCompatability<TWindow>())
             {
@@ -110,7 +111,7 @@ namespace Reload.Core
         /// Adds the graphics backend sub-system.
         /// </summary>
         /// <returns>A GameBuilder.</returns>
-        public PlatformOS<TProgram> WithGraphicsAPI<TGraphics>() where TGraphics : GraphicsAPI, ICoreSystem
+        public PlatformOS WithGraphicsAPI<TGraphics>() where TGraphics : GraphicsAPI, ICoreSystem
         {
             if (!CheckGraphicsBackendCompatability<TGraphics>())
             {
@@ -128,7 +129,7 @@ namespace Reload.Core
         /// Adds the audio backend sub-system.
         /// </summary>
         /// <returns>A GameBuilder.</returns>
-        public PlatformOS<TProgram> WithAudioAPI<TAudio>() where TAudio : AudioAPI, ICoreSystem
+        public PlatformOS WithAudioAPI<TAudio>() where TAudio : AudioAPI, ICoreSystem
         {
             if (!CheckAudioBackendCompatability<TAudio>())
             {
@@ -146,14 +147,14 @@ namespace Reload.Core
         /// Adds an input sub-system.
         /// </summary>
         /// <returns>A GameBuilder.</returns>
-        public PlatformOS<TProgram> WithInput<T>() where T : class, IInputSystem, ICoreSystem
+        public PlatformOS WithInput<TInput>() where TInput : class, IInputSystem, ICoreSystem
         {
-            if (!CheckInputCompatability<T>())
+            if (!CheckInputCompatability<TInput>())
             {
                 throw new ReloadInputNotSupportedException();
             }
 
-            SystemsContainer.Register<IInputSystem, T>(Reuse.Singleton);
+            SystemsContainer.Register<IInputSystem, TInput>(Reuse.Singleton);
             SystemsContainer.RegisterInitializer<IInputSystem>((inputSystem, resolver) =>
                 Logger.Log().Information(Resources.WithAudioBackendMessage, inputSystem?.Source.GetDescription()));
 
@@ -165,7 +166,7 @@ namespace Reload.Core
         /// other core systems.
         /// </summary> 
         /// <returns>A PlatformOS.</returns>
-        public PlatformOS<TProgram> WithCoreSystem<TCoreSystem>() where TCoreSystem : class, ICoreSystem
+        public PlatformOS WithCoreSystem<TCoreSystem>() where TCoreSystem : class, ICoreSystem
         {
             SystemsContainer.Register<ICoreSystem, TCoreSystem>();
             SystemsContainer.RegisterInitializer<ICoreSystem>((coreSystem, resolver) =>
@@ -179,7 +180,7 @@ namespace Reload.Core
         /// </summary>
         /// <param name="lifetime">The lifetime.</param>
         /// <returns>A PlatformOS.</returns>
-        public PlatformOS<TProgram> WithSubSystem<T>(Lifetime lifetime) where T : class, ISubSystem
+        public PlatformOS WithSubSystem<T>(Lifetime lifetime) where T : class, ISubSystem
         {
             IReuse reuse = lifetime switch
             {
@@ -201,7 +202,6 @@ namespace Reload.Core
         /// </summary>
         public virtual void ConfigureAndBuild()
         {
-
             SystemsContainer.RegisterInitializer<ISubSystem>((subSystem, resolver) => subSystem.StartUp());
             
             SystemsContainer.RegisterInitializer<ICoreSystem>((coreSystem, resolver) => {

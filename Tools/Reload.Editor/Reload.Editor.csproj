@@ -1,79 +1,95 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<TargetFramework>net5.0</TargetFramework>
-		<LangVersion>preview</LangVersion>
-	</PropertyGroup>
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net5.0</TargetFramework>
+        <LangVersion>preview</LangVersion>
+        <IsWindows Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Windows)))' == 'true'">true</IsWindows>
+        <IsOSX Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::OSX)))' == 'true'">true</IsOSX>
+        <IsLinux Condition="'$([System.Runtime.InteropServices.RuntimeInformation]::IsOSPlatform($([System.Runtime.InteropServices.OSPlatform]::Linux)))' == 'true'">true</IsLinux>
+    </PropertyGroup>
+    
+    <PropertyGroup Condition="'$(IsWindows)'=='true'">
+        <DefineConstants>Windows</DefineConstants>
+    </PropertyGroup>
+    
+    <PropertyGroup Condition="'$(IsOSX)'=='true'">
+        <DefineConstants>OSX</DefineConstants>
+    </PropertyGroup>
+    
+    <PropertyGroup Condition="'$(IsLinux)'=='true'">
+        <DefineConstants>Linux</DefineConstants>
+    </PropertyGroup>
 
-	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-		<AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-	</PropertyGroup>
+    <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+        <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    </PropertyGroup>
 
-	<ItemGroup>
-		<PackageReference Include="runtime.osx.10.10-x64.CoreCompat.System.Drawing" Version="5.8.64" />
-		<PackageReference Include="System.Drawing.Common" Version="5.0.0-preview.7.20364.11" />
-	</ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="runtime.osx.10.10-x64.CoreCompat.System.Drawing" Version="5.8.64" />
+        <PackageReference Include="System.Drawing.Common" Version="5.0.0-preview.7.20364.11" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\Core\Reload.Core\Reload.Core.csproj" />
-		<ProjectReference Include="..\..\Platform\Graphics\Reload.Platform.Graphics.OpenGl\Reload.Platform.Graphics.OpenGl.csproj" />
-		<ProjectReference Include="..\..\Platform\OS\Reload.Platform.OS.Linux\Reload.Platform.OS.Linux.csproj" />
-		<ProjectReference Include="..\..\Platform\OS\Reload.Platform.OS.Windows\Reload.Platform.OS.Windows.csproj" />
-		<ProjectReference Include="..\..\Runtime\Reload.AssetSystem\Reload.AssetSystem.csproj" />
-		<ProjectReference Include="..\..\Runtime\Reload.Scenes\Reload.Scenes.csproj" />
-	</ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\..\Core\Reload.Core\Reload.Core.csproj" />
+        <ProjectReference Include="..\..\Platform\Audio\Reload.Platform.Audio.OpenAl\Reload.Platform.Audio.OpenAl.csproj" />
+        <ProjectReference Include="..\..\Platform\Graphics\Reload.Platform.Graphics.OpenGl\Reload.Platform.Graphics.OpenGl.csproj" />
+        <ProjectReference Condition="'$(IsLinux)'=='true'" Include="..\..\Platform\OS\Reload.Platform.OS.Linux\Reload.Platform.OS.Linux.csproj" />
+        <ProjectReference Condition="'$(IsWindows)'=='true'" Include="..\..\Platform\OS\Reload.Platform.OS.Windows\Reload.Platform.OS.Windows.csproj" />
+        <ProjectReference Include="..\..\Runtime\Reload.AssetSystem\Reload.AssetSystem.csproj" />
+        <ProjectReference Include="..\..\Runtime\Reload.Scenes\Reload.Scenes.csproj" />
+    </ItemGroup>
 
-	<ItemGroup>
-		<None Update="Assets\Models\RedCube.bin">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="Assets\Models\RedCube.gltf">
-		  <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="Assets\Shaders\grid.glsl">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="Assets\Shaders\main.glsl">
-			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Update="Assets\Shaders\offscreenTex.glsl">
-		  <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-		</None>
-		<None Update="Assets\Textures\download.png">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<None Update="Assets\Textures\test.png">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-		</None>
-		<ContentWithTargetPath Include="Lib\glfw3.dll">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<TargetPath>glfw.dll</TargetPath>
-		</ContentWithTargetPath>
-		<ContentWithTargetPath Include="Lib\SpaceVIL.dll">
-			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-			<TargetPath>SpaceVIL.dll</TargetPath>
-		</ContentWithTargetPath>
-	</ItemGroup>
+    <ItemGroup>
+        <None Update="Assets\Models\RedCube.bin">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Assets\Models\RedCube.gltf">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Assets\Shaders\grid.glsl">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Assets\Shaders\main.glsl">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Assets\Shaders\offscreenTex.glsl">
+            <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+        </None>
+        <None Update="Assets\Textures\download.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <None Update="Assets\Textures\test.png">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+        </None>
+        <ContentWithTargetPath Include="Lib\glfw3.dll">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <TargetPath>glfw.dll</TargetPath>
+        </ContentWithTargetPath>
+        <ContentWithTargetPath Include="Lib\SpaceVIL.dll">
+            <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+            <TargetPath>SpaceVIL.dll</TargetPath>
+        </ContentWithTargetPath>
+    </ItemGroup>
 
-	<ItemGroup>
-		<Folder Include="Lib" />
-		<Reference Include="Lib\SpaceVIL.dll" />
-	</ItemGroup>
+    <ItemGroup>
+        <Folder Include="Lib" />
+        <Reference Include="Lib\SpaceVIL.dll" />
+    </ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="Properties\Resources.Designer.cs">
-	    <DesignTime>True</DesignTime>
-	    <AutoGen>True</AutoGen>
-	    <DependentUpon>Resources.resx</DependentUpon>
-	  </Compile>
-	</ItemGroup>
+    <ItemGroup>
+        <Compile Update="Properties\Resources.Designer.cs">
+            <DesignTime>True</DesignTime>
+            <AutoGen>True</AutoGen>
+            <DependentUpon>Resources.resx</DependentUpon>
+        </Compile>
+    </ItemGroup>
 
-	<ItemGroup>
-	  <EmbeddedResource Update="Properties\Resources.resx">
-	    <Generator>ResXFileCodeGenerator</Generator>
-	    <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-	  </EmbeddedResource>
-	</ItemGroup>
+    <ItemGroup>
+        <EmbeddedResource Update="Properties\Resources.resx">
+            <Generator>ResXFileCodeGenerator</Generator>
+            <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+        </EmbeddedResource>
+    </ItemGroup>
 
 </Project>

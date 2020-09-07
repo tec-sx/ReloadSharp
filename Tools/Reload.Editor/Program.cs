@@ -1,14 +1,13 @@
 ﻿using Reload.Core;
 using Reload.Core.Configuration;
-using Reload.Core.Exceptions;
-using Reload.Core.Game;
 using Reload.Platform.Audio.OpenAl;
 using Reload.Platform.Graphics.OpenGl;
+
+#if Linux
 using Reload.Platform.OS.Linux;
+#elif Windows
 using Reload.Platform.OS.Windows;
-using Reload.Rendering;
-using System.Collections.Generic;
-using System.Runtime.InteropServices;
+#endif
 
 namespace Reload.Editor
 {
@@ -23,47 +22,28 @@ namespace Reload.Editor
         /// <param name="args">The args.</param>
         static void Main(string[] args)
         {
-            GameSystem game = BuildGameForRuntimeOS();
-
-            game.Initilize();
-            game.Run();
-            game.ShutDown();
-        }
-
-        /// <summary>
-        /// Builds the game for the the operating system currently running.
-        /// </summary>
-        /// <returns>A GameSystem.</returns>
-        public static GameSystem BuildGameForRuntimeOS(string name)
-        {
-            ProgramBuilder<GameEditor> gameBuilder;
-
-            DisplayConfiguration configuration = ConfigurationFactory.CreateDefaultDisplayConfiguration();
-
-            if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
-            {
-                gameBuilder = new ProgramBuilder<GameEditor>(name, new PlatformLinux());
-                gameBuilder
-                    .WithWindow<DefaultViewport>(configuration)
+            PlatformOS platform;
+#if Linux
+            platform = new PlatformLinux()
+                    .RegisterMainProgram<GameEditor>()
+                    .WithConfiguration<SystemConfiguration>()
+                    .WithWindow<DefaultViewport>()
                     .WithGraphicsAPI<OpenGlAPI>()
                     .WithAudioAPI<OpenAl>();
-            }
-            else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-            {
-                gameBuilder = new ProgramBuilder<GameEditor>(name, new PlatformWindows());
-                gameBuilder
-                    .WithWindow<MainWindow>(configuration)
+#elif Windows
+            
+                platform = new PlatformWindows()
+                    .RegisterMainProgram<GameEditor>()
+                    .WithConfiguration<SystemConfiguration>()
+                    .WithWindow<DefaultViewport>()
                     .WithGraphicsAPI<OpenGlAPI>()
                     .WithAudioAPI<OpenAl>();
-            }
-            else
-            {
-                throw new ReloadUnsupporedOSPlatformException();
-            }
+#else
+            throw new ReloadUnsupporedOSPlatformException();
+#endif
 
-            return gameBuilder      
-                    .WithSubSystem<Renderer>(Lifetime.Singleton)
-                    .BuildForPlatform();
+            platform.ConfigureAndBuild();
+            platform.Run();
         }
     }
 }
