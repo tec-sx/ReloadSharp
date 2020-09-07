@@ -79,7 +79,7 @@ namespace Reload.Core.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Starting to build the game system....
+        ///   Looks up a localized string similar to Starting to build the program....
         /// </summary>
         internal static string BuildStartingMessage {
             get {
@@ -187,6 +187,15 @@ namespace Reload.Core.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Run the &apos;ConfigurAndBuild&apos; method successfully before running the program..
+        /// </summary>
+        internal static string ProgramNotBuiltMessage {
+            get {
+                return ResourceManager.GetString("ProgramNotBuiltMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Vertex has more than four bones/weights affecting it, extra data will be discarded (BoneID={0}, Weight={1}).
         /// </summary>
         internal static string VertexHasMoreThanFourBones {
@@ -201,6 +210,15 @@ namespace Reload.Core.Properties {
         internal static string WithAudioBackendMessage {
             get {
                 return ResourceManager.GetString("WithAudioBackendMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to With configuration: {Configuration}.
+        /// </summary>
+        internal static string WithConfiguration {
+            get {
+                return ResourceManager.GetString("WithConfiguration", resourceCulture);
             }
         }
         

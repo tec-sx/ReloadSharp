@@ -27,6 +27,7 @@ using Reload.Core.Audio;
 using Reload.Core.Configuration;
 using Reload.Core.Graphics;
 using Reload.Core.Input;
+using Reload.Core.Windowing;
 using System;
 
 namespace Reload.Core.Game
@@ -35,7 +36,7 @@ namespace Reload.Core.Game
     /// The base game system class.
     /// Can be instantiated through <see cref="GameBuilder"/>
     /// </summary>
-    public abstract class GameSystem : ICoreSystem, IDisposable
+    public abstract class GameSystem : ISubSystem, IDisposable
     {
         private bool _isDisposed;
 
@@ -85,7 +86,23 @@ namespace Reload.Core.Game
         { }
 
         /// <summary>
-        /// Itterates throug all included sub-systems and calls the <see cref="ICoreSystem.StartUp"/>
+        /// Configures the core systems.
+        /// </summary>
+        public void Configure(SystemConfiguration configuration)
+        {
+            if (configuration == null)
+            {
+                configuration = ConfigurationFactory.CreateDefault();
+            }
+
+            Window.Configure(configuration.Display);
+            Graphics.Configure(Window);
+            Input.Configure(Window);
+            Audio?.Configure();
+        }
+
+        /// <summary>
+        /// Itterates throug all included sub-systems and calls the <see cref="ISubSystem.StartUp"/>
         /// for each of them. afterwards it calls the <see cref="OnInitialize"/> method.
         /// </summary>
         public void StartUp()

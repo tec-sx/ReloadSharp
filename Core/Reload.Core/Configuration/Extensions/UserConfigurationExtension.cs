@@ -1,6 +1,5 @@
 ﻿namespace Reload.Core.Configuration.Extensions
 {
-    using Reload.Configuration;
     using System;
     using System.IO;
     using System.Runtime.Serialization.Formatters.Binary;

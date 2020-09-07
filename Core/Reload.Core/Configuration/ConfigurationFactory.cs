@@ -1,28 +1,47 @@
-﻿namespace Reload.Core.Configuration
-{
-  public static class ConfigurationFactory
-    {
-        private static SystemConfiguration _userConfiguration;
+﻿using Reload.Core.Windowing;
+using System.Drawing;
 
+namespace Reload.Core.Configuration
+{
+    public static class ConfigurationFactory
+    {
         //public static void Initialize()
         //{
         //    _userConfiguration = new UserConfiguration().Load();
         //}
 
-        //public static DisplayConfiguration CreateDisplayConfiguration()
-        //{
-        //    return new DisplayConfiguration
-        //    {
-        //        Resolution = _userConfiguration.DisplayResolution,
-        //        RefreshRate = _userConfiguration.DisplayRefreshRate,
-        //        TargetFps = SystemConfiguration.TargetFps,
-        //        InFullScreen = _userConfiguration.DisplayInFullScreen,
-        //        EnableVSync = _userConfiguration.DisplayEnableVsync,
-        //        WindowTitle = $"{SystemConfiguration.ProgramName} - v.{SystemConfiguration.ProgramVersion}",
-        //        WindowBorder = WindowBorder.Fixed,
-        //        Position = new Point(100, 100)
-        //    };
-        //}
+        public static DisplayConfiguration CreateDefaultDisplayConfiguration()
+        {
+            return new DisplayConfiguration
+            {
+                Resolution = new Size(1280, 768),
+                RefreshRate = 60,
+                TargetFps = 60,
+                InFullScreen = false,
+                EnableVSync = true,
+                WindowTitle = $"{SystemConfiguration.ProgramName} - v.{SystemConfiguration.ProgramVersion}",
+                WindowBorder = WindowBorder.Fixed,
+                Position = new Point(100, 100)
+            };
+        }
+
+        public static SystemConfiguration CreateDefault()
+        {
+            return new SystemConfiguration
+            {
+                Display = new DisplayConfiguration
+                {
+                    Resolution = new Size(1280, 768),
+                    RefreshRate = 60,
+                    TargetFps = 60,
+                    InFullScreen = false,
+                    EnableVSync = true,
+                    WindowTitle = $"{SystemConfiguration.ProgramName} - v.{SystemConfiguration.ProgramVersion}",
+                    WindowBorder = WindowBorder.Fixed,
+                    Position = new Point(100, 100)
+                }
+            };
+        }
 
 
         //public static AssetsConfiguration CreateAssetsConfiguration()

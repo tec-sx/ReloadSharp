@@ -24,10 +24,12 @@ THE SOFTWARE.
 */
 #endregion
 using Reload.Core.Game;
+using Reload.Core.Windowing;
+using System;
 
 namespace Reload.Core.Input
 {
-    public interface IInputSystem : ICoreSystem
+    public interface IInputSystem : ICoreSystem, IDisposable
     {
         /// <summary>
         /// Gets the input source the system is listening to.

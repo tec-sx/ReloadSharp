@@ -32,7 +32,7 @@ namespace Reload.Core.Audio
     /// <summary>
     /// The audio API base.
     /// </summary>
-    public abstract class AudioAPI : ICoreSystem
+    public abstract class AudioAPI : ICoreSystem, IDisposable
     {
         /// <summary>
         /// Gets the audio backend type.

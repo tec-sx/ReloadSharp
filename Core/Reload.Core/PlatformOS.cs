@@ -23,10 +23,18 @@ THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
 #endregion
+using DryIoc;
 using Reload.Core.Audio;
+using Reload.Core.Configuration;
+using Reload.Core.Exceptions;
+using Reload.Core.Extensions;
+using Reload.Core.Game;
 using Reload.Core.Graphics;
 using Reload.Core.Input;
+using Reload.Core.Properties;
+using Reload.Core.Utilities;
 using Reload.Core.Windowing;
+using System;
 
 namespace Reload.Core
 {
@@ -34,8 +42,221 @@ namespace Reload.Core
     /// The OS platform base class. Every opering system implementation
     /// must inherit from this class.
     /// </summary>
-    public abstract class PlatformOS
+    public abstract class PlatformOS<TProgram> : IDisposable where TProgram : GameSystem
     {
+        private bool _isDisposed;
+
+        /// <summary>
+        /// Gets the sub systems container.
+        /// </summary>
+        protected IContainer SystemsContainer { get; }
+
+        /// <summary>
+        /// Indicates whether the program has been build successfully for the platform.
+        /// </summary>
+        protected bool IsSuccessfullyBuilt { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PlatformOS"/> class.
+        /// </summary>
+        public PlatformOS()
+        {
+            SystemsContainer = new Container();
+            RegisterMainProgram();
+        }
+
+        /// <summary>
+        /// Registers the main program.
+        /// </summary>
+        private void RegisterMainProgram()
+        {
+            SystemsContainer.Register<GameSystem, TProgram>();
+            SystemsContainer.RegisterInitializer<GameSystem>((program, resolver) =>
+                Logger.Log().Information(Resources.BuildStartingMessage, program.Name));
+        }
+
+        /// <summary>
+        /// Adds a configuration.
+        /// </summary>
+        /// <returns>A PlatformOS.</returns>
+        public PlatformOS<TProgram> WithConfiguration<TConfig>() where TConfig : SystemConfiguration, ICoreSystem
+        {
+            SystemsContainer.Register<SystemConfiguration, TConfig>();
+            SystemsContainer.RegisterInitializer<SystemConfiguration>((configuration, resolver) =>
+                Logger.Log().Information(Resources.WithConfiguration, configuration.ToString()));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds the window sub-system.
+        /// </summary>
+        /// <returns>A GameBuilder.</returns>
+        public PlatformOS<TProgram> WithWindow<TWindow>() where TWindow : class, IProgramWindow, ICoreSystem
+        {
+            if (!CheckWindowCompatability<TWindow>())
+            {
+                throw new ReloadWindowBackendNotSupportedException();
+            }
+
+            SystemsContainer.Register<IProgramWindow, TWindow>();
+            SystemsContainer.RegisterInitializer<IProgramWindow>((window, resolver) =>
+                Logger.Log().Information(Resources.WithWindowMessage, window.Api.GetDescription()));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds the graphics backend sub-system.
+        /// </summary>
+        /// <returns>A GameBuilder.</returns>
+        public PlatformOS<TProgram> WithGraphicsAPI<TGraphics>() where TGraphics : GraphicsAPI, ICoreSystem
+        {
+            if (!CheckGraphicsBackendCompatability<TGraphics>())
+            {
+                throw new ReloadGraphicsBackendNotSupportedException();
+            }
+
+            SystemsContainer.Register<GraphicsAPI, TGraphics>();
+            SystemsContainer.RegisterInitializer<GraphicsAPI>((graphicsApi, resolver) =>
+                Logger.Log().Information(Resources.WithGraphicsBackendMessage, graphicsApi.Type.GetDescription()));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds the audio backend sub-system.
+        /// </summary>
+        /// <returns>A GameBuilder.</returns>
+        public PlatformOS<TProgram> WithAudioAPI<TAudio>() where TAudio : AudioAPI, ICoreSystem
+        {
+            if (!CheckAudioBackendCompatability<TAudio>())
+            {
+                throw new ReloadAudioBackendNotSupportedException();
+            }
+
+            SystemsContainer.Register<AudioAPI, TAudio>();
+            SystemsContainer.RegisterInitializer<AudioAPI>((audioApi, resolver) =>
+                Logger.Log().Information(Resources.WithAudioBackendMessage, audioApi.Type.GetDescription()));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds an input sub-system.
+        /// </summary>
+        /// <returns>A GameBuilder.</returns>
+        public PlatformOS<TProgram> WithInput<T>() where T : class, IInputSystem, ICoreSystem
+        {
+            if (!CheckInputCompatability<T>())
+            {
+                throw new ReloadInputNotSupportedException();
+            }
+
+            SystemsContainer.Register<IInputSystem, T>(Reuse.Singleton);
+            SystemsContainer.RegisterInitializer<IInputSystem>((inputSystem, resolver) =>
+                Logger.Log().Information(Resources.WithAudioBackendMessage, inputSystem?.Source.GetDescription()));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a new core system as singleton just like the 
+        /// other core systems.
+        /// </summary> 
+        /// <returns>A PlatformOS.</returns>
+        public PlatformOS<TProgram> WithCoreSystem<TCoreSystem>() where TCoreSystem : class, ICoreSystem
+        {
+            SystemsContainer.Register<ICoreSystem, TCoreSystem>();
+            SystemsContainer.RegisterInitializer<ICoreSystem>((coreSystem, resolver) =>
+                Logger.Log().Information(Resources.WithAudioBackendMessage, coreSystem.ToString()));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Adds a new sub system.
+        /// </summary>
+        /// <param name="lifetime">The lifetime.</param>
+        /// <returns>A PlatformOS.</returns>
+        public PlatformOS<TProgram> WithSubSystem<T>(Lifetime lifetime) where T : class, ISubSystem
+        {
+            IReuse reuse = lifetime switch
+            {
+                Lifetime.Singleton => Reuse.Singleton,
+                Lifetime.Transient => Reuse.Transient,
+                Lifetime.Scoped => Reuse.Scoped,
+                _ => throw new ReloadInvalidEnumArgumentException()
+            };
+
+            SystemsContainer.Register<ISubSystem, T>(reuse);
+            SystemsContainer.RegisterInitializer<ISubSystem>((subSystem, resolver) =>
+                Logger.Log().Information(Resources.WithAudioBackendMessage, subSystem.ToString()));
+
+            return this;
+        }
+
+        /// <summary>
+        /// Configures and build the application.
+        /// </summary>
+        public virtual void ConfigureAndBuild()
+        {
+
+            SystemsContainer.RegisterInitializer<ISubSystem>((subSystem, resolver) => subSystem.StartUp());
+            
+            SystemsContainer.RegisterInitializer<ICoreSystem>((coreSystem, resolver) => {
+                coreSystem.Configure();
+                coreSystem.StartUp();
+            });
+
+            SystemsContainer.RegisterDisposer<ICoreSystem>(coreSystem => coreSystem.Dispose());
+
+            IsSuccessfullyBuilt = true;
+        }
+
+        /// <summary>
+        /// Runs the application if it is successfully build.
+        /// Otherwise it breaks the application.
+        /// </summary>
+        /// <exception cref="ApplicationException"></exception>
+        public virtual void Run()
+        {
+            if (!IsSuccessfullyBuilt)
+            {
+                throw new ApplicationException(Resources.ProgramNotBuiltMessage);
+            }
+
+            SystemsContainer.Resolve<GameSystem>().Run();
+        }
+
+        /// <inheritdoc/>
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        /// <summary>
+        /// Protected dispose method overload with disposing parameter that indicates 
+        /// whether the method call comes from a Dispose method (value is true) or
+        /// from a finalizer (value is false)
+        /// </summary>
+        /// <param name="disposing"></param>
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_isDisposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                SystemsContainer.Dispose();
+            }
+
+            _isDisposed = true;
+        }
+
         /// <summary>
         /// Checks if the window is compatible with the running operating system.
         /// </summary>

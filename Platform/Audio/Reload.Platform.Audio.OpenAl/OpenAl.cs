@@ -10,16 +10,24 @@ namespace Reload.Platform.Audio.OpenAl
     /// </summary>
     public class OpenAl : AudioAPI
     {
-        private static readonly AL api = AL.GetApi();
+        private static AL _api;
+
+        private bool _disposed;
 
         public AudioAPIType Type => AudioAPIType.OpenAL;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="OpenAl"/> class.
+        /// </summary>
+        public OpenAl()
+        { }
 
         /// <summary>
         /// Checks the for OpenAL error codes and throw corresponding exceptions.
         /// </summary>
         private static void CheckForErrors()
         {
-            switch (api.GetError())
+            switch (_api.GetError())
             {
                 case AudioError.NoError: break;
                 case AudioError.InvalidValue: throw new OpenAlInvalidValueException();
@@ -38,7 +46,7 @@ namespace Reload.Platform.Audio.OpenAl
         /// <returns>A bool.</returns>
         public static bool IsExtensionPresent(string extension)
         {
-            return api.IsExtensionPresent(extension);
+            return _api.IsExtensionPresent(extension);
         }
 
         #region Generators
@@ -49,7 +57,7 @@ namespace Reload.Platform.Audio.OpenAl
         /// <returns>An audio buffer handle as uint.</returns>
         public static uint GenerateBuffer()
         {
-            var buffer = api.GenBuffer();
+            var buffer = _api.GenBuffer();
             CheckForErrors();
 
             return buffer;
@@ -61,7 +69,7 @@ namespace Reload.Platform.Audio.OpenAl
         /// <param name="buffer">The audio buffer handle.</param>
         public static void DeleteBuffer(uint buffer)
         {
-            api.DeleteBuffer(buffer);
+            _api.DeleteBuffer(buffer);
             CheckForErrors();
         }
 
@@ -75,7 +83,7 @@ namespace Reload.Platform.Audio.OpenAl
         public static void BufferData<T>(uint buffer, BufferFormat bufferFormat, T[] data, int sampleRate)
             where T : unmanaged
         {
-            api.BufferData(buffer, bufferFormat, data, sampleRate);
+            _api.BufferData(buffer, bufferFormat, data, sampleRate);
             CheckForErrors();
         }
 
@@ -85,7 +93,7 @@ namespace Reload.Platform.Audio.OpenAl
         /// <returns>An audio source handle as an uint.</returns>
         public static uint GenerateSource()
         {
-            var source = api.GenSource();
+            var source = _api.GenSource();
             CheckForErrors();
 
             return source;
@@ -97,7 +105,7 @@ namespace Reload.Platform.Audio.OpenAl
         /// <param name="source">The source.</param>
         public static void DeleteSource(uint source)
         {
-            api.DeleteSource(source);
+            _api.DeleteSource(source);
             CheckForErrors();
         }
 
@@ -107,7 +115,7 @@ namespace Reload.Platform.Audio.OpenAl
 
         public static void SetDistanceModel(DistanceModel model)
         {
-            api.DistanceModel(model);
+            _api.DistanceModel(model);
             CheckForErrors();
         }
 
@@ -117,7 +125,7 @@ namespace Reload.Platform.Audio.OpenAl
 
         public static int GetSourceProperty(uint source, GetSourceInteger param)
         {
-            api.GetSourceProperty(source, param, out int value);
+            _api.GetSourceProperty(source, param, out int value);
             CheckForErrors();
 
             return value;
@@ -125,7 +133,7 @@ namespace Reload.Platform.Audio.OpenAl
 
         public  static float GetSourceProperty(uint source, SourceFloat param)
         {
-            api.GetSourceProperty(source, param, out float value);
+            _api.GetSourceProperty(source, param, out float value);
             CheckForErrors();
 
             return value;
@@ -133,7 +141,7 @@ namespace Reload.Platform.Audio.OpenAl
 
         public static bool GetSourceProperty(uint source, SourceBoolean param)
         {
-            api.GetSourceProperty(source, param, out bool value);
+            _api.GetSourceProperty(source, param, out bool value);
             CheckForErrors();
 
             return value;
@@ -141,7 +149,7 @@ namespace Reload.Platform.Audio.OpenAl
 
         public static Vector3 GetSourceProperty(uint source, SourceVector3 param)
         {
-            api.GetSourceProperty(source, param, out Vector3 value);
+            _api.GetSourceProperty(source, param, out Vector3 value);
             CheckForErrors();
 
             return value;
@@ -153,25 +161,25 @@ namespace Reload.Platform.Audio.OpenAl
 
         public static void SetSourceProperty(uint source, SourceInteger param, int value)
         {
-            api.SetSourceProperty(source, param, value);
+            _api.SetSourceProperty(source, param, value);
             CheckForErrors();
         }
 
         public static void SetSourceProperty(uint source, SourceFloat param, float value)
         {
-            api.SetSourceProperty(source, param, value);
+            _api.SetSourceProperty(source, param, value);
             CheckForErrors();
         }
 
         public static void SetSourceProperty(uint source, SourceBoolean param, bool value)
         {
-            api.SetSourceProperty(source, param, value);
+            _api.SetSourceProperty(source, param, value);
             CheckForErrors();
         }
 
         public static void SetSourceProperty(uint source, SourceVector3 param, Vector3 value)
         {
-            api.SetSourceProperty(source, param, value);
+            _api.SetSourceProperty(source, param, value);
             CheckForErrors();
         }
 
@@ -181,7 +189,7 @@ namespace Reload.Platform.Audio.OpenAl
 
         public static int GetListenerProperty(ListenerInteger param)
         {
-            api.GetListenerProperty(param, out int value);
+            _api.GetListenerProperty(param, out int value);
             CheckForErrors();
 
             return value;
@@ -189,7 +197,7 @@ namespace Reload.Platform.Audio.OpenAl
 
         public static float GetListenerProperty(ListenerFloat param)
         {
-            api.GetListenerProperty(param, out float value);
+            _api.GetListenerProperty(param, out float value);
             CheckForErrors();
 
             return value;
@@ -197,7 +205,7 @@ namespace Reload.Platform.Audio.OpenAl
 
         public static Vector3 GetListenerProperty(ListenerVector3 param)
         {
-            api.GetListenerProperty(param, out Vector3 value);
+            _api.GetListenerProperty(param, out Vector3 value);
             CheckForErrors();
 
             return value;
@@ -209,19 +217,19 @@ namespace Reload.Platform.Audio.OpenAl
 
         public static void SetListenerProperty(ListenerInteger param, int value)
         {
-            api.SetListenerProperty(param, value);
+            _api.SetListenerProperty(param, value);
             CheckForErrors();
         }
 
         public static void ListenerProperty(ListenerFloat param, float value)
         {
-            api.SetListenerProperty(param, value);
+            _api.SetListenerProperty(param, value);
             CheckForErrors();
         }
 
         public static void SetListenerProperty(ListenerVector3 param, Vector3 value)
         {
-            api.SetListenerProperty(param, value);
+            _api.SetListenerProperty(param, value);
             CheckForErrors();
         }
 
@@ -229,32 +237,56 @@ namespace Reload.Platform.Audio.OpenAl
 
         public static void SourceQueueBuffers(uint source, uint[] buffers)
         {
-            api.SourceQueueBuffers(source, buffers);
+            _api.SourceQueueBuffers(source, buffers);
             CheckForErrors();
         }
 
         public static void SourceUnqueueBuffers(uint source, uint[] buffers)
         {
-            api.SourceUnqueueBuffers(source, buffers);
+            _api.SourceUnqueueBuffers(source, buffers);
             CheckForErrors();
         }
 
         public static void SourcePlay(uint source)
         {
-            api.SourcePlay(source);
+            _api.SourcePlay(source);
             CheckForErrors();
         }
 
         public static void SourceStop(uint source)
         {
-            api.SourceStop(source);
+            _api.SourceStop(source);
             CheckForErrors();
         }
 
+        /// <inheritdoc/>
+        public override void Configure()
+        {
+            _api = AL.GetApi();
+        }
+
+        /// <inheritdoc/>
         public override void StartUp()
         {}
 
+        /// <inheritdoc/>
         public override void ShutDown()
         { }
+
+        /// <inheritdoc/>
+        protected override void Dispose(bool disposing)
+        {
+            if (_disposed)
+            {
+                return;
+            }
+
+            if (disposing)
+            {
+                _api.Dispose();
+            }
+
+            _disposed = true;
+        }
     }
 }

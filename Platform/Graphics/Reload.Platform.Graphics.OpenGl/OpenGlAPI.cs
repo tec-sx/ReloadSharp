@@ -1,5 +1,4 @@
-﻿using Silk.NET.Windowing.Common;
-using Reload.Platform.Graphics.OpenGl.Buffers;
+﻿using Reload.Platform.Graphics.OpenGl.Buffers;
 using Silk.NET.OpenGL;
 using Reload.Core.Graphics;
 using Reload.Platform.Graphics.OpenGl.Shaders;

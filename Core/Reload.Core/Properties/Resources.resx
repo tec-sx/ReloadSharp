@@ -124,7 +124,7 @@
     <value>Argument of type BufferElement is null</value>
   </data>
   <data name="BuildStartingMessage" xml:space="preserve">
-    <value>Starting to build the game system...</value>
+    <value>Starting to build the program...</value>
   </data>
   <data name="DefaultFactoryNotImplementedMessage" xml:space="preserve">
     <value>The factory class you are trying to access is not implemented and null reference is returned</value>
@@ -159,11 +159,17 @@
   <data name="NullReferenceExceptionMessage" xml:space="preserve">
     <value>You have tried to access a member on a type: {Type} whose value is null.</value>
   </data>
+  <data name="ProgramNotBuiltMessage" xml:space="preserve">
+    <value>Run the 'ConfigurAndBuild' method successfully before running the program.</value>
+  </data>
   <data name="VertexHasMoreThanFourBones" xml:space="preserve">
     <value>Vertex has more than four bones/weights affecting it, extra data will be discarded (BoneID={0}, Weight={1})</value>
   </data>
   <data name="WithAudioBackendMessage" xml:space="preserve">
     <value>With audio backend: {AudioBackend}</value>
+  </data>
+  <data name="WithConfiguration" xml:space="preserve">
+    <value>With configuration: {Configuration}</value>
   </data>
   <data name="WithGraphicsBackendMessage" xml:space="preserve">
     <value>With graphics backend: {GraphicsBackend}</value>

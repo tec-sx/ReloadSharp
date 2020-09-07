@@ -23,6 +23,8 @@ THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
 #endregion
+using System;
+
 namespace Reload.Core.Game
 {
     public interface ISubSystem
@@ -30,7 +32,7 @@ namespace Reload.Core.Game
         /// <summary>
         /// Initializes the sub system.
         /// </summary>
-        void Initialize();
+        void StartUp();
 
         /// <summary>
         /// Shuts down the sub system.

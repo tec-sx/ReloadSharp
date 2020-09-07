@@ -15,12 +15,12 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             osPlatform.CheckWindowCompatability<GameWindowFake>().Returns(false);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithWindow<GameWindowFake>();
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithWindow<GameWindowFake>();
 
             //Assert
             act.Should().Throw<ReloadWindowBackendNotSupportedException>();
@@ -31,16 +31,16 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             osPlatform.CheckWindowCompatability<GameWindowFake>().Returns(true);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithWindow<GameWindowFake>();
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithWindow<GameWindowFake>();
 
             //Assert
             act.Should().NotThrow<Exception>();
-            act().Should().BeOfType<GameBuilder<GameSystemFake>>();
+            act().Should().BeOfType<ProgramBuilder<GameSystemFake>>();
         }
 
         [Fact]
@@ -48,12 +48,12 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             osPlatform.CheckGraphicsBackendCompatability<GraphicsAPIFake>().Returns(false);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithGraphicsAPI<GraphicsAPIFake>();
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithGraphicsAPI<GraphicsAPIFake>();
 
             //Assert
             act.Should().Throw<ReloadGraphicsBackendNotSupportedException>();
@@ -64,16 +64,16 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             osPlatform.CheckGraphicsBackendCompatability<GraphicsAPIFake>().Returns(true);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithGraphicsAPI<GraphicsAPIFake>();
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithGraphicsAPI<GraphicsAPIFake>();
 
             //Assert
             act.Should().NotThrow<Exception>();
-            act().Should().BeOfType<GameBuilder<GameSystemFake>>();
+            act().Should().BeOfType<ProgramBuilder<GameSystemFake>>();
         }
 
         [Fact]
@@ -81,12 +81,12 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             osPlatform.CheckAudioBackendCompatability<AudioAPIFake>().Returns(false);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithAudioAPI<AudioAPIFake>();
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithAudioAPI<AudioAPIFake>();
 
             //Assert
             act.Should().Throw<ReloadAudioBackendNotSupportedException>();
@@ -97,16 +97,16 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             osPlatform.CheckAudioBackendCompatability<AudioAPIFake>().Returns(true);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithAudioAPI<AudioAPIFake>();
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithAudioAPI<AudioAPIFake>();
 
             //Assert
             act.Should().NotThrow<Exception>();
-            act().Should().BeOfType<GameBuilder<GameSystemFake>>();
+            act().Should().BeOfType<ProgramBuilder<GameSystemFake>>();
         }
 
         [Fact]
@@ -114,12 +114,12 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             osPlatform.CheckInputCompatability<InputSystemFake>().Returns(false);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithInput<InputSystemFake>();
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithInput<InputSystemFake>();
 
             //Assert
             act.Should().Throw<ReloadInputNotSupportedException>();
@@ -130,16 +130,16 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             osPlatform.CheckInputCompatability<InputSystemFake>().Returns(true);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithInput<InputSystemFake>();
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithInput<InputSystemFake>();
 
             //Assert
             act.Should().NotThrow<Exception>();
-            act().Should().BeOfType<GameBuilder<GameSystemFake>>();
+            act().Should().BeOfType<ProgramBuilder<GameSystemFake>>();
         }
 
         [Fact]
@@ -147,10 +147,10 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithSubSystem<SubSystemFake>(0);
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithSubSystem<SubSystemFake>(0);
 
             //Assert
             act.Should().Throw<ReloadInvalidEnumArgumentException>();
@@ -161,14 +161,14 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithSubSystem<SubSystemFake>(Lifetime.Singleton);
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithSubSystem<SubSystemFake>(Lifetime.Singleton);
 
             //Assert
             act.Should().NotThrow<Exception>();
-            act().Should().BeOfType<GameBuilder<GameSystemFake>>();
+            act().Should().BeOfType<ProgramBuilder<GameSystemFake>>();
         }
 
         [Fact]
@@ -176,14 +176,14 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithSubSystem<SubSystemFake>(Lifetime.Transient);
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithSubSystem<SubSystemFake>(Lifetime.Transient);
 
             //Assert
             act.Should().NotThrow<Exception>();
-            act().Should().BeOfType<GameBuilder<GameSystemFake>>();
+            act().Should().BeOfType<ProgramBuilder<GameSystemFake>>();
         }
 
         [Fact]
@@ -191,14 +191,14 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             //Act
-            Func<GameBuilder<GameSystemFake>> act = () => gameBuilder.WithSubSystem<SubSystemFake>(Lifetime.Scoped);
+            Func<ProgramBuilder<GameSystemFake>> act = () => gameBuilder.WithSubSystem<SubSystemFake>(Lifetime.Scoped);
 
             //Assert
             act.Should().NotThrow<Exception>();
-            act().Should().BeOfType<GameBuilder<GameSystemFake>>();
+            act().Should().BeOfType<ProgramBuilder<GameSystemFake>>();
         }
 
         [Fact]
@@ -206,7 +206,7 @@ namespace Reload.Core.Tests
         {
             // Arrange
             PlatformOS osPlatform = Substitute.For<PlatformOS>();
-            GameBuilder<GameSystemFake> gameBuilder = new GameBuilder<GameSystemFake>(osPlatform);
+            ProgramBuilder<GameSystemFake> gameBuilder = new ProgramBuilder<GameSystemFake>(osPlatform);
 
             osPlatform.CheckGraphicsBackendCompatability<GraphicsAPIFake>().Returns(true);
             osPlatform.CheckAudioBackendCompatability<AudioAPIFake>().Returns(true);

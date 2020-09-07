@@ -29,7 +29,6 @@ using Reload.Core.Graphics.Rendering;
 using Reload.Core.Graphics.Rendering.Buffers;
 using Reload.Core.Graphics.Rendering.Shaders;
 using Reload.Core.Graphics.Rendering.Textures;
-using Reload.Core.Windowing;
 using System;
 
 namespace Reload.Core.Graphics
@@ -91,7 +90,7 @@ namespace Reload.Core.Graphics
         }
 
         /// <inheritdoc/>
-        public abstract void Configure(IProgramWindow window);
+        public abstract void Configure();
 
         /// <inheritdoc/>
         public abstract void StartUp();

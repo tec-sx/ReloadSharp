@@ -2,7 +2,7 @@
 
 namespace Reload.Core.Tests.Fakes
 {
-    internal class SubSystemFake : ICoreSystem
+    internal class SubSystemFake : ISubSystem
     {
         public void StartUp()
         { }

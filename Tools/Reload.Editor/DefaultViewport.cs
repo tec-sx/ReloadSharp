@@ -9,11 +9,12 @@ using Reload.Core.Commands;
 using Reload.Editor.Platform;
 using Reload.Editor.Input;
 using Reload.Editor.Extensions;
-using Reload.Core.Graphics;
 using System;
 using System.Drawing;
 using Reload.Core.Game;
 using Size = System.Drawing.Size;
+using Reload.Core.Windowing;
+using Reload.Core.Configuration;
 
 namespace Reload.Editor
 {
@@ -60,6 +61,15 @@ namespace Reload.Editor
         public Action<Size> Resize { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public Action<bool> FocusChanged { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public Action Closing { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+
+        public Size Size => throw new NotImplementedException();
+
+        public Point Position => throw new NotImplementedException();
+
+        public DefaultViewport()
+        {
+
+        }
 
         public DefaultViewport(OpenGl openGl, SceneMachine sceneMachine, InputManager inputManager)
         {
@@ -335,17 +345,22 @@ namespace Reload.Editor
             throw new System.NotImplementedException();
         }
 
-        void ICoreSystem.StartUp()
+        void ISubSystem.StartUp()
         {
             throw new NotImplementedException();
         }
 
-        void ICoreSystem.ShutDown()
+        void ISubSystem.ShutDown()
         {
             throw new NotImplementedException();
         }
 
         void IDisposable.Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Configure(DisplayConfiguration configuration)
         {
             throw new NotImplementedException();
         }

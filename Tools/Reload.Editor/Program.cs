@@ -1,4 +1,5 @@
 ﻿using Reload.Core;
+using Reload.Core.Configuration;
 using Reload.Core.Exceptions;
 using Reload.Core.Game;
 using Reload.Platform.Audio.OpenAl;
@@ -6,6 +7,7 @@ using Reload.Platform.Graphics.OpenGl;
 using Reload.Platform.OS.Linux;
 using Reload.Platform.OS.Windows;
 using Reload.Rendering;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 
 namespace Reload.Editor
@@ -32,21 +34,25 @@ namespace Reload.Editor
         /// Builds the game for the the operating system currently running.
         /// </summary>
         /// <returns>A GameSystem.</returns>
-        public static GameSystem BuildGameForRuntimeOS()
+        public static GameSystem BuildGameForRuntimeOS(string name)
         {
-            GameBuilder<GameEditor> gameBuilder;
+            ProgramBuilder<GameEditor> gameBuilder;
+
+            DisplayConfiguration configuration = ConfigurationFactory.CreateDefaultDisplayConfiguration();
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Linux))
             {
-                gameBuilder = new GameBuilder<GameEditor>(new PlatformLinux());
+                gameBuilder = new ProgramBuilder<GameEditor>(name, new PlatformLinux());
                 gameBuilder
+                    .WithWindow<DefaultViewport>(configuration)
                     .WithGraphicsAPI<OpenGlAPI>()
                     .WithAudioAPI<OpenAl>();
             }
             else if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
-                gameBuilder = new GameBuilder<GameEditor>(new PlatformWindows());
+                gameBuilder = new ProgramBuilder<GameEditor>(name, new PlatformWindows());
                 gameBuilder
+                    .WithWindow<MainWindow>(configuration)
                     .WithGraphicsAPI<OpenGlAPI>()
                     .WithAudioAPI<OpenAl>();
             }
@@ -55,8 +61,7 @@ namespace Reload.Editor
                 throw new ReloadUnsupporedOSPlatformException();
             }
 
-            return gameBuilder
-                    .WithWindow<MainWindow>()
+            return gameBuilder      
                     .WithSubSystem<Renderer>(Lifetime.Singleton)
                     .BuildForPlatform();
         }
