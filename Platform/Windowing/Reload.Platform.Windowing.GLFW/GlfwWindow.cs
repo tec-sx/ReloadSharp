@@ -15,12 +15,10 @@ namespace Reload.Platform.Windowing.GLFW
     {
         private IWindow _nativeWindow;
 
-        private WindowOptions _windowOptions;
-
         private bool _disposed;
 
         /// <inheritdoc/>
-        public WindowingAPIType Api { get; private set; }
+        public WindowingAPIType Api => WindowingAPIType.Glfw;
 
         /// <inheritdoc/>
         public Size Size => _nativeWindow.Size;
@@ -35,7 +33,7 @@ namespace Reload.Platform.Windowing.GLFW
         public bool IsVsyncOn { get; set; }
 
         /// <inheritdoc/>
-        public Func<string, IntPtr> GetProcAddress { get; private set; }
+        public Func<string, IntPtr> GetProcAddress { get; init; }
         
         /// <inheritdoc/>
         public Action Load { get; set; }
@@ -61,17 +59,13 @@ namespace Reload.Platform.Windowing.GLFW
         /// <summary>
         /// Initializes a new instance of the <see cref="GlfwWindow"/> class.
         /// </summary>
-        public GlfwWindow()
-        { }
-
-        /// <inheritdoc/>
-        public void Configure(DisplayConfiguration configuration)
+        public GlfwWindow(SystemConfiguration configuration)
         {
-            _windowOptions = CreateWindowOptionsFromConfiguration(configuration);
-            _nativeWindow = Window.Create(_windowOptions);
+            WindowOptions options = CreateWindowOptionsFromConfiguration(configuration.Display);
+
+            _nativeWindow = Window.Create(options);
 
             GetProcAddress = _nativeWindow.GLContext.GetProcAddress;
-            Api = WindowingAPIType.Glfw;
         }
 
         /// <inheritdoc/>

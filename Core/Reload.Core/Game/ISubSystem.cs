@@ -27,6 +27,9 @@ using System;
 
 namespace Reload.Core.Game
 {
+    /// <summary>
+    /// Represents a sub system module.
+    /// </summary>
     public interface ISubSystem
     {
         /// <summary>

@@ -29,7 +29,10 @@ using System;
 
 namespace Reload.Core.Input
 {
-    public interface IInputSystem : ICoreSystem, IDisposable
+    /// <summary>
+    /// Input system interface
+    /// </summary>
+    public interface IInputSystem : ISubSystem, IDisposable
     {
         /// <summary>
         /// Gets the input source the system is listening to.

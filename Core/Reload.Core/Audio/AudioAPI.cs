@@ -32,20 +32,26 @@ namespace Reload.Core.Audio
     /// <summary>
     /// The audio API base.
     /// </summary>
-    public abstract class AudioAPI : ICoreSystem, IDisposable
+    public abstract class AudioAPI : ISubSystem, IDisposable
     {
         /// <summary>
         /// Gets the audio backend type.
         /// </summary>
-        public AudioAPIType Type { get; protected init; }
+        public AudioAPIType Type { get; }
 
         /// <summary>
         /// Gets or sets the audio factory.
         /// </summary>
         protected internal static AudioFactory AudioFactory { get; protected set; }
 
-        /// <inheritdoc/>
-        public abstract void Configure();
+        /// <summary>
+        /// Initializes a new instance of the <see cref="AudioAPI"/> class.
+        /// </summary>
+        /// <param name="type">The type.</param>
+        public AudioAPI(AudioAPIType type)
+        {
+            Type = type;
+        }
 
         /// <inheritdoc/>
         public abstract void StartUp();

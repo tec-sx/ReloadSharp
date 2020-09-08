@@ -23,22 +23,24 @@ namespace Reload.Editor
         static void Main(string[] args)
         {
             PlatformOS platform;
+            SystemConfiguration configuration = ConfigurationFactory.CreateDefault();
+
 #if Linux
             platform = new PlatformLinux()
                     .RegisterMainProgram<GameEditor>()
-                    .WithConfiguration<SystemConfiguration>()
+                    .WithConfiguration(configuration)
                     .WithWindow<DefaultViewport>()
                     .WithGraphicsAPI<OpenGlAPI>()
                     .WithAudioAPI<OpenAl>();
 #elif Windows
-            
-                platform = new PlatformWindows()
-                    .RegisterMainProgram<GameEditor>()
-                    .WithConfiguration<SystemConfiguration>()
-                    .WithWindow<DefaultViewport>()
-                    .WithGraphicsAPI<OpenGlAPI>()
-                    .WithAudioAPI<OpenAl>();
-#else
+
+            platform = new PlatformWindows()
+                .RegisterMainProgram<GameEditor>()
+                .WithConfiguration(configuration)
+                .WithWindow<DefaultViewport>()
+                .WithGraphicsAPI<OpenGlAPI>()
+                .WithAudioAPI<OpenAl>();
+#elif OSX
             throw new ReloadUnsupporedOSPlatformException();
 #endif
 

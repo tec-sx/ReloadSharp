@@ -36,7 +36,7 @@ namespace Reload.Core.Graphics
     /// <summary>
     /// The graphics API base.
     /// </summary>
-    public abstract class GraphicsAPI : ICoreSystem, IDisposable
+    public abstract class GraphicsAPI : ISubSystem, IDisposable
     {
         #region Core factories
 
@@ -65,12 +65,12 @@ namespace Reload.Core.Graphics
         /// <summary>
         /// Gets the graphics backend type.
         /// </summary>
-        public GraphicsAPIType Type { get; protected init; }
+        public GraphicsAPIType Type { get; }
 
         /// <summary>
         /// Gets the backend API version.
         /// </summary>
-        public GraphicsAPIVersion Version { get; init; }
+        public GraphicsAPIVersion Version { get; }
 
         /// <summary>
         /// Prevents a default instance of the <see cref="GraphicsAPI"/> class from being created.
@@ -88,9 +88,6 @@ namespace Reload.Core.Graphics
             Type = type;
             Version = version;
         }
-
-        /// <inheritdoc/>
-        public abstract void Configure();
 
         /// <inheritdoc/>
         public abstract void StartUp();

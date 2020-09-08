@@ -80,9 +80,9 @@ namespace Reload.Core
         /// Adds a configuration.
         /// </summary>
         /// <returns>A PlatformOS.</returns>
-        public PlatformOS WithConfiguration<TConfig>() where TConfig : SystemConfiguration
+        public PlatformOS WithConfiguration(SystemConfiguration configuration)
         {
-            SystemsContainer.Register<SystemConfiguration, TConfig>();
+            SystemsContainer.RegisterInstance(configuration);
             SystemsContainer.RegisterInitializer<SystemConfiguration>((configuration, resolver) =>
                 Logger.Log().Information(Resources.WithConfiguration, configuration.ToString()));
 
@@ -93,7 +93,7 @@ namespace Reload.Core
         /// Adds the window sub-system.
         /// </summary>
         /// <returns>A GameBuilder.</returns>
-        public PlatformOS WithWindow<TWindow>() where TWindow : class, IProgramWindow, ICoreSystem
+        public PlatformOS WithWindow<TWindow>() where TWindow : class, IProgramWindow, ISubSystem, IDisposable
         {
             if (!CheckWindowCompatability<TWindow>())
             {
@@ -111,7 +111,7 @@ namespace Reload.Core
         /// Adds the graphics backend sub-system.
         /// </summary>
         /// <returns>A GameBuilder.</returns>
-        public PlatformOS WithGraphicsAPI<TGraphics>() where TGraphics : GraphicsAPI, ICoreSystem
+        public PlatformOS WithGraphicsAPI<TGraphics>() where TGraphics : GraphicsAPI, ISubSystem, IDisposable
         {
             if (!CheckGraphicsBackendCompatability<TGraphics>())
             {
@@ -129,7 +129,7 @@ namespace Reload.Core
         /// Adds the audio backend sub-system.
         /// </summary>
         /// <returns>A GameBuilder.</returns>
-        public PlatformOS WithAudioAPI<TAudio>() where TAudio : AudioAPI, ICoreSystem
+        public PlatformOS WithAudioAPI<TAudio>() where TAudio : AudioAPI, ISubSystem, IDisposable
         {
             if (!CheckAudioBackendCompatability<TAudio>())
             {
@@ -147,7 +147,7 @@ namespace Reload.Core
         /// Adds an input sub-system.
         /// </summary>
         /// <returns>A GameBuilder.</returns>
-        public PlatformOS WithInput<TInput>() where TInput : class, IInputSystem, ICoreSystem
+        public PlatformOS WithInput<TInput>() where TInput : class, IInputSystem, ISubSystem, IDisposable
         {
             if (!CheckInputCompatability<TInput>())
             {
@@ -157,20 +157,6 @@ namespace Reload.Core
             SystemsContainer.Register<IInputSystem, TInput>(Reuse.Singleton);
             SystemsContainer.RegisterInitializer<IInputSystem>((inputSystem, resolver) =>
                 Logger.Log().Information(Resources.WithAudioBackendMessage, inputSystem?.Source.GetDescription()));
-
-            return this;
-        }
-
-        /// <summary>
-        /// Adds a new core system as singleton just like the 
-        /// other core systems.
-        /// </summary> 
-        /// <returns>A PlatformOS.</returns>
-        public PlatformOS WithCoreSystem<TCoreSystem>() where TCoreSystem : class, ICoreSystem
-        {
-            SystemsContainer.Register<ICoreSystem, TCoreSystem>();
-            SystemsContainer.RegisterInitializer<ICoreSystem>((coreSystem, resolver) =>
-                Logger.Log().Information(Resources.WithAudioBackendMessage, coreSystem.ToString()));
 
             return this;
         }
@@ -203,13 +189,7 @@ namespace Reload.Core
         public virtual void ConfigureAndBuild()
         {
             SystemsContainer.RegisterInitializer<ISubSystem>((subSystem, resolver) => subSystem.StartUp());
-            
-            SystemsContainer.RegisterInitializer<ICoreSystem>((coreSystem, resolver) => {
-                coreSystem.Configure();
-                coreSystem.StartUp();
-            });
-
-            SystemsContainer.RegisterDisposer<ICoreSystem>(coreSystem => coreSystem.Dispose());
+            SystemsContainer.RegisterDisposer<IDisposable>(coreSystem => coreSystem.Dispose());
 
             IsSuccessfullyBuilt = true;
         }

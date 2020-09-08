@@ -23,7 +23,7 @@ THE SOFTWARE.
 -----------------------------------------------------------------------------
 */
 #endregion
-using Reload.Core.Configuration;
+
 using Reload.Core.Game;
 using System;
 using System.Drawing;
@@ -33,7 +33,7 @@ namespace Reload.Core.Windowing
     /// <summary>
     /// The game window base.
     /// </summary>
-    public interface IProgramWindow : ICoreSystem
+    public interface IProgramWindow : ISubSystem, IDisposable
     {
         /// <summary>
         /// Gets the windowing backend type.
@@ -99,11 +99,5 @@ namespace Reload.Core.Windowing
         /// Executes on window closing.
         /// </summary>
         Action Closing { get; set; }
-
-        /// <summary>
-        /// Configures the window.
-        /// </summary>
-        /// <param name="configuration">The configuration.</param>
-        void Configure(DisplayConfiguration configuration);
     }
 }
