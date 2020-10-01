@@ -22,12 +22,8 @@ namespace Reload.Platform.Graphics.OpenGl
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenGlAPI"/> class.
         /// </summary>
-        public OpenGlAPI()
+        public OpenGlAPI(IProgramWindow window)
             : base(GraphicsAPIType.OpenGL, new GraphicsAPIVersion())
-        { }
-
-        /// <inheritdoc/>
-        public override void Configure(IProgramWindow window)
         {
             _api = GL.GetApi(window.GetProcAddress);
 

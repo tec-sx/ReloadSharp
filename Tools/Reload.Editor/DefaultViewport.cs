@@ -51,7 +51,7 @@ namespace Reload.Editor
 
         public Scene ActiveScene { get; set; }
 
-        WindowingAPIType IProgramWindow.Api { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
+        WindowingAPIType IProgramWindow.Api { get; }
 
         public Func<string, IntPtr> GetProcAddress { get => throw new NotImplementedException(); init => throw new NotImplementedException(); }
         public Action Load { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }

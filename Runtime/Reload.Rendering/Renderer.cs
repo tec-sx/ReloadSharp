@@ -52,7 +52,7 @@ namespace Reload.Rendering
         }
 
         /// <inheritdoc/>
-        public void Initialize()
+        public void StartUp()
         {
             
         }

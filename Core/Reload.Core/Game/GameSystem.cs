@@ -86,22 +86,6 @@ namespace Reload.Core.Game
         { }
 
         /// <summary>
-        /// Configures the core systems.
-        /// </summary>
-        public void Configure(SystemConfiguration configuration)
-        {
-            if (configuration == null)
-            {
-                configuration = ConfigurationFactory.CreateDefault();
-            }
-
-            Window.Configure(configuration.Display);
-            Graphics.Configure(Window);
-            Input.Configure(Window);
-            Audio?.Configure();
-        }
-
-        /// <summary>
         /// Itterates throug all included sub-systems and calls the <see cref="ISubSystem.StartUp"/>
         /// for each of them. afterwards it calls the <see cref="OnInitialize"/> method.
         /// </summary>

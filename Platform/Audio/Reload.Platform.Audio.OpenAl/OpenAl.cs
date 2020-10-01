@@ -14,13 +14,13 @@ namespace Reload.Platform.Audio.OpenAl
 
         private bool _disposed;
 
-        public AudioAPIType Type => AudioAPIType.OpenAL;
-
         /// <summary>
         /// Initializes a new instance of the <see cref="OpenAl"/> class.
         /// </summary>
-        public OpenAl()
-        { }
+        public OpenAl() : base(AudioAPIType.OpenAL)
+        {
+            _api = AL.GetApi();
+        }
 
         /// <summary>
         /// Checks the for OpenAL error codes and throw corresponding exceptions.
@@ -257,12 +257,6 @@ namespace Reload.Platform.Audio.OpenAl
         {
             _api.SourceStop(source);
             CheckForErrors();
-        }
-
-        /// <inheritdoc/>
-        public override void Configure()
-        {
-            _api = AL.GetApi();
         }
 
         /// <inheritdoc/>
